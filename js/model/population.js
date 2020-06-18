@@ -15,7 +15,7 @@ export const countryAliases = {
 };
 
 // https://www.worldometers.info/world-population/population-by-country/
-export const populationByCountry = [
+const populationByCountryRaw = [
     { name: "Afghanistan", count: 38928346 },
     { name: "Albania", count: 2877797 },
     { name: "Algeria", count: 43851044 },
@@ -252,8 +252,8 @@ export const populationByCountry = [
     { name: "Zambia", count: 18383955 },
     { name: "Zimbabwe", count: 14862924 }
 ];
-populationByCountry.push({ name: "Kosovo", count: 1810366, code: "XK" }); // https://en.wikipedia.org/wiki/Demographics_of_Kosovo
-populationByCountry.push({ name: "Burma", count: 54409800, code: "MM" }); // copied from Myanmar above
+populationByCountryRaw.push({ name: "Kosovo", count: 1810366, code: "XK" }); // https://en.wikipedia.org/wiki/Demographics_of_Kosovo
+populationByCountryRaw.push({ name: "Burma", count: 54409800, code: "MM" }); // copied from Myanmar above
 
 // https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes/blob/master/slim-2/slim-2.json
 const countrieswithRegionalCodes = [
@@ -612,13 +612,13 @@ export const excludedNoCovidData = _.sortedUniq(_.sortBy([
     "Wallis & Futuna",
 ]));
 
-// add country code to populationByCountry
+// add country code to populationByCountryRaw
 const notfound = [];
 const notfound2 = [];
 const notfound3 = [];
 const notfound4 = [];
 _.each(countrieswithRegionalCodes, (item) => {
-    const found = _.find(populationByCountry, (country) => {
+    const found = _.find(populationByCountryRaw, (country) => {
         const countray = convertFromCountrieswithRegionalCodes2PopulationByCountry[item.name] || item.name;
         return country.name === countray;
     });
@@ -639,17 +639,19 @@ const isExcluded = name => {
     }
     return false;
 };
-populationByCountry.forEach(p => {
+export const populationByCountry = [];
+populationByCountryRaw.forEach(p => {
     if (!p.code) {
         notfound2.push(p);
-        _.unset(populationByCountry, p.name);
+        return;
     } else {
         if (isExcluded(p.name)) {
-            _.unset(populationByCountry, p.name);
+            return;
         }
     }
+    populationByCountry.push(p);
 });
-console.log("country name not found in populationByCountry", notfound);
+console.log("country name not found in populationByCountryRaw", notfound);
 console.log("country code not found in countrieswithRegionalCodes", notfound2);
 console.log("country population not found", notfound3);
 console.log("country covid data not found", notfound4);
