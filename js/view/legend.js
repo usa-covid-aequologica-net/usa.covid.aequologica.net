@@ -69,11 +69,16 @@ export function Legend() {
                 })
             });
 
-            const $populationToggleButton = $('[type="button"]#populationToggle');
-            if (isPopulationColumnVisible) {
-                $populationToggleButton.addClass('active');
+            const $populationToggle = $('[type="button"]#populationToggle');
+            function feedbackPopulationColumnVisible() {
+                const isPopulationColumnVisible = properties.getToggle("togglePopulationColumnVisibility") === "visible";
+                if (isPopulationColumnVisible) {
+                    $populationToggle.addClass('active');
+                } else {
+                    $populationToggle.removeClass('active');
+                }
             }
-            $populationToggleButton.on('click', (b) => {
+            $populationToggle.on('click', (b) => {
                 const pops = document.getElementsByClassName("legend_population");
                 for (let pop of pops) {
                     const sty = pop.getAttribute("style");
@@ -85,6 +90,7 @@ export function Legend() {
                         pop.setAttribute("style", "display:table-cell");
                     }
                 }
+                feedbackPopulationColumnVisible();
             });
 
             $("#legend td.country").on('click', (e) => {

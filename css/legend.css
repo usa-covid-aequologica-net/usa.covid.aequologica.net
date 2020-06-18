@@ -47,7 +47,11 @@
     border-color: transparent;
 }
 
-#legend .active#populationToggle {
+#legend #populationToggle:not(:hover) {
+    background-color: white !important;
+}
+
+#legend .active#populationToggle:not(:hover) {
     background-color: #ccc !important;
 }
 
