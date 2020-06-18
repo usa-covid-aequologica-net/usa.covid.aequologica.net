@@ -49,28 +49,28 @@ $(document).ready(() => {
 
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
-            (async function () {
-                $("#spinner").show();
-                /*
-                console.log("waiting ...");
-                await new Promise(r => setTimeout(r, 2000));
-                console.log("...resumed!");
-                */
-                const d3svgChart = d3.select("main svg#chart");
-                if (d3svgChart.empty()) {
-                    return undefined;
-                }
-                
-                d3svgChart.selectAll("g#rootG").remove();
-                if (countries) {
-                    model.massageData();
-                }
-                const svg = d3svgChart.append("g").attr("id", "rootG");
-                drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
-                    redraw(c, true);
-                });
-                $("#spinner").hide();
-            })();
+            $("#spinner").show();
+            setTimeout(
+                async function () {
+                    /*
+                    console.log("waiting ...");
+                    await new Promise(r => setTimeout(r, 2000));
+                    console.log("...resumed!");
+                    */
+                    const d3svgChart = d3.select("main svg#chart");
+                    if (d3svgChart.empty()) {
+                        return undefined;
+                    }
+                    d3svgChart.selectAll("g#rootG").remove();
+                    if (countries) {
+                        model.massageData();
+                    }
+                    const svg = d3svgChart.append("g").attr("id", "rootG");
+                    drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
+                        redraw(c, true);
+                    });
+                    $("#spinner").hide();
+                },100);
         }
 
         // start date
