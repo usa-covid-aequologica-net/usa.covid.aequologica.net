@@ -7,15 +7,15 @@ Live at [covid.aequologica.net](http://covid.aequologica.net/). Consuming [Johns
 You are involved in a heated discussion on your favorite Whatsapp group about the confinement measures. One guy - who happens to be your best friend - maintains that Sweden is doing pretty good notwithstanding it did not implement confinement. You do not want to terminate a 20 years long friendship, so, instead of calling him names, you cut & paste the following permalink in the Whatsapp chat :
 
 ```
-https://covid.aequologica.net/?confirmed,day,FR,IT,SE,2020-03-02,per,log,14,_
+https://covid.aequologica.net/?18,2020-03-01,FR,IT,SE,confirmed,day,log,per,_
 ```
 
-This will lead to a web page that shows a comparison graph of all **confirmed** daily (**day**) new cases for France (**FR**), Italy (**IT**) and Sweden (**SE**), starting from the 2nd of March of this year (**2020-03-02**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); the population of Sweden is roughly 1/6 of France or Italy, so the figures are per capita (**per**), to adjust for that; the Y-axis scale is logarithmic (**log**) to be able to compare low and high figures (try to add South Korea (KR) to the URL and you will understand what I mean); finally, to reduce the noise inherent with daily figures, for each day a moving average of the previous **14** days is plotted.
+This will lead to a web page that shows a comparison graph of all **confirmed** daily (**day**) new cases for France (**FR**), Italy (**IT**) and Sweden (**SE**), starting from the 1st of March of this year (**2020-03-01**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); the population of Sweden is roughly 1/6 of France or Italy, so the figures are per capita (**per**), to adjust for that; the Y-axis scale is logarithmic (**log**) to be able to compare low and high figures (try to add South Korea (KR) to the URL and you will understand what I mean); finally, to reduce the noise inherent with daily figures, for each day a moving average of the previous **18** days is plotted.
 
 
-Try it here: [https://covid.aequologica.net/?confirmed,day,FR,IT,SE,2020-03-02,per,log,14,_](https://covid.aequologica.net/?confirmed,day,FR,IT,SE,2020-03-01,per,log,14,_)
+Try it here: [https://covid.aequologica.net/?18,2020-03-01,FR,IT,SE,confirmed,day,log,per,_](https://covid.aequologica.net/?18,2020-03-01,FR,IT,SE,confirmed,day,log,per,_)
 
-![FR,IT,SE](./img/screenshot4.png "FR,IT,SE")
+![FR,IT,SE](./img/screenshot5.png "FR,IT,SE")
 
 ## All this typing ?
 
