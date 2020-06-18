@@ -1,0 +1,118 @@
+#legend {
+    overflow: hidden scroll;
+}
+
+#legend .table {
+    margin-bottom: 0;
+}
+
+#legend button {
+    padding: 0 .3rem;
+}
+
+#legend .remove button {
+    padding: 0;
+    border: none;
+}
+
+#legend tr.selected {
+    background-color: #e7e9fa;
+}
+
+#legend td.country {
+    cursor: pointer;
+}
+
+#legend td.country:hover {
+    background-color: ghostwhite;
+}
+
+#legend td.country, #legend td.legend_population {
+    padding-right: .3rem;
+}
+
+#legend th.legend_population, #legend td.legend_population {
+    font-family: monospace;
+    font-size: smaller;
+    text-align: right;
+    padding-left: .5rem;
+}
+
+#legend #populationToggle {
+    border-color: transparent;
+}
+
+#legend .active#populationToggle {
+    background-color: #ccc !important;
+}
+
+#legend th.legend_population a {
+    color: rgb(33, 37, 41) !important
+}
+
+#countries th.code, td.code {
+    font-size: smaller;
+    text-align: center;
+}
+
+#countries th.population, td.population {
+    font-family: monospace;
+    font-size: smaller;
+    text-align: right;
+}
+
+#legend table.table-responsive {
+    max-height: 300px;
+}
+
+#legend .card {
+    display: inline-block;
+    /* background-color: transparent; */
+    background-color: rgba(255, 255, 255, .9);
+    overflow: hidden scroll;
+}
+
+#legend .card-body {
+    padding: 0.1rem 0.2rem;
+    padding-top: 0.1rem;
+    padding-right: 0.2rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.2rem;
+    font-size: 14px;
+    opacity: 1;
+}
+
+#legendButtonsWrapper {
+    position: fixed;
+    right: 5px;
+    top: 0;
+    height: 100%;
+}
+
+#legendButtons {
+    width: 24px;
+}
+
+#legendSelectionUp::before {
+    content: "↑";
+}
+
+#legendToggle::before {
+    content: "←";
+}
+
+#legendToggle.folded::before {
+    content: "→";
+}
+
+#legendSelectionDown::before {
+    content: "↓";
+}
+
+#legendButtons button {
+    padding: 0.25rem;
+}
+
+#legendButtons button:not(:hover) {
+    background-color: white;
+}

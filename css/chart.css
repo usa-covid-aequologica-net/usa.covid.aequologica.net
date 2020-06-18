@@ -1,0 +1,40 @@
+#chart .axis path, #chart .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+#chart .grid line {
+    stroke: #bbccdd;
+}
+
+#chart .point {
+    stroke: none;
+    fill: #e6e6e6;
+    opacity: 0.5;
+}
+
+#chart .line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+#chart .line2 {
+    fill: none;
+    stroke-width: 1px;
+}
+
+#chart .category.inactive .line, #chart .category.inactive .line2, #chart .category.inactive circle {
+    opacity: 0.4;
+    stroke-width: 1px;
+}
+
+#chart .category.active .line, #chart .category.active circle {
+    stroke-width: 2.5px;
+    opacity: 1;
+}
+
+#chart .category.active .line2 {
+    stroke-width: 1.5px;
+    opacity: 1;
+}

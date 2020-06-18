@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>YACA</title>
+  <!-- ^RELEASE -->
+  <!--script>
+    if (window.location.hostname === "localhost") {
+      window.document.title = window.document.title.toLowerCase();
+    }
+  </script-->
+  <!-- /^RELEASE -->
+
+  <meta name="title" content="YACA">
+  <meta name="author" content="Christophe Thiebaud">
+  <meta name="description" content="Yet Another Covid-19 App">
+  <meta name="keywords" content="covid-19">
+
+  <script src="https://cdn.jsdelivr.net/npm/pace-progressbar@latest/pace.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progressbar@latest/themes/blue/pace-theme-flash.css">
+  <script>
+    Pace.on('hide', () => {
+      const topfloatright = document.getElementById('top-float-right');
+      if (topfloatright) {
+        topfloatright.style.visibility = 'visible';
+      }
+    });
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/css/theme.bootstrap_4.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@latest/themes/light.css">
+
+  <link href="./css/styles.css" rel="stylesheet">
+  <link href="./css/legend.css" rel="stylesheet">
+  <link href="./css/chart.css" rel="stylesheet">
+  <link href="./css/tooltip.css" rel="stylesheet">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Open Graph data -->
+  <meta property="fb:app_id" content="104250825478" />
+
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="YACA" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://covid.aequologica.net" />
+  <meta property="og:description" content="Yet Another Covid-19 App, by Christophe Thiebaud" />
+  <meta property="og:site_name" content="covid.aequologica.net" />
+
+  <meta property="og:image" content="https://covid.aequologica.net/img/screenshot4.png" />
+  <meta property="og:image:url" content="https://covid.aequologica.net/img/screenshot4.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="2208" />
+  <meta property="og:image:height" content="1556" />
+
+</head>
+
+<body>
+  <header>
+    <div id="top">
+      <div id="top2" class="fixed-top d-none d-print-flex"></div>
+      <div id="top2" class="fixed-top d-flex justify-content-between d-print-none">
+
+        <div id="top-left" class="p-1 flex-grow-1">
+
+          <!-- TITLE -->
+          <div id="title">
+            <span class="d-none d-md-inline">COVID-19</span>
+            <div id="cumulaGroup" class="btn-group" title="total numbers vs. daily new">
+              <button type="button" class="btn btn-sm btn-outline-secondary"><span id="cumulat"></span></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu" id="type">
+                <a class="dropdown-item" href="#" data-type="total">total</a>
+                <a class="dropdown-item" href="#" data-type="daily" active>daily</a>
+              </div>
+            </div>
+            <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths vs. recovered">
+              <button type="button" class="btn btn-sm btn-outline-secondary"><span id="measure"></span></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu" id="type">
+                <a class="dropdown-item" href="#" data-type="confirmed">confirmed</a>
+                <a class="dropdown-item" href="#" data-type="deaths" active>deaths</a>
+                <a class="dropdown-item" href="#" data-type="recovered">recovered</a>
+              </div>
+            </div>
+          </div>
+          <span id="when_is_data_updated" class="d-none d-lg-inline">&nbsp;(updated every day, though <a href="https://github.com/CSSEGISandData/COVID-19/issues/2369"
+              target="_CSSEGISandData">not clear when</a>)</span>
+          </span>
+          <!-- /TITLE -->
+
+        </div>
+
+        <div id="top-float-right" class="d-flex justify-content-between d-print-none">
+
+          <div class="flex-column">
+            <div id="b0x0" class="p-1">
+              <span class="mr-auto mt-2 mt-lg-0" style="white-space: nowrap;">
+
+                <!-- BOX 0x0 -->
+                <button id="location" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="show location">
+                  <a href="">
+                    <img src="">
+                  </a>
+                  <span class="d-none d-sm-inline"></span>
+                </button>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <!-- permalink -->
+                  <button id="permalink" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="get permalink" data-toggle="modal"
+                    data-target="#permalinkModal">
+                    <img src="./img/link-svgrepo-com.svg">
+                    <span class="d-none d-sm-inline">permalink</span>
+                  </button>
+                  <!-- save snapshot 
+                  <button id="html2canvasButton" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="save as image" data-toggle="modal"
+                    data-target="#printModal">
+                    <img src="./img/photo-camera-svgrepo-com.svg">
+                    <span class="d-none d-sm-inline">save</span>
+                  </button>-->
+                  <!-- help -->
+                  <button id="info" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="reference guide"
+                    onclick="location.href='./showdown.html?https://github.com/cthiebaud/cthiebaud.github.io/blob/master/README.md';">
+                    <img src="./img/life-buoy-svgrepo-com.svg">
+                    <span class="d-none d-sm-inline">info</span>
+                  </button>
+                </div>
+                <button id="facebook" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="share to facebook">
+                  <img src="./img/facebook.svg">
+                  <span class="d-none d-sm-inline"></span>
+                </button>
+
+                <!-- BOX 0x0 -->
+
+              </span>
+            </div>
+          </div>
+
+          <div class="flex-column" style="font-size:Smaller;">
+            <div id="b1x1" class="p-1 _boxrow1 _boxcol1" style="white-space: nowrap;">
+
+              <!-- BOX 1x1 -->
+              <!--span class="d-none d-sm-inline">sources:</span>
+              <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">JHU</a>
+              <i style="border-left: 1px solid rgb(33, 37, 41); border-right: 1px solid rgb(33, 37, 41);; height: 100%">&nbsp;</i-->
+              <a href="https://github.com/cthiebaud/cthiebaud.github.io" target="_github_com" title="github.com/cthiebaud/cthiebaud.github.io">
+                <img style="display:inline-block; width: 14px; height:auto;" src="./img/github.svg">
+              </a>
+              <!-- /BOX 1x1 -->
+
+            </div>
+            <div id="b1x2" class="p-1 _boxrow2 _boxcol1" style="white-space: nowrap;">
+
+              <!-- BOX 1x2 -->
+              <span class="d-none d-sm-inline">as of</span>
+              <span id="end"></span>
+              <!-- /BOX 1x2 -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="credits" class="fixed-top d-flex">
+        <div>data source: <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">Johns Hopkins University</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- page content -->
+  <main role="main">
+    <div class="container">
+      <noscript>
+        <div class="alert alert-danger d-print-none" role="alert">
+          covid.aequologica.net requires javascript
+        </div>
+      </noscript>
+      <!-- svg -->
+      <svg id="chart"></svg>
+      <!-- legend -->
+      <div id="legend" style="position: fixed; left: 10px; top: 58px; height: calc(100% - 96px);"></div>
+      <!-- toggle legend button -->
+      <div id="legendButtonsWrapper" class="d-flex">
+        <div id="legendButtons" class="btn-group-vertical d-print-none align-self-center">
+          <button type="button" id="legendSelectionUp" class="btn btn-sm btn-outline-secondary" title="toggle legend visibility"></button>
+          <button type="button" id="legendToggle" class="btn btn-sm btn-outline-secondary" title="toggle legend visibility"></button>
+          <button type="button" id="legendSelectionDown" class="btn btn-sm btn-outline-secondary" title="toggle legend visibility"></button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div id="bottom" class="fixed-bottom d-none d-print-flex"></div>
+    <nav id="bottom" class="navbar fixed-bottom navbar-expand-lg navbar-light d-print-none">
+      <div class="container-fluid d-flex align-items-start">
+        <form class="form-inline flex-grow-1">
+          <a class="navbar-brand" style="padding: 0; width: 100%;">
+            <!-- start date -->
+            <div class="card">
+              <div class="card-body" title="start date">
+                <div class="custom-control custom-control-inline" style="padding-left: 0.25rem; margin-right: 0.25rem; width: 100%;">
+                  <!-- label class="d-block d-lg-none">starting&nbsp;</label -->
+                  <input type="range" id="startRangeInput" step="1" min="1" max="366" value="1" class="custom-range" />
+                  &nbsp;
+                  <label id="startFeedback" class="my-custom-control-label"></label>
+                </div>
+              </div>
+            </div>
+          </a>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarToggler" style="flex-basis: auto; flex-shrink: 1;">
+          <form class="form-inline" style="margin-left: auto;">
+            <!-- ml-auto my-2 my-lg-0 -->
+            <ul class="navbar-nav">
+              <!-- ml-auto mt-2 mt-lg-0 -->
+              <!-- toggleCapita -->
+              <li class="card">
+                <div class="card-body" title="per capita vs. absolute numbers">
+                  <div class="form-check form-check-inline">
+                    <input id="toggleCapita" data-taggle-on="percapita" data-taggle-off="absolute" type="checkbox" data-toggle="toggle" data-size="xs"
+                      data-onstyle="outline-primary" data-offstyle="outline-secondary">
+                    <label id="toggleCapita" for="toggleCapita" class="form-check-label" style="width:100%;">
+                      &nbsp;per 10<sup>6</sup>&nbsp;
+                    </label>
+                    <!-- label id="toggleCapita" style="font-size:larger; font-weight: bold;">‱</label -->
+                    <img id="toggleCapita" style="width: 16px; height:auto" class="rounded float-right" src="./img/group-people-svgrepo-com.svg">
+                  </div>
+                </div>
+              </li>
+              <!-- toggleLinear -->
+              <li class="card">
+                <div class="card-body" title="logarithmic vs. linear Y axis" style="white-space: nowrap; flex-wrap: nowrap;">
+                  <div class="form-check form-check-inline">
+                    <input id="toggleLinear" data-taggle-on="logarithmic" data-taggle-off="linear" type="checkbox" data-toggle="toggle" data-size="xs"
+                      data-onstyle="outline-primary" data-offstyle="outline-secondary">
+                    <label id="toggleLinear" for="toggleLinear" class="form-check-label" style="width:100%;">
+                      &nbsp;log Y axis&nbsp;
+                    </label>
+                    <img id="toggleLinear" style="width: 20px; height:auto" class="rounded float-right" src="./img/log.svg">
+                  </div>
+                </div>
+              </li>
+              <!-- toggleDeaths 
+              <li class="card">
+                <div class="card-body" title="show vs. hide 2nd curve for deaths">
+                  <div class="form-check form-check-inline">
+                    <input id="toggleDeaths" data-taggle-on="visible" data-taggle-off="hidden" type="checkbox" data-toggle="toggle" data-size="xs" data-onstyle="outline-primary"
+                      data-offstyle="outline-secondary">
+                    <label id="toggleDeaths" for="toggleDeaths" class="form-check-label" style="width:100%;">
+                      &nbsp;deaths&nbsp;
+                    </label>
+                    <img id="toggleDeaths" style="width: 16px; height:auto" class="rounded float-right" src="./img/skull-svgrepo-com.svg">
+                  </div>
+                </div>
+              </li>-->
+              <!-- togglePoints 
+              <li class="card">
+                <div class="card-body" title="show vs. hide points">
+                  <div class="form-check form-check-inline">
+                    <input id="togglePoints" data-taggle-on="showpoints" data-taggle-off="hidepoints" type="checkbox" data-toggle="toggle" data-size="xs"
+                      data-onstyle="outline-primary" data-offstyle="outline-secondary">
+                    <label id="togglePoints" for="togglePoints" class="form-check-label" style="width:100%;">
+                      &nbsp;points&nbsp;
+                    </label>
+                    <img id="togglePoints" style="width: 16px; height:auto" class="rounded float-right" src="./img/graph-svgrepo-com.svg">
+
+                  </div>
+                </div>
+              </li>-->
+              <!-- average -->
+              <li class="card">
+                <div class="card-body" title="length of rolling average" style="overflow: hidden;">
+                  <div class="custom-control custom-control-inline" style="padding-left: 0.25rem; margin-right: 0.25rem;">
+                    <input type="range" min="1" max="21" value="21" class="custom-range" id="sizeOfAverage" style="width:100px">
+                    <label class="my-custom-control-label" id="bubble" for="sizeOfAverage"
+                      style="min-width:1rem; margin: 0 .3rem; text-align:right; font-family: monospace; "></label>
+                    <label id="average" class="my-custom-control-label"></label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </form>
+        </div>
+        <button class="navbar-toggler btn-sm flex-shrink-1" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
+          aria-label="Toggle navigation" style="padding: .25rem;">
+          <img id="cog" style="width: 16px; height:auto" src="./img/gear-svgrepo-com.svg">
+        </button>
+      </div>
+    </nav>
+  </footer>
+
+  <!-- modals  -->
+  <!-- modal for permalink  -->
+  <div id="permalinkModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">permalink</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" style="width:100%;"></input>
+          <label></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal for share  -->
+  <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="printModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span id="counter" class="badge badge-pill badge-danger" style="font-family: monospace; font-size: 20px;"></span>&nbsp;<span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="iframeWrapper" class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" height="100%" width="100%" name="iframe_modal"></iframe>
+          </div>
+        </div>
+        <div class="modal-footer d-inline-flex " style="white-space: nowrap; flex-wrap: nowrap;">
+          <div id="aequalizer" class="text-warning flex-shrink-0;" style="text-align: left; white-space: nowrap; text-overflow: ellipsis;">
+            <em>work in progress</em>
+          </div>
+          <div class="mr-auto flex-grow-1" style="text-align: right;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="send" class="btn btn-primary" disabled>Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal country picker -->
+  <div class="modal fade" id="modalCountryPicker" tabindex="-1" role="dialog" aria-labelledby="modalCountryPickerLabel" aria-hidden="true">
+    <div class="modal-dialog .modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div id="countries">
+            <button id="selectAll" type="button" class="reset btn btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+              select all
+            </button>
+            <button id="unselectAll" type="button" class="reset btn btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+              unselect all
+            </button>
+            <button id="resetToFactory" type="button" class="reset btn btn-outline-secondary" title="reset list of countries to factory defaults"
+              style="padding: 0 .3rem; margin-bottom:.5rem;">
+              reset to factory default
+            </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <table class="table table-responsive-sm table-sm table-striped table-hover table-fit tablesorter">
+              <thead>
+                <tr>
+                  <th scope="col" class="center"></th>
+                  <th scope="col" class="flag">&nbsp;</th>
+                  <th scope="col" class="name">country</th>
+                  <th scope="col" class="code">code</th>
+                  <th scope="col" class="population">population</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /modals  -->
+
+  <!-- handlebars templates -->
+  <!-- PRINT header -->
+  <script id="print-header-template" type="text/x-handlebars-template">
+    <div class=row>
+      <div class="col">
+        <span class="badge badge-secondary badge-pill badge-info">{{toggleCumula}}</span>
+        <span class="badge badge-secondary badge-pill badge-info">{{measure}}</span>
+        {{#if (isDaily toggleCumula)}}
+        {{#if (islargerThanOne sizeOfAverage)}}
+        <span class="badge badge-secondary badge-pill badge-info">{{sizeOfAverage}}&nbsp;days&nbsp;average</span>
+        {{/if}}
+        {{/if}}
+        <span class="badge badge-secondary badge-pill badge-info">{{toggleCapita}}</span>
+        <span class="badge badge-secondary badge-pill badge-info">{{toggleLinear}}</span>
+      </div>
+    </div>
+  </script>
+  <!-- PRINT footer -->
+  <script id="print-footer-template" type="text/x-handlebars-template">
+    <div style="font-size: 8pt; text-align:right; width: 100%">
+      <div>COVID-19 data from Johns Hopkins University</div>
+      <div>json aggregation by Rodrigo Pombo</div>
+      <div>https:/covid.aequologica.net by Christophe Thiebaud</div>
+    </div>
+  </script>
+  <!-- country picker row -->
+  <script id="row-template" type="text/x-handlebars-template">
+    <tr id="r{{index}}">
+      <td class="center">
+        <span id="trucAndAstuceForTableSorter" style="display: none">{{trucAndAstuce}}</span>
+        <span class="form-check">
+          <input type="checkbox" data-toggle="toggle" class="form-check-input position-static" id="cb{{index}}" value="{{index}}" name="{{name}}" {{checked}}>
+        </span>
+      </td>
+      <td class="flag">
+        <span id="f{{index}}"><img style="width:20px; height:auto;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{flag}}.svg"></span>
+      </td>
+      <td class="name">
+        <span id="n{{index}}">{{name}}</span>
+      </td>
+      <td class="code">
+        <span id="c{{index}}">{{code}}</span>
+      </td>
+      <td class="population">
+        {{population}}
+      </td>
+    </tr>
+  </script>
+  <!-- legend -->
+  <script id="legend-template" type="text/x-handlebars-template">
+    <div class="card" style="direction: ltr;">
+      <div class="card-body">
+        <table class="table table-sm" id="legend">
+          <tbody data-folded=false>
+            <tr class="d-print-none">
+              <th class="remove">
+                <span>&nbsp;</span>
+              </th>
+              <th class="country">
+                <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
+                  &#x002B;
+                </button>
+                <span>&nbsp;</span>
+                <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
+                  &#x21C4;
+                </button>
+              </th>
+              <th class="legend_population" {{{pop-style}}}>
+                code
+                <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
+              </th>
+              <th class="legend_population" {{{pop-style}}}>
+                population
+                <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
+              </th>
+            </tr>
+            {{#each @root}}
+            <tr>
+              <td class="remove d-print-none">
+                <button type="button" class="remove btn btn-sm btn-outline-secondary" title="remove {{name}}" name="{{name}}">
+                  <span class="remove">×</span>
+                </button>
+              </td>
+              <td class="country" id="{{name}}"  name="{{name}}" {{{color name}}}>{{name}}</td>
+              <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
+              <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </script>
+  <!-- tooltip class="text-info" -->
+  <script id="tooltip-template" type="text/x-handlebars-template">
+  <div class="card mytooltip" style="word-wrap: normal; ">
+    <div class="card-header">
+      <div style="color:{{countryColor}};">{{country}}</div>
+      <div class="text-dark" style="white-space: nowrap;">{{date}}</div>
+      <div style="font-size:smaller; font-style: italic;"><span class='nowrap text-info'>{{{explanation}}}</span></div>
+    </div>
+    <div class="card-body">
+      <table class="table table-sm table-borderless">
+        {{#if isTotal}}
+        <tr>
+          <td>{{yesterday}} </td>
+        </tr>
+        <tr>
+          <td style="border-bottom: 1px solid #777">{{delta}} </td>
+        </tr>
+        {{/if}}
+        <tr>
+          <td><b>{{today}}</b> </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </script>
+  <!-- /handlebars templates -->
+
+  <!-- 3rd party scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+  <!-- need these specific versions of popper & tippy for compatibility with bootstrap 4 -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1/dist/umd/popper.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tippy.js@5/dist/tippy-bundle.iife.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+  <!-- / -->
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/js/bootstrap4-toggle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@latest/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@latest/dist/d3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@latest/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+  <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
+  <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
+  <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
+  <!-- script async defer src="https://cdn.jsdelivr.net/npm/country-flag-emoji@latest/dist/country-flag-emoji.umd.min.js"></script -->
+
+  <!-- facebook -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '104250825478',
+        cookie: true,
+        xfbml: true,
+        version: 'v7.0'
+      });
+    };
+  </script>
+  <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <!-- /facebook -->
+
+  <script>
+    // compile the templates
+    var printHeaderTemplate = Handlebars.compile(document.getElementById("print-header-template").innerHTML);
+    var printFooterTemplate = Handlebars.compile(document.getElementById("print-footer-template").innerHTML);
+    var rowTemplate = Handlebars.compile(document.getElementById("row-template").innerHTML);
+    var legendTemplate = Handlebars.compile(document.getElementById("legend-template").innerHTML);
+    var tooltipTemplate = Handlebars.compile(document.getElementById("tooltip-template").innerHTML);
+  </script>
+
+  <script nomodule>
+    $('#top').prepend($('<div class="alert alert-danger" role="alert">').text('This browser DOES NOT support <script type="module">'));
+  </script>
+
+  <!-- https://github.com/doowb/sma -->
+  <!-- script src="https://cdn.jsdelivr.net/npm/sma@latest/index.js"></script -->
+  <script src="./lib/sma.js"></script>
+
+  <!-- no local storage ? -->
+  <script>
+    (function (hasLocalStorage) {
+      if (hasLocalStorage) {
+        window._localStorage = window.localStorage;
+      } else {
+        var data = {};
+        window._localStorage = {
+          setItem: function (id, val) { return data[id] = String(val); },
+          getItem: function (id) { return data.hasOwnProperty(id) ? data[id] : undefined; },
+          removeItem: function (id) { return delete data[id]; },
+          clear: function () { return data = {}; }
+        };
+      }
+    })((function () {
+      try {
+        return "localStorage" in window && window.localStorage != null;
+      } catch (e) {
+        return false;
+      }
+    })());
+  </script>
+
+  <!-- location -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
+  <script type="module">
+    const location = Cookies.get('location');
+    function showLocation(location) {
+      $("#location").attr('title', "display data for " + location.country);
+      $("#location a")
+        .attr("href", "?" + location.countryCode);
+      $("#location img")
+        .attr("src", "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/" + location.countryCode.toLowerCase() + ".svg");
+
+    }
+    if (location) {
+      showLocation(JSON.parse(location));
+    } else {
+      $.ajax({
+        url: "https://ipecho.net/plain",
+        type: "GET",
+        dataType: "text",
+        crossDomain: true,
+        success: function (response) {
+          $.ajax({
+            url: "https://immense-ridge-70449.herokuapp.com/proxy?scheme=http&host=ip-api.com&port=80&path=/json/" + response + "?fields=country,countryCode&proxyType=Internet",
+            type: "GET",
+            dataType: "json",
+            crossDomain: true,
+            success: function (response) {
+              Cookies.set('location', response, { expires: 10 });
+              showLocation(JSON.stringify(response));
+            },
+            error: function (xhr, errorType, exception) {
+              console.log("Error fetching location data from ipstack.com", xhr, errorType, exception);
+              $("#location").remove();
+            }
+          });
+        },
+        error: function (xhr, errorType, exception) {
+          console.log("Error fetching location data from ipstack.com", xhr, errorType, exception);
+          $("#location").remove();
+        }
+      });
+    }
+
+  </script>
+
+  <!-- main script -->
+  <script type="module" src="./js/index.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- RELEASE -->
+  <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-163898058-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-163898058-1');
+  </script>
+  <!-- /RELEASE -->
+
+</body>
+
+</html>

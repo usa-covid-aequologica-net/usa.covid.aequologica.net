@@ -1,0 +1,38 @@
+circle:focus {
+    outline: none;
+}
+
+.tippy-content {
+    padding: 0;   
+}
+
+.mytooltip .card-header {
+    padding: .25rem .50rem;
+}
+
+.mytooltip .card-body{
+    padding: .25rem;
+}
+
+.mytooltip table {
+    margin-bottom: 0;
+}
+
+.mytooltip tr td:first-child {
+    text-align: right;
+    font-family: monospace;
+}
+
+.mytooltip tr td:last-child {
+    font-family: monospace;
+}
+
+.mytooltip caption {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+}
+
+.mytooltip .nowrap {
+    white-space: nowrap;
+    font-size: smaller;
+}
