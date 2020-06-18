@@ -50,21 +50,21 @@ $(document).ready(() => {
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
             $("#spinner").show();
+            const d3svgChart = d3.select("main svg#chart");
+            if (d3svgChart.empty()) {
+                return undefined;
+            }
+            d3svgChart.selectAll("g#rootG").remove();
+            if (countries) {
+                model.massageData();
+            }
+            const svg = d3svgChart.append("g").attr("id", "rootG");
             console.log("waiting ...");
             setTimeout(
                 async function () {
                     /*
                     await new Promise(r => setTimeout(r, 2000));
                     */
-                    const d3svgChart = d3.select("main svg#chart");
-                    if (d3svgChart.empty()) {
-                        return undefined;
-                    }
-                    d3svgChart.selectAll("g#rootG").remove();
-                    if (countries) {
-                        model.massageData();
-                    }
-                    const svg = d3svgChart.append("g").attr("id", "rootG");
                     drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
                         redraw(c, true);
                     });
