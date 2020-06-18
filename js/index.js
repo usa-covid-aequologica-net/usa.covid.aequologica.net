@@ -50,6 +50,7 @@ $(document).ready(() => {
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
             Pace.start();
+            console.log("pace on")
             setTimeout(function () {
                 const d3svgChart = d3.select("main svg#chart");
                 if (d3svgChart.empty()) {
@@ -64,7 +65,8 @@ $(document).ready(() => {
                     redraw(c, true);
                 });
                 Pace.stop();
-            }, 200);
+                console.log("pace of")
+            }, 1000);
         }
 
         // start date
