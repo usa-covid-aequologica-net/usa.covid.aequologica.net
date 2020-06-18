@@ -62,7 +62,6 @@ function calcMovingAverage(data_country) {
         });
     });
 }
-
 const maxSizeOfAverage = 21;
 const defaultSizeOfAverage = 21;
 let sizeOfAverage = undefined;
@@ -131,17 +130,13 @@ function massageData() {
     let latest = new moment(end);
     let earliest = moment();
 
-    // format the data 
+    // compute delta
     if (countries.length > 0) {
         end = moment(_.maxBy(data[countries[0]], 'date').date);
         latest = new moment(end);
         earliest = moment(_.minBy(data[countries[0]], 'date').date);
         latest.subtract(2, 'days');
         earliest.subtract(1, 'days');
-
-        const measureType = measure.getType();
-        const isTotal = getToggle("toggleCumula") === "total";
-
 
         countries.forEach((country) => {
             if (data[country].done) {
@@ -151,27 +146,26 @@ function massageData() {
             let previousMeasure = _.clone(measure.typesObject);
             if (!data[country]) {
                 console.log(country, "OUILLEE, no data !?");
-                return;
-            }
+            } else {
 
-            data[country].forEach((d) => {
-                d.delta = _.clone(measure.typesObject);
-                d.total = _.clone(measure.typesObject);
-                d.deltaMovingAverage = _.clone(measure.typesObject);
-                _.each(measure.typesArray, (m) => {
-                    d.total[m] = d[m];
-                    d.delta[m] = d[m] - previousMeasure[m];
-                    d.deltaMovingAverage[m] = d.delta[m];
-                    previousMeasure[m] = d[m];
+                data[country].forEach((d) => {
+                    d.delta = _.clone(measure.typesObject);
+                    d.total = _.clone(measure.typesObject);
+                    d.deltaMovingAverage = _.clone(measure.typesObject);
+                    _.each(measure.typesArray, (m) => {
+                        d.total[m] = d[m];
+                        d.delta[m] = d[m] - previousMeasure[m];
+                        d.deltaMovingAverage[m] = d.delta[m];
+                        previousMeasure[m] = d[m];
+                    });
                 });
-            });
 
-            calcMovingAverage(data[country]);
+                calcMovingAverage(data[country]);
 
-            data[country].done = true;
-            console.log("massaged", country);
+                data[country].done = true;
+                console.log("massaged", country);
+            }
         });
-
     }
 
     massagedData.data = data;

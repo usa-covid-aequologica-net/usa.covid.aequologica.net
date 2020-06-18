@@ -44,7 +44,7 @@ $(document).ready(() => {
 
     (function anonymous() { // should take care of not putting things in the global scope, shouldn't it ?
 
-        // data in model
+        // model
         const model = initModel(params.queryString);
 
         // usine à gaz pour dessiner les graphes
@@ -55,29 +55,14 @@ $(document).ready(() => {
             }
             d3svgChart.selectAll("g#rootG").remove();
             if (countries) {
-                massage();
+                model.massageData();
             }
             return d3svgChart.append("g").attr("id", "rootG");
         }
-
         function draw(svg, doNotAnimate) {
-            drawChart(svg, model, params.PRINT, doNotAnimate, (c) => { 
-                draw(raz(c), true) 
+            drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
+                draw(raz(c), true)
             });
-        }
-
-        function massage() {
-            
-            model.massageData();
-
-            const countries = model.getCountriesHolder().get();
-            if (countries.length == 0) {
-                $("#zero-country").show();
-                $("#more-than-zero-country").hide();
-            } else {
-                $("#zero-country").hide();
-                $("#more-than-zero-country").show();
-            }
         }
 
         // start date
@@ -131,7 +116,7 @@ $(document).ready(() => {
             $("#cumulaGroup .dropdown-item").on("click", (e) => {
                 const odlCumula = model.getToggle("toggleCumula");
                 const newCumula = $(e.currentTarget).data("type");
-                if (odlCumula != newCumula) {
+                if (odlCumula !== newCumula) {
                     model.setToggle("toggleCumula", newCumula);
                     $("#cumulat").html(newCumula);
                     cumula2averageFeedback(newCumula === "total");
@@ -155,7 +140,7 @@ $(document).ready(() => {
                 const newMeasure = $(e.currentTarget).data("type");
                 if (odlMeasure != newMeasure) {
                     measure.setType(newMeasure);
-                    $("#measure").html(measure.getType());
+                    $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
                     draw(raz());
                 }
@@ -165,13 +150,6 @@ $(document).ready(() => {
         // countries
         {
             const countries = model.getCountriesHolder().get();
-            if (countries.length == 0) {
-                $("#zero-country").show();
-                $("#more-than-zero-country").hide();
-            } else {
-                $("#zero-country").hide();
-                $("#more-than-zero-country").show();
-            }
 
             // country picker
             {
@@ -200,13 +178,11 @@ $(document).ready(() => {
             const sizeOfAverage = model.getSizeOfAverage();
             $("#sizeOfAverage").val(sizeOfAverage);
             $("#bubble").html(sizeOfAverage);
-
             function averageFeedback(a) {
-                const isDaily =
-                    $("#average").html(a < 2
-                        ? "day&nbsp;&nbsp;<span style='text-decoration: line-through'>average</span>"
-                        : "days&nbsp;average"
-                    );
+                $("#average").html(a < 2
+                    ? "day&nbsp;&nbsp;<span style='text-decoration: line-through'>average</span>"
+                    : "days&nbsp;average"
+                );
             }
             averageFeedback(sizeOfAverage);
             const ranges = document.querySelectorAll('#sizeOfAverage[type="range"]');
@@ -230,7 +206,7 @@ $(document).ready(() => {
 
         // permalink
         $('#permalinkModal').on('show.bs.modal', () => {
-            buildPermalink(model).then((permalink) => {
+            buildPermalink(model).then(permalink => {
                 if (window.location.protocol !== "https:" && window.location.hostname !== "localhost") {
                     $('#permalinkModal').find('input').val(permalink);
                     $('#permalinkModal').find('label').html("focus, then ctrl-A, ctrl-C to copy permalink to clipboard");
@@ -245,7 +221,7 @@ $(document).ready(() => {
 
         // facebook
         $("#facebook").on("click", function () {
-            buildPermalink(model).then((permalink) => {
+            buildPermalink(model).then(permalink => {
                 permalink = permalink.replace(/http:\/\/localhost:8001\//, "https://covid.aequologica.net/");
                 FB.ui({
                     method: 'share',
@@ -259,7 +235,7 @@ $(document).ready(() => {
 
         // get the data
         {
-            model.fetchData((result) => {
+            model.fetchData(result => {
 
                 $("#end").html(result.end.format('LL'));
                 $('#startRangeInput').prop("max", result.latest.dayOfYear());
@@ -281,7 +257,7 @@ $(document).ready(() => {
                     buildPermalink,
                     params.printMarker,
                 );
-
+                
             });
         }
     })();
