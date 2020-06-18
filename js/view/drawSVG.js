@@ -58,6 +58,7 @@ export function draw(rootG, properties, PRINT, doNotAnimate, callback) {
             return { nummer: nummer, tot: tot, date: d.date };
         }
 
+        // const lasts = _.filter(massagedData.lasts, (l) => countriesHolder.get().includes(l.name))
         const sorted = properties.getFetchResults().lasts.sort((a, b) => {
             let A;
             let B;
