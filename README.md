@@ -28,7 +28,7 @@ Try it here: [https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,p
 
 You may find cumbersome all this typing (read: you are not a geek). But wait, you can configure all these options with the - hopefully - intuitive user interface of the application, and boom! one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
 
-![UI explained](./img/screenshot5-UI-explained.png "UI explained")
+![UI explained](./img/screenshot6-UI-explained.png "UI explained")
 
 ## Complete Reference Guide
 
