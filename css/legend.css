@@ -6,6 +6,11 @@
     margin-bottom: 0;
 }
 
+#legend table td, .table th {
+    padding: .2rem;
+    border-top: none;
+}
+
 #legend button {
     padding: 0 .3rem;
 }
