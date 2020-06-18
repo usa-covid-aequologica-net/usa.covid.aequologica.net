@@ -82,17 +82,6 @@
     opacity: 1;
 }
 
-#legendButtonsWrapper {
-    position: fixed;
-    right: 5px;
-    top: 0;
-    height: 100%;
-}
-
-#legendButtons {
-    width: 24px;
-}
-
 #legendSelectionUp::before {
     content: "↑";
 }
@@ -109,10 +98,11 @@
     content: "↓";
 }
 
-#legendButtons button {
-    padding: 0.25rem;
+#legendButtonsWrapper button {
+    width: 20px;
+    padding: 0.2rem;
 }
 
-#legendButtons button:not(:hover) {
+#legendButtonsWrapper button:not(:hover) {
     background-color: white;
 }
