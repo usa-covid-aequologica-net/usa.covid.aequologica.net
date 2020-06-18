@@ -50,19 +50,21 @@ $(document).ready(() => {
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
             Pace.start();
-            const d3svgChart = d3.select("main svg#chart");
-            if (d3svgChart.empty()) {
-                return undefined;
-            }
-            d3svgChart.selectAll("g#rootG").remove();
-            if (countries) {
-                model.massageData();
-            }
-            const svg = d3svgChart.append("g").attr("id", "rootG");
-            drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
-                redraw(c, true);    
-            });
-            Pace.stop();
+            setTimeout(function () {
+                const d3svgChart = d3.select("main svg#chart");
+                if (d3svgChart.empty()) {
+                    return undefined;
+                }
+                d3svgChart.selectAll("g#rootG").remove();
+                if (countries) {
+                    model.massageData();
+                }
+                const svg = d3svgChart.append("g").attr("id", "rootG");
+                drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
+                    redraw(c, true);
+                });
+                Pace.stop();
+            }, 200);
         }
 
         // start date
@@ -257,7 +259,7 @@ $(document).ready(() => {
                     buildPermalink,
                     params.printMarker,
                 );
-                
+
             });
         }
     })();
