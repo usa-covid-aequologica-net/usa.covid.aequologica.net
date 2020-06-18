@@ -76,7 +76,13 @@ export function draw(rootG, properties, PRINT, doNotAnimate, callback) {
             if (!A || !B) {
                 return 0;
             }
-            if (isPercapita) {
+            if (!countryMap[a.name]) {
+                console.log("no /" + a.name + "/ in countryMap", countryMap);
+            }
+            if (!countryMap[b.name]) {
+                console.log("no /" + b.name + "/ in countryMap", countryMap);
+            }
+            if (isPercapita && countryMap[a.name] && countryMap[b.name]) {
                 A = 1000000 * A / countryMap[a.name].count;;
                 B = 1000000 * B / countryMap[b.name].count;
             }
