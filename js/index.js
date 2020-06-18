@@ -48,7 +48,8 @@ $(document).ready(() => {
         const model = initModel(params.queryString);
 
         // usine à gaz pour dessiner les graphes
-        function raz(countries) {
+        function redraw(countries, doNotAnimate) {
+            Pace.start();
             const d3svgChart = d3.select("main svg#chart");
             if (d3svgChart.empty()) {
                 return undefined;
@@ -57,14 +58,11 @@ $(document).ready(() => {
             if (countries) {
                 model.massageData();
             }
-            return d3svgChart.append("g").attr("id", "rootG");
-        }
-        function draw(svg, doNotAnimate) {
+            const svg = d3svgChart.append("g").attr("id", "rootG");
             drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
-                Pace.start();
-                draw(raz(c), true);
-                Pace.stop();
+                redraw(c, true);    
             });
+            Pace.stop();
         }
 
         // start date
@@ -75,7 +73,7 @@ $(document).ready(() => {
 
             $('#startRangeInput').on('change', (e) => {
                 model.setStartDate(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')));
-                draw(raz());
+                redraw();
             }).on('input', (e) => {
                 $('#startFeedback').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
             });
@@ -101,7 +99,7 @@ $(document).ready(() => {
             if (oldVal !== newVal) {
                 model.setToggle(key, newVal);
                 $('label#' + key + ', img#' + key).css('opacity', isChecked ? "1" : ".666");
-                draw(raz());
+                redraw();
             }
         });
 
@@ -122,7 +120,7 @@ $(document).ready(() => {
                     model.setToggle("toggleCumula", newCumula);
                     $("#cumulat").html(newCumula);
                     cumula2averageFeedback(newCumula === "total");
-                    draw(raz());
+                    redraw();
                 }
             });
         }
@@ -144,7 +142,7 @@ $(document).ready(() => {
                     measure.setType(newMeasure);
                     $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
-                    draw(raz());
+                    redraw();
                 }
             });
         }
@@ -169,7 +167,7 @@ $(document).ready(() => {
                     .on('hidden.bs.modal', () => {
                         const dirty = countryPicker.afterClose();
                         if (dirty) {
-                            draw(raz(model.getCountriesHolder().get()));
+                            redraw(model.getCountriesHolder().get());
                         }
                     });
             }
@@ -199,7 +197,7 @@ $(document).ready(() => {
                         if (model.getSizeOfAverage() != r.value) {
                             model.setSizeOfAverage(r.value);
                             averageFeedback(r.value);
-                            draw(raz());
+                            redraw();
                         }
                     });
                 });
@@ -243,7 +241,7 @@ $(document).ready(() => {
                 $('#startRangeInput').prop("max", result.latest.dayOfYear());
                 $('#startRangeInput').prop("min", result.earliest.dayOfYear());
 
-                draw(raz());
+                redraw();
 
                 const $printModal = $('.modal#printModal');
 
