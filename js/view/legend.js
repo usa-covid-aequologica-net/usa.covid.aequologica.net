@@ -133,7 +133,6 @@ export function Legend() {
             });
 
             $("main #legendSelectionUp").unbind().on('click', (e) => {
-                Pace.start();
                 e.stopPropagation();
                 e.preventDefault();
                 if (properties.selectionUp()) {
@@ -141,11 +140,9 @@ export function Legend() {
                     refresh();
                     console.log("up");
                 }
-                Pace.stop();
             });
 
             $("main #legendSelectionDown").unbind().on('click', (e) => {
-                Pace.start();
                 e.stopPropagation();
                 e.preventDefault();
                 if (properties.selectionDown()) {
@@ -153,7 +150,6 @@ export function Legend() {
                     $('#legend td.country.active')[0].scrollIntoView();
                     console.log("down");
                 }
-                Pace.stop();
             });
         }
     }

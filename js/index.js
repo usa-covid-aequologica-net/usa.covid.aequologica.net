@@ -61,7 +61,9 @@ $(document).ready(() => {
         }
         function draw(svg, doNotAnimate) {
             drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
-                draw(raz(c), true)
+                Pace.start();
+                draw(raz(c), true);
+                Pace.stop();
             });
         }
 
