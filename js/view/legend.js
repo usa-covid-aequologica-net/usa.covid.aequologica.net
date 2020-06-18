@@ -130,6 +130,7 @@ export function Legend() {
                 e.stopPropagation();
                 e.preventDefault();
                 if (properties.selectionUp()) {
+                    $('#legend td.country.active')[0].scrollIntoView();
                     refresh();
                     console.log("up");
                 }
@@ -140,6 +141,7 @@ export function Legend() {
                 e.preventDefault();
                 if (properties.selectionDown()) {
                     refresh();
+                    $('#legend td.country.active')[0].scrollIntoView();
                     console.log("down");
                 }
             });
