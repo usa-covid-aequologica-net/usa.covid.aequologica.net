@@ -50,12 +50,11 @@ $(document).ready(() => {
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
             $("#spinner").show();
+            console.log("waiting ...");
             setTimeout(
                 async function () {
                     /*
-                    console.log("waiting ...");
                     await new Promise(r => setTimeout(r, 2000));
-                    console.log("...resumed!");
                     */
                     const d3svgChart = d3.select("main svg#chart");
                     if (d3svgChart.empty()) {
@@ -69,8 +68,9 @@ $(document).ready(() => {
                     drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
                         redraw(c, true);
                     });
+                    console.log("...resumed!");
                     $("#spinner").hide();
-                },100);
+                },3000);
         }
 
         // start date
