@@ -1,5 +1,6 @@
 'use strict';
 
+import { store } from './yetAnotherLocalStorageWrapper.js';
 // import { factory } from './factory.js'
 const factory = _.sortedUniq(_.sortBy([
     "Brazil",
@@ -15,33 +16,29 @@ const factory = _.sortedUniq(_.sortBy([
 ]));
 import { populationByCountry } from './population.js';
 
-
-let countries = undefined;
-let selectedCountry = undefined;
-
 function reset() {
-    window._localStorage.removeItem('countries');
-    console.log("'remove countries from local storage'");
+    store.remove('countries');
     countries = _.clone(factory);
     return countries;
 };
+
+function getSelectedCountry() {
+    if (countries.includes(selectedCountry)) {
+        return selectedCountry;
+    }
+    return undefined;
+}
 
 function setSelectedCountry(c, nosave) {
     if (!c) {
         selectedCountry = undefined;
         if (!nosave) {
-            console.log("'remove selected country from local storage'");
-            window._localStorage.removeItem('selectedCountry');
-        } else {
-            console.log("'no country selected'");
+            store.remove('selectedCountry');
         }
     } else {
         selectedCountry = c;
         if (!nosave) {
-            console.log("'write selected country to local storage'", selectedCountry);
-            window._localStorage.setItem('selectedCountry', selectedCountry);
-        } else {
-            console.log("'selected country = '" + selectedCountry + ' from local storage');
+            store.set('selectedCountry', selectedCountry);
         }
     }
 }
@@ -71,17 +68,27 @@ function getCountryObjectMap() {
     return map;
 }
 
+function read() {
+    let countrays = store.get('countries', factory.join(","));
+    if (typeof countrays !== "string" || countrays.length == 0) {
+        countrays = [];
+    } else {
+        countrays = countrays.split(',');
+    }
+    countries = _.sortedUniq(_.sortBy(countrays));
+    return countries;
+}
+
+let countries = undefined;
+read();
+
+let selectedCountry = store.get('selectedCountry', undefined);
 
 export function Countries() {
     return {
-        getSelectedCountry: () => {
-            if (countries.includes(selectedCountry)) {
-                return selectedCountry;
-            }
-            return undefined;
-        },
-        isSelected: s => countries.includes(s) && selectedCountry === s,
+        getSelectedCountry: getSelectedCountry,
         setSelectedCountry: setSelectedCountry,
+        isSelected: s => countries.includes(s) && selectedCountry === s,
         selectedCountryDown: () => {
             if (!selectedCountry) {
                 return;
@@ -125,38 +132,20 @@ export function Countries() {
         get: () => countries,
         getAsMap: getCountryObjectMap,
         getAsArray: getCountryObjectArray,
-        set: cs => {
-            countries = _.sortedUniq(_.sortBy(cs));
+        set: countrays => {
+            countries = _.sortedUniq(_.sortBy(countrays));
             return countries;
         },
         reset: reset,
-        read: () => {
-            let cs = window._localStorage.getItem('countries');
-            if (cs != null) {
-                if (typeof cs !== "string" || cs.length == 0) {
-                    cs = [];
-                } else {
-                    cs = cs.split(',');
-                }
-                console.log("'countries from local storage'", cs);
-            } else {
-                cs = _.clone(factory);
-                console.log("'countries from factory'", cs);
-            }
-            countries = _.sortedUniq(_.sortBy(cs));
-            setSelectedCountry(window._localStorage.getItem('selectedCountry'), true);
-            return countries;
-        },
-        write: cs => {
-            cs = _.sortedUniq(_.sortBy(cs));
-            if (_.isEqual(cs, factory)) {
+        read: read,
+        write: countrays => {
+            countrays = _.sortedUniq(_.sortBy(countrays));
+            if (_.isEqual(countrays, factory)) {
                 return reset();
             } else {
-                window._localStorage.setItem('countries', cs);
-                console.log("'write countries to local storage'", cs);
-
+                store.set('countries', countrays);
             }
-            countries = cs;
+            countries = countrays;
             return countries;
         }
     };

@@ -557,29 +557,6 @@
   <!-- script src="https://cdn.jsdelivr.net/npm/sma@latest/index.js"></script -->
   <script src="./lib/sma.js"></script>
 
-  <!-- no local storage ? -->
-  <script>
-    (function (hasLocalStorage) {
-      if (hasLocalStorage) {
-        window._localStorage = window.localStorage;
-      } else {
-        var data = {};
-        window._localStorage = {
-          setItem: function (id, val) { return data[id] = String(val); },
-          getItem: function (id) { return data.hasOwnProperty(id) ? data[id] : undefined; },
-          removeItem: function (id) { return delete data[id]; },
-          clear: function () { return data = {}; }
-        };
-      }
-    })((function () {
-      try {
-        return "localStorage" in window && window.localStorage != null;
-      } catch (e) {
-        return false;
-      }
-    })());
-  </script>
-
   <!-- location -->
   <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
   <script type="module">

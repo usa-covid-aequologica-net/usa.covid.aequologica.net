@@ -1,10 +1,12 @@
 'use strict';
 
-export function Measure(window) {
+import { store } from './yetAnotherLocalStorageWrapper.js';
 
-    const defaultType = "deaths";
+export function Measure() {
 
-    let type = defaultType;
+    const defaultMeasureType = "deaths";
+
+    let type = store.get("measureType", defaultMeasureType);
 
     const typesArray = ["confirmed", "deaths", "recovered"];
     const typesObject = { confirmed: 0, deaths: 0, recovered: 0 };
@@ -23,28 +25,16 @@ export function Measure(window) {
                     type = newType;
                     break;
                 default:
-                    type = defaultType;
                     break;
             }
             if (!nosave) {
-                if (type === defaultType) {
-                    window._localStorage.removeItem("measureType");
-                    console.log("remove type from local storage");
+                if (type === defaultMeasureType) {
+                    store.remove("measureType");
                 } else if (type !== previousType) {
-                    window._localStorage.setItem("measureType", type);
-                    console.log("write type to local storage", type);
+                    store.set("measureType", type);
                 }
             }
         }
-    }
-
-    // read type from local storage 
-    let typeFromLocalStorage = window._localStorage.getItem("measureType");
-    if (typeFromLocalStorage) {
-        setType(typeFromLocalStorage);
-        console.log("measure type = " + typeFromLocalStorage + " from local storage");
-    } else {
-        console.log("measure type = " + type + " from defaults");
     }
 
     return {

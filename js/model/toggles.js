@@ -1,5 +1,7 @@
 'use strict';
 
+import { store } from './yetAnotherLocalStorageWrapper.js';
+
 const validToggles = { // first is default
     toggleCapita: ["absolute", "percapita"],
     toggleCumula: ["daily", "total"],
@@ -15,13 +17,12 @@ const toggles = {
 
 export const readToggles = () => {
     _.each(validToggles, (val, key) => {
-        const tmp = window._localStorage.getItem(key);
+        const tmp = store.get(key, val[0]);
         if (tmp && validToggles[key].includes(tmp)) {
             toggles[key] = tmp;
-            console.log(key + " = " + tmp + " from local storage");
         } else {
             toggles[key] = val[0];
-            console.log(key + " = " + val[0] + " from defaults");
+            console.log("invalid value " + key + " = " + tmp + " from local storage; used " + val[0] + "from defaults");
         }
     });
 }
@@ -45,12 +46,12 @@ export const setToggle = (key, value, nosave) => {
         throw "not a toggle (" + key + ") !";
     }
     if (toggles[key] !== value) {
-        if (validToggles[key][0] === value) {
-            if (!nosave) { window._localStorage.removeItem(key); }
-            console.log("remove " + key + "from local storage");
-        } else {
-            if (!nosave) { window._localStorage.setItem(key, value); }
-            console.log("write " + key + " = " + value + " to local storage");
+        if (!nosave) {
+            if (validToggles[key][0] === value) {
+                store.remove(key);
+            } else {
+                store.set(key, value);
+            }
         }
         toggles[key] = value;
     }

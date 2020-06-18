@@ -1,5 +1,6 @@
 'use strict';
 
+import { store } from './yetAnotherLocalStorageWrapper.js';
 import { countryAliases } from './population.js';
 import { Countries } from './countries.js';
 import { Measure } from './measure.js';
@@ -8,12 +9,11 @@ import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
 // toggles
 readToggles();
 
-// measure (confirmed | deaths | recovered )
-const measure = Measure(window);
+// measure
+const measure = Measure();
 
 // countries
 const countriesHolder = Countries();
-countriesHolder.read();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
@@ -24,17 +24,18 @@ let setStartDate;
     const defaultStart = moment("2020-01-21");
     // start date
     let readStartDate = () => {
-        const startAsDayOfYear = window._localStorage.getItem("startAsDayOfYear");
-        const startDate = startAsDayOfYear ? moment().dayOfYear(startAsDayOfYear) : defaultStart;
+        const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
+        const startDate = moment().dayOfYear(startAsDayOfYear);
         return startDate;
     };
-
     setStartDate = (s, nosave) => {
         startDate = s;
-        if (s.isSame(defaultStart, 'day')) {
-            if (!nosave) { window._localStorage.removeItem("startAsDayOfYear"); }
-        } else {
-            if (!nosave) { window._localStorage.setItem("startAsDayOfYear", startDate.dayOfYear()); }
+        if (!nosave) {
+            if (s.isSame(defaultStart, 'day')) {
+                store.remove("startAsDayOfYear");
+            } else {
+                store.set("startAsDayOfYear", startDate.dayOfYear());
+            }
         }
         return startDate;
     }
@@ -47,6 +48,9 @@ let setStartDate;
 
 // size of average
 function calcMovingAverage(data_country) {
+    if (!data_country) {
+        return;
+    }
     _.each(measure.typesArray, (m) => {
         const deltas = _.map(data_country, 'delta.' + m);
         let deltasMovingAverage = sma(deltas, sizeOfAverage, x => x);
@@ -73,19 +77,21 @@ let setSizeOfAverage = (s, nosave) => {
         sizeOfAverage = s;
         const countries = countriesHolder.get();
         countries.forEach((country) => {
-            calcMovingAverage(massagedData.data[country]);
+            if (massagedData && massagedData.data) {
+                calcMovingAverage(massagedData.data[country]);
+            }
         });
         if (!nosave) {
             if (sizeOfAverage == 21) {
-                window._localStorage.removeItem("sizeOfAverage");
+                store.remove("sizeOfAverage");
             } else {
-                window._localStorage.setItem("sizeOfAverage", sizeOfAverage);
+                store.set("sizeOfAverage", sizeOfAverage);
             }
         }
     }
 };
 {
-    let storedSizeOfAverage = window._localStorage.getItem("sizeOfAverage");
+    let storedSizeOfAverage = store.get("sizeOfAverage", defaultSizeOfAverage);
     if (storedSizeOfAverage) {
         storedSizeOfAverage = parseInt(storedSizeOfAverage, 10);  // "Always specify a radix to avoid (...) unreliable behavior" https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
     }
@@ -200,7 +206,7 @@ export function init(queryStringParams) {
     // query parameters
     if (queryStringParams) {
         if (queryStringParams.reset) {
-            window._localStorage.clear();
+            store.clear();
             window.location = ".";
         }
         if (queryStringParams.measure) {
