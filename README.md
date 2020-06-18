@@ -59,12 +59,6 @@ _Tip : ending the query string with an underscore (\_) prevents Facebook to horr
 
 ## New features
 
-### Download image
-
-_Disclaimer: feature still in alpha mode._
-
-Not only a permalink can be generated, but also a snapshot image of the current graph can be downloaded, to be later shared on social media. To have a try at this feature, click on the top right "save" button, the one with a camera icon.
-
 ### Select country
 
 Notice the * in the permalink:
