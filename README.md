@@ -128,5 +128,5 @@ Adding or removing countries from the list with the country picker modal dialog 
 
 That's the map from Google Analytics about the frequentation of the site since its creation, the 17 of April 2020.
 
-![Google Analytics geo map of frequntation](./img/screenshot-world-audience.png)
+![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
 
