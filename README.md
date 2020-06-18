@@ -20,7 +20,7 @@ coutries with very different low and high numbers would be easied (try to add So
 finally, to reduce the noise inherent with daily figures, for each day a moving average of the previous **18** days is plotted.
 
 
-Try it here: [https://covid.aequologica.net/?18,2020-03-01,FR,IT,SE,confirmed,day,log,per,_](https://covid.aequologica.net/?18,2020-03-01,FR,IT,SE,confirmed,day,log,per,_)
+Try it here: [https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,per,lin,18,_](https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,per,lin,18,_)
 
 ![FR,IT,SE](./img/screenshot6.png "FR,IT,SE")
 
