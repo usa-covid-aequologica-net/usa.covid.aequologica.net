@@ -47,16 +47,16 @@ let setStartDate;
 }
 
 // size of average
-function calcMovingAverage(data_country) {
-    if (!data_country) {
+function calcMovingAverage(data, lasts, country) {
+    if (!data[country]) {
         return;
     }
     _.each(measure.typesArray, (m) => {
-        const deltas = _.map(data_country, 'delta.' + m);
+        const deltas = _.map(data[country], 'delta.' + m);
         let deltasMovingAverage = sma(deltas, sizeOfAverage, x => x);
 
         let i = 1;
-        data_country.forEach((d) => {
+        data[country].forEach((d) => {
             if (i <= sizeOfAverage) {
                 d.deltaMovingAverage[m] = d.total[m] / i;
             } else {
@@ -64,7 +64,17 @@ function calcMovingAverage(data_country) {
             }
             i = i + 1;
         });
+
     });
+    // recalc sort order for selection up/down
+    const last = _.find(lasts, l => l.name === country);
+    if (last) {
+        const newLast = data[country][data[country].length-2].deltaMovingAverage;
+        const oldLast = last.deltaMovingAverage;
+        if (!_.isEqual(oldLast,newLast)) {
+            last.deltaMovingAverage = newLast;
+        }
+    }
 }
 const maxSizeOfAverage = 21;
 const defaultSizeOfAverage = 21;
@@ -77,8 +87,8 @@ let setSizeOfAverage = (s, nosave) => {
         sizeOfAverage = s;
         const countries = countriesHolder.get();
         countries.forEach((country) => {
-            if (massagedData && massagedData.data) {
-                calcMovingAverage(massagedData.data[country]);
+            if (massagedData && massagedData.data && massagedData.lasts) {
+                calcMovingAverage(massagedData.data, massagedData.lasts, country);
             }
         });
         if (!nosave) {
@@ -161,12 +171,9 @@ function massageData() {
                     _.each(measure.typesArray, (m) => {
                         d.total[m] = d[m];
                         d.delta[m] = d[m] - previousMeasure[m];
-                        d.deltaMovingAverage[m] = d.delta[m];
                         previousMeasure[m] = d[m];
                     });
                 });
-
-                calcMovingAverage(data[country]);
 
                 data[country].done = true;
                 console.log("massaged", country);
@@ -174,7 +181,24 @@ function massageData() {
         });
     }
 
+    // store last measures in 'lasts' to be able to sort later
+    let lasts = [];
+    {
+        const sort = [];
+        lasts = _.transform(data, (result, value, key) => (result.push({
+            name: key,
+            total: value[value.length - 1].total,
+            delta: value[value.length - 1].delta,
+            deltaMovingAverage: value[value.length - 1].deltaMovingAverage,
+        })), []);
+    }
+
+    countries.forEach((country) => {
+        calcMovingAverage(data, lasts, country);
+    });
+
     massagedData.data = data;
+    massagedData.lasts = lasts;
     massagedData.end = end;
     massagedData.latest = latest;
     massagedData.earliest = earliest;
@@ -263,6 +287,49 @@ export function init(queryStringParams) {
 
         fetchData: fetchData,
         massageData: massageData,
+        selectionUp: () => {
+            function up(array, element) {
+                if (!element) {
+                    return;
+                }
+                let index = _.findIndex(array, a => a.name === element);
+                if (array[index].name !== element) {
+                    return;
+                }
+                if (0 < index) {
+                    return array[index - 1].name;
+                }
+                return;
+            }
+            const oldSel = countriesHolder.getSelectedCountry();
+            const newSel = up(massagedData.lasts, oldSel);
+            if (newSel && oldSel !== newSel) {
+                countriesHolder.setSelectedCountry(newSel);
+                return newSel;
+            }
+            return;
+        },
+        selectionDown: () => {
+            function down(array, element) {
+                if (!element) {
+                    return;
+                }
+                let index = _.findIndex(array, a => a.name === element);
+                if (array[index].name !== element) {
+                    return;
+                }
+                if (index < array.length - 1) {
+                    return array[index + 1].name;
+                }
+            }
+            const oldSel = countriesHolder.getSelectedCountry();
+            const newSel = down(massagedData.lasts, oldSel);
+            if (newSel && oldSel !== newSel) {
+                countriesHolder.setSelectedCountry(newSel);
+                return newSel;
+            }
+            return;
+        },
         getFetchResults: () => massagedData,
 
         printHeaderTemplateObjects: {

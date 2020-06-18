@@ -14,7 +14,7 @@ export function draw(rootG, properties, PRINT, doNotAnimate, callback) {
     const sizeOfAverage = properties.getSizeOfAverage();
     const startDate = properties.getStartDate();
     const countryMap = properties.getCountriesHolder().getAsMap();
-    
+
     if (rootG) {
         rootG.attr("transform", " translate(10 10)");
 
@@ -46,12 +46,8 @@ export function draw(rootG, properties, PRINT, doNotAnimate, callback) {
                     nummer = d.delta[measureType];
                     tot = d.delta.deaths;
                 } else {
-                    if (d.deltaMovingAverage) {
-                        nummer = d.deltaMovingAverage[measureType];
-                        tot = d.deltaMovingAverage.deaths;
-                    } else {
-                        throw "ouille !!!!";
-                    }
+                    nummer = d.deltaMovingAverage[measureType];
+                    tot = d.deltaMovingAverage.deaths;
                 }
             }
             if (isPercapita) {
@@ -62,6 +58,31 @@ export function draw(rootG, properties, PRINT, doNotAnimate, callback) {
             return { nummer: nummer, tot: tot, date: d.date };
         }
 
+        const sorted = properties.getFetchResults().lasts.sort((a, b) => {
+            let A;
+            let B;
+            if (isTotal) {
+                A = a.total[measureType];
+                B = b.total[measureType];
+            } else {
+                if (sizeOfAverage < 2) {
+                    A = a.delta[measureType];
+                    B = b.delta[measureType];
+                } else {
+                    A = a.deltaMovingAverage[measureType];
+                    B = b.deltaMovingAverage[measureType];
+                }
+            }
+            if (!A || !B) {
+                return 0;
+            }
+            if (isPercapita) {
+                A = 1000000 * A / countryMap[a.name].count;;
+                B = 1000000 * B / countryMap[b.name].count;
+            }
+            return B - A;
+        });
+        
         // Read in data
         const data = properties.getFetchResults().data;
 

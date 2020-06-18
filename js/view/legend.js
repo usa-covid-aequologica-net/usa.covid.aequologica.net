@@ -129,17 +129,19 @@ export function Legend() {
             $("main #legendSelectionUp").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                properties.getCountriesHolder().selectedCountryUp();
-                refresh();
-                console.log("up");
+                if (properties.selectionUp()) {
+                    refresh();
+                    console.log("up");
+                }
             });
 
             $("main #legendSelectionDown").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                properties.getCountriesHolder().selectedCountryDown();
-                refresh();
-                console.log("down");
+                if (properties.selectionDown()) {
+                    refresh();
+                    console.log("down");
+                }
             });
         }
     }
