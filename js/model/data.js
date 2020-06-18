@@ -9,7 +9,7 @@ import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
 readToggles();
 
 // measure (confirmed | deaths | recovered )
-const measure = Measure();
+const measure = Measure(window);
 
 // countries
 const countriesHolder = Countries();

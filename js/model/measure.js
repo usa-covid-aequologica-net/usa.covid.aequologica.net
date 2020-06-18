@@ -1,6 +1,6 @@
 'use strict';
 
-export function Measure() {
+export function Measure(window) {
 
     const defaultType = "deaths";
 
