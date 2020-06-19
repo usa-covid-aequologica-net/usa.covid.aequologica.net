@@ -91,27 +91,35 @@
     opacity: 1;
 }
 
-#legendSelectionUp::before {
-    content: "↑";
-}
-
-#legendToggle::before {
-    content: "←";
-}
-
-#legendToggle.folded::before {
-    content: "→";
-}
-
-#legendSelectionDown::before {
-    content: "↓";
-}
-
 #legendButtonsWrapper button {
-    width: 20px;
     padding: 0.2rem;
+    margin-left: auto;
+}
+
+#legendButtonsWrapper button:not(#legendToggle) {
+    width: 18px;
 }
 
 #legendButtonsWrapper button:not(:hover) {
     background-color: white;
+}
+
+#legendToggle {
+    width: 24px;
+}
+
+#legendToggle:not(.folded) img#legendToggleOpen, #legendToggle.folded img#legendToggleClosed {
+    display: none;
+}
+
+#legendToggle.folded img#legendToggleOpen, #legendToggle:not(.folded) img#legendToggleClosed {
+    display: inline;
+}
+
+#legendSelectionUp::before {
+    content: "↑";
+}
+
+#legendSelectionDown::before {
+    content: "↓";
 }
