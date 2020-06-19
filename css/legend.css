@@ -43,10 +43,6 @@
     padding-left: .5rem;
 }
 
-#legend #populationToggle {
-    border-color: transparent;
-}
-
 #legend #populationToggle:not(:hover) {
     background-color: white !important;
 }
@@ -102,6 +98,10 @@
 
 #legendButtonsWrapper button:not(:hover) {
     background-color: white;
+}
+
+#legendButtonsWrapper button#legendToggle.folded:not(:hover) {
+    background-color: #ccc !important;
 }
 
 #legendToggle {
