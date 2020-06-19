@@ -3,6 +3,7 @@
 import { share as setupShare } from './view/share.js';
 import { init as initCountryPicker } from './view/countryPicker.js';
 import { draw as drawChart } from './view/drawSVG.js';
+import { Legend } from './view/legend.js';
 import { init as initModel } from './model/data.js';
 import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
@@ -50,27 +51,44 @@ $(document).ready(() => {
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
             $("#spinner").show();
+
+            // raz
             const d3svgChart = d3.select("main svg#chart");
             if (d3svgChart.empty()) {
+                $("#spinner").hide();
                 return undefined;
             }
             d3svgChart.selectAll("g#rootG").remove();
+            const svg = d3svgChart.append("g").attr("id", "rootG");
+
+            // data massage
             if (countries) {
                 model.massageData();
             }
-            const svg = d3svgChart.append("g").attr("id", "rootG");
-            console.log("waiting ...");
-            setTimeout(
-                async function () {
-                    /*
-                    await new Promise(r => setTimeout(r, 2000));
-                    */
-                    drawChart(svg, model, params.PRINT, doNotAnimate, (c) => {
-                        redraw(c, true);
-                    });
-                    console.log("...resumed!");
-                    $("#spinner").hide();
-                },3000);
+            const categories = model.setupCategories();
+
+            // d3
+            drawChart(
+                svg,
+                {
+                    isLogarithmic: model.getToggle("toggleLinear") === "logarithmic",
+                    countries: model.getCountriesHolder().get(),
+                    selectedCountry: model.getCountriesHolder().getSelectedCountry(),
+                },
+                categories,
+                params.PRINT,
+                doNotAnimate);
+
+            // legend
+            Legend().draw(
+                model,
+                legendTemplate,
+                (c) => {
+                    redraw(c, true);
+                }
+            );
+
+            $("#spinner").hide();
         }
 
         // start date
@@ -167,7 +185,7 @@ $(document).ready(() => {
                         if (!countryPicker) {
                             countryPicker = initCountryPicker(
                                 model.getCountriesHolder(),
-                                "#countries",
+                                "#countriesInModal",
                             );
                         }
                         countryPicker.beforeOpen();

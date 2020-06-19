@@ -39,7 +39,7 @@ export function init(...args) {
 
     function syncTableSorter() {
 
-        $('#countries th.population').data('sorter', 'digit');
+        $('#countriesInModal th.population').data('sorter', 'digit');
 
 
         const $trs = $(selector + " table tbody tr");
@@ -125,7 +125,7 @@ export function init(...args) {
         $table_sorter.trigger('update');
     }
 
-    $("#countries #resetToFactory").on("click", (e) => {
+    $("#countriesInModal #resetToFactory").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -134,7 +134,7 @@ export function init(...args) {
         set(countries);
     });
 
-    $("#countries #selectAll").on("click", (e) => {
+    $("#countriesInModal #selectAll").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         let aa = [];
@@ -148,7 +148,7 @@ export function init(...args) {
         set(countries);
     });
 
-    $("#countries #unselectAll").on("click", (e) => {
+    $("#countriesInModal #unselectAll").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 

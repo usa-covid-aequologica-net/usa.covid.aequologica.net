@@ -47,7 +47,7 @@ let setStartDate;
 }
 
 // size of average
-function calcMovingAverage(data, lasts, country) {
+function calcMovingAverage(data, country) {
     if (!data[country]) {
         return;
     }
@@ -64,17 +64,7 @@ function calcMovingAverage(data, lasts, country) {
             }
             i = i + 1;
         });
-
     });
-    // recalc sort order for selection up/down
-    const last = _.find(lasts, l => l.name === country);
-    if (last) {
-        const newLast = data[country][data[country].length-2].deltaMovingAverage;
-        const oldLast = last.deltaMovingAverage;
-        if (!_.isEqual(oldLast,newLast)) {
-            last.deltaMovingAverage = newLast;
-        }
-    }
 }
 const maxSizeOfAverage = 21;
 const defaultSizeOfAverage = 21;
@@ -87,8 +77,8 @@ let setSizeOfAverage = (s, nosave) => {
         sizeOfAverage = s;
         const countries = countriesHolder.get();
         countries.forEach((country) => {
-            if (massagedData && massagedData.data && massagedData.lasts) {
-                calcMovingAverage(massagedData.data, massagedData.lasts, country);
+            if (massagedData && massagedData.data) {
+                calcMovingAverage(massagedData.data, country);
             }
         });
         if (!nosave) {
@@ -181,30 +171,76 @@ function massageData() {
         });
     }
 
-    // store last measures in 'lasts' to be able to sort later
-    let lasts = [];
-    {
-        const sort = [];
-        lasts = _.transform(data, (result, value, key) => (result.push({
-            name: key,
-            total: value[value.length - 1].total,
-            delta: value[value.length - 1].delta,
-            deltaMovingAverage: value[value.length - 1].deltaMovingAverage,
-        })), []);
-    }
-
     countries.forEach((country) => {
-        calcMovingAverage(data, lasts, country);
+        calcMovingAverage(data, country);
     });
 
     massagedData.data = data;
-    massagedData.lasts = lasts;
     massagedData.end = end;
     massagedData.latest = latest;
     massagedData.earliest = earliest;
 
     return massagedData;
 }
+
+let categories;
+let lasts;
+function setLasts(categories) {
+    
+    lasts = _.transform(categories, (result, value, key) => (result.push({
+        name: value.category,
+        nummer: value.datapoints[value.datapoints.length-1].nummer,
+    })), []);
+
+    lasts.sort((a, b) => {
+        return b.nummer - a.nummer;
+    });
+    console.log(lasts);
+}
+
+function setupCategories() {
+    const isPercapita = getToggle("toggleCapita") === "percapita";
+    const isTotal = getToggle("toggleCumula") === "total";
+    const measureType = measure.getType();
+    const countries = countriesHolder.get();
+    const countryMap = countriesHolder.getAsMap();
+
+    function which(country, d) {
+        let nummer;
+        let tot;
+        if (isTotal) {
+            nummer = d.total[measureType];
+            tot = d.total.deaths;
+        } else {
+            if (sizeOfAverage < 2) {
+                nummer = d.delta[measureType];
+                tot = d.delta.deaths;
+            } else {
+                nummer = d.deltaMovingAverage[measureType];
+                tot = d.deltaMovingAverage.deaths;
+            }
+        }
+        if (isPercapita) {
+            const pop = countryMap[country].count;
+            nummer = 1000000 * nummer / pop;
+            tot = 1000000 * tot / pop;
+        }
+        return { nummer: nummer, tot: tot, date: d.date };
+    }
+
+    // reformat data to make it more copasetic for d3
+    categories = countries.map((country) => {
+        return {
+            category: country,
+            datapoints: _.map(_.filter(massagedData.data[country], (d) => moment(d.date).isSameOrAfter(startDate)), (d) => which(country, d))
+        };
+    });
+
+    setLasts(categories);
+    
+    return categories;
+}
+
 
 // Read in data
 function fetchData(callback) {
@@ -287,6 +323,7 @@ export function init(queryStringParams) {
 
         fetchData: fetchData,
         massageData: massageData,
+        setupCategories: setupCategories,
         selectionUp: () => {
             function up(array, element) {
                 if (!element) {
@@ -302,7 +339,7 @@ export function init(queryStringParams) {
                 return;
             }
             const oldSel = countriesHolder.getSelectedCountry();
-            const newSel = up(massagedData.lasts, oldSel);
+            const newSel = up(lasts, oldSel);
             if (newSel && oldSel !== newSel) {
                 countriesHolder.setSelectedCountry(newSel);
                 return newSel;
@@ -323,7 +360,7 @@ export function init(queryStringParams) {
                 }
             }
             const oldSel = countriesHolder.getSelectedCountry();
-            const newSel = down(massagedData.lasts, oldSel);
+            const newSel = down(lasts, oldSel);
             if (newSel && oldSel !== newSel) {
                 countriesHolder.setSelectedCountry(newSel);
                 return newSel;

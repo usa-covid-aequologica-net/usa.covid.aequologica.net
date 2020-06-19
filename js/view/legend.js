@@ -5,14 +5,14 @@ export function Legend() {
 
     // legend
     return {
-        draw: (rootG, properties, handlebarsTemplate, refresh) => {
+        draw: (model, handlebarsTemplate, refresh) => {
 
             const color = d3.scaleOrdinal().range(d3.schemeCategory10);
             // Set the color domain equal to the countries
-            const countries = properties.getCountriesHolder().get();
+            const countries = model.getCountriesHolder().get();
             color.domain(countries);
 
-            const isPopulationColumnVisible = properties.getToggle("togglePopulationColumnVisibility") === "visible";
+            const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
 
             const $legend = $("main #legend");
 
@@ -20,7 +20,7 @@ export function Legend() {
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
             Handlebars.registerHelper("pop-style", () => 'style="display:' + (isPopulationColumnVisible ? 'table-cell' : 'none') + '"');
 
-            $legend.html(handlebarsTemplate(properties.getCountriesHolder().getAsArray()));
+            $legend.html(handlebarsTemplate(model.getCountriesHolder().getAsArray()));
 
             function feedbackSelectedCountry(selectedCountry) {
                 // legend
@@ -30,13 +30,15 @@ export function Legend() {
                 $('#chart .category').removeClass('active');
                 $('#chart .category').removeClass('inactive');
                 // points toggle
+                /*
                 $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('disable');
                 $('label#togglePoints, img#togglePoints').css({ opacity: .2 });
+                */
                 // selection navigator
                 $("main #legendSelectionUp").attr("disabled", true);
                 $("main #legendSelectionDown").attr("disabled", true);
 
-                if (selectedCountry) {
+                if (selectedCountry && 0 < selectedCountry.length) {
                     // legend
                     const $me = $('#legend td.country[name="' + selectedCountry + '"]');
                     $me.addClass("active");
@@ -46,32 +48,36 @@ export function Legend() {
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').addClass('active');
                     // points toggle
+                    /*
                     $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('enable');
                     $('label#togglePoints, img#togglePoints').css({ 'text-decoration': "none", opacity: 1 });
+                    */
                     // selection navigator
                     $("main #legendSelectionUp").attr("disabled", false);
                     $("main #legendSelectionDown").attr("disabled", false);
+
+                    return $me;
                 }
             }
-            const selectedCountry = properties.getCountriesHolder().getSelectedCountry();
+            const selectedCountry = model.getCountriesHolder().getSelectedCountry();
             feedbackSelectedCountry(selectedCountry);
 
             const removeButtons = document.querySelectorAll('[type="button"].remove');
             removeButtons.forEach((b) => {
                 b.addEventListener("click", (event) => {
-                    const countries = properties.getCountriesHolder().get();
+                    const countries = model.getCountriesHolder().get();
                     const index = countries.indexOf(event.currentTarget.name);
                     if (index > -1) {
                         countries.splice(index, 1);
                     }
-                    const countries2 = properties.getCountriesHolder().write(countries);
+                    const countries2 = model.getCountriesHolder().write(countries);
                     refresh(countries2);
                 })
             });
 
             const $populationToggle = $('[type="button"]#populationToggle');
             function feedbackPopulationColumnVisible() {
-                const isPopulationColumnVisible = properties.getToggle("togglePopulationColumnVisibility") === "visible";
+                const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
                 if (isPopulationColumnVisible) {
                     $populationToggle.addClass('active');
                 } else {
@@ -83,10 +89,10 @@ export function Legend() {
                 for (let pop of pops) {
                     const sty = pop.getAttribute("style");
                     if (!sty || sty == "display:table-cell") {
-                        properties.setToggle("togglePopulationColumnVisibility", "hidden");
+                        model.setToggle("togglePopulationColumnVisibility", "hidden");
                         pop.setAttribute("style", "display: none");
                     } else {
-                        properties.setToggle("togglePopulationColumnVisibility", "visible");
+                        model.setToggle("togglePopulationColumnVisibility", "visible");
                         pop.setAttribute("style", "display:table-cell");
                     }
                 }
@@ -94,9 +100,8 @@ export function Legend() {
             });
 
             $("#legend td.country").on('click', (e) => {
-                const selectedCountry = properties.getCountriesHolder().toggleSelectedCountry($(e.currentTarget).attr('name'));
+                const selectedCountry = model.getCountriesHolder().toggleSelectedCountry($(e.currentTarget).attr('name'));
                 feedbackSelectedCountry(selectedCountry);
-                refresh();
             });
 
             function displayFoldedLegend(folded) {
@@ -113,10 +118,10 @@ export function Legend() {
             }
 
             // unfold legend when selectedCountry is not in country set
-            let folded = properties.getToggle("toggleLegend") === "folded";
+            let folded = model.getToggle("toggleLegend") === "folded";
             if (folded) {
-                if (!properties.getCountriesHolder().get().includes(selectedCountry)) {
-                    properties.setToggle("toggleLegend", "unfolded");
+                if (!model.getCountriesHolder().get().includes(selectedCountry)) {
+                    model.setToggle("toggleLegend", "unfolded");
                     folded = false;
                 }
             }
@@ -128,28 +133,31 @@ export function Legend() {
                 const $tbody = $("#legend table tbody");
                 const fold = !$tbody.data("folded");
                 $tbody.data("folded", fold);
-                properties.setToggle("toggleLegend", fold ? "folded" : "unfolded")
+                model.setToggle("toggleLegend", fold ? "folded" : "unfolded")
                 displayFoldedLegend(fold);
             });
 
             $("main #legendSelectionUp").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                if (properties.selectionUp()) {
-                    $('#legend td.country.active')[0].scrollIntoView();
-                    console.log("up");
-                    refresh();
+                const newSelectedCountry = model.selectionUp();
+                if (newSelectedCountry) {
+                    const $him = feedbackSelectedCountry(newSelectedCountry);
+                    if ($him && 0 < $him.length) {
+                        $him[0].scrollIntoView();
+                    }
                 }
             });
 
             $("main #legendSelectionDown").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                if (properties.selectionDown()) {
-                    $('#legend td.country.active')[0].scrollIntoView();
-                    console.log("down");
-                    refresh();
-                    
+                const newSelectedCountry = model.selectionDown();
+                if (newSelectedCountry) {
+                    const $him = feedbackSelectedCountry(newSelectedCountry);
+                    if ($him && 0 < $him.length) {
+                        $him[0].scrollIntoView();
+                    }
                 }
             });
         }

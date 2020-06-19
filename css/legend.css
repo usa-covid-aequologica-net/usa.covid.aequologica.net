@@ -59,12 +59,12 @@
     color: rgb(33, 37, 41) !important
 }
 
-#countries th.code, td.code {
+#countriesInModal th.code, td.code {
     font-size: smaller;
     text-align: center;
 }
 
-#countries th.population, td.population {
+#countriesInModal th.population, td.population {
     font-family: monospace;
     font-size: smaller;
     text-align: right;
