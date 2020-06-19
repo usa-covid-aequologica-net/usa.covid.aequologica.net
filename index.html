@@ -7,13 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <title>YACA</title>
-  <!-- ^RELEASE -->
-  <!--script>
-    if (window.location.hostname === "localhost") {
-      window.document.title = window.document.title.toLowerCase();
-    }
-  </script-->
-  <!-- /^RELEASE -->
 
   <meta name="title" content="YACA">
   <meta name="author" content="Christophe Thiebaud">
@@ -522,6 +515,7 @@
   <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
+  <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@1.0.0/pubsub.min.js"></script>
   <!-- script async defer src="https://cdn.jsdelivr.net/npm/country-flag-emoji@latest/dist/country-flag-emoji.umd.min.js"></script -->
 
   <!-- facebook -->
@@ -560,12 +554,9 @@
   <script type="module">
     const location = Cookies.get('location');
     function showLocation(location) {
-      $("#location").attr('title', "display data for " + location.country);
-      $("#location a")
-        .attr("href", "?" + location.countryCode);
-      $("#location img")
-        .attr("src", "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/" + location.countryCode.toLowerCase() + ".svg");
-
+      $("#location").attr('title', "redirect to " + location.country);
+      $("#location a").attr("href", "?" + location.countryCode);
+      $("#location img").attr("src", "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/" + location.countryCode.toLowerCase() + ".svg");
     }
     if (location) {
       showLocation(JSON.parse(location));
@@ -583,7 +574,7 @@
             crossDomain: true,
             success: function (response) {
               Cookies.set('location', response, { expires: 10 });
-              showLocation(JSON.stringify(response));
+              showLocation(response);
             },
             error: function (xhr, errorType, exception) {
               console.log("Error fetching location data from ipstack.com", xhr, errorType, exception);
@@ -597,14 +588,14 @@
         }
       });
     }
-
   </script>
+  <!-- /location -->
 
   <!-- main script -->
   <script type="module" src="./js/index.js"></script>
 
+  <!-- IF RELEASE -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- RELEASE -->
   <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-163898058-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -613,6 +604,13 @@
     gtag('config', 'UA-163898058-1');
   </script>
   <!-- /RELEASE -->
+  <!-- ELSE IF ^RELEASE -->
+  <script>
+    if (window.location.hostname === "localhost") {
+      window.document.title = window.document.title.toLowerCase();
+    }
+  </script>
+  <!-- /^RELEASE -->
 
 </body>
 

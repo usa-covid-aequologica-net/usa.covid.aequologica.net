@@ -1,5 +1,8 @@
 'use strict';
 
+import { pubSubKey } from './keyboard.js';
+
+
 export function Legend() {
     'use strict';
 
@@ -161,6 +164,11 @@ export function Legend() {
                     feedbackSelectedCountry(newSelectedCountry, true);
                 }
             });
+
+            window.ps.subscribe(pubSubKey, (e) => {
+                console.log("received " + e);
+            });
+
         }
     }
 }
