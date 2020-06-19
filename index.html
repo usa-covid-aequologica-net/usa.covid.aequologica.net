@@ -552,12 +552,12 @@
   <!-- location -->
   <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
   <script type="module">
-    const location = Cookies.get('location');
     function showLocation(location) {
       $("#location").attr('title', "redirect to " + location.country);
       $("#location a").attr("href", "?" + location.countryCode);
       $("#location img").attr("src", "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/" + location.countryCode.toLowerCase() + ".svg");
     }
+    const location = Cookies.get('location');
     if (location) {
       showLocation(JSON.parse(location));
     } else {
