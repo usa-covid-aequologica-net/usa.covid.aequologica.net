@@ -195,7 +195,6 @@ function setLasts(categories) {
     lasts.sort((a, b) => {
         return b.nummer - a.nummer;
     });
-    console.log(lasts);
 }
 
 function setupCategories() {

@@ -63,7 +63,6 @@ export function init(...args) {
     function onKeypress(e) {
         if (e.which == 13) {
             const $eventTarget = $(window.getSelection().anchorNode);
-            console.log("'You pressed enter!'", $eventTarget);
             const $td = $eventTarget.closest('td.name');
 
             if ($td.length > 0) {

@@ -16,5 +16,4 @@ export const factory = _.sortedUniq(_.sortBy([
     "United Kingdom",
     "United States",
 ]));
-// console.log(factory);
 
