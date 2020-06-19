@@ -53,7 +53,7 @@ https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_
 ```
 displays the daily confirmed cases with a 2 days average (try it: [first one wins](https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_)).
 
-Countries are specified with their associated [ISO-3166-1 alpha-2](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes) code, cf. [this wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements). If no country is specified, the list of countries per default is [here](https://github.com/cthiebaud/cthiebaud.github.io/blob/master/js/model/factory.js); A country code suffixed with an asterisk marks that country as 'selected'. There can be only one selected country. If more than one, the **first** one wins.
+Countries are specified with their associated [ISO-3166-1 alpha-2](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes) code, cf. [this wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements). If no country is specified, the list of countries per default is [here](https://github.com/cthiebaud/cthiebaud.github.io/blob/master/js/model/factory.js); A country code suffixed with an asterisk marks that country as 'selected'. There can be only one selected country. If more than one is present in the permalink, the **first** one wins.
 
 ### Examples
 
@@ -123,17 +123,17 @@ Try it : [store US vs. VA permalink!](https://covid.aequologica.net/?1,2020-02-2
 
 ### Location detection
 
-YACA will try to detect your location; If successful, a country button will appear top right. If there is no country button, probably the detection failed. Clicking on this button will redirect to the country graph.
+YACA will try to detect your location; If successful, a country button will appear top right. If there is no country button, probably the detection failed. Clicking on this button will redirect to the graph for this particular country.
 
 ### Easier selection with country picker
 
-Adding or removing countries from the list with the country picker modal dialog is easier with keyboard [enter] key. Click on or select text of a country name, then press enter, selection check box will toggle its state. Be aware that, depending on the sort criteria of the table, the country may be pushed at the top or bottom of the list, hence vanishing from sight.
+Adding or removing countries from the list with the country picker modal dialog is easier with keyboard [enter] key. Click on or select text of a country name, then press enter, the selection will be toggled Be aware that, depending on the sort criteria of the table, the country may be pushed at the top or bottom of the list, hence vanishing from sight.
 
 ![screenshot of country picker](./img/screenshotCountryPicker.png)
 
 ## Some analytics
 
-That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of the 18th of June 2020, since its creation, the 17 of April 2020.
+That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 18th of June 2020, since its creation, the 17 of April 2020.
 
 ![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
 
