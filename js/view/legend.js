@@ -22,7 +22,7 @@ export function Legend() {
 
             $legend.html(handlebarsTemplate(model.getCountriesHolder().getAsArray()));
 
-            function feedbackSelectedCountry(selectedCountry) {
+            function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
                 // legend
                 $('#legend td.country.active').removeClass("active");
                 $('#legend tr').removeClass("selected");
@@ -43,6 +43,12 @@ export function Legend() {
                     const $me = $('#legend td.country[name="' + selectedCountry + '"]');
                     $me.addClass("active");
                     $me.parent().addClass("selected");
+                    displayFoldedLegend($("#legend table tbody").data("folded"));
+                    if (scrollIntoView) {
+                        if ($me && 0 < $me.length) {
+                            $me[0].scrollIntoView();
+                        }
+                    }
                     // chart
                     $('#chart .category').addClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
@@ -108,7 +114,8 @@ export function Legend() {
                 $("#legend table tbody").data("folded", folded);
                 if (folded) {
                     // hide all rows not selected, leave the header row visible
-                    $("#legend table tbody tr:not(.selected):not(:first-child)").css("display", "none");
+                    $("#legend table tbody tr:not(.selected):not(:first-child)").hide();
+                    $("#legend table tbody tr.selected").show();
                     $("#legendToggle").addClass("folded");
                 } else {
                     // show all rows
@@ -142,10 +149,7 @@ export function Legend() {
                 e.preventDefault();
                 const newSelectedCountry = model.selectionUp();
                 if (newSelectedCountry) {
-                    const $him = feedbackSelectedCountry(newSelectedCountry);
-                    if ($him && 0 < $him.length) {
-                        $him[0].scrollIntoView();
-                    }
+                    const $him = feedbackSelectedCountry(newSelectedCountry, true);
                 }
             });
 
@@ -154,10 +158,7 @@ export function Legend() {
                 e.preventDefault();
                 const newSelectedCountry = model.selectionDown();
                 if (newSelectedCountry) {
-                    const $him = feedbackSelectedCountry(newSelectedCountry);
-                    if ($him && 0 < $him.length) {
-                        $him[0].scrollIntoView();
-                    }
+                    feedbackSelectedCountry(newSelectedCountry, true);
                 }
             });
         }
