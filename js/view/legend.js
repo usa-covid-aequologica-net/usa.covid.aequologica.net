@@ -37,16 +37,12 @@ export function Legend() {
                 $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('disable');
                 $('label#togglePoints, img#togglePoints').css({ opacity: .2 });
                 */
-                // selection navigator
-                $("main #legendSelectionUp").attr("disabled", true);
-                $("main #legendSelectionDown").attr("disabled", true);
-
-                if (selectedCountry && 0 < selectedCountry.length) {
+                let ret = undefined;
+                if (selectedCountry) {
                     // legend
                     const $me = $('#legend td.country[name="' + selectedCountry + '"]');
                     $me.addClass("active");
                     $me.parent().addClass("selected");
-                    displayFoldedLegend($("#legend table tbody").data("folded"));
                     if (scrollIntoView) {
                         if ($me && 0 < $me.length) {
                             $me[0].scrollIntoView();
@@ -61,12 +57,13 @@ export function Legend() {
                     $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('enable');
                     $('label#togglePoints, img#togglePoints').css({ 'text-decoration': "none", opacity: 1 });
                     */
-                    // selection navigator
-                    $("main #legendSelectionUp").attr("disabled", false);
-                    $("main #legendSelectionDown").attr("disabled", false);
-
-                    return $me;
+                    ret = $me;
                 }
+
+                displayFoldedLegend($("#legend table tbody").data("folded"));
+
+                return ret;
+                    
             }
             const selectedCountry = model.getCountriesHolder().getSelectedCountry();
             feedbackSelectedCountry(selectedCountry);
@@ -151,18 +148,14 @@ export function Legend() {
                 e.stopPropagation();
                 e.preventDefault();
                 const newSelectedCountry = model.selectionUp();
-                if (newSelectedCountry) {
-                    const $him = feedbackSelectedCountry(newSelectedCountry, true);
-                }
+                feedbackSelectedCountry(newSelectedCountry, true);
             });
 
             $("main #legendSelectionDown").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 const newSelectedCountry = model.selectionDown();
-                if (newSelectedCountry) {
-                    feedbackSelectedCountry(newSelectedCountry, true);
-                }
+                feedbackSelectedCountry(newSelectedCountry, true);
             });
 
             window.ps.subscribe(pubSubKey, (e) => {

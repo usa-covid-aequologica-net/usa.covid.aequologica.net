@@ -325,8 +325,12 @@ export function init(queryStringParams) {
         setupCategories: setupCategories,
         selectionUp: () => {
             function up(array, element) {
+                if (!array || array.length === 0) {
+                    return undefined;
+                }
                 if (!element) {
-                    return;
+                    // take last
+                    return array[array.length - 1].name;
                 }
                 let index = _.findIndex(array, a => a.name === element);
                 if (array[index].name !== element) {
@@ -335,20 +339,24 @@ export function init(queryStringParams) {
                 if (0 < index) {
                     return array[index - 1].name;
                 }
-                return;
+                return undefined;
             }
             const oldSel = countriesHolder.getSelectedCountry();
             const newSel = up(lasts, oldSel);
-            if (newSel && oldSel !== newSel) {
+            if (oldSel !== newSel) {
                 countriesHolder.setSelectedCountry(newSel);
                 return newSel;
             }
-            return;
+            return undefined;
         },
         selectionDown: () => {
             function down(array, element) {
+                if (!array || array.length === 0) {
+                    return undefined;
+                }
                 if (!element) {
-                    return;
+                    // take first
+                    return array[0].name;
                 }
                 let index = _.findIndex(array, a => a.name === element);
                 if (array[index].name !== element) {
@@ -357,14 +365,15 @@ export function init(queryStringParams) {
                 if (index < array.length - 1) {
                     return array[index + 1].name;
                 }
+                return undefined;
             }
             const oldSel = countriesHolder.getSelectedCountry();
             const newSel = down(lasts, oldSel);
-            if (newSel && oldSel !== newSel) {
+            if (oldSel !== newSel) {
                 countriesHolder.setSelectedCountry(newSel);
                 return newSel;
             }
-            return;
+            return undefined;
         },
         getFetchResults: () => massagedData,
 
