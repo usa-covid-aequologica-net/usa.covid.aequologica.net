@@ -28,13 +28,14 @@ function formatNummer(input) {
     return input.toLocaleString(undefined, { minimumFractionDigits: fractionDigits, maximumFractionDigits: fractionDigits });
 }
 
-function formatNummerWithSign(input) {
-    const shown = formatNummer(Math.abs(input));
+function formatDiffWithSign(a, b) {
+    const diff = (+a.replace(/,/g, '')) - (+b.replace(/,/g, ''));
+    const shown = formatNummer(Math.abs(diff));
     let sign;
     if (+shown == 0) {
         sign = '';
     } else {
-        sign = input < 0 ? '-' : '+';
+        sign = diff < 0 ? '-' : '+';
     }
     return `${sign}${shown}`;
 }
@@ -71,16 +72,18 @@ export function setupTooltip(rootG, points, color, country, properties) {
         const d3this = d3.select(this);
         const $this = $(this);
         const nummerTheDayBefore = +$this.prev().attr("data-nummer");
-        
+
+        const a = formatNummer(nummerTheDayBefore);
+        const b = formatNummer(d.nummer);
         const opti = {
             isTotal: properties.isTotal,
             country: country,
             countryColor: color(country),
             date: formatTime(d.date),
             explanation: explanatino,
-            yesterday: formatNummer(nummerTheDayBefore),
-            delta: formatNummerWithSign(d.nummer - nummerTheDayBefore),
-            today: formatNummer(d.nummer),
+            yesterday: a,
+            delta: formatDiffWithSign(b, a),
+            today: b,
         }
 
         d3totici

@@ -46,6 +46,8 @@ export function buildPermalink(...args) {
         // patch for horrible facebook querystring mangling
         permalink = permalink + ",_";
 
+        permalink = permalink.replace(/http:\/\/localhost:8001/, "https://covid.aequologica.net");
+                
         resolve(permalink);
     });
 }

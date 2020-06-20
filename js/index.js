@@ -249,7 +249,6 @@ $(document).ready(() => {
         // facebook
         $("#facebook").on("click", function () {
             buildPermalink(model).then(permalink => {
-                permalink = permalink.replace(/http:\/\/localhost:8001\//, "https://covid.aequologica.net/");
                 FB.ui({
                     method: 'share',
                     href: permalink,
