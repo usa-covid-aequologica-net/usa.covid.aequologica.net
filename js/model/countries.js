@@ -3,14 +3,14 @@
 import { store } from './yetAnotherLocalStorageWrapper.js';
 // import { factory } from './factory.js'
 const factory = _.sortedUniq(_.sortBy([
+    "Australia",
+    "Bangladesh",
     "Brazil",
-    "Chile",
+    "France",
+    "Germany",
     "India",
-    "Iran",
-    "Mexico",
-    "Pakistan",
-    "Peru",
-    "Russia",
+    "Italy",
+    "Morocco",
     "United Kingdom",
     "United States",
 ]));

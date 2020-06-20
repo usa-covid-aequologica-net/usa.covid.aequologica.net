@@ -5,15 +5,17 @@
 // according to JHU https://coronavirus.jhu.edu/data/new-cases
 
 export const factory = _.sortedUniq(_.sortBy([
+    "Australia",
+    "Bengladesh",
     "Brazil",
-    "Chile",
+    "France",
+    "Germany",
     "India",
-    "Iran",
-    "Mexico",
-    "Pakistan",
-    "Peru",
-    "Russia",
+    "Italy",
+    "Morocco",
     "United Kingdom",
     "United States",
 ]));
+
+
 
