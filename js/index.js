@@ -116,9 +116,7 @@ $(document).ready(() => {
                 $('label#' + key + ', img#' + key).css('opacity', setOn ? "1" : ".666");
             });
         });
-        $('#bottom [type="radio"]#toggleCapita, #bottom [type="checkbox"]#toggleCapita').change(event => {
-            $("#when_is_data_updated").html(event.currentTarget.checked ? "per million habitants" : "&nbsp;");
-        });
+
         $('#bottom [type="radio"], #bottom [type="checkbox"]').change(event => {
             // which toggle 
             const key = event.currentTarget.id;

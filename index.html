@@ -90,9 +90,6 @@
               </div>
             </div>
           </div>
-          <span id="when_is_data_updated" class="d-none d-lg-inline">&nbsp;(updated every day, though <a href="https://github.com/CSSEGISandData/COVID-19/issues/2369"
-              target="_CSSEGISandData">not clear when</a>)</span>
-          </span>
           <!-- /TITLE -->
 
         </div>
@@ -166,7 +163,21 @@
       </div>
 
       <div id="credits" class="fixed-top d-flex">
-        <div>data source: <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">Johns Hopkins University</a></div>
+        <div>
+          data source:
+          <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">
+            Johns Hopkins University
+          </a>
+          <em id="when_is_data_updated" class="d-none d-sm-inline">
+            (updated every day, though
+            <a href="https://github.com/CSSEGISandData/COVID-19/issues/2369" target="_CSSEGISandData">
+              not clear when
+            </a>
+            )
+            </span>
+          </em>
+          .
+        </div>
       </div>
     </div>
   </header>
@@ -227,7 +238,7 @@
                     <input id="toggleCapita" data-taggle-on="percapita" data-taggle-off="absolute" type="checkbox" data-toggle="toggle" data-size="xs"
                       data-onstyle="outline-primary" data-offstyle="outline-secondary">
                     <label id="toggleCapita" for="toggleCapita" class="form-check-label" style="width:100%;">
-                      &nbsp;per 10<sup>6</sup>&nbsp;
+                      &nbsp;per 10<sup>5</sup>&nbsp;
                     </label>
                     <!-- label id="toggleCapita" style="font-size:larger; font-weight: bold;">‱</label -->
                     <img id="toggleCapita" style="width: 16px; height:auto" class="rounded float-right" src="./img/group-people-svgrepo-com.svg">

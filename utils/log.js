@@ -45,7 +45,12 @@ export const log = (sel) => {
         .style("stroke-width", "5px");
 
     svg.append("path")
-        .datum(d3.range(100).map(function (x) { return [x, x * x + x + 1]; }))
+        .datum(d3.range(100).map(function (x) { 
+            const y =  x * x + x + 1;
+            x = x+10;
+            console.log(x, y);
+            return [x, y]; 
+        }))
         .attr("class", "line")
         .style("fill", "none")
         .style("stroke", "black")
