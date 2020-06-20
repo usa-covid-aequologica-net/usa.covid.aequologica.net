@@ -33,11 +33,6 @@ export function Legend() {
                 $('#chart .category').removeClass('active');
                 $('#chart .category').removeClass('inactive');
 
-                // points toggle
-                /*
-                $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('disable');
-                $('label#togglePoints, img#togglePoints').css({ opacity: .2 });
-                */
                 let ret = undefined;
                 if (selectedCountry) {
                     // legend
@@ -54,11 +49,6 @@ export function Legend() {
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').addClass('active');
                     
-                    // points toggle
-                    /*
-                    $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('enable');
-                    $('label#togglePoints, img#togglePoints').css({ 'text-decoration': "none", opacity: 1 });
-                    */
                     ret = $me;
                 }
 

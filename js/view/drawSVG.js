@@ -36,7 +36,6 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
         .y((d) => { return yScale(d.nummer); });
 
     // @TODO: add trendline with https://observablehq.com/@harrystevens/d3-regression-with-datetimes?collection=@harrystevens/d3-regression
-    let products; // extern, used by drawPoints()
     if (properties.countries.length > 0 && categories.length > 0) {
 
         // set the domain of the axes
@@ -77,7 +76,7 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
                 .tickFormat("")
             );
 
-        products = rootG
+        const products = rootG
             .selectAll(".category")
             .data(categories)
             .enter()

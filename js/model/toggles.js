@@ -7,7 +7,6 @@ const validToggles = { // first is default
     toggleCumula: ["daily", "total"],
     toggleDeaths: ["hidden", "visible"],
     toggleLinear: ["linear", "logarithmic"],
-    togglePoints: ["hidepoints", "showpoints"],
     toggleLegend: ["unfolded", "folded"],
     togglePopulationColumnVisibility: ["hidden", "visible"],
 }
