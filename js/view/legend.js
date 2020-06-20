@@ -21,6 +21,7 @@ export function Legend() {
 
             Handlebars.registerHelper("color", (country) => 'style="color:' + color(country) + ';"');
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
+            Handlebars.registerHelper("lowercase", (text) => text.toLowerCase());
             Handlebars.registerHelper("pop-style", () => 'style="display:' + (isPopulationColumnVisible ? 'table-cell' : 'none') + '"');
 
             $legend.html(handlebarsTemplate(model.getCountriesHolder().getAsArray()));

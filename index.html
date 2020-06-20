@@ -360,7 +360,6 @@
               <thead>
                 <tr>
                   <th scope="col" class="center"></th>
-                  <th scope="col" class="flag">&nbsp;</th>
                   <th scope="col" class="name">country</th>
                   <th scope="col" class="code">code</th>
                   <th scope="col" class="population">population</th>
@@ -410,10 +409,8 @@
           <input type="checkbox" data-toggle="toggle" class="form-check-input position-static" id="cb{{index}}" value="{{index}}" name="{{name}}" {{checked}}>
         </span>
       </td>
-      <td class="flag">
-        <span id="f{{index}}"><img style="width:20px; height:auto;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{flag}}.svg"></span>
-      </td>
       <td class="name">
+        <span id="f{{index}}" class="float-left"><img style="width:20px; height:auto; margin-right: .25rem;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{flag}}.svg"></span>
         <span id="n{{index}}">{{name}}</span>
       </td>
       <td class="code">
@@ -459,7 +456,10 @@
                   <span class="remove">×</span>
                 </button>
               </td>
-              <td class="country" id="{{name}}"  name="{{name}}" {{{color name}}}>{{name}}</td>
+              <td class="country" id="{{name}}"  name="{{name}}" {{{color name}}}>
+                <span id="flag_{{code}}" class="float-left"><img style="width:22.5px; height:auto; margin-right: .25rem;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{lowercase code}}.svg"></span>
+                {{name}}
+              </td>
               <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
               <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
             </tr>
@@ -513,7 +513,6 @@
   <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@1.0.0/pubsub.min.js"></script>
-  <!-- script async defer src="https://cdn.jsdelivr.net/npm/country-flag-emoji@latest/dist/country-flag-emoji.umd.min.js"></script -->
 
   <!-- facebook -->
   <script>
