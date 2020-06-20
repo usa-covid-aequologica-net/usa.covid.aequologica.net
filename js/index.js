@@ -72,6 +72,9 @@ $(document).ready(() => {
                 svg,
                 {
                     isLogarithmic: model.getToggle("toggleLinear") === "logarithmic",
+                    isTotal: model.getToggle("toggleCumula") === "total",
+                    isPercapita: model.getToggle("toggleCapita") === "percapita",
+                    sizeOfAverage: model.getSizeOfAverage(),
                     countries: model.getCountriesHolder().get(),
                     selectedCountry: model.getCountriesHolder().getSelectedCountry(),
                 },

@@ -1,6 +1,6 @@
 'use strict';
 
-// import { setupTooltip, hideTooltip } from './tooltip.js';
+import { setupTooltip, hideTooltip } from './tooltip.js';
 
 export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
     if (!rootG) {
@@ -109,7 +109,48 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
                 return color(d.category);
             });
 
+        selectCountry(properties.selectedCountry);
     }
+
+    const mySubscriber = function (msg, data) {
+        // console.log( "msg", msg, "data", data );
+        selectCountry(msg)
+    };
+
+    window.ps.subscribe("SELECTED_COUNTRY", mySubscriber);
+
+    function selectCountry(selectedCountry) {
+
+        // do not show on mobile or tablet
+        const canHover = !(matchMedia('(hover: none)').matches);
+        if (!canHover) {
+            return;
+        }
+        
+        // between try/catch: points and tooltip is not worth crashing the app
+        try {
+            d3.selectAll("circle.point").remove();
+            if (selectedCountry) {
+                const sel = _.find(categories, c => c.category === selectedCountry);
+                const points = rootG.selectAll("points")
+                    .data(sel.datapoints)
+                    .enter()
+                    .append("circle")
+                    .attr("cx", d => xScale(d.date))
+                    .attr("cy", d => yScale(d.nummer))
+                    .attr("r", 5)
+                    .attr("data-nummer", d => d.nummer)
+                    .attr("class", "point");
+
+                // tooltip
+                setupTooltip(rootG, points, color, selectedCountry, properties);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
     // animate cf. http://bl.ocks.org/fryford/2925ecf70ac9d9b51031
     function animate() {
         if (!PRINT) {

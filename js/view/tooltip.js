@@ -45,7 +45,7 @@ export function hideTooltip() {
     }
 }
 
-export function setupTooltip(rootG, points, color, country, isTotal, isPercapita, sizeOfAverage) {
+export function setupTooltip(rootG, points, color, country, properties) {
 
     d3.select("#totici").remove();
     d3totici = rootG.append("circle")
@@ -64,7 +64,7 @@ export function setupTooltip(rootG, points, color, country, isTotal, isPercapita
         trigger: 'click', */
     });
 
-    const explanatino = formatExplanation(isTotal, isPercapita, sizeOfAverage);
+    const explanatino = formatExplanation(properties.isTotal, properties.isPercapita, properties.sizeOfAverage);
 
     points.on("mouseover", function (d, e) {
 
@@ -73,7 +73,7 @@ export function setupTooltip(rootG, points, color, country, isTotal, isPercapita
         const nummerTheDayBefore = +$this.prev().attr("data-nummer");
         
         const opti = {
-            isTotal: isTotal,
+            isTotal: properties.isTotal,
             country: country,
             countryColor: color(country),
             date: formatTime(d.date),

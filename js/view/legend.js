@@ -32,6 +32,7 @@ export function Legend() {
                 // chart
                 $('#chart .category').removeClass('active');
                 $('#chart .category').removeClass('inactive');
+
                 // points toggle
                 /*
                 $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('disable');
@@ -52,6 +53,7 @@ export function Legend() {
                     $('#chart .category').addClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').addClass('active');
+                    
                     // points toggle
                     /*
                     $('[data-toggle="toggle"]#togglePoints').bootstrapToggle('enable');
@@ -61,6 +63,8 @@ export function Legend() {
                 }
 
                 displayFoldedLegend($("#legend table tbody").data("folded"));
+
+                window.ps.publish('SELECTED_COUNTRY', selectedCountry);
 
                 return ret;
                     
