@@ -3,16 +3,18 @@
 import { store } from './yetAnotherLocalStorageWrapper.js';
 // import { factory } from './factory.js'
 const factory = _.sortedUniq(_.sortBy([
-    "Australia",
-    "Bangladesh",
-    "Brazil",
+    "Bulgaria",
+    "Canada",
+    "Chile",
+    "Costa Rica",
     "France",
     "Germany",
-    "India",
     "Italy",
-    "Morocco",
+    "Malaysia",
+    "Mexico",
+    "Russia",
+    "Sri Lanka",
     "United Kingdom",
-    "United States",
 ]));
 import { populationByCountry } from './population.js';
 
