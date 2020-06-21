@@ -323,6 +323,7 @@ export function init(queryStringParams) {
         fetchData: fetchData,
         massageData: massageData,
         setupCategories: setupCategories,
+        getCategories: () => categories,
         selectionUp: () => {
             function up(array, element) {
                 if (!array || array.length === 0) {

@@ -193,7 +193,7 @@
       <!-- svg -->
       <svg id="chart"></svg>
       <!-- legend -->
-      <div id="legend" style="position: fixed; left: 10px; top: 58px; height: calc(100% - 96px);"></div>
+      <div id="legend"></div>
       <!-- toggle legend button -->
       <div id="legendButtonsWrapper" style="position: fixed; right: 2px; top: 58px; height: calc(100% - 96px);" class="d-flex flex-column justify-content-around">
         <button type="button" id="legendSelectionUp" class="btn btn-sm btn-outline-secondary" title="select next country"></button>
@@ -424,31 +424,34 @@
   <!-- legend -->
   <script id="legend-template" type="text/x-handlebars-template">
     <div class="card" style="direction: ltr;">
-      <div class="card-body">
+      <div class="card-body" style="position: fixed; left: 10px; top: 58px; height: calc(100% - 96px); overflow-y: auto; padding: 0;">
         <table class="table table-sm" id="legend">
           <tbody data-folded=false>
-            <tr class="d-print-none">
-              <th class="remove">
-                <span>&nbsp;</span>
-              </th>
-              <th class="country">
-                <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-                  &#x002B;
-                </button>
-                <span>&nbsp;</span>
-                <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
-                  &#x21C4;
-                </button>
-              </th>
-              <th class="legend_population" {{{pop-style}}}>
-                code
-                <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
-              </th>
-              <th class="legend_population" {{{pop-style}}}>
-                population
-                <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
-              </th>
-            </tr>
+            <thead>
+              <tr class="d-print-none">
+                <th class="remove">
+                  <span>&nbsp;</span>
+                </th>
+                <th class="country">
+                  <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
+                    &#x002B;
+                  </button>
+                  <span>&nbsp;</span>
+                  <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
+                    &#x21C4;
+                  </button>
+                </th>
+                <th class="legend_population" {{{pop-style}}}>
+                  code
+                  <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
+                </th>
+                <th class="legend_population" {{{pop-style}}}>
+                  population
+                  <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
             {{#each @root}}
             <tr>
               <td class="remove d-print-none">
@@ -465,6 +468,7 @@
             </tr>
             {{/each}}
           </tbody>
+        </tbody>
         </table>
       </div>
     </div>

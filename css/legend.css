@@ -2,13 +2,43 @@
     overflow: hidden scroll;
 }
 
-#legend .table {
+#legend table.table {
     margin-bottom: 0;
+    background-color: rgba(255, 255, 255, .9);
 }
 
-#legend table td, .table th {
+#legend table.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+#legend table.table tbody td, #legend table.table thead th {
     padding: .2rem;
     border-top: none;
+}
+
+#legend table.table tbody tr.selected {
+    background-color: #e7e9fa;
+}
+
+#legend table.table tbody td.country {
+    cursor: pointer;
+}
+
+#legend table.table tbody td.country:hover {
+    background-color: ghostwhite;
+}
+
+#legend table.table tbody td.country, #legend table.table tbody td.legend_population {
+    padding-right: .3rem;
+}
+
+#legend table.table thead th.legend_population, #legend table.table tbody td.legend_population {
+    font-family: monospace;
+    font-size: smaller;
+    text-align: right;
+    padding-left: .5rem;
 }
 
 #legend button {
@@ -20,29 +50,6 @@
     border: none;
 }
 
-#legend tr.selected {
-    background-color: #e7e9fa;
-}
-
-#legend td.country {
-    cursor: pointer;
-}
-
-#legend td.country:hover {
-    background-color: ghostwhite;
-}
-
-#legend td.country, #legend td.legend_population {
-    padding-right: .3rem;
-}
-
-#legend th.legend_population, #legend td.legend_population {
-    font-family: monospace;
-    font-size: smaller;
-    text-align: right;
-    padding-left: .5rem;
-}
-
 #legend #populationToggle:not(:hover) {
     background-color: white !important;
 }
@@ -51,7 +58,7 @@
     background-color: #ccc !important;
 }
 
-#legend th.legend_population a {
+#legend table.table thead th.legend_population a {
     color: rgb(33, 37, 41) !important
 }
 
@@ -66,14 +73,8 @@
     text-align: right;
 }
 
-#legend table.table-responsive {
-    max-height: 300px;
-}
-
 #legend .card {
     display: inline-block;
-    /* background-color: transparent; */
-    background-color: rgba(255, 255, 255, .9);
     overflow: hidden scroll;
 }
 

@@ -2,7 +2,21 @@
 
 import { setupTooltip, hideTooltip } from './tooltip.js';
 
-export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
+let pubSubToken;
+let flyingCategories;
+let flyingXScale;
+let flyingYScale;
+
+export function draw(...args) {
+    const [rootG, properties, categories, PRINT, doNotAnimate] = args;
+
+    flyingCategories = categories;
+
+    if (pubSubToken) {
+        window.ps.unsubscribe(pubSubToken);
+        pubSubToken = undefined;
+    }
+
     if (!rootG) {
         return
     }
@@ -19,6 +33,8 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
     // define scales & color
     const xScale = d3.scaleTime().range([0, width]);
     const yScale = (properties.isLogarithmic ? d3.scaleSymlog() : d3.scaleLinear()).range([height, 0]);
+    flyingXScale = xScale;
+    flyingYScale = yScale;
     const color = d3.scaleOrdinal().range(d3.schemeCategory10);
     // Set the color domain equal to the countries
     color.domain(properties.countries);
@@ -42,6 +58,7 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
         xScale.domain(
             d3.extent(categories[0].datapoints, d => d.date)
         );
+        flyingXScale = xScale;
         function getYExtent() {
             const yExtents = [];
             _.each(categories, category => {
@@ -108,46 +125,43 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
                 return color(d.category);
             });
 
-        selectCountry(properties.selectedCountry);
-    }
+        pubSubToken = window.ps.subscribe("SELECTED_COUNTRY", (msg, data) => {
+            selectCountry(msg);
+        });
 
-    const mySubscriber = function (msg, data) {
-        // console.log( "msg", msg, "data", data );
-        selectCountry(msg)
-    };
+        function selectCountry(selectedCountry) {
 
-    window.ps.subscribe("SELECTED_COUNTRY", mySubscriber);
-
-    function selectCountry(selectedCountry) {
-
-        // do not show on mobile or tablet
-        const canHover = !(matchMedia('(hover: none)').matches);
-        if (!canHover) {
-            return;
-        }
-        
-        // between try/catch: points and tooltip is not worth crashing the app
-        try {
-            d3.selectAll("circle.point").remove();
-            if (selectedCountry) {
-                const sel = _.find(categories, c => c.category === selectedCountry);
-                const points = rootG.selectAll("points")
-                    .data(sel.datapoints)
-                    .enter()
-                    .append("circle")
-                    .attr("cx", d => xScale(d.date))
-                    .attr("cy", d => yScale(d.nummer))
-                    .attr("r", 5)
-                    .attr("data-nummer", d => d.nummer)
-                    .attr("class", "point");
-
-                // tooltip
-                setupTooltip(rootG, points, color, selectedCountry, properties);
+            // do not show on mobile or tablet
+            const canHover = !(matchMedia('(hover: none)').matches);
+            if (!canHover) {
+                return;
             }
-        } catch (err) {
-            console.log(err);
+
+            // between try/catch: points and tooltip is not worth crashing the app
+            try {
+                d3.selectAll("circle.point").remove();
+                if (selectedCountry) {
+                    const sel = _.find(flyingCategories, c => c.category === selectedCountry);
+                    const points = rootG.selectAll("points")
+                        .data(sel.datapoints)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", d => flyingXScale(d.date))
+                        .attr("cy", d => flyingYScale(d.nummer))
+                        .attr("r", 5)
+                        .attr("data-nummer", d => d.nummer)
+                        .attr("class", "point");
+
+                    // tooltip
+                    setupTooltip(rootG, points, color, selectedCountry, properties);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+
         }
 
+        selectCountry(properties.selectedCountry);
     }
 
     // animate cf. http://bl.ocks.org/fryford/2925ecf70ac9d9b51031
@@ -184,6 +198,8 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
         // Update the range of the scale with new width/height
         xScale.range([0, width]);
         yScale.range([height, 0]);
+        flyingXScale = xScale;
+        flyingYScale = yScale;
 
         // Update the axis and text with the new scale
         rootG.select(".x.axis")
@@ -212,6 +228,17 @@ export function draw(rootG, properties, categories, PRINT, doNotAnimate) {
         rootG.selectAll(".line").attr("d", (d) => {
             return line(d.datapoints);
         });
+
+        rootG.selectAll("circle.point")
+            .attr("cx", (d) => {
+                return xScale(d.date);
+            })
+            .attr("cy", (d) => {
+                return yScale(d.nummer)
+            });
+
+        // hide tooltip
+        hideTooltip();
 
         if (!doNotAnimate) {
             animate();

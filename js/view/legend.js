@@ -2,7 +2,6 @@
 
 import { pubSubKey } from './keyboard.js';
 
-
 export function Legend() {
     'use strict';
 
@@ -26,6 +25,14 @@ export function Legend() {
 
             $legend.html(handlebarsTemplate(model.getCountriesHolder().getAsArray()));
 
+            const css = {
+                position: "fixed",
+                right: "2px",
+                top: "58px",
+                height: "calc(100% - 96px)",
+            };
+            $("legendButtonsWrapper").css(css);
+
             function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
                 // legend
                 $('#legend td.country.active').removeClass("active");
@@ -42,14 +49,17 @@ export function Legend() {
                     $me.parent().addClass("selected");
                     if (scrollIntoView) {
                         if ($me && 0 < $me.length) {
-                            $me[0].scrollIntoView();
+                            $me[0].scrollIntoView({
+                                behavior: "smooth",
+                                block: "center",
+                            });
                         }
                     }
                     // chart
                     $('#chart .category').addClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').addClass('active');
-                    
+
                     ret = $me;
                 }
 
@@ -58,7 +68,7 @@ export function Legend() {
                 window.ps.publish('SELECTED_COUNTRY', selectedCountry);
 
                 return ret;
-                    
+
             }
             const selectedCountry = model.getCountriesHolder().getSelectedCountry();
             feedbackSelectedCountry(selectedCountry);
@@ -108,8 +118,8 @@ export function Legend() {
             function displayFoldedLegend(folded) {
                 $("#legend table tbody").data("folded", folded);
                 if (folded) {
-                    // hide all rows not selected, leave the header row visible
-                    $("#legend table tbody tr:not(.selected):not(:first-child)").hide();
+                    // hide all rows not selected
+                    $("#legend table tbody tr:not(.selected)").hide();
                     $("#legend table tbody tr.selected").show();
                     $("#legendToggle").addClass("folded");
                 } else {
