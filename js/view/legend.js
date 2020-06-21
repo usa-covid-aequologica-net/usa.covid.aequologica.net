@@ -22,9 +22,9 @@ export function Legend() {
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
             Handlebars.registerHelper("lowercase", (text) => text.toLowerCase());
             Handlebars.registerHelper("pop-style", () => 'style="display:' + (isPopulationColumnVisible ? 'table-cell' : 'none') + '"');
-
-            $legend.html(handlebarsTemplate(model.getCountriesHolder().getAsArray()));
-
+            const legendCard = handlebarsTemplate(model.getCountriesHolder().getAsArray());
+            $legend.html(legendCard);
+            /*
             const css = {
                 position: "fixed",
                 right: "2px",
@@ -32,7 +32,7 @@ export function Legend() {
                 height: "calc(100% - 96px)",
             };
             $("legendButtonsWrapper").css(css);
-
+            */
             function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
                 // legend
                 $('#legend td.country.active').removeClass("active");
