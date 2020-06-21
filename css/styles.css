@@ -182,6 +182,9 @@ footer #bottom .navbar-toggler-icon {
     height: 1em;
 }
 
-footer #bottom #average {
+footer #bottom label#average {
     font-family: monospace;
+    /* max-width: 20px;
+    overflow-x: hidden;
+    text-overflow: ellipsis; */
 }
