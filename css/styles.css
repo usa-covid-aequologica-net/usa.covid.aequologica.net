@@ -58,7 +58,7 @@ main #chart {
     position: fixed;
     top: 56px;
     left: 0;
-    height: calc(100vh - 92px);
+    height: calc(100% - 92px);
     width: 100%;
 }
 
