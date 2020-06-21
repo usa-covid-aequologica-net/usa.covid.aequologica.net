@@ -10,15 +10,15 @@ let dirty;
 let emptyThenAppend;
 
 export function init(...args) {
-    const [countriesHolderParam, selectorParam] = args;
+    const [countriesHolderParam, tableSelector] = args;
 
     if (countriesHolder) {
         throw "there is only one country picker";
     }
 
     countriesHolder = countriesHolderParam;
-    selector = selectorParam;
-    $table_sorter = $(selector + " table").tablesorter({
+    selector = tableSelector;
+    $table_sorter = $(selector).tablesorter({
         theme: "bootstrap",
         sortList: [[0, 0]],
     });
@@ -28,7 +28,7 @@ export function init(...args) {
         event.stopPropagation();
 
         let countries = [];
-        const checkedCheckboxes = $(selector + " table input:checkbox:checked");
+        const checkedCheckboxes = $(selector + " tbody input:checkbox:checked");
         checkedCheckboxes.each(function (i, val) {
             countries.push($(val).prop("name"));
         });
@@ -39,10 +39,9 @@ export function init(...args) {
 
     function syncTableSorter() {
 
-        $('#countriesInModal th.population').data('sorter', 'digit');
+        $(selector + " thead th.population").data('sorter', 'digit');
 
-
-        const $trs = $(selector + " table tbody tr");
+        const $trs = $(selector + " tbody tr");
         $trs.on("change", (event) => {
             const $eventTarget = $(event.target);
             if ($eventTarget.is("input")) {
@@ -81,7 +80,7 @@ export function init(...args) {
     }
 
     emptyThenAppend = (countries) => {
-        const $tbody = $(selector + " table tbody");
+        const $tbody = $(selector + " tbody");
         $tbody.empty();
 
         let i = 0;
@@ -106,7 +105,7 @@ export function init(...args) {
     }
 
     const set = (countries) => {
-        const $checkboxes = $(selector + " table input:checkbox");
+        const $checkboxes = $(selector + " tbody input:checkbox");
         $checkboxes.each((index, value) => {
             const $cb = $(value);
             const $tr = $cb.closest('tr');
@@ -124,7 +123,7 @@ export function init(...args) {
         $table_sorter.trigger('update');
     }
 
-    $("#countriesInModal #resetToFactory").on("click", (e) => {
+    $("#modalCountryPicker #resetToFactory").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -133,7 +132,7 @@ export function init(...args) {
         set(countries);
     });
 
-    $("#countriesInModal #selectAll").on("click", (e) => {
+    $("#modalCountryPicker #selectAll").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         let aa = [];
@@ -147,7 +146,7 @@ export function init(...args) {
         set(countries);
     });
 
-    $("#countriesInModal #unselectAll").on("click", (e) => {
+    $("#modalCountryPicker #unselectAll").on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 

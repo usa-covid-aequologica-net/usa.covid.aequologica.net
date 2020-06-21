@@ -340,34 +340,34 @@
   <div class="modal fade" id="modalCountryPicker" tabindex="-1" role="dialog" aria-labelledby="modalCountryPickerLabel" aria-hidden="true">
     <div class="modal-dialog .modal-dialog-scrollable" role="document">
       <div class="modal-content">
-        <div class="modal-body">
-          <div id="countriesInModal">
-            <button id="selectAll" type="button" class="reset btn btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
-              select all
-            </button>
-            <button id="unselectAll" type="button" class="reset btn btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
-              unselect all
-            </button>
-            <button id="resetToFactory" type="button" class="reset btn btn-outline-secondary" title="reset list of countries to factory defaults"
-              style="padding: 0 .3rem; margin-bottom:.5rem;">
-              reset to factory default
-            </button>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <table class="table table-responsive-sm table-sm table-striped table-hover table-fit tablesorter">
-              <thead>
-                <tr>
-                  <th scope="col" class="center"></th>
-                  <th scope="col" class="name">country</th>
-                  <th scope="col" class="code">code</th>
-                  <th scope="col" class="population">population</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
+        <div class="modal-header p-2">
+          <button id="selectAll" type="button" class="reset btn btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+            select all
+          </button>
+          <button id="unselectAll" type="button" class="reset btn btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+            unselect all
+          </button>
+          <button id="resetToFactory" type="button" class="reset btn btn-outline-secondary" title="reset list of countries to factory defaults"
+            style="padding: 0 .3rem; margin-bottom:.5rem;">
+            reset to factory default
+          </button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>  
+        </div>
+        <div class="modal-body p-0" style="max-height: calc(90vh - 50px); overflow-y: auto;">
+          <table class="table table-responsive-sm table-sm table-striped table-hover table-fit tablesorter">
+            <thead>
+              <tr>
+                <th scope="col" class="center"></th>
+                <th scope="col" class="name">country</th>
+                <th scope="col" class="code">code</th>
+                <th scope="col" class="population">population</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

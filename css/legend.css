@@ -62,12 +62,12 @@
     color: rgb(33, 37, 41) !important
 }
 
-#countriesInModal th.code, td.code {
+#modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {
     font-size: smaller;
     text-align: center;
 }
 
-#countriesInModal th.population, td.population {
+#modalCountryPicker table thead th.population, #modalCountryPicker table tbody td.population {
     font-family: monospace;
     font-size: smaller;
     text-align: right;

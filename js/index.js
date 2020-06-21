@@ -183,7 +183,7 @@ $(document).ready(() => {
                         if (!countryPicker) {
                             countryPicker = initCountryPicker(
                                 model.getCountriesHolder(),
-                                "#countriesInModal",
+                                "#modalCountryPicker table",
                             );
                         }
                         countryPicker.beforeOpen();
