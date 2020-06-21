@@ -8,6 +8,10 @@ import { init as initModel } from './model/data.js';
 import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
 
+if (location.protocol !== 'https:' /* && window.location.hostname !== "localhost" */) {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
+
 // These usually indicate a programmer mistake during development,
 // warn about them ASAP rather than swallowing them by default.
 var errorNames = /^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;
