@@ -16,7 +16,7 @@ export function Legend() {
 
             const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
 
-            const $legend = $("main #legend");
+            const $legend = $("main #legend .card .card-body table.table");
 
             Handlebars.registerHelper("color", (country) => 'style="color:' + color(country) + ';"');
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
@@ -24,15 +24,7 @@ export function Legend() {
             Handlebars.registerHelper("pop-style", () => 'style="display:' + (isPopulationColumnVisible ? 'table-cell' : 'none') + '"');
             const legendCard = handlebarsTemplate(model.getCountriesHolder().getAsArray());
             $legend.html(legendCard);
-            /*
-            const css = {
-                position: "fixed",
-                right: "2px",
-                top: "58px",
-                height: "calc(100% - 96px)",
-            };
-            $("legendButtonsWrapper").css(css);
-            */
+
             function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
                 // legend
                 $('#legend td.country.active').removeClass("active");

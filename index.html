@@ -192,9 +192,17 @@
       <!-- svg -->
       <svg id="chart"></svg>
       <!-- legend -->
-      <div id="legend" class="p-1" style="position: fixed; left: 0px; top: 58px; max-height: calc(100% - 96px);"></div>
+      <div id="legend" class="p-1" style="position: fixed; left: 0px; top: 58px; max-height: calc(100vh - 96px);">
+        <div class="card border-secondary" style="direction: ltr; overflow-y: scroll; max-height: calc(100vh - 96px); background-color: transparent;">
+          <div class="card-body text-secondary" style="padding: 0;">
+            <table class="table table-sm table-borderless table-hover" style="overflow-y: scroll;">
+              <!-- legend-template goes here -->
+            </table>
+          </div>
+        </div>
+      </div>
       <!-- toggle legend button -->
-      <div id="legendButtonsWrapper" style="position: fixed; right: 2px; top: 58px; height: calc(100% - 96px);" class="d-flex flex-column justify-content-around">
+      <div id="legendButtonsWrapper" style="position: fixed; right: 2px; top: 58px; height: calc(100vh - 96px);" class="d-flex flex-column justify-content-around">
         <button type="button" id="legendSelectionUp" class="btn btn-sm btn-outline-secondary" title="select next country"></button>
         <button type="button" id="legendToggle" class="btn btn-sm btn-outline-secondary" title="fold / unfold legend">
           <img id="legendToggleOpen" style="width: 16px; height:auto" src="./img/open-archive-svgrepo-com.svg">
@@ -353,7 +361,7 @@
           </button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>  
+          </button>
         </div>
         <div class="modal-body p-0" style="max-height: calc(90vh - 50px); overflow-y: auto;">
           <table class="table table-responsive-sm table-sm table-striped table-hover table-fit tablesorter">
@@ -422,54 +430,48 @@
   </script>
   <!-- legend -->
   <script id="legend-template" type="text/x-handlebars-template">
-    <div class="card border-secondary" style="direction: ltr; overflow-y: scroll; max-height: calc(100vh - 96px); background-color: transparent;">
-      <div class="card-body text-secondary" style="padding: 0;">
-        <table class="table table-sm table-borderless table-hover" id="legend" style="overflow-y: scroll;">
-          <thead>
-            <tr class="d-print-none">
-              <th class="remove">
-                <span>&nbsp;</span>
-              </th>
-              <th class="country">
-                <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-                  &#x002B;
-                </button>
-                <span>&nbsp;</span>
-                <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
-                  &#x21C4;
-                </button>
-              </th>
-              <th class="legend_population" {{{pop-style}}}>
-                code
-                <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
-              </th>
-              <th class="legend_population" {{{pop-style}}}>
-                population
-                <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
-              </th>
-            </tr>
-          </thead>
-          <tbody data-folded=false>
-          {{#each @root}}
-            <tr>
-              <td class="remove d-print-none">
-                <button type="button" class="remove btn btn-sm btn-outline-secondary" title="remove {{name}}" name="{{name}}">
-                  <span class="remove">×</span>
-                </button>
-              </td>
-              <td class="country" id="{{name}}"  name="{{name}}" {{{color name}}}>
-                <span id="flag_{{code}}" class="float-left"><img style="width:15px; height:auto; margin-right: .25rem;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{lowercase code}}.svg"></span>
-                {{name}}
-              </td>
-              <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
-              <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
-            </tr>
-          {{/each}}
-          </tbody>
-        </tbody>
-        </table>
-      </div>
-    </div>
+  <thead>
+    <tr class="d-print-none">
+      <th class="remove">
+        <span>&nbsp;</span>
+      </th>
+      <th class="country">
+        <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
+          &#x002B;
+        </button>
+        <span>&nbsp;</span>
+        <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
+          &#x21C4;
+        </button>
+      </th>
+      <th class="legend_population" {{{pop-style}}}>
+        code
+        <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
+      </th>
+      <th class="legend_population" {{{pop-style}}}>
+        population
+        <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody data-folded=false>
+    {{#each @root}}
+    <tr>
+      <td class="remove d-print-none">
+        <button type="button" class="remove btn btn-sm btn-outline-secondary" title="remove {{name}}" name="{{name}}">
+          <span class="remove">×</span>
+        </button>
+      </td>
+      <td class="country" id="{{name}}" name="{{name}}" {{{color name}}}>
+        <span id="flag_{{code}}" class="float-left"><img style="width:15px; height:auto; margin-right: .25rem;"
+            src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{lowercase code}}.svg"></span>
+        {{name}}
+      </td>
+      <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
+      <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
   </script>
   <!-- tooltip class="text-info" -->
   <script id="tooltip-template" type="text/x-handlebars-template">

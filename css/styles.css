@@ -58,7 +58,7 @@ main #chart {
     position: fixed;
     top: 56px;
     left: 0;
-    height: calc(100% - 92px);
+    height: calc(100vh - 92px);
     width: 100%;
 }
 
@@ -68,16 +68,6 @@ main noscript {
     left: 5px;
     right: 5px;
 }
-
-/* seems that specifying the exact same properties directly in the element style works perfectly fine, 
-but here not at all. DO NOT UNCOMMENT !!!!
-main #legend {
-    position: fixed;
-    top: 58px;
-    left: 10px;
-    height: calc(100% - 116px);
-} 
-*/
 
 footer #bottom {
     /* height: 48px; NEVER UNCOMMENT height !!!! */
