@@ -8,7 +8,7 @@ import { init as initModel } from './model/data.js';
 import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
 
-if (location.protocol !== 'https:' /* && window.location.hostname !== "localhost" */) {
+if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
 }
 
