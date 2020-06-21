@@ -126,10 +126,12 @@ export function draw(...args) {
             });
 
         pubSubToken = window.ps.subscribe("SELECTED_COUNTRY", (msg, data) => {
-            selectCountry(msg);
+            drawPoints(msg);
         });
 
-        function selectCountry(selectedCountry) {
+        function drawPoints(selectedCountry) {
+
+            const country = selectedCountry || (categories.length === 1 ? categories[0].category : undefined);
 
             // do not show on mobile or tablet
             const canHover = !(matchMedia('(hover: none)').matches);
@@ -140,8 +142,8 @@ export function draw(...args) {
             // between try/catch: points and tooltip is not worth crashing the app
             try {
                 d3.selectAll("circle.point").remove();
-                if (selectedCountry) {
-                    const sel = _.find(flyingCategories, c => c.category === selectedCountry);
+                if (country) {
+                    const sel = _.find(flyingCategories, c => c.category === country);
                     const points = rootG.selectAll("points")
                         .data(sel.datapoints)
                         .enter()
@@ -153,7 +155,7 @@ export function draw(...args) {
                         .attr("class", "point");
 
                     // tooltip
-                    setupTooltip(rootG, points, color, selectedCountry, properties);
+                    setupTooltip(rootG, points, color, country, properties);
                 }
             } catch (err) {
                 console.log(err);
@@ -161,7 +163,7 @@ export function draw(...args) {
 
         }
 
-        selectCountry(properties.selectedCountry);
+        // drawPoints(properties.selectedCountry); // not needed : will be called when drawing legend
     }
 
     // animate cf. http://bl.ocks.org/fryford/2925ecf70ac9d9b51031
