@@ -1,21 +1,7 @@
 'use strict';
 
 import { store } from './yetAnotherLocalStorageWrapper.js';
-// import { factory } from './factory.js'
-const factory = _.sortedUniq(_.sortBy([
-    "Bulgaria",
-    "Canada",
-    "Chile",
-    "Costa Rica",
-    "France",
-    "Germany",
-    "Italy",
-    "Malaysia",
-    "Mexico",
-    "Russia",
-    "Sri Lanka",
-    "United Kingdom",
-]));
+import { factory } from './factory.js'
 import { populationByCountry } from './population.js';
 
 function reset() {

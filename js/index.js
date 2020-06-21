@@ -50,12 +50,10 @@ $(document).ready(() => {
 
         // usine à gaz pour dessiner les graphes
         function redraw(countries, doNotAnimate) {
-            $("#spinner").show();
 
             // raz
             const d3svgChart = d3.select("main svg#chart");
             if (d3svgChart.empty()) {
-                $("#spinner").hide();
                 return undefined;
             }
             d3svgChart.selectAll("g#rootG").remove();
@@ -91,7 +89,6 @@ $(document).ready(() => {
                 }
             );
 
-            $("#spinner").hide();
         }
 
         // start date

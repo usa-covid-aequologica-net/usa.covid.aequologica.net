@@ -93,7 +93,9 @@ let setSizeOfAverage = (s, nosave) => {
 {
     let storedSizeOfAverage = store.get("sizeOfAverage", defaultSizeOfAverage);
     if (storedSizeOfAverage) {
-        storedSizeOfAverage = parseInt(storedSizeOfAverage, 10);  // "Always specify a radix to avoid (...) unreliable behavior" https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+        // "Always specify a radix to avoid (...) unreliable behavior" 
+        // cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+        storedSizeOfAverage = parseInt(storedSizeOfAverage, 10);
     }
     sizeOfAverage = storedSizeOfAverage || defaultSizeOfAverage;
 }
@@ -186,10 +188,10 @@ function massageData() {
 let categories;
 let lasts;
 function setLasts(categories) {
-    
+
     lasts = _.transform(categories, (result, value, key) => (result.push({
         name: value.category,
-        nummer: value.datapoints[value.datapoints.length-1].nummer,
+        nummer: value.datapoints[value.datapoints.length - 1].nummer,
     })), []);
 
     lasts.sort((a, b) => {
@@ -236,7 +238,7 @@ function setupCategories() {
     });
 
     setLasts(categories);
-    
+
     return categories;
 }
 
