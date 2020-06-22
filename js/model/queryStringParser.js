@@ -4,6 +4,7 @@ import { populationByCountry } from './population.js';
 
 export function parseParams(...args) {
     const [input] = args;
+    const decoded = decodeURIComponent(input);
     const queryStringParams = {};
 
     let countries = [];
@@ -14,7 +15,7 @@ export function parseParams(...args) {
         w.push(warning);
         warnings[key] = w;
     }
-    const array = input.replace(/%2C/g, ",").split(",");
+    const array = decoded.split(",");
     function found() {
         array.splice(i, 1);
     }
