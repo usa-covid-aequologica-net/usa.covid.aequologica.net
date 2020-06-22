@@ -16,7 +16,7 @@ This will lead to a web page that shows a comparison graph of all daily (**day**
 starting from the 1st of March of this year (**2020-03-01**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); 
 the population of Sweden is roughly 1/6 of France or Italy, so the figures are per capita (**per**), to adjust for that; 
 the Y-axis scale is linear (**lin**); be it logaritmic (log), comparison between 
-countries with numbers on a different order of magnitude would be possible (add South Korea (KR) to the [URL](https://covid.aequologica.net/?day,confirmed,FR,IT,SE,KR,2020-03-01,per,log,18,_), then switch between logaritmic and linear Y axis : you will understand what I mean); 
+countries with numbers on a different order of magnitude would be possible (replace France (FR) with South Korea (KR) to the [URL](https://covid.aequologica.net/?day,confirmed,FR,IT,SE,KR,2020-03-01,per,lin,18,_), then switch between logaritmic and linear Y axis : you will understand what I mean); 
 finally, to reduce the noise inherent with daily figures, for each day a moving average of the previous **18** days is plotted.
 
 
