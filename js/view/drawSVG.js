@@ -87,7 +87,6 @@ export function draw(...args) {
 
         rootG.append("g")
             .attr("class", "grid")
-            .style("stroke-dasharray", ("2,8"))
             .call(yGrid
                 .tickSize(-width)
                 .tickFormat("")
@@ -217,11 +216,6 @@ export function draw(...args) {
             .style("font-size", "smaller");
         rootG.select(".grid")
             .call(yGrid);
-        // update the tick marks
-        xAxis.ticks(Math.max(width / 75, 2));
-        yAxis.ticks(Math.max(height / 50, 2));
-        yGrid.ticks(Math.max(height / 50, 2));
-
         // force D3 to recalculate and update the line
         rootG.selectAll(".grid")
             .call(yGrid

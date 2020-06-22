@@ -4,8 +4,13 @@
     shape-rendering: crispEdges;
 }
 
+#chart .grid path {
+    stroke: none;
+}
+
 #chart .grid line {
-    stroke: #bbccdd;
+    stroke: rgb(108, 117, 125);
+    stroke-dasharray: 1, 4;
 }
 
 #chart .point {
