@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,28 +28,25 @@
   <link href="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/css/theme.bootstrap_4.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/css/bootstrap4-toggle.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@latest/themes/light.css">
-
   <link href="./css/styles.css" rel="stylesheet">
   <link href="./css/legend.css" rel="stylesheet">
   <link href="./css/chart.css" rel="stylesheet">
-  <link href="./css/tooltip.css" rel="stylesheet">
-
-  <!-- https://github.com/filamentgroup/loadCSS -->
-  <link rel="stylesheet" href="./lib/freakflags.css" media="print" onload="this.media='all'; this.onload=null;">
   
+  <!-- https://github.com/filamentgroup/loadCSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@latest/themes/light.css" media="print" onload="this.media='all'; this.onload=null;">
+  <link rel="stylesheet" href="./lib/freakflags.css" media="print" onload="this.media='all'; this.onload=null;">
+  <link href="./css/tooltip.css" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+
   <link rel="shortcut icon" href="favicon.ico">
 
-  <!-- Open Graph data -->
+  <!-- Open Graph -->
   <meta property="fb:app_id" content="104250825478" />
-
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="YACA" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://covid.aequologica.net" />
   <meta property="og:description" content="Yet Another Covid-19 App, by Christophe Thiebaud" />
   <meta property="og:site_name" content="covid.aequologica.net" />
-
   <meta property="og:image" content="https://covid.aequologica.net/img/screenshot7.png" />
   <meta property="og:image:url" content="https://covid.aequologica.net/img/screenshot7.png" />
   <meta property="og:image:type" content="image/png" />
@@ -57,15 +54,13 @@
   <meta property="og:image:height" content="1266" />
 
 </head>
-
 <body>
+
   <header>
     <div id="top">
       <div id="top2" class="fixed-top d-none d-print-flex"></div>
       <div id="top2" class="fixed-top d-flex justify-content-between d-print-none">
-
         <div id="top-left" class="p-1 flex-grow-1">
-
           <!-- TITLE -->
           <div id="title">
             <span class="d-none d-md-inline">COVID-19</span>
@@ -94,15 +89,11 @@
             </div>
           </div>
           <!-- /TITLE -->
-
         </div>
-
         <div id="top-float-right" class="d-flex justify-content-between d-print-none">
-
           <div class="flex-column">
             <div id="b0x0" class="p-1">
               <span class="mr-auto mt-2 mt-lg-0" style="white-space: nowrap;">
-
                 <!-- BOX 0x0 -->
                 <button id="location" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="show location">
                   <a href="">
@@ -141,36 +132,27 @@
                     </a>
                   </button>
                 </div>
-
                 <!-- BOX 0x0 -->
-
               </span>
             </div>
           </div>
-
           <div class="flex-column" style="font-size:Smaller;">
             <div id="b1x1" class="p-1 _boxrow1 _boxcol1" style="white-space: nowrap;">
-
               <!-- BOX 1x1 -->
               <a href="https://github.com/cthiebaud/cthiebaud.github.io" target="_github_com" title="github.com/cthiebaud/cthiebaud.github.io">
                 <img style="display:inline-block; width: 14px; height:auto;" src="./img/github.svg">
               </a>
               <!-- /BOX 1x1 -->
-
             </div>
             <div id="b1x2" class="p-1 _boxrow2 _boxcol1" style="white-space: nowrap;">
-
               <!-- BOX 1x2 -->
               <span class="d-none d-sm-inline">as of</span>
               <span id="end"></span>
               <!-- /BOX 1x2 -->
-
             </div>
           </div>
-
         </div>
       </div>
-
       <div id="credits" class="fixed-top d-flex">
         <div>
           data source:
@@ -225,6 +207,7 @@
 
   <!-- footer -->
   <footer class="footer">
+
     <div id="bottom" class="fixed-bottom d-none d-print-flex"></div>
     <nav id="bottom" class="navbar fixed-bottom navbar-expand-sm navbar-light d-print-none">
       <div class="container-fluid d-flex align-items-start">
@@ -245,9 +228,7 @@
         </form>
         <div class="collapse navbar-collapse" id="navbarToggler" style="flex-basis: auto; flex-shrink: 1;">
           <form class="form-inline" style="margin-left: auto;">
-            <!-- ml-auto my-2 my-lg-0 -->
             <ul class="navbar-nav">
-              <!-- ml-auto mt-2 mt-lg-0 -->
               <!-- toggleCapita -->
               <li class="card">
                 <div class="card-body" title="per capita vs. absolute numbers">
@@ -308,6 +289,7 @@
         </button>
       </div>
     </nav>
+
   </footer>
 
   <!-- modals  -->
@@ -484,13 +466,12 @@
     {{/each}}
   </tbody>
   </script>
-  <!-- tooltip class="text-info" -->
+  <!-- tooltip -->
   <script id="tooltip-template" type="text/x-handlebars-template">
   <div class="card mytooltip" style="word-wrap: normal; ">
     <div class="card-header">
       <div style="color:{{countryColor}};">{{country}}</div>
       <div class="text-dark" style="white-space: nowrap;">{{date}}</div>
-      <!-- div style="font-size:smaller; font-style: italic;"><span class='nowrap text-info'>{{{explanation}}}</span></div -->
     </div>
     <div class="card-body">
       <table class="table table-sm table-borderless">
@@ -527,7 +508,7 @@
   <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
-  <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@1.0.0/pubsub.min.js"></script>
+  <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></script>
 
   <!-- facebook -->
   <script>
@@ -544,7 +525,7 @@
   <!-- /facebook -->
 
   <script>
-    // compile the templates
+    // compile the handlebars templates
     var printHeaderTemplate = Handlebars.compile(document.getElementById("print-header-template").innerHTML);
     var printFooterTemplate = Handlebars.compile(document.getElementById("print-footer-template").innerHTML);
     var rowTemplate = Handlebars.compile(document.getElementById("row-template").innerHTML);
