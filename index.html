@@ -35,8 +35,9 @@
   <link href="./css/chart.css" rel="stylesheet">
   <link href="./css/tooltip.css" rel="stylesheet">
 
-  <link href="./lib/freakflags.css" rel="stylesheet">
-
+  <!-- https://github.com/filamentgroup/loadCSS -->
+  <link rel="stylesheet" href="./lib/freakflags.css" media="print" onload="this.media='all'; this.onload=null;">
+  
   <link rel="shortcut icon" href="favicon.ico">
 
   <!-- Open Graph data -->
@@ -346,8 +347,8 @@
             <em>work in progress</em>
           </div>
           <div class="mr-auto flex-grow-1" style="text-align: right;">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" id="send" class="btn btn-primary" disabled>Save</button>
+            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="send" class="btn btn-sm btn-primary" disabled>Save</button>
           </div>
         </div>
       </div>
@@ -358,13 +359,13 @@
     <div class="modal-dialog .modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header p-2">
-          <button id="selectAll" type="button" class="reset btn btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+          <button id="selectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
             select all
           </button>
-          <button id="unselectAll" type="button" class="reset btn btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+          <button id="unselectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
             unselect all
           </button>
-          <button id="resetToFactory" type="button" class="reset btn btn-outline-secondary" title="reset list of countries to factory defaults"
+          <button id="resetToFactory" type="button" class="reset btn btn-sm btn-outline-secondary" title="reset list of countries to factory defaults"
             style="padding: 0 .3rem; margin-bottom:.5rem;">
             reset to factory default
           </button>
@@ -474,7 +475,7 @@
         </button>
       </td>
       <td class="country" id="{{name}}" name="{{name}}" {{{color name}}}>
-        <div class="fflag fflag-{{code}} ff-md ff-round" title="{{name}} {{code}}"></div>
+        <!-- div class="fflag fflag-{{code}} ff-md ff-round" title="{{name}} {{code}}"></div -->
         {{name}}
       </td>
       <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
