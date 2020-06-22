@@ -207,13 +207,11 @@ export function draw(...args) {
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis)
             .selectAll("text")
-            .attr("transform", "translate(-10,10)rotate(-45)")
-            .style("font-size", "smaller");
+            .attr("transform", "translate(-10,10)rotate(-45)");
         rootG.select(".y.axis")
             .attr("transform", "translate(" + width + " ,0)")
             .call(yAxis)
-            .selectAll("text")
-            .style("font-size", "smaller");
+            .selectAll("text");
         rootG.select(".grid")
             .call(yGrid);
         // force D3 to recalculate and update the line

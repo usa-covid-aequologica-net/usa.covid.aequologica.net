@@ -51,9 +51,9 @@ export function setupTooltip(rootG, points, color, country, properties) {
     d3.select("#totici").remove();
     d3totici = rootG.append("circle")
         .attr("id", "totici")
-        .attr("stroke", "none")
-        .attr("fill", "gray")
-        .attr("fill-opacity", 0);
+        .style("stroke", "none")
+        .style("fill", "gray")
+        .style("fill-opacity", 0);
 
     $(".tippy-popper").remove();
 
@@ -61,7 +61,10 @@ export function setupTooltip(rootG, points, color, country, properties) {
         followCursor: 'horizontal',
         allowHTML: true,
         theme: 'light', 
-        delay: [0, 1000],/* uncomment to debug :
+        delay: [0, 1000],
+        onHidden(instance) {
+            d3totici.style("fill-opacity", 0);
+        }, /* uncomment to debug :
         hideOnClick: false,
         trigger: 'click', */
     });
@@ -91,11 +94,12 @@ export function setupTooltip(rootG, points, color, country, properties) {
             .attr("cx", d3this.attr("cx"))
             .attr("cy", d3this.attr("cy"))
             .attr("r", 7)
-            .style("fill-opacity", .3);
+            .style("fill-opacity", .5);
 
         d3totici.node()._tippy.setContent(tooltipTemplate(opti));
 
     }).on("mouseout", (d) => {
+        // d3.select("#totici").remove();
     });
 
     $("svg#chart").on("click", (e) => {
