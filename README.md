@@ -30,6 +30,10 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ![UI explained](./img/screenshot6-UI-explained.png "UI explained")
 
+## Sweden
+
+Read this article: [Coronavirus: Should We Aim for Herd Immunity Like Sweden?](https://medium.com/@tomaspueyo/coronavirus-should-we-aim-for-herd-immunity-like-sweden-b1de3348e88b), 9th of June 2020, by [Tomas Pueyo](https://twitter.com/tomaspueyo).
+
 ## Complete Reference Guide
 
 There are 6 categories. For each category, valid values are (defaults are in **bold**):
