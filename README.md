@@ -133,7 +133,7 @@ Adding or removing countries from the list with the country picker modal dialog 
 
 ## Some analytics
 
-That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 18th of June 2020, since its creation, the 17 of April 2020.
+That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 22th of June 2020, since its creation, the 17 of April 2020.
 
 ![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
 
