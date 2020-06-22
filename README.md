@@ -22,7 +22,7 @@ finally, to reduce the noise inherent with daily figures, for each day a moving 
 
 Try it here: [https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,per,lin,18,_](https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,per,lin,18,_)
 
-![FR,IT,SE](./img/screenshot6.png "FR,IT,SE")
+![FR,IT,SE](./img/screenshot7.png "FR,IT,SE")
 
 ## All this typing ?
 
