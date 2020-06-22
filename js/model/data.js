@@ -242,24 +242,34 @@ function setupCategories() {
     return categories;
 }
 
+$(document).ajaxSend(function(){
+    $(elementIWantToShowOnAjaxSend).fadeIn(250);
+});
+$(document).ajaxComplete(function(){
+    $(elementIWantToShowOnAjaxSend).fadeOut(250);
+});
 
 // Read in data
 function fetchData(callback) {
-    d3.json("https://pomber.github.io/covid19/timeseries.json").then((data) => {
+    $.ajax({
+        type: 'GET',
+        url: 'https://pomber.github.io/covid19/timeseries.json',
+        dataType: 'json',
+        success: function (data) {
+            rawData = data;
+            massagedData = {
+                data: undefined,
+                end: undefined,
+                latest: undefined,
+                earliest: undefined,
+            };
 
-        rawData = data;
-        massagedData = {
-            data: undefined,
-            end: undefined,
-            latest: undefined,
-            earliest: undefined,
-        };
+            massageData();
 
-        massageData();
+            setSizeOfAverage(sizeOfAverage, true);
 
-        setSizeOfAverage(sizeOfAverage, true);
-
-        return callback(massagedData);
+            return callback(massagedData);
+        }
     });
 }
 
