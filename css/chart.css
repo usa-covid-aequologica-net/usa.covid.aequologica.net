@@ -1,6 +1,6 @@
 #chart .axis path, #chart .axis line {
     fill: none;
-    stroke: #000;
+    stroke: rgb(108, 117, 125);
     shape-rendering: crispEdges;
 }
 

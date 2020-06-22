@@ -6,6 +6,16 @@ body {
     font: 12pt sans-serif;
 }
 
+/* global colors */
+button.btn.btn-outline-secondary[type="button"], .card.border-secondary {
+    border-color: rgba(0, 0, 0, .2) !important;
+    color: rgb(108, 117, 125) !important;
+}
+
+button.btn.btn-outline-secondary[type="button"]:hover {
+    color: #fff !important;
+}
+
 /* general structure 
 
 +--------------------+
