@@ -15,8 +15,8 @@ https://covid.aequologica.net/?day,confirmed,FR,IT,SE,2020-03-01,per,lin,18,_
 This will lead to a web page that shows a comparison graph of all daily (**day**) **confirmed** new cases for France (**FR**), Italy (**IT**) and Sweden (**SE**), 
 starting from the 1st of March of this year (**2020-03-01**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); 
 the population of Sweden is roughly 1/6 of France or Italy, so the figures are per capita (**per**), to adjust for that; 
-the Y-axis scale is linear (**lin**); were it logaritmic (log), the differences between the countries would be attenuated, although comparison between 
-coutries with very different low and high numbers would be easied (try to add South Korea (KR) to the URL, then switch between logaritmic and linear Y axis : you will understand what I mean); 
+the Y-axis scale is linear (**lin**); be it logaritmic (log), comparison between 
+coutries with numbers on a different order of magnitude would be possible (add South Korea (KR) to the [URL](https://covid.aequologica.net/?day,confirmed,FR,IT,SE,KR,2020-03-01,per,log,18,_), then switch between logaritmic and linear Y axis : you will understand what I mean); 
 finally, to reduce the noise inherent with daily figures, for each day a moving average of the previous **18** days is plotted.
 
 
@@ -133,7 +133,7 @@ Adding or removing countries from the list with the country picker modal dialog 
 
 ## Some analytics
 
-That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 22th of June 2020, since its creation, the 17 of April 2020.
+That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 22th of June 2020, since its creation, the 17th of April 2020.
 
 ![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
 
