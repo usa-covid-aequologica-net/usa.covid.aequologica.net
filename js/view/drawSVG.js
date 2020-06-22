@@ -1,6 +1,6 @@
 'use strict';
 
-import { setupTooltip, hideTooltip } from './tooltip.js';
+import { setupTooltip } from './tooltip.js';
 
 let pubSubToken;
 let flyingCategories;
@@ -231,8 +231,9 @@ export function draw(...args) {
                 return yScale(d.nummer)
             });
 
-        // hide tooltip
-        hideTooltip();
+        if (0 < $(".tippy-popper").length && $(".tippy-popper")[0]._tippy) {
+            $(".tippy-popper")[0]._tippy.hide();
+        }
 
         if (!doNotAnimate) {
             animate();

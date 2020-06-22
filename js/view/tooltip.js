@@ -29,7 +29,7 @@ function formatNummer(input) {
 }
 
 function formatDiffWithSign(a, b) {
-    const diff = (+a.replace(/,/g, '')) - (+b.replace(/,/g, ''));
+    const diff = (+(a.replace(/,/g, ''))) - (+(b.replace(/,/g, '')));
     const shown = formatNummer(Math.abs(diff));
     let sign;
     if (+shown == 0) {
@@ -38,12 +38,6 @@ function formatDiffWithSign(a, b) {
         sign = diff < 0 ? '-' : '+';
     }
     return `${sign}${shown}`;
-}
-
-export function hideTooltip() {
-    if (d3totici && d3totici.node() && d3totici.node()._tippy) {
-        d3totici.node()._tippy.hide();
-    }
 }
 
 export function setupTooltip(rootG, points, color, country, properties) {
@@ -58,15 +52,15 @@ export function setupTooltip(rootG, points, color, country, properties) {
     $(".tippy-popper").remove();
 
     tippy('#totici', {
-        followCursor: 'horizontal',
+        /* followCursor: 'horizontal', */
         allowHTML: true,
-        theme: 'light', 
+        theme: 'light',
         delay: [0, 1000],
         onHidden(instance) {
             d3totici.style("fill-opacity", 0);
-        }, /* uncomment to debug :
+        },
         hideOnClick: false,
-        trigger: 'click', */
+        trigger: 'click', /* uncomment to debug :*/
     });
 
     const explanatino = formatExplanation(properties.isTotal, properties.isPercapita, properties.sizeOfAverage);
@@ -103,8 +97,13 @@ export function setupTooltip(rootG, points, color, country, properties) {
     });
 
     $("svg#chart").on("click", (e) => {
-        if (!$(e.target).is("circle")) {
-            hideTooltip();
+        if (d3totici && d3totici.node() && d3totici.node()._tippy) {
+            if (!$(e.target).is("circle")) {
+                d3totici.node()._tippy.hide();
+            } else {
+                d3totici.node()._tippy.show();
+            }
         }
     });
+
 }

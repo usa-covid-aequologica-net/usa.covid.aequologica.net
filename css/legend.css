@@ -1,14 +1,3 @@
-/*
-#legend {
-    overflow: hidden scroll;
-}
-
-#legend .card {
-    display: inline-block;
-    overflow: hidden scroll;
-}
-*/
-
 #legend .card-body {
     padding: 0.1rem 0.2rem;
     padding-top: 0.1rem;
@@ -18,8 +7,6 @@
     font-size: 14px;
     opacity: 1;
 }
-
-
 
 #legend table.table {
     margin-bottom: 0;
@@ -38,7 +25,8 @@
 }
 
 #legend table.table tbody tr.selected {
-    background-color: rgba(0,0,0,.075); /* #e7e9fa;  */
+    background-color: rgba(0, 0, 0, .075);
+    /* #e7e9fa;  */
 }
 
 #legend table.table tbody td.country {
@@ -62,7 +50,7 @@
 }
 
 #legend button {
-    padding: 0 .3rem;
+    padding: 0 .25rem;
 }
 
 #legend .remove button {
@@ -76,10 +64,6 @@
 
 #legend .active#populationToggle:not(:hover) {
     background-color: #ccc !important;
-}
-
-#legend table.table thead th.legend_population a {
-    color: rgb(33, 37, 41) !important
 }
 
 #modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {

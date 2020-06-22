@@ -16,14 +16,14 @@ export function Legend() {
 
             const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
 
-            const $legend = $("main #legend .card .card-body table.table");
+            const $legend = $("main #legend table.table");
 
             Handlebars.registerHelper("color", (country) => 'style="color:' + color(country) + ';"');
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
             Handlebars.registerHelper("lowercase", (text) => text.toLowerCase());
             Handlebars.registerHelper("pop-style", () => 'style="display:' + (isPopulationColumnVisible ? 'table-cell' : 'none') + '"');
-            const legendCard = handlebarsTemplate(model.getCountriesHolder().getAsArray());
-            $legend.html(legendCard);
+            const legendHeadAndBody = handlebarsTemplate(model.getCountriesHolder().getAsArray());
+            $legend.html(legendHeadAndBody);
 
             function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
                 // legend
@@ -55,7 +55,7 @@ export function Legend() {
                     ret = $me;
                 }
 
-                displayFoldedLegend($("#legend table tbody").data("folded"));
+                displayFoldedLegend($("#legend table.table tbody").data("folded"));
 
                 window.ps.publish('SELECTED_COUNTRY', selectedCountry);
 
@@ -102,21 +102,21 @@ export function Legend() {
                 feedbackPopulationColumnVisible();
             });
 
-            $("#legend td.country").on('click', (e) => {
+            $("#legend table.table").on('click', "td.country", (e) => {
                 const selectedCountry = model.getCountriesHolder().toggleSelectedCountry($(e.currentTarget).attr('name'));
                 feedbackSelectedCountry(selectedCountry);
             });
 
             function displayFoldedLegend(folded) {
-                $("#legend table tbody").data("folded", folded);
+                $("#legend table.table tbody").data("folded", folded);
                 if (folded) {
                     // hide all rows not selected
-                    $("#legend table tbody tr:not(.selected)").hide();
-                    $("#legend table tbody tr.selected").show();
+                    $("#legend table.table tbody tr:not(.selected)").hide();
+                    $("#legend table.table tbody tr.selected").show();
                     $("#legendToggle").addClass("folded");
                 } else {
                     // show all rows
-                    $("#legend table tbody tr").css("display", "table-row");
+                    $("#legend table.table tbody tr").css("display", "table-row");
                     $("#legendToggle").removeClass("folded");
                 }
             }
@@ -129,12 +129,13 @@ export function Legend() {
                     folded = false;
                 }
             }
+            
             displayFoldedLegend(folded);
 
             $("main #legendToggle").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                const $tbody = $("#legend table tbody");
+                const $tbody = $("#legend table.table tbody");
                 const fold = !$tbody.data("folded");
                 $tbody.data("folded", fold);
                 model.setToggle("toggleLegend", fold ? "folded" : "unfolded")
