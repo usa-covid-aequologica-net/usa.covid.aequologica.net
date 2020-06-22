@@ -35,6 +35,8 @@
   <link href="./css/chart.css" rel="stylesheet">
   <link href="./css/tooltip.css" rel="stylesheet">
 
+  <link href="./lib/freakflags.css" rel="stylesheet">
+
   <link rel="shortcut icon" href="favicon.ico">
 
   <!-- Open Graph data -->
@@ -103,7 +105,7 @@
                 <!-- BOX 0x0 -->
                 <button id="location" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="show location">
                   <a href="">
-                    <img src="">
+                    <div class="fflag ff-md ff-round"></div>
                   </a>
                   <span class="d-none d-sm-inline"></span>
                 </button>
@@ -424,7 +426,9 @@
         </span>
       </td>
       <td class="name">
-        <span id="f{{index}}" class="float-left"><img style="width:20px; height:auto; margin-right: .25rem;" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{flag}}.svg"></span>
+        <span id="f{{index}}" class="float-left">
+          <div class="fflag fflag-{{code}} ff-sm" style="margin-right: .25rem;" title="{{name}} {{code}}"></div>
+        </span>
         <span id="n{{index}}">{{name}}</span>
       </td>
       <td class="code">
@@ -470,8 +474,7 @@
         </button>
       </td>
       <td class="country" id="{{name}}" name="{{name}}" {{{color name}}}>
-        <span id="flag_{{code}}" class="float-left"><img style="width:15px; height:auto; margin-right: .25rem;"
-            src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/{{lowercase code}}.svg"></span>
+        <div class="fflag fflag-{{code}} ff-md ff-round" title="{{name}} {{code}}"></div>
         {{name}}
       </td>
       <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
@@ -562,7 +565,7 @@
     function showLocation(location) {
       $("#location").attr('title', "redirect to " + location.country);
       $("#location a").attr("href", "?" + location.countryCode);
-      $("#location img").attr("src", "https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/" + location.countryCode.toLowerCase() + ".svg");
+      $("#location a div").addClass("fflag-" + location.countryCode);
     }
     const location = Cookies.get('location');
     if (location) {

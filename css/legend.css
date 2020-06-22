@@ -29,6 +29,10 @@
     /* #e7e9fa;  */
 }
 
+#legend table.table thead th.country {
+    z-index: 4000;
+}
+
 #legend table.table tbody td.country {
     cursor: pointer;
 }

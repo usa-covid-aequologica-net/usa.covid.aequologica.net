@@ -90,7 +90,6 @@ export function init(...args) {
                 index: i,
                 name: country.name,
                 code: country.code,
-                flag: country.code.toLowerCase(),
                 population: country.count.toLocaleString(),
                 checked: (isChecked ? "checked" : ""),
                 trucAndAstuce: (isChecked ? "checked_" : "unchecked_") + country.name,
