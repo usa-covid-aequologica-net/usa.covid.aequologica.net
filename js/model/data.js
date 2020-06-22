@@ -242,13 +242,6 @@ function setupCategories() {
     return categories;
 }
 
-$(document).ajaxSend(function(){
-    $(elementIWantToShowOnAjaxSend).fadeIn(250);
-});
-$(document).ajaxComplete(function(){
-    $(elementIWantToShowOnAjaxSend).fadeOut(250);
-});
-
 // Read in data
 function fetchData(callback) {
     $.ajax({
