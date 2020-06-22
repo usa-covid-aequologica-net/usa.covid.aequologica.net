@@ -17,6 +17,7 @@ export function Legend() {
             const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
 
             const $legend = $("main #legend table.table");
+            $legend.empty();
 
             Handlebars.registerHelper("color", (country) => 'style="color:' + color(country) + ';"');
             Handlebars.registerHelper("format", (number) => number.toLocaleString());
