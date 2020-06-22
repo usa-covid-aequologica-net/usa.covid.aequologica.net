@@ -102,7 +102,7 @@ export function Legend() {
                 feedbackPopulationColumnVisible();
             });
 
-            $("#legend table.table").on('click', "td.country", (e) => {
+            $("#legend table.table tbody").on('click', "td.country", (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 const selectedCountry = model.getCountriesHolder().toggleSelectedCountry($(e.currentTarget).attr('name'));
