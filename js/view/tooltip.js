@@ -60,7 +60,8 @@ export function setupTooltip(rootG, points, color, country, properties) {
     tippy('#totici', {
         followCursor: 'horizontal',
         allowHTML: true,
-        theme: 'light', /* uncomment to debug :
+        theme: 'light', 
+        delay: [0, 1000],/* uncomment to debug :
         hideOnClick: false,
         trigger: 'click', */
     });
