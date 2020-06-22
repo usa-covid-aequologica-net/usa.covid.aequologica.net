@@ -15,8 +15,8 @@
 
 #chart .point {
     stroke: none;
-    fill: #e6e6e6;
-    opacity: 0.5;
+    fill: rgb(108, 117, 125);
+    opacity: 0.125;
 }
 
 #chart .line {
