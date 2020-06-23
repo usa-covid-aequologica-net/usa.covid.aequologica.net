@@ -612,7 +612,7 @@
     });
     $(document).ajaxSend(function (event, xhr, options) {
       console.log("ajax send", event, xhr, options);
-      $('#ajaxFeedback #source').html(options.url);
+      // $('#ajaxFeedback #source').html(options.url);
       $('#ajaxFeedback').show();
     });
     $(document).ajaxComplete(function (event, xhr, options) {
