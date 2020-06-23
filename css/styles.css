@@ -7,6 +7,7 @@ body {
 }
 
 /* global colors */
+
 button.btn.btn-outline-secondary[type="button"], .card.border-secondary {
     border-color: rgba(0, 0, 0, .2) !important;
     color: rgb(108, 117, 125) !important;
@@ -40,7 +41,7 @@ header #top {
 header #top2 {
     height: 40px;
     max-height: 40px;
-    background-color: rgb(253,243,220);
+    background-color: rgb(253, 243, 220);
 }
 
 header #credits {
@@ -83,7 +84,7 @@ footer #bottom {
     /* height: 48px; NEVER UNCOMMENT height !!!! */
     font-family: sans-serif;
     overflow: hidden hidden;
-    background-color: rgb(253,243,220);
+    background-color: rgb(253, 243, 220);
     /* z-index: 2000; */
 }
 
@@ -161,16 +162,13 @@ footer #bottom label {
     text-align: center !important;
 }
 
-footer #bottom .card:first-child {
-    margin-left: 0.2rem;
-}
-
 footer #bottom {
-    padding: 0.1rem 0.2rem;
+    padding: 0;
+    margin: 0;
 }
 
 footer #bottom .card {
-    margin: 0 0.2rem;
+    margin: 0
 }
 
 footer #bottom .navbar-brand {
@@ -200,7 +198,7 @@ footer #bottom label#average {
 }
 
 #modalCountryPicker .modal-header {
-    background-color: rgb(253,243,220);
+    background-color: rgb(253, 243, 220);
 }
 
 #modalCountryPicker button:not(:hover):not(.close) {
@@ -221,4 +219,3 @@ footer #bottom label#average {
     font-size: smaller;
     text-align: right;
 }
-

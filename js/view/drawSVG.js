@@ -32,7 +32,7 @@ export function draw(...args) {
 
     // define scales & color
     const xScale = d3.scaleTime().range([0, width]);
-    const yScale = (properties.isLogarithmic ? d3.scaleSymlog() : d3.scaleLinear()).range([height, 0]);
+    const yScale = (properties.isLogarithmic ? d3.scaleLog() : d3.scaleLinear()).range([height, 0]);
     flyingXScale = xScale;
     flyingYScale = yScale;
     const color = d3.scaleOrdinal().range(d3.schemeCategory10);
@@ -79,18 +79,20 @@ export function draw(...args) {
         rootG
             .append("g")
             .attr("class", "x axis")
-            .call(xAxis);
+            .call(xAxis.ticks(20));
 
         rootG
             .append("g")
             .attr("class", "y axis")
-            .call(yAxis.tickFormat(
+            .call(yAxis.ticks(20, '~s')/*tickFormat(
+                
                 d => (d >= 1000 ? (d / 1000).toLocaleString() + "k" : d.toLocaleString())
-            ));
+            )*/);
 
         rootG.append("g")
             .attr("class", "grid")
             .call(yGrid
+                .ticks(20, '~s')
                 .tickSize(-width)
                 .tickFormat("")
             );
