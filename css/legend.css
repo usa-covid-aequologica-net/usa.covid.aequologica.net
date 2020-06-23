@@ -38,7 +38,6 @@
 }
 
 #legend table.table tbody td.country:hover {
-    /* background-color: ghostwhite; */
     text-decoration: underline;
 }
 
@@ -68,17 +67,6 @@
 
 #legend .active#populationToggle:not(:hover) {
     background-color: #ccc !important;
-}
-
-#modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {
-    font-size: smaller;
-    text-align: center;
-}
-
-#modalCountryPicker table thead th.population, #modalCountryPicker table tbody td.population {
-    font-family: monospace;
-    font-size: smaller;
-    text-align: right;
 }
 
 #legendButtonsWrapper button {

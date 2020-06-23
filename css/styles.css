@@ -40,7 +40,7 @@ header #top {
 header #top2 {
     height: 40px;
     max-height: 40px;
-    background-color: ghostwhite;
+    background-color: rgb(253,243,220);
 }
 
 header #credits {
@@ -83,7 +83,7 @@ footer #bottom {
     /* height: 48px; NEVER UNCOMMENT height !!!! */
     font-family: sans-serif;
     overflow: hidden hidden;
-    background-color: ghostwhite;
+    background-color: rgb(253,243,220);
     /* z-index: 2000; */
 }
 
@@ -198,3 +198,27 @@ footer #bottom label#average {
     overflow-x: hidden;
     text-overflow: ellipsis; */
 }
+
+#modalCountryPicker .modal-header {
+    background-color: rgb(253,243,220);
+}
+
+#modalCountryPicker button:not(:hover):not(.close) {
+    background-color: white;
+}
+
+#modalCountryPicker table thead th {
+    background-color: ghostwhite;
+}
+
+#modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {
+    font-size: smaller;
+    text-align: center;
+}
+
+#modalCountryPicker table thead th.population, #modalCountryPicker table tbody td.population {
+    font-family: monospace;
+    font-size: smaller;
+    text-align: right;
+}
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
@@ -31,7 +32,7 @@
   <link href="./css/styles.css" rel="stylesheet">
   <link href="./css/legend.css" rel="stylesheet">
   <link href="./css/chart.css" rel="stylesheet">
-  
+
   <!-- https://github.com/filamentgroup/loadCSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tippy.js@latest/themes/light.css" media="print" onload="this.media='all'; this.onload=null;">
   <link rel="stylesheet" href="./lib/freakflags.css" media="print" onload="this.media='all'; this.onload=null;">
@@ -54,6 +55,7 @@
   <meta property="og:image:height" content="1266" />
 
 </head>
+
 <body>
 
   <header>
@@ -341,16 +343,18 @@
     <div class="modal-dialog .modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header p-2">
-          <button id="selectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
-            select all
-          </button>
-          <button id="unselectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
-            unselect all
-          </button>
-          <button id="resetToFactory" type="button" class="reset btn btn-sm btn-outline-secondary" title="reset list of countries to factory defaults"
-            style="padding: 0 .3rem; margin-bottom:.5rem;">
-            reset to factory default
-          </button>
+          <div id="countryPickerGroup" class="btn-group">
+            <button id="selectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+              select all
+            </button>
+            <button id="unselectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="unselect all" style="padding: 0 .3rem; margin-bottom:.5rem;">
+              unselect all
+            </button>
+            <button id="resetToFactory" type="button" class="reset btn btn-sm btn-outline-secondary" title="reset list of countries to factory defaults"
+              style="padding: 0 .3rem; margin-bottom:.5rem;">
+              reset to factory default
+            </button>
+          </div>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
