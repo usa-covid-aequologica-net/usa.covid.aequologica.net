@@ -148,18 +148,20 @@ export function draw(...args) {
                 d3.selectAll("circle.point").remove();
                 if (country) {
                     const sel = _.find(flyingCategories, c => c.category === country);
-                    const points = rootG.selectAll("points")
-                        .data(sel.datapoints)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", d => flyingXScale(d.date))
-                        .attr("cy", d => flyingYScale(d.nummer))
-                        .attr("r", 5)
-                        .attr("data-nummer", d => d.nummer)
-                        .attr("class", "point");
+                    if (sel) {
+                        const points = rootG.selectAll("points")
+                            .data(sel.datapoints)
+                            .enter()
+                            .append("circle")
+                            .attr("cx", d => flyingXScale(d.date))
+                            .attr("cy", d => flyingYScale(d.nummer))
+                            .attr("r", 5)
+                            .attr("data-nummer", d => d.nummer)
+                            .attr("class", "point");
 
-                    // tooltip
-                    setupTooltip(rootG, points, color, country, properties);
+                        // tooltip
+                        setupTooltip(rootG, points, color, country, properties);
+                    }
                 }
             } catch (err) {
                 console.log(err);

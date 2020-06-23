@@ -26,13 +26,15 @@ export function Legend() {
             const legendHeadAndBody = handlebarsTemplate(model.getCountriesHolder().getAsArray());
             $legend.html(legendHeadAndBody);
 
-            function feedbackSelectedCountry(selectedCountry, scrollIntoView) {
+            function feedbackSelectedCountry(selectedCountry, doNotScrollIntoView) {
                 // legend
                 $('#legend td.country.active').removeClass("active");
                 $('#legend tr').removeClass("selected");
                 // chart
                 $('#chart .category').removeClass('active');
                 $('#chart .category').removeClass('inactive');
+                // location
+                $("header #location").removeClass('active');
 
                 let ret = undefined;
                 if (selectedCountry) {
@@ -40,7 +42,7 @@ export function Legend() {
                     const $me = $('#legend td.country[name="' + selectedCountry + '"]');
                     $me.addClass("active");
                     $me.parent().addClass("selected");
-                    if (scrollIntoView) {
+                    if (!doNotScrollIntoView) {
                         if ($me && 0 < $me.length) {
                             $me[0].scrollIntoView({
                                 behavior: "smooth",
@@ -52,6 +54,12 @@ export function Legend() {
                     $('#chart .category').addClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').removeClass('inactive');
                     $('#chart .category[name="' + selectedCountry + '"]').addClass('active');
+
+                    // location
+                    const location = $("header #location").data("country");
+                    if (selectedCountry === location) {
+                        $("header #location").addClass('active');
+                    }
 
                     ret = $me;
                 }
@@ -107,7 +115,7 @@ export function Legend() {
                 e.preventDefault();
                 e.stopPropagation();
                 const selectedCountry = model.getCountriesHolder().toggleSelectedCountry($(e.currentTarget).attr('name'));
-                feedbackSelectedCountry(selectedCountry);
+                feedbackSelectedCountry(selectedCountry, true);
             });
 
             function displayFoldedLegend(folded) {
@@ -132,7 +140,7 @@ export function Legend() {
                     folded = false;
                 }
             }
-            
+
             displayFoldedLegend(folded);
 
             $("main #legendToggle").unbind().on('click', (e) => {
@@ -149,14 +157,14 @@ export function Legend() {
                 e.stopPropagation();
                 e.preventDefault();
                 const newSelectedCountry = model.selectionUp();
-                feedbackSelectedCountry(newSelectedCountry, true);
+                feedbackSelectedCountry(newSelectedCountry);
             });
 
             $("main #legendSelectionDown").unbind().on('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 const newSelectedCountry = model.selectionDown();
-                feedbackSelectedCountry(newSelectedCountry, true);
+                feedbackSelectedCountry(newSelectedCountry);
             });
 
             /* window.ps.subscribe(pubSubKey, (e) => {

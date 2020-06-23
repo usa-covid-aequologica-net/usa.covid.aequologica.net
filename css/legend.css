@@ -16,11 +16,12 @@
 #legend table.table thead th {
     position: sticky;
     top: 0;
-    background-color: ghostwhite;
+    color:rgb(0,45,114);
+    background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
 }
 
 #legend table.table tbody td, #legend table.table thead th {
-    padding: .2rem;
+    padding: .25rem .1rem;
     border-top: none;
 }
 
@@ -46,7 +47,7 @@
 }
 
 #legend table.table thead th.legend_population, #legend table.table tbody td.legend_population {
-    font-family: monospace;
+    /* font-family: monospace; */
     font-size: smaller;
     text-align: right;
     padding-left: .5rem;

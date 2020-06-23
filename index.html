@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progressbar@latest/themes/blue/pace-theme-flash.css">
   <script>
     Pace.on('hide', () => {
-      const topfloatright = document.getElementById('top-float-right');
+      const topfloatright = document.getElementById('top-right');
       if (topfloatright) {
         topfloatright.style.visibility = 'visible';
       }
@@ -61,47 +61,42 @@
   <header>
     <div id="top">
       <div id="top2" class="fixed-top d-none d-print-flex"></div>
-      <div id="top2" class="fixed-top d-flex justify-content-between d-print-none">
-        <div id="top-left" class="p-1 flex-grow-1">
+      <div id="top2" class="mx-1 py-1 fixed-top d-flex justify-content-between d-print-none">
+        <div id="top-left" class="flex-grow-1">
           <!-- TITLE -->
-          <div id="title">
-            <span class="d-none d-md-inline">COVID-19</span>
-            <div id="cumulaGroup" class="btn-group" title="total numbers vs. daily new">
-              <button type="button" class="btn btn-sm btn-outline-secondary"><span id="cumulat"></span></button>
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu" id="type">
-                <a class="dropdown-item" href="#" data-type="total">total</a>
-                <a class="dropdown-item" href="#" data-type="daily" active>daily</a>
-              </div>
-            </div>
-            <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths vs. recovered">
-              <button type="button" class="btn btn-sm btn-outline-secondary"><span id="measure"></span></button>
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class="dropdown-menu" id="type">
-                <a class="dropdown-item" href="#" data-type="confirmed">confirmed</a>
-                <a class="dropdown-item" href="#" data-type="deaths" active>deaths</a>
-                <a class="dropdown-item" href="#" data-type="recovered">recovered</a>
-              </div>
+          <div id="top3"></div>
+          <div id="title" class="d-none d-md-inline" style="display: inline-flex;">COVID-19</div>
+          <div id="cumulaGroup" class="btn-group" title="total numbers vs. daily new">
+            <button type="button" class="btn btn-sm btn-outline-secondary"><span id="cumulat"></span></button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" id="type">
+              <a class="dropdown-item" href="#" data-type="total">total</a>
+              <a class="dropdown-item" href="#" data-type="daily" active>daily</a>
             </div>
           </div>
+          <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths vs. recovered">
+            <button type="button" class="btn btn-sm btn-outline-secondary"><span id="measure"></span></button>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" id="type">
+              <a class="dropdown-item" href="#" data-type="confirmed">confirmed</a>
+              <a class="dropdown-item" href="#" data-type="deaths" active>deaths</a>
+              <a class="dropdown-item" href="#" data-type="recovered">recovered</a>
+            </div>
+          </div>
+
           <!-- /TITLE -->
         </div>
-        <div id="top-float-right" class="d-flex justify-content-between d-print-none">
+        <div id="top-right" class="d-flex justify-content-between d-print-none">
           <div class="flex-column">
-            <div id="b0x0" class="p-1">
+            <div id="b0x0" class="">
               <span class="mr-auto mt-2 mt-lg-0" style="white-space: nowrap;">
                 <!-- BOX 0x0 -->
                 <button id="location" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="show location">
-                  <a href="">
-                    <div class="fflag ff-md ff-round"></div>
-                  </a>
-                  <span class="d-none d-sm-inline"></span>
+                  <div class="fflag ff-md ff-round"></div>
                 </button>
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- permalink -->
@@ -139,24 +134,22 @@
             </div>
           </div>
           <div class="flex-column" style="font-size:Smaller;">
-            <div id="b1x1" class="p-1 _boxrow1 _boxcol1" style="white-space: nowrap;">
+            <div id="b1x1" class="px-1 _boxrow1 _boxcol1" style="white-space: nowrap;">
               <!-- BOX 1x1 -->
               <a href="https://github.com/cthiebaud/cthiebaud.github.io" target="_github_com" title="github.com/cthiebaud/cthiebaud.github.io">
                 <img style="display:inline-block; width: 14px; height:auto;" src="./img/github.svg">
               </a>
               <!-- /BOX 1x1 -->
             </div>
-            <div id="b1x2" class="p-1 _boxrow2 _boxcol1" style="white-space: nowrap;">
-              <!-- BOX 1x2 -->
-              <span class="d-none d-sm-inline">as of</span>
-              <span id="end"></span>
-              <!-- /BOX 1x2 -->
+            <!-- BOX 1x2 - - >
+            <div id="b1x2" class="x_boxrow2 _boxcol1" style="white-space: nowrap;">
             </div>
+            < ! - - /BOX 1x2 -->
           </div>
         </div>
       </div>
       <div id="credits" class="fixed-top d-flex">
-        <div>
+        <div class="flex-grow-1">
           data source:
           <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">
             Johns Hopkins University
@@ -169,6 +162,10 @@
             )
             </span>
           </em>
+        </div>
+        <div>
+          <span class="d-none d-sm-inline">as of</span>
+          <span id="end"></span>
         </div>
       </div>
     </div>
@@ -275,8 +272,8 @@
                 <div class="card-body" title="length of rolling average" style="overflow: hidden;">
                   <div class="custom-control custom-control-inline" style="padding-left: 0.25rem; margin-right: 0.25rem;">
                     <input type="range" min="1" max="21" value="21" class="custom-range" id="sizeOfAverage" style="width:100px">
-                    <label class="my-custom-control-label" id="bubble" for="sizeOfAverage"
-                      style="min-width:1rem; margin: 0 .3rem; text-align:right; font-family: monospace; "></label>
+                    <label class="my-custom-control-label" id="bubble" for="sizeOfAverage" style="min-width:1rem; margin: 0 .3rem; text-align:right;"></label>
+                    <!--  font-family: monospace; -->
                     <label id="average" class="my-custom-control-label"></label>
                   </div>
                 </div>
@@ -317,7 +314,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span id="counter" class="badge badge-pill badge-danger" style="font-family: monospace; font-size: 20px;"></span>&nbsp;<span aria-hidden="true">&times;</span>
+            <span id="counter" class="badge badge-pill badge-danger" style="font-size: 20px;"></span>&nbsp;<span aria-hidden="true">&times;</span><!-- font-family: monospace;  -->
           </button>
         </div>
         <div class="modal-body">
@@ -341,7 +338,7 @@
   <div class="modal fade" id="modalCountryPicker" tabindex="-1" role="dialog" aria-labelledby="modalCountryPickerLabel" aria-hidden="true">
     <div class="modal-dialog .modal-dialog-scrollable" role="document">
       <div class="modal-content">
-        <div class="modal-header p-2">
+        <div class="modal-header p-2" style="border-bottom:none;">
           <div id="countryPickerGroup" class="btn-group">
             <button id="selectAll" type="button" class="reset btn btn-sm btn-outline-secondary" title="select all" style="padding: 0 .3rem; margin-bottom:.5rem;">
               select all
@@ -550,7 +547,7 @@
     function showLocation(location) {
       $("header #location").attr('title', "redirect to " + location.country);
       $("header #location").data("country-code", location.countryCode);
-      $("header #location a div").addClass("fflag-" + location.countryCode);
+      $("header #location div").addClass("fflag-" + location.countryCode);
     }
     const location = Cookies.get('location');
     if (location) {
@@ -585,7 +582,7 @@
     }
   </script>
   <!-- /location -->
-  
+
   <!-- ajax feedback -->
   <style>
     .centered {

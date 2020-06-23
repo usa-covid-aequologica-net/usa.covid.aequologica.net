@@ -3,7 +3,17 @@ html, body {
 }
 
 body {
-    font: 14px sans-serif;
+    font-size: 14px;
+    color:rgb(0,45,114);
+    /* font-family: "monospaced"; */
+}
+
+@font-face {
+    font-family: 'inconsolata';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    src: local('inconsolata'), url('../fonts/inconsolata.woff') format('woff');
 }
 
 /* global colors */
@@ -35,13 +45,13 @@ button.btn.btn-outline-secondary[type="button"]:hover {
 header #top {
     height: 56px;
     max-height: 56px;
-    background-color: white;
+    color:rgb(0,45,114);
+    background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
 }
 
 header #top2 {
     height: 40px;
     max-height: 40px;
-    background-color: rgb(253, 243, 220);
 }
 
 header #credits {
@@ -52,7 +62,7 @@ header #credits {
     top: 40px;
     max-height: 16px;
     padding: 0 .25rem;
-    font-size: 12px;
+    font-size: 13px;
     color: rgb(120, 120, 120);
     background-color: white;
     z-index: 1000;
@@ -63,6 +73,10 @@ header #credits #when_is_data_updated {
     overflow: hidden hidden;
     text-overflow: ellipsis;
     font-size: 10px;
+}
+
+header .active#location:not(:hover) {
+    background-color: #ccc !important;
 }
 
 main #chart {
@@ -82,9 +96,9 @@ main noscript {
 
 footer #bottom {
     /* height: 48px; NEVER UNCOMMENT height !!!! */
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     overflow: hidden hidden;
-    background-color: rgb(253, 243, 220);
+    background-color: white;
     /* z-index: 2000; */
 }
 
@@ -92,18 +106,23 @@ footer #bottom {
 
 /* - - - - - header - - - - - */
 
-header #top2 #title {
+header #top2 #top-left {
     display: inline-block;
-    font-size: 24px;
     white-space: nowrap;
 }
+header #top2 #title {
+    line-height: 0;
+    font-size: 24px;
+    height: 32px; 
+    max-height:32px;
+}
 
-header #top2 #top-float-right {
+header #top2 #top-right {
     font-size: 14px;
     visibility: hidden;
 }
 
-header #top2 #top-float-right [type="button"] {
+header #top2 #top-right [type="button"] {
     padding-left: 4px;
     padding-right: 4px;
 }
@@ -189,24 +208,13 @@ footer #bottom .navbar-toggler-icon {
     width: 1em;
     height: 1em;
 }
-
+/*
 footer #bottom label#average {
     font-family: monospace;
-    /* max-width: 20px;
-    overflow-x: hidden;
-    text-overflow: ellipsis; */
 }
-
-#modalCountryPicker .modal-header {
-    background-color: rgb(253, 243, 220);
-}
-
+*/
 #modalCountryPicker button:not(:hover):not(.close) {
     background-color: white;
-}
-
-#modalCountryPicker table thead th {
-    background-color: ghostwhite;
 }
 
 #modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {
@@ -215,7 +223,7 @@ footer #bottom label#average {
 }
 
 #modalCountryPicker table thead th.population, #modalCountryPicker table tbody td.population {
-    font-family: monospace;
+    /* font-family: monospace; */
     font-size: smaller;
     text-align: right;
 }

@@ -208,8 +208,8 @@ $(document).ready(() => {
             $("#bubble").html(sizeOfAverage);
             function averageFeedback(a) {
                 $("label#average").html(a < 2
-                    ? "day&nbsp;&nbsp;<span style='text-decoration: line-through'>ave.</span>"
-                    : "days&nbsp;ave."
+                    ? "day<span style='text-decoration: line-through'>s&nbsp;average</span>"
+                    : "day<span>s&nbsp;average</span>"
                 );
             }
             averageFeedback(sizeOfAverage);
@@ -262,23 +262,25 @@ $(document).ready(() => {
 
         // location
         {
-            $("header #location a").attr("href", "#");
-            $("header #location a").on('click', e => {
+            const $location = $("header #location");
+            {
                 const countryCode = $("header #location").data("country-code");
-                console.log(countryCode);
                 const country = model.getCountriesHolder().code2name(countryCode);
+                $("header #location").data("country", country);
+            }
+            $("header #location").on('click', e => {
+                const country = $("header #location").data("country");
                 const countries = model.getCountriesHolder().get();
-                const oldSelectedCoutry = model.getCountriesHolder().getSelectedCountry();
+                const oldSelectedCountry = model.getCountriesHolder().getSelectedCountry();
                 let doRedraw = false;
                 if (!countries.includes(country)) {
                     doRedraw = true;
                     const clone = _.cloneDeep(countries);
                     clone.push(country);
-                    model.getCountriesHolder().set(clone);
+                    model.getCountriesHolder().write(clone);
                 }
-                model.getCountriesHolder().toggleSelectedCountry(country);
-                const newSelectedCoutry = model.getCountriesHolder().getSelectedCountry();
-                if (doRedraw || oldSelectedCoutry !== newSelectedCoutry) {
+                const newSelectedCountry = model.getCountriesHolder().toggleSelectedCountry(country);
+                if (doRedraw || oldSelectedCountry !== newSelectedCountry) {
                     redraw(model.getCountriesHolder().get());
                 }
             });
