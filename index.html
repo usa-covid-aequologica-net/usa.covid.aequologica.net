@@ -548,9 +548,9 @@
   <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
   <script type="module">
     function showLocation(location) {
-      $("#location").attr('title', "redirect to " + location.country);
-      $("#location a").attr("href", "?" + location.countryCode);
-      $("#location a div").addClass("fflag-" + location.countryCode);
+      $("header #location").attr('title', "redirect to " + location.country);
+      $("header #location").data("country-code", location.countryCode);
+      $("header #location a div").addClass("fflag-" + location.countryCode);
     }
     const location = Cookies.get('location');
     if (location) {
@@ -573,13 +573,13 @@
             },
             error: function (xhr, errorType, exception) {
               console.log("Error fetching location data from ipstack.com", xhr, errorType, exception);
-              $("#location").remove();
+              $("header #location").remove();
             }
           });
         },
         error: function (xhr, errorType, exception) {
           console.log("Error fetching location data from ipstack.com", xhr, errorType, exception);
-          $("#location").remove();
+          $("header #location").remove();
         }
       });
     }

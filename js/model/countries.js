@@ -10,6 +10,20 @@ function reset() {
     return countries;
 };
 
+function code2name(c) {
+    if (!c) {
+        return c;
+    }
+    if (c.length === 2) {
+        // country code
+        const c2 = _.find(populationByCountry, (country) => c === country.code);
+        if (c2 && c2.name) {
+            return c2.name
+        }
+    }
+    return c;
+}
+
 function getSelectedCountry() {
     if (countries.includes(selectedCountry)) {
         return selectedCountry;
@@ -24,7 +38,7 @@ function setSelectedCountry(c, nosave) {
             store.remove('selectedCountry');
         }
     } else {
-        selectedCountry = c;
+        selectedCountry = code2name(c);
         if (!nosave) {
             store.set('selectedCountry', selectedCountry);
         }
@@ -74,6 +88,7 @@ let selectedCountry = store.get('selectedCountry', undefined);
 
 export function Countries() {
     return {
+        code2name: code2name,
         getSelectedCountry: getSelectedCountry,
         setSelectedCountry: setSelectedCountry,
         isSelected: s => countries.includes(s) && selectedCountry === s,
@@ -107,6 +122,9 @@ export function Countries() {
             if (!s) {
                 return undefined;
             }
+            
+            s = code2name(s);
+            
             if (!countries.includes(s)) {
                 return undefined;
             }

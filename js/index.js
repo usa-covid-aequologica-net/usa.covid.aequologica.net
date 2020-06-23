@@ -260,6 +260,29 @@ $(document).ready(() => {
             });
         });
 
+        // location
+        {
+            $("header #location a").attr("href", "#");
+            $("header #location a").on('click', e => {
+                const countryCode = $("header #location").data("country-code");
+                console.log(countryCode);
+                const country = model.getCountriesHolder().code2name(countryCode);
+                const countries = model.getCountriesHolder().get();
+                const oldSelectedCoutry = model.getCountriesHolder().getSelectedCountry();
+                let doRedraw = false;
+                if (!countries.includes(country)) {
+                    doRedraw = true;
+                    const clone = _.cloneDeep(countries);
+                    clone.push(country);
+                    model.getCountriesHolder().set(clone);
+                }
+                model.getCountriesHolder().toggleSelectedCountry(country);
+                const newSelectedCoutry = model.getCountriesHolder().getSelectedCountry();
+                if (doRedraw || oldSelectedCoutry !== newSelectedCoutry) {
+                    redraw(model.getCountriesHolder().get());
+                }
+            });
+        }
         // get the data
         {
             model.fetchData(result => {
