@@ -32,7 +32,7 @@ export function draw(...args) {
 
     // define scales & color
     const xScale = d3.scaleTime().range([0, width]);
-    const yScale = (properties.isLogarithmic ? d3.scaleSymlog().range([height, 0]) : d3.scaleLinear().range([height, 0])).nice();
+    const yScale = (properties.isLogarithmic ? d3.scaleSymlog() : d3.scaleLinear()).range([height, 0]).nice();
     flyingXScale = xScale;
     flyingYScale = yScale;
     const color = d3.scaleOrdinal().range(d3.schemeCategory10);
@@ -68,12 +68,12 @@ export function draw(...args) {
                 d3.min(yExtents, d => d[0]),
                 d3.max(yExtents, d => d[1])
             ];
-            if (yExtent[0] < 0) {
+            if (yExtent[0] < 1) {
                 yExtent[0] = 0;
             }
             return yExtent;
         }
-        yScale.domain(getYExtent());
+        yScale.domain(getYExtent()).nice();
 
         // add axes; formatting is in resize()
         rootG
@@ -203,11 +203,7 @@ export function draw(...args) {
 
         // Update the range of the scale with new width/height
         xScale.range([0, width]);
-        if (properties.isLogarithmic) {
-            yScale.range([height, 0]);
-        } else {
-            yScale.range([height, 0]);
-        }
+        yScale.range([height, 0]);
         flyingXScale = xScale;
         flyingYScale = yScale;
 
