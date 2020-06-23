@@ -159,9 +159,9 @@ export function Legend() {
                 feedbackSelectedCountry(newSelectedCountry, true);
             });
 
-            window.ps.subscribe(pubSubKey, (e) => {
+            /* window.ps.subscribe(pubSubKey, (e) => {
                 console.log("received " + e);
-            });
+            }); */
 
         }
     }

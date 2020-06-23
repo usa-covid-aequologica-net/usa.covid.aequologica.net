@@ -155,7 +155,6 @@ function massageData() {
             if (!data[country]) {
                 console.log(country, "OUILLEE, no data !?");
             } else {
-
                 data[country].forEach((d) => {
                     d.delta = _.clone(measure.typesObject);
                     d.total = _.clone(measure.typesObject);
@@ -166,7 +165,6 @@ function massageData() {
                         previousMeasure[m] = d[m];
                     });
                 });
-
                 data[country].done = true;
                 console.log("massaged", country);
             }

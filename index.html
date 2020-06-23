@@ -608,15 +608,15 @@
   </div>
   <script>
     $(document).ajaxStart(function (event, xhr, options) {
-      console.log("ajax started", event, xhr, options);
+      // ("ajax started", event, xhr, options);
     });
     $(document).ajaxSend(function (event, xhr, options) {
-      console.log("ajax send", event, xhr, options);
+      // console.log("ajax send", event, xhr, options);
       // $('#ajaxFeedback #source').html(options.url);
       $('#ajaxFeedback').show();
     });
     $(document).ajaxComplete(function (event, xhr, options) {
-      console.log("ajax completed", event, xhr, options);
+      // console.log("ajax completed", event, xhr, options);
       $('#ajaxFeedback').hide();
     });
   </script>

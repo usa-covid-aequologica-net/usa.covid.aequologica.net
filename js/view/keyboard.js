@@ -22,7 +22,7 @@ $(document).ready(() => {
         down = 40 
         */
         var $focused = $(':focus');;
-        console.log($focused);
+        // console.log($focused);
         if (e.which == 38) {
             event.preventDefault();
             event.stopPropagation();

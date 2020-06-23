@@ -651,9 +651,9 @@ populationByCountryRaw.forEach(p => {
     }
     populationByCountry.push(p);
 });
-console.log("country name not found in populationByCountryRaw", notfound);
-console.log("country code not found in countrieswithRegionalCodes", notfound2);
-console.log("country population not found", notfound3);
-console.log("country covid data not found", notfound4);
+// console.log("country name not found in populationByCountryRaw", notfound);
+// console.log("country code not found in countrieswithRegionalCodes", notfound2);
+// console.log("country population not found", notfound3);
+// console.log("country covid data not found", notfound4);
 
 
