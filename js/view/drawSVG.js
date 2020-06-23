@@ -32,7 +32,7 @@ export function draw(...args) {
 
     // define scales & color
     const xScale = d3.scaleTime().range([0, width]);
-    const yScale = (properties.isLogarithmic ? d3.scaleLog() : d3.scaleLinear()).range([height, 0]);
+    const yScale = (properties.isLogarithmic ? d3.scaleSymlog().range([height, 0]) : d3.scaleLinear().range([height, 0])).nice();
     flyingXScale = xScale;
     flyingYScale = yScale;
     const color = d3.scaleOrdinal().range(d3.schemeCategory10);
@@ -203,7 +203,11 @@ export function draw(...args) {
 
         // Update the range of the scale with new width/height
         xScale.range([0, width]);
-        yScale.range([height, 0]);
+        if (properties.isLogarithmic) {
+            yScale.range([height, 0]);
+        } else {
+            yScale.range([height, 0]);
+        }
         flyingXScale = xScale;
         flyingYScale = yScale;
 
