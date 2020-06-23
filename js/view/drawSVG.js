@@ -65,9 +65,12 @@ export function draw(...args) {
                 yExtents.push(d3.extent(category.datapoints, d => d.nummer));
             });
             const yExtent = [
-                0 /* d3.min(yExtents, d => d[0])*/,
+                d3.min(yExtents, d => d[0]),
                 d3.max(yExtents, d => d[1])
             ];
+            if (yExtent[0] < 0) {
+                yExtent[0] = 0;
+            }
             return yExtent;
         }
         yScale.domain(getYExtent());
