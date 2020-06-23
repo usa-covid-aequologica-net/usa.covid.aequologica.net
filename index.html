@@ -169,7 +169,6 @@
             )
             </span>
           </em>
-          .
         </div>
       </div>
     </div>
@@ -586,6 +585,42 @@
     }
   </script>
   <!-- /location -->
+  
+  <!-- ajax feedback -->
+  <style>
+    .centered {
+      position: fixed;
+      background-color: ghostwhite;
+      top: 50%;
+      left: 50%;
+      z-index: 123456;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  </style>
+  <div id="ajaxFeedback" class="card centered">
+    <div class="card-body">
+      <div class="m-1">loading data from <code id="source">&hellip;</code></div>
+      <div class="spinner-border text-primary m-1" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ajaxStart(function (event, xhr, options) {
+      console.log("ajax started", event, xhr, options);
+    });
+    $(document).ajaxSend(function (event, xhr, options) {
+      console.log("ajax send", event, xhr, options);
+      $('#ajaxFeedback #source').html(options.url);
+      $('#ajaxFeedback').show();
+    });
+    $(document).ajaxComplete(function (event, xhr, options) {
+      console.log("ajax completed", event, xhr, options);
+      $('#ajaxFeedback').hide();
+    });
+  </script>
+  <!-- /ajax feedback -->
 
   <!-- main script -->
   <script type="module" src="./js/index.js"></script>
