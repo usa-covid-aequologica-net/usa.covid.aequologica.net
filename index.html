@@ -590,7 +590,7 @@
   <style>
     .centered {
       position: fixed;
-      background-color: ghostwhite;
+      background-color: transparent;
       top: 50%;
       left: 50%;
       z-index: 123456;
@@ -598,9 +598,9 @@
       text-align: center;
     }
   </style>
-  <div id="ajaxFeedback" class="card centered">
-    <div class="card-body">
-      <div class="m-1">loading data from <code id="source">&hellip;</code></div>
+  <div id="ajaxFeedback" class="centered">
+    <div class="">
+      <!-- div class="m-1">loading data from <code id="source">&hellip;</code></div -->
       <div class="spinner-border text-primary m-1" role="status">
         <span class="sr-only">Loading...</span>
       </div>
