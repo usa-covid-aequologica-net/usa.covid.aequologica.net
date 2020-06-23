@@ -1,17 +1,14 @@
 'use strict';
 
 export const factory = _.sortedUniq(_.sortBy([
-    "Belgium",
+    "Australia",
     "Brazil",
     "France",
     "Germany",
+    "Greece",
     "India",
     "Italy",
     "Mexico",
-    "Morocco",
-    "Sweden",
+    "United Kingdom",
     "United States",
 ]));
-
-
-
