@@ -221,8 +221,8 @@ function setupCategories() {
         }
         if (isPercapita) {
             const pop = countryMap[country].count;
-            nummer = 100000 * nummer / pop;
-            tot = 100000 * tot / pop;
+            nummer = 1000000 * nummer / pop;
+            tot = 1000000 * tot / pop;
         }
         return { nummer: nummer, tot: tot, date: d.date };
     }
