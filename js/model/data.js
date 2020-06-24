@@ -134,18 +134,12 @@ function massageData() {
         }
     });
 
-    let end = moment();
-    let latest = new moment(end);
+    let latest = new moment("2020-01-01");
     let earliest = moment();
 
     // compute delta
     if (countries.length > 0) {
-        end = moment(_.maxBy(data[countries[0]], 'date').date);
-        latest = new moment(end);
-        earliest = moment(_.minBy(data[countries[0]], 'date').date);
-        latest.subtract(2, 'days');
-        earliest.subtract(1, 'days');
-
+        
         countries.forEach((country) => {
             if (!data[country]) {
                 console.log(country, "OUILLEE, no data !?");
@@ -153,6 +147,11 @@ function massageData() {
                 if (data[country].done) {
                     return;
                 }
+
+                const thisMax = moment(_.maxBy(data[country], 'date').date);
+                latest = moment.max(latest, thisMax);
+                const thisMin = moment(_.minBy(data[country], 'date').date);
+                earliest = moment.min(earliest, thisMin);
 
                 let previousMeasure = _.clone(measure.typesObject);
                 data[country].forEach((d) => {
@@ -169,6 +168,10 @@ function massageData() {
                 console.log("massaged", country);
             }
         });
+        /*
+        latest.subtract(2, 'days');
+        earliest.subtract(1, 'days');
+        */
     }
 
     countries.forEach((country) => {
@@ -176,7 +179,6 @@ function massageData() {
     });
 
     massagedData.data = data;
-    massagedData.end = end;
     massagedData.latest = latest;
     massagedData.earliest = earliest;
 
@@ -189,7 +191,7 @@ function setLasts(categories) {
 
     lasts = _.transform(categories, (result, value, key) => (result.push({
         name: value.category,
-        nummer: value.datapoints[value.datapoints.length - 1].nummer,
+        nummer: value.datapoints.length > 1 ? value.datapoints[value.datapoints.length - 1].nummer : 0,
     })), []);
 
     lasts.sort((a, b) => {
@@ -229,9 +231,13 @@ function setupCategories() {
 
     // reformat data to make it more copasetic for d3
     categories = countries.map((country) => {
+        let points = []
+        if (massagedData.data[country]) {
+            points = _.map(_.filter(massagedData.data[country], (d) => moment(d.date).isSameOrAfter(startDate)), (d) => which(country, d));
+        }
         return {
             category: country,
-            datapoints: _.map(_.filter(massagedData.data[country], (d) => moment(d.date).isSameOrAfter(startDate)), (d) => which(country, d))
+            datapoints: points,
         };
     });
 
@@ -250,7 +256,6 @@ function fetchData(callback) {
             rawData = data;
             massagedData = {
                 data: undefined,
-                end: undefined,
                 latest: undefined,
                 earliest: undefined,
             };

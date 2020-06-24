@@ -289,9 +289,9 @@ $(document).ready(() => {
         {
             model.fetchData(result => {
 
-                $("#end").html(result.end.format('LL'));
-                $('#startRangeInput').prop("max", result.latest.dayOfYear());
-                $('#startRangeInput').prop("min", result.earliest.dayOfYear());
+                $("#end").html(result.latest.format('LL'));
+                $('#startRangeInput').prop("max", result.latest.dayOfYear()-2);
+                $('#startRangeInput').prop("min", result.earliest.dayOfYear()-1);
 
                 redraw();
 
