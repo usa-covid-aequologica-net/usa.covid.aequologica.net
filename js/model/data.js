@@ -147,14 +147,14 @@ function massageData() {
         earliest.subtract(1, 'days');
 
         countries.forEach((country) => {
-            if (data[country].done) {
-                return;
-            }
-
-            let previousMeasure = _.clone(measure.typesObject);
             if (!data[country]) {
                 console.log(country, "OUILLEE, no data !?");
             } else {
+                if (data[country].done) {
+                    return;
+                }
+
+                let previousMeasure = _.clone(measure.typesObject);
                 data[country].forEach((d) => {
                     d.delta = _.clone(measure.typesObject);
                     d.total = _.clone(measure.typesObject);
