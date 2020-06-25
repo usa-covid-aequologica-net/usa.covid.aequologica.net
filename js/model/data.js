@@ -2,7 +2,7 @@
 
 import { domain } from './domain.js';
 import { store } from './yetAnotherLocalStorageWrapper.js';
-import { countryAliases } from './population.js';
+import { countryAliases, code2name } from './population.js';
 import { Countries } from './countries.js';
 import { Measure } from './measure.js';
 import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
@@ -110,6 +110,48 @@ function massageData() {
     }
 
     if (!massagedData.data) {
+    
+        if (domain === "usa") {
+            rawData.sort((a, b) => {
+                if (a.state < b.state) { return -1; }
+                if (a.state > b.state) { return 1; }
+
+                return a.date - b.date;
+            });
+
+            const rawData1 = _.uniqWith(rawData, (a, b) => {
+                if (a.date == b.date && a.state == b.state) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            const rawData2 = _.map(
+                rawData1,
+                row => _.omit(
+                    _.assign(
+                        _.pick(
+                            row,
+                            'state',
+                            'date',
+                            'positive',
+                            'death',
+                            'recovered'
+                        ),
+                        {
+                            date: moment("" + row.date).format("YYYY-MM-DD"),
+                            confirmed: row.positive,
+                            deaths: row.death
+                        }
+                    ),
+                    'death',
+                    'positive'
+                )
+            );
+            rawData = _.groupBy(rawData2, d => code2name[d.state]);
+        }
+        
         _.each(countryAliases, (newKey, key) => {
             if (!rawData[newKey] && rawData[key]) {
                 rawData[newKey] = rawData[key];
@@ -249,9 +291,13 @@ function setupCategories() {
 
 // Read in data
 function fetchData(callback) {
+    const URL = (domain === "usa")
+        ? 'https://covidtracking.com/api/v1/states/daily.json'
+        : 'https://pomber.github.io/covid19/timeseries.json';
+        
     $.ajax({
         type: 'GET',
-        url: 'https://pomber.github.io/covid19/timeseries.json',
+        url: URL,
         dataType: 'json',
         success: function (data) {
             rawData = data;
