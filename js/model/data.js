@@ -22,7 +22,7 @@ let startDate;
 let endDate;
 let setStartDate;
 {
-    const defaultStart = moment("2020-01-21");
+    const defaultStart = moment("2020-03-03");
     // start date
     let readStartDate = () => {
         const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());

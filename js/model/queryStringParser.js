@@ -131,12 +131,12 @@ export function parseParams(...args) {
                 if (item.match("^[\\d]{2,4}[\\s\\-\\_\\/][\\d]{1,2}[\\s\\-\\_\\/][\\d]{1,2}$")) {
                     const date = moment.utc(item, "YYYY MM DD");
                     if (date && date.isValid()) {
-                        if (date.isBefore(moment().subtract(2, 'days')) && date.isAfter(moment("2020-01-21"))) {
+                        if (date.isBefore(moment().subtract(2, 'days')) && date.isAfter(moment("2020-03-03"))) {
                             found();
                             queryStringParams.startDate = date;
                             break;
                         } else {
-                            warn(item, 'date is not between 2020-01-21 and the day before yesterday');
+                            warn(item, 'date is not between 2020-03-03 and the day before yesterday');
                         }
                     } else {
                         warn(item, 'not a valid date');

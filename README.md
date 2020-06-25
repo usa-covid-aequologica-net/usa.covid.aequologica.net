@@ -42,7 +42,7 @@ There are 6 categories. For each category, valid values are (defaults are in **b
 3. log or logarithmic / **lin** or **linear**,
 4. per or percapita / **abs** or **absolute**,
 5. any number between 1 and **21** incl. will set the size of the average,
-6. start date in YYYY-MM-DD format; default is January 21, 2020, i.e. **2020-01-21** (before, there is no data).
+6. start date in YYYY-MM-DD format; default is March 3, 2020, i.e. **2020-03-03** (before, there is no data).
 
 Categories must be separated by comma. Otherwise, parsing is rather lenient :
 
