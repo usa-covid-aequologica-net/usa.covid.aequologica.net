@@ -1,5 +1,6 @@
 'use strict';
 
+import { domain } from './domain.js';
 import { populationByCountry } from './population.js';
 
 export function parseParams(...args) {
@@ -95,7 +96,7 @@ export function parseParams(...args) {
                             isSelected = true;
                         }
                     }
-                    const candidate = _.find(populationByCountry, (country) => countryCode === country.code);
+                    const candidate = _.find(populationByCountry[domain], (country) => countryCode === country.code);
                     if (candidate) {
                         found();
                         if (isSelected) {

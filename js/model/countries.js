@@ -17,7 +17,7 @@ function code2name(c) {
     }
     if (c.length === 2) {
         // country code
-        const c2 = _.find(populationByCountry, (country) => c === country.code);
+        const c2 = _.find(populationByCountry[domain], (country) => c === country.code);
         if (c2 && c2.name) {
             return c2.name
         }
@@ -47,9 +47,9 @@ function setSelectedCountry(c, nosave) {
 }
 
 function getCountryObject(country) {
-    const countray = _.find(populationByCountry, { 'name': country });
+    const countray = _.find(populationByCountry[domain], { 'name': country });
     if (!countray) {
-        console.log("country not found in populationByCountry!", country);
+        console.log("country not found in populationByCountry!", domain, country);
         return { name: country, count: 1, code: "XX" };
     }
     return countray;

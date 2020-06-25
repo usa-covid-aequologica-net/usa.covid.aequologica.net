@@ -1,5 +1,6 @@
 'use strict';
 
+import { domain } from '../model/domain.js';
 import { populationByCountry } from '../model/population.js';
 
 let countriesHolder;
@@ -84,7 +85,7 @@ export function init(...args) {
         $tbody.empty();
 
         let i = 0;
-        populationByCountry.forEach((country) => {
+        populationByCountry[domain].forEach((country) => {
             const isChecked = _.sortedIndexOf(countries, country.name) >= 0;
             const html = rowTemplate({
                 index: i,
