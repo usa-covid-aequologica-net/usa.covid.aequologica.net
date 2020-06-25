@@ -9,6 +9,7 @@ const validToggles = { // first is default
     toggleLinear: ["linear", "logarithmic"],
     toggleLegend: ["unfolded", "folded"],
     togglePopulationColumnVisibility: ["hidden", "visible"],
+    toggleDomain: ["world", "usa"],
 }
 
 const toggles = {

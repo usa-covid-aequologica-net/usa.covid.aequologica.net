@@ -43,8 +43,8 @@ button.btn.btn-outline-secondary[type="button"]:hover {
 */
 
 header #top {
-    height: 56px;
-    max-height: 56px;
+    height: 60px;
+    max-height: 60px;
     color:rgb(0,45,114);
     background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
 }
@@ -58,9 +58,9 @@ header #credits {
     white-space: nowrap;
     overflow: hidden hidden;
     text-overflow: ellipsis;
-    height: 16px;
+    height: 32px;
     top: 40px;
-    max-height: 16px;
+    max-height: 32px;
     padding: 0 .25rem;
     font-size: 13px;
     color: rgb(120, 120, 120);

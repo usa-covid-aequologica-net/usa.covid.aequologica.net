@@ -9,6 +9,11 @@ import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
 // toggles
 readToggles();
 
+// force domain toggle 
+if (window.location.hostname.startsWith("usa.") || window.location.port == 8002) {
+    setToggle("toggleDomain", "usa");
+}
+
 // measure
 const measure = Measure();
 
@@ -139,7 +144,7 @@ function massageData() {
 
     // compute delta
     if (countries.length > 0) {
-        
+
         countries.forEach((country) => {
             if (!data[country]) {
                 console.log(country, "OUILLEE, no data !?");
