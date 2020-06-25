@@ -100,7 +100,6 @@ let setSizeOfAverage = (s, nosave) => {
     }
     sizeOfAverage = storedSizeOfAverage || defaultSizeOfAverage;
 }
-
 // massage data
 let rawData = undefined;
 let massagedData = undefined;
