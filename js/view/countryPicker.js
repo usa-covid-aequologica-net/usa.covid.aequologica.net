@@ -40,6 +40,10 @@ export function init(...args) {
 
     function syncTableSorter() {
 
+        if (domain !== 'world') {
+            $('.flag').hide();
+        }
+
         $(selector + " thead th.population").data('sorter', 'digit');
 
         const $trs = $(selector + " tbody tr");
