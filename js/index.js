@@ -1,6 +1,5 @@
 'use strict';
 
-import { share as setupShare } from './view/share.js';
 import { init as initCountryPicker } from './view/countryPicker.js';
 import { draw as drawChart } from './view/drawSVG.js';
 import { Legend } from './view/legend.js';
@@ -297,6 +296,7 @@ $(document).ready(() => {
 
                 const $printModal = $('.modal#printModal');
 
+                /*
                 setupShare(
                     params.PRINT,
                     model,
@@ -309,6 +309,7 @@ $(document).ready(() => {
                     buildPermalink,
                     params.printMarker,
                 );
+                */
 
             });
         }
