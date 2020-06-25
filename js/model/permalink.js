@@ -47,6 +47,7 @@ export function buildPermalink(...args) {
         permalink = permalink + ",_";
 
         permalink = permalink.replace(/http:\/\/localhost:8001/, "https://covid.aequologica.net");
+        permalink = permalink.replace(/http:\/\/localhost:8002/, "https://usa.covid.aequologica.net");
                 
         resolve(permalink);
     });

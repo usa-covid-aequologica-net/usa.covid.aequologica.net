@@ -52,20 +52,18 @@ Categories must be separated by comma. Otherwise, parsing is rather lenient :
 - case does not matter; FR, fr, Fr and fR will all go to France,
 - if several options appear for the same category in the URL, the **first** one wins: e.g. 
 ```
-https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_
+https://usa.covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_
 ```
-displays the daily confirmed cases with a 2 days average (try it: [first one wins](https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_)).
+displays the daily confirmed cases with a 2 days average (try it: [first one wins](https://usa.covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_)).
 
-Countries are specified with their associated [ISO-3166-1 alpha-2](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes) code, cf. [this wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements). If no country is specified, the list of countries per default is [here](https://github.com/cthiebaud/cthiebaud.github.io/blob/master/js/model/factory.js); A country code suffixed with an asterisk marks that country as 'selected'. There can be only one selected country. If more than one is present in the permalink, the **first** one wins.
+Countries are specified with their associated [ISO-3166-1 alpha-2](https://github.com/lukes/ISO-3166-Countries-with-Regional-Codes) code, cf. [this wikipedia page](https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements). If no country is specified, the list of countries per default is [here](https://github.com/usa-covid-aequologica-net/usa.covid.aequologica.net/blob/master/js/model/factory.js); A country code suffixed with an asterisk marks that country as 'selected'. There can be only one selected country. If more than one is present in the permalink, the **first** one wins.
 
 ### Examples
 
 |  description       |   URL         | 
 | ------------- |:-------------:| 
-| all defaults     | https://covid.aequologica.net |
-| the seven largest countries      | https://covid.aequologica.net/?BR,CN,IN,ID,NG,PK,US,_      | 
-| total confirmed cases in Brazil, Russia and USA since the 11th of March, linear scale, per capita numbers and 14 days average | https://covid.aequologica.net/?confirmed,tot,lin,per,14,2020-03-11,BR,RU,US,_      | 
-| comparison of the 4 scandinavian countries (Denmark, Finland, Norway, Sweden) | http://covid.aequologica.net/?DK,FI,NO,SE,_ |
+| all defaults     | https://usa.covid.aequologica.net |
+| the 12 most impacted states      | https://usa.covid.aequologica.net/?AL,AR,AZ,FL,GA,IA,LA,MS,NC,SC,TX*,UT,_   | 
 
 _Tip : ending the query string with an underscore (\_) prevents Facebook to horribly mangle the URL when pasted into a post. It has no use other than this; the underscore must be separated from the option before by a comma._
 
@@ -76,7 +74,7 @@ _Tip : ending the query string with an underscore (\_) prevents Facebook to horr
 Notice the * in the permalink:
 
 ```
-https://covid.aequologica.net/?14,2020-03-01,FR,IT*,SE,confirmed,day,log,per,_
+https://usa.covid.aequologica.net/?AL,AR,AZ,FL,GA,IA,LA,MS,NC,SC,TX*,UT,_
 ```
 
 Observe the results in the screenshot below.
@@ -85,7 +83,7 @@ Clicking country name in the legend toggles the selection.
 
 Selected country, if any, is locally stored.
 
-![FR,IT*,SE](./img/selectedCountryScreenshot.png "FR,IT*,SE")
+![TX*](./img/selectedCountryScreenshot2.png "TX*")
 
 ### Reset
 
@@ -106,10 +104,10 @@ If there is no local storage in the browser (e.g. when cookies are blocked), not
 All stored values can be erased with the 'reset' query string :
 
 ```
-https://covid.aequologica.net/?reset
+https://usa.covid.aequologica.net/?reset
 ```
 
-Try it: [reset!](https://covid.aequologica.net/?reset)
+Try it: [reset!](https://usa.covid.aequologica.net/?reset)
 
 ### Store permalink config
 
@@ -119,10 +117,10 @@ previous stored categories, forgetting anything that was setup in the permalink.
 Nevertheless, it is possible to make persistent the permalink by adding a **!** character:
 
 ```
-https://covid.aequologica.net/?1,2020-02-25,US,VA,confirmed,log,per,tot,!
+https://covid.aequologica.net/?!,confirmed,log,per,tot,_
 ```
 
-Try it : [store US vs. VA permalink!](https://covid.aequologica.net/?1,2020-02-25,US,VA,confirmed,log,per,tot,!)
+Try it : [store US vs. VA permalink!](https://covid.aequologica.net/?!,confirmed,log,per,tot,_)
 
 ### Location detection
 
