@@ -1,5 +1,6 @@
 'use strict';
 
+import { domain } from './domain.js';
 import { store } from './yetAnotherLocalStorageWrapper.js';
 import { countryAliases } from './population.js';
 import { Countries } from './countries.js';
@@ -8,11 +9,6 @@ import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
 
 // toggles
 readToggles();
-
-// force domain toggle 
-if (window.location.hostname.startsWith("usa.") || window.location.port == 8002) {
-    setToggle("toggleDomain", "usa");
-}
 
 // measure
 const measure = Measure();
@@ -319,6 +315,8 @@ export function init(queryStringParams) {
     }
 
     return {
+        domain: domain,
+
         getCountriesHolder: () => countriesHolder,
 
         getMeasure: () => measure,

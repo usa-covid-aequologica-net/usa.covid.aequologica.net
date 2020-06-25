@@ -1,12 +1,13 @@
 'use strict';
 
+import { domain } from './domain.js';
 import { store } from './yetAnotherLocalStorageWrapper.js';
 import { factory } from './factory.js'
 import { populationByCountry } from './population.js';
 
 function reset() {
     store.remove('countries');
-    countries = _.clone(factory);
+    countries = _.clone(factory[domain]);
     return countries;
 };
 
@@ -71,7 +72,7 @@ function getCountryObjectMap() {
 }
 
 function read() {
-    let countrays = store.get('countries', factory.join(","));
+    let countrays = store.get('countries', factory[domain].join(","));
     if (typeof countrays !== "string" || countrays.length == 0) {
         countrays = [];
     } else {
@@ -146,7 +147,7 @@ export function Countries() {
         read: read,
         write: countrays => {
             countrays = _.sortedUniq(_.sortBy(countrays));
-            if (_.isEqual(countrays, factory)) {
+            if (_.isEqual(countrays, factory[domain])) {
                 return reset();
             } else {
                 store.set('countries', countrays);
