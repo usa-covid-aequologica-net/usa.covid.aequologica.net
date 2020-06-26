@@ -5,12 +5,6 @@ import { store } from './yetAnotherLocalStorageWrapper.js';
 import { factory } from './factory.js'
 import { populationByCountry } from './population.js';
 
-function reset() {
-    store.remove('countries');
-    countries = _.clone(factory[domain]);
-    return countries;
-};
-
 function code2name(c) {
     if (!c) {
         return c;
@@ -143,12 +137,11 @@ export function Countries() {
             countries = _.sortedUniq(_.sortBy(countrays));
             return countries;
         },
-        reset: reset,
         read: read,
         write: countrays => {
             countrays = _.sortedUniq(_.sortBy(countrays));
             if (_.isEqual(countrays, factory[domain])) {
-                return reset();
+                store.remove('countries');
             } else {
                 store.set('countries', countrays);
             }

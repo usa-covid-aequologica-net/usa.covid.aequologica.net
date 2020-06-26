@@ -783,7 +783,7 @@ populationByCountryUSRaw.forEach(p => {
         code: _.findKey(code2name, _.partial(_.isEqual, p.State)),
     });
 });
-console.log(populationByCountryUS);
+// console.log(populationByCountryUS);
 
 export const populationByCountry = {
     world: populationByCountryWorld,

@@ -2,6 +2,7 @@
 
 import { domain } from '../model/domain.js';
 import { populationByCountry } from '../model/population.js';
+import { factory } from '../model/factory.js';
 
 let countriesHolder;
 let selector;
@@ -131,7 +132,16 @@ export function init(...args) {
         e.preventDefault();
         e.stopPropagation();
 
-        let countries = countriesHolder.reset();
+        let countries = countriesHolder.write(factory[domain]);
+        dirty = true;
+        set(countries);
+    });
+
+    $("#modalCountryPicker #selectEU").on("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let countries = countriesHolder.write(factory.eu);
         dirty = true;
         set(countries);
     });

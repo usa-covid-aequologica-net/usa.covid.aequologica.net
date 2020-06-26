@@ -211,10 +211,6 @@ function massageData() {
                 console.log("massaged", country);
             }
         });
-        /*
-        latest.subtract(2, 'days');
-        earliest.subtract(1, 'days');
-        */
     }
 
     countries.forEach((country) => {
