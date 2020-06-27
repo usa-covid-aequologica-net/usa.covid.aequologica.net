@@ -78,6 +78,17 @@ export function Legend() {
             const removeButtons = document.querySelectorAll('[type="button"].remove');
             removeButtons.forEach((b) => {
                 b.addEventListener("click", (event) => {
+                    const countries_before_filter = store.get("countries_before_filter");
+                    if (countries_before_filter) {
+                        const asArray = countries_before_filter.split(',');
+                        if (asArray.length > 0) {
+                            const index = asArray.indexOf(event.currentTarget.name);
+                            if (index > -1) {
+                                asArray.splice(index, 1);
+                                store.set("countries_before_filter", asArray);
+                            }
+                        }
+                    } 
                     const countries = model.getCountriesHolder().get();
                     const index = countries.indexOf(event.currentTarget.name);
                     if (index > -1) {
