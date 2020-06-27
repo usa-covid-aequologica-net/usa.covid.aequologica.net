@@ -289,7 +289,7 @@
         </div>
         <button class="navbar-toggler btn-sm flex-shrink-1" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
           aria-label="Toggle navigation" style="padding: .25rem;">
-          <img id="cog" style="width: 16px; height:auto" src="./img/gear-svgrepo-com.svg">
+          <img id="cog" style="width: 16px; height:auto" src="./img/settings-svgrepo-com.svg">
         </button>
       </div>
     </nav>
@@ -353,8 +353,7 @@
             <button id="unselectAll" type="button" class="btn btn-sm btn-outline-secondary" title="unselect all" style="padding: 0 .3rem;">
               unselect all
             </button>
-            <button id="resetToFactory" type="button" class="btn btn-sm btn-outline-secondary" title="reset list of countries to factory defaults"
-              style="padding: 0 .3rem;">
+            <button id="resetToFactory" type="button" class="btn btn-sm btn-outline-secondary" title="reset list of countries to factory defaults" style="padding: 0 .3rem;">
               reset to factory default
             </button>
           </div>
@@ -437,13 +436,20 @@
         <span>&nbsp;</span>
       </th>
       <th class="country">
-        <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-          &#x002B;
-        </button>
-        <span>&nbsp;</span>
-        <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
-          &#x21C4;
-        </button>
+        <div class="btn-group float-left">
+          <button type="button" class="add btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
+            &#x002B;
+          </button>
+        </div>
+        <div class="btn-group float-right">
+          <button type="button" id="filterToggle" class="topTen btn btn-sm btn-outline-secondary" title="toggle filter to top ten countries"
+          data-taggle-on="on" data-taggle-off="off" >
+            ↑<sup>10</sup>
+          </button>
+          <button type="button" id="populationToggle" class="btn btn-sm btn-outline-secondary float-right" title="toggle population column visibility">
+            &#x21C4;
+          </button>
+        </div>
       </th>
       <th class="legend_population" {{{pop-style}}}>
         code

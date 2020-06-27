@@ -110,7 +110,7 @@ function massageData() {
     }
 
     if (!massagedData.data) {
-    
+
         if (domain === "usa") {
             rawData.sort((a, b) => {
                 if (a.state < b.state) { return -1; }
@@ -151,7 +151,7 @@ function massageData() {
             );
             rawData = _.groupBy(rawData2, d => code2name[d.state]);
         }
-        
+
         _.each(countryAliases, (newKey, key) => {
             if (!rawData[newKey] && rawData[key]) {
                 rawData[newKey] = rawData[key];
@@ -290,7 +290,7 @@ function fetchData(callback) {
     const URL = (domain === "usa")
         ? 'https://covidtracking.com/api/v1/states/daily.json'
         : 'https://pomber.github.io/covid19/timeseries.json';
-        
+
     $.ajax({
         type: 'GET',
         url: URL,
@@ -377,6 +377,9 @@ export function init(queryStringParams) {
         massageData: massageData,
         setupCategories: setupCategories,
         getCategories: () => categories,
+        topTen: () => {
+            return _.map(lasts.slice(0, 10), 'name');
+        },
         selectionUp: () => {
             function up(array, element) {
                 if (!array || array.length === 0) {

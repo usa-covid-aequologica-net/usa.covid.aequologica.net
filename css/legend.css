@@ -62,11 +62,12 @@
     border: none;
 }
 
-#legend #populationToggle:not(:hover) {
+#legend .btn-outline-secondary:not(:hover) {
     background-color: white !important;
 }
 
-#legend .active#populationToggle:not(:hover) {
+#legend .active#populationToggle:not(:hover),
+#legend .active#filterToggle:not(:hover) {
     background-color: #ccc !important;
 }
 

@@ -71,6 +71,8 @@ export function draw(...args) {
             if (yExtent[0] < 1) {
                 yExtent[0] = 0;
             }
+            // add .5%
+            yExtent[1] = yExtent[1] + (yExtent[1]/200);
             return yExtent;
         }
         yScale.domain(getYExtent()).nice();

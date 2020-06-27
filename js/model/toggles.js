@@ -10,6 +10,7 @@ const validToggles = { // first is default
     toggleLegend: ["unfolded", "folded"],
     togglePopulationColumnVisibility: ["hidden", "visible"],
     toggleDomain: ["world", "usa"],
+    toggleFilter: ["off", "on"],
 }
 
 const toggles = {

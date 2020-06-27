@@ -1,6 +1,7 @@
 'use strict';
 
 import { pubSubKey } from './keyboard.js';
+import { store } from '../model/yetAnotherLocalStorageWrapper.js';
 
 export function Legend() {
     'use strict';
@@ -96,6 +97,7 @@ export function Legend() {
                     $populationToggle.removeClass('active');
                 }
             }
+            feedbackPopulationColumnVisible();
             $populationToggle.on('click', (b) => {
                 const pops = document.getElementsByClassName("legend_population");
                 for (let pop of pops) {
@@ -109,6 +111,38 @@ export function Legend() {
                     }
                 }
                 feedbackPopulationColumnVisible();
+            });
+
+            // filter
+            const $filterToggle = $('[type="button"]#filterToggle');
+            function feedbackFilter() {
+                const toggleFilter = model.getToggle("toggleFilter");
+                if (toggleFilter === "on") {
+                    $filterToggle.addClass('active').html("↓<sup>all</sup>");
+                } else {
+                    $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                }
+            }
+            feedbackFilter();
+            $filterToggle.on('click', (b) => {
+                const toggleFilter = model.getToggle("toggleFilter");
+                if (toggleFilter === "on") {
+                    const countries_before_filter = store.get("countries_before_filter");
+                    if (countries_before_filter) {
+                        model.getCountriesHolder().write(countries_before_filter.split(','));
+                        store.remove("countries_before_filter");
+                    }
+                    model.setToggle("toggleFilter", "off");
+                } else {
+                    const countries_after_filter = model.topTen();
+                    if (countries_after_filter && countries_after_filter.length > 0) {
+                        store.set("countries_before_filter", model.getCountriesHolder().get());
+                        model.getCountriesHolder().write(countries_after_filter);
+                    }
+                    model.setToggle("toggleFilter", "on");
+                }
+                feedbackFilter();
+                refresh(model.getCountriesHolder().get());
             });
 
             $("#legend table.table tbody").on('click', "td.country", (e) => {
