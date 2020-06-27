@@ -377,8 +377,8 @@ export function init(queryStringParams) {
         massageData: massageData,
         setupCategories: setupCategories,
         getCategories: () => categories,
-        topTen: () => {
-            return _.map(lasts.slice(0, 10), 'name');
+        topTwelve: () => {
+            return _.map(lasts.slice(0, 12), 'name');
         },
         selectionUp: () => {
             function up(array, element) {

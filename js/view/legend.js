@@ -131,7 +131,7 @@ export function Legend() {
                 if (toggleFilter === "on") {
                     $filterToggle.addClass('active').html("↓<sup>all</sup>");
                 } else {
-                    $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                    $filterToggle.removeClass('active').html("↑<sup>12</sup>");
                 }
             }
             feedbackFilter();
@@ -145,7 +145,7 @@ export function Legend() {
                     }
                     model.setToggle("toggleFilter", "off");
                 } else {
-                    const countries_after_filter = model.topTen();
+                    const countries_after_filter = model.topTwelve();
                     if (countries_after_filter && countries_after_filter.length > 0) {
                         store.set("countries_before_filter", model.getCountriesHolder().get());
                         model.getCountriesHolder().write(countries_after_filter);
