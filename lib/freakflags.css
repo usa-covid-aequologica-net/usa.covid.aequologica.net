@@ -16,6 +16,10 @@ For complete information visit: www.freakflagsprite.com
     vertical-align: middle;
     box-sizing: content-box;
 }
+.fflag-EU {
+    background-image:url(../img/Flag_of_Europe.svg);
+    background-size: 100% 100%;
+}
 .fflag-CH,
 .fflag-NP {box-shadow: none!important}
 .fflag-DZ {background-position:center 0.2287%}

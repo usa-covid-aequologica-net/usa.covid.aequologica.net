@@ -75,6 +75,7 @@ export function Legend() {
             const selectedCountry = model.getCountriesHolder().getSelectedCountry();
             feedbackSelectedCountry(selectedCountry);
 
+
             const removeButtons = document.querySelectorAll('[type="button"].remove');
             removeButtons.forEach((b) => {
                 b.addEventListener("click", (event) => {
@@ -99,6 +100,7 @@ export function Legend() {
                 })
             });
 
+            // population columns
             const $populationToggle = $('[type="button"]#populationToggle');
             function feedbackPopulationColumnVisible() {
                 const isPopulationColumnVisible = model.getToggle("togglePopulationColumnVisibility") === "visible";
@@ -131,7 +133,7 @@ export function Legend() {
                 if (toggleFilter === "on") {
                     $filterToggle.addClass('active').html("↓<sup>all</sup>");
                 } else {
-                    $filterToggle.removeClass('active').html("↑<sup>12</sup>");
+                    $filterToggle.removeClass('active').html("↑<sup>10</sup>");
                 }
             }
             feedbackFilter();
@@ -145,7 +147,7 @@ export function Legend() {
                     }
                     model.setToggle("toggleFilter", "off");
                 } else {
-                    const countries_after_filter = model.topTwelve();
+                    const countries_after_filter = model.topTen();
                     if (countries_after_filter && countries_after_filter.length > 0) {
                         store.set("countries_before_filter", model.getCountriesHolder().get());
                         model.getCountriesHolder().write(countries_after_filter);
