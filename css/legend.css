@@ -62,7 +62,7 @@
     border: none;
 }
 
-#legend .btn-outline-secondary:not(:hover) {
+#legend .btn-outline-secondary:enabled:not(:hover) {
     background-color: white !important;
 }
 

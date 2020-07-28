@@ -4,7 +4,7 @@ import { store } from './yetAnotherLocalStorageWrapper.js';
 
 export function Measure() {
 
-    const defaultMeasureType = "deaths";
+    const defaultMeasureType = "confirmed";
 
     let type = store.get("measureType", defaultMeasureType);
 

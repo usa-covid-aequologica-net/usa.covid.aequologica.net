@@ -89,7 +89,7 @@ export function Legend() {
                                 store.set("countries_before_filter", asArray);
                             }
                         }
-                    } 
+                    }
                     const countries = model.getCountriesHolder().get();
                     const index = countries.indexOf(event.currentTarget.name);
                     if (index > -1) {
@@ -128,12 +128,22 @@ export function Legend() {
 
             // filter
             const $filterToggle = $('[type="button"]#filterToggle');
+            { 
+                const countries = model.getCountriesHolder().get();
+                if (countries.length <= 10 && model.getToggle("toggleFilter") === 'off') {
+                    $filterToggle.attr('disabled', 'disabled');
+                } else {
+                    $filterToggle.removeAttr('disabled');
+                }
+            }
             function feedbackFilter() {
                 const toggleFilter = model.getToggle("toggleFilter");
                 if (toggleFilter === "on") {
                     $filterToggle.addClass('active').html("↓<sup>all</sup>");
+                    $filterToggle.attr('title', "remove top ten filter");
                 } else {
                     $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                    $filterToggle.attr('title', "top ten filter");
                 }
             }
             feedbackFilter();

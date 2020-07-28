@@ -29,15 +29,11 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ![UI explained](./img/screenshot6-UI-explained.png "UI explained")
 
-## Sweden
-
-Read this article: [Coronavirus: Should We Aim for Herd Immunity Like Sweden?](https://medium.com/@tomaspueyo/coronavirus-should-we-aim-for-herd-immunity-like-sweden-b1de3348e88b), 9th of June 2020, by [Tomas Pueyo](https://twitter.com/tomaspueyo).
-
 ## Complete Reference Guide
 
 There are 6 categories. For each category, valid values are (defaults are in **bold**):
 
-1. confirmed / **deaths** / recovered,
+1. **confirmed** / deaths / recovered,
 2. **day** or **daily** / tot or total,
 3. log or logarithmic / **lin** or **linear**,
 4. per or percapita / **abs** or **absolute**,
@@ -117,24 +113,8 @@ previous stored categories, forgetting anything that was setup in the permalink.
 Nevertheless, it is possible to make persistent the permalink by adding a **!** character:
 
 ```
-https://covid.aequologica.net/?!,confirmed,log,per,tot,_
+https://usa.covid.aequologica.net/?!,confirmed,log,per,tot,_
 ```
 
-Try it : [store US vs. VA permalink!](https://covid.aequologica.net/?!,confirmed,log,per,tot,_)
-
-### Location detection
-
-YACA will try to detect your location; If successful, a country button will appear top right. If there is no country button, probably the detection failed. Clicking on this button will redirect to the graph for this particular country.
-
-### Easier selection with country picker
-
-Adding or removing countries from the list with the country picker modal dialog is easier with keyboard [enter] key. Click on or select text of a country name, then press enter, the selection will be toggled Be aware that, depending on the sort criteria of the table, the country may be pushed at the top or bottom of the list, hence vanishing from sight.
-
-![screenshot of country picker](./img/screenshotCountryPicker.png)
-
-## Some analytics
-
-That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 22th of June 2020, since its creation, the 17th of April 2020.
-
-![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
+Try it : [store US vs. VA permalink!](https://usa.covid.aequologica.net/?!,confirmed,log,per,tot,_)
 

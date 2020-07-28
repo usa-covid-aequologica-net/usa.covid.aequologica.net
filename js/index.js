@@ -6,6 +6,7 @@ import { Legend } from './view/legend.js';
 import { init as initModel } from './model/data.js';
 import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
+import { store } from './model/yetAnotherLocalStorageWrapper.js';
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -189,6 +190,17 @@ $(document).ready(() => {
                                 "#modalCountryPicker table",
                             );
                         }
+                        {
+                            const countries_before_filter = store.get("countries_before_filter");
+                            if (countries_before_filter) {
+                                model.getCountriesHolder().write(countries_before_filter.split(','));
+                                store.remove("countries_before_filter");
+                            }
+                            model.setToggle("toggleFilter", "off");
+                            const $filterToggle = $('[type="button"]#filterToggle');
+                            $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                            $filterToggle.attr('title', "top ten filter");
+                        }
                         countryPicker.beforeOpen();
                     })
                     .on('hidden.bs.modal', () => {
@@ -289,8 +301,8 @@ $(document).ready(() => {
             model.fetchData(result => {
 
                 $("#end").html(result.latest.format('LL'));
-                $('#startRangeInput').prop("max", result.latest.dayOfYear()-2);
-                $('#startRangeInput').prop("min", result.earliest.dayOfYear()-1);
+                $('#startRangeInput').prop("max", result.latest.dayOfYear() - 2);
+                $('#startRangeInput').prop("min", result.earliest.dayOfYear() - 1);
 
                 redraw();
 

@@ -23,7 +23,7 @@ button.btn.btn-outline-secondary[type="button"], .card.border-secondary {
     color: rgb(108, 117, 125) !important;
 }
 
-button.btn.btn-outline-secondary[type="button"]:hover {
+button.btn.btn-outline-secondary[type="button"]:enabled:hover {
     color: #fff !important;
 }
 
