@@ -65,7 +65,7 @@ export function setupTooltip(rootG, points, color, country, properties) {
 
     const explanatino = formatExplanation(properties.isTotal, properties.isPercapita, properties.sizeOfAverage);
 
-    points.on("mouseover", function (d, e) {
+    points.on("mouseover", function (e, d) {
 
         const d3this = d3.select(this);
         const $this = $(this);
