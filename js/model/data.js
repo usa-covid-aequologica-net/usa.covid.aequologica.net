@@ -295,7 +295,9 @@ function fetchData(callback) {
         type: 'GET',
         url: URL,
         dataType: 'json',
-        crossDomain: true,
+        headers: {
+            "Access-Control-Allow-Origin":"*"
+        },
         success: function (data) {
             rawData = data;
             massagedData = {
