@@ -74,11 +74,19 @@
     background-color: white !important;
 }
 
+#legend button#filterToggle.active {
+    color:black !important;
+}   
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active {
+    background-color: white !important;
+}
+/* 
 #legend .active#legendToggle:not(:hover),
 #legend .active#populationToggle:not(:hover),
 #legend .active#filterToggle:not(:hover) {
     background-color: #ccc !important;
-}
+} */
 
 #rightVerticalBar button {
     padding: 0.2rem;

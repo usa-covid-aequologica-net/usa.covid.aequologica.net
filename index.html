@@ -118,7 +118,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- twitter -->
                   <button id="twitter" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="follow on twitter">
-                    <a class="twitter-follow-button" href="https://twitter.com/covid_net">
+                    <a class="twitter-follow-button" href="https://twitter.com/covid_net" target="_twitter_com">
                       <img src="./img/twitter-black-shape.svg" style="width: 18px;">
                       <span class="d-none d-sm-inline">twitter</span>
                     </a>
@@ -403,17 +403,17 @@
   <thead>
     <tr class="d-print-none">
       <th class="country" style="padding: 0;">
-        <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="margin: -2px;">
+        <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="min-width: 200px; margin: -2px;">
           <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-            &#x002B;
-          </button>
-          <button type="button" id="legendToggle" class="btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="fold / unfold legend">
-            <img id="legendToggleOpen" style="width: 14px; height:auto" src="./img/closed-folder-svgrepo-com.svg">
-            <img id="legendToggleClosed" style="width: 14px; height:auto;" src="./img/open-archive-svgrepo-com.svg">
+            &#x002B&nbsp;Add&nbsp;&hellip;
           </button>
           <button type="button" id="filterToggle" class="topTen btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="top ten"
           data-taggle-on="on" data-taggle-off="off" >
             ↑<sup>10</sup>
+          </button>
+          <button type="button" id="legendToggle" class="btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="fold / unfold legend">
+            <img id="legendToggleOpen" style="width: 14px; height:auto" src="./img/chevron-down-svgrepo-com.svg">
+            <img id="legendToggleClosed" style="width: 14px; height:auto;" src="./img/chevron-up-svgrepo-com.svg">
           </button>
           <button type="button" id="populationToggle" class="btn btn-sm border-top-0 _border-bottom-0 _border-right-0 btn-outline-secondary" title="toggle population column visibility">
             <img id="populationToggleOpen" style="width: 12px; height:auto" src="./img/chevron-left-svgrepo-com.svg">
@@ -421,11 +421,11 @@
           </button></div>
           </th>
       </th>
-      <th class="legend_population border-bottom" {{{pop-style}}}>
+      <!-- <th class="legend_population border-bottom pl-1" {{{pop-style}}}>
         code
         <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
-      </th>
-      <th class="legend_population border-bottom" {{{pop-style}}}>
+      </th> -->
+      <th class="legend_population border-bottom px-1" {{{pop-style}}}>
         population
         <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
       </th>
@@ -440,7 +440,7 @@
         </button>
         {{name}}
       </td>
-      <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td>
+      <!-- <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td> -->
       <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
     </tr>
     {{/each}}
