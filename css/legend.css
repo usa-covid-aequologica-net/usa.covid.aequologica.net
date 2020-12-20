@@ -1,0 +1,126 @@
+#legend .card-body {
+    padding: 0.1rem 0.2rem;
+    padding-top: 0.1rem;
+    padding-right: 0.2rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.2rem;
+    font-size: 14px;
+    opacity: 1;
+}
+
+#legend table.table {
+    margin-bottom: 0;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+#legend table.table thead th {
+    position: sticky;
+    top: 0;
+    color:rgb(0,45,114);
+    /* background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+    background-color: white;
+}
+
+#legend table.table tbody td, #legend table.table thead th {
+    border: none;
+}
+
+#legend table.table tbody tr.selected {
+    background-color: rgba(0, 0, 0, .075);
+    /* #e7e9fa;  */
+}
+
+#legend table.table thead th.country {
+    z-index: 4000;
+}
+#legend table.table thead th.country button {
+    min-height: 24px;
+}
+#legend table.table tbody td.country {
+    cursor: pointer;
+}
+
+#legend table.table tbody td.country:hover {
+    text-decoration: underline;
+}
+
+#legend table.table tbody td.country, 
+#legend table.table tbody td.legend_population {
+    padding-right: .3rem;
+}
+
+#legend table.table thead th.legend_population, 
+#legend table.table tbody td.legend_population {
+    font-family: monospace;
+    font-size: 12px;
+    text-align: right;
+    padding-left: .5rem;
+}
+#legend table.table thead th.legend_population {
+    padding: 0;
+    font-size: 12px;
+}
+#legend button {
+    padding: 0 .25rem;
+}
+
+#legend button.remove  {
+    vertical-align: top;
+    padding: 1px;
+    border: none;
+}
+
+#legend .btn-outline-secondary:enabled:not(:hover) {
+    background-color: white !important;
+}
+
+#legend .active#legendToggle:not(:hover),
+#legend .active#populationToggle:not(:hover),
+#legend .active#filterToggle:not(:hover) {
+    background-color: #ccc !important;
+}
+
+#rightVerticalBar button {
+    padding: 0.2rem;
+    margin-left: auto;
+}
+
+#rightVerticalBar button:not(#legendToggle) {
+    width: 18px;
+}
+
+#rightVerticalBar button:not(:hover) {
+    background-color: white;
+}
+
+#rightVerticalBar button#legendToggle.folded:not(:hover) {
+    background-color: #ccc !important;
+}
+
+#legendToggle {
+    width: 24px;
+}
+
+#legendToggle:not(.folded) img#legendToggleOpen, #legendToggle.folded img#legendToggleClosed {
+    display: none;
+}
+
+#legendToggle.folded img#legendToggleOpen, #legendToggle:not(.folded) img#legendToggleClosed {
+    display: inline;
+}
+
+#populationToggle:not(.active) img#populationToggleOpen, #populationToggle.active img#populationToggleClosed {
+    display: none;
+}
+
+#populationToggle.active img#populationToggleOpen, #populationToggle:not(.active) img#populationToggleClosed {
+    display: inline;
+}
+
+#legendSelectionUp::before {
+    content: "↑";
+}
+
+#legendSelectionDown::before {
+    content: "↓";
+}

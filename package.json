@@ -1,0 +1,8 @@
+{
+    "name": "covid.aequologica.net",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "test": "mocha"
+    }
+}

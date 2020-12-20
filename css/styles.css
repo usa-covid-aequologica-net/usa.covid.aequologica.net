@@ -1,0 +1,158 @@
+@font-face {
+  font-family: "inconsolata";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  src: local("inconsolata"), url("../fonts/inconsolata.woff") format("woff");
+}
+
+/* ---------- general ---------- */
+body {
+  font-size: 14px;
+}
+
+header #top {
+  color: rgb(0, 45, 114);
+  /*  background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+  background-color: rgb(230, 250, 240);
+}
+
+/* ---------- credits ---------- */
+header #credits {
+  /* background-color: #89b9b9; 
+  color: White;*/ 
+
+  white-space: nowrap;
+  overflow: hidden hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.25rem;
+  font-size: 13px;
+  z-index: 1000;
+}
+header #credits #when_is_data_updated {
+  white-space: nowrap;
+  overflow: hidden hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+}
+header #credits a {
+  /* color: white; */
+  font-weight: bold;
+}
+header #credits a:link {
+  /* color: #1313ff; 
+  color: white; */
+  font-weight: bold;
+}
+
+/* - - - - - header - - - - - */
+
+header #top-bar #top-left {
+  display: inline-block;
+  white-space: nowrap;
+}
+header #top-bar #title {
+  line-height: 0;
+  font-size: 28px;
+  color: #483C32;
+}
+
+header #top-bar #top-right {
+  font-size: 14px;
+  visibility: hidden;
+}
+
+header #top-bar #top-right [type="button"] {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+header #top-bar #b0x0 img {
+  display: inline-block;
+  width: 16px;
+  height: auto;
+}
+
+header #top-bar ._boxrow1,
+#top-bar ._boxrow2 {
+  height: 24px;
+}
+
+header #top-bar ._boxrow2 {
+  padding-top: 0 !important;
+}
+
+header #top-bar .dropdown-menu.show {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+header #top-bar ._boxcol1 {
+  text-align: right;
+}
+
+header #top-bar button:not(:hover) {
+  background-color: white;
+}
+
+/* - - - - - footer - - - - - */
+footer #bottom {
+  padding: 0;
+  margin: 0;
+  overflow: hidden hidden;
+  background-color: rgb(230, 250, 240);
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+footer #bottom label {
+  margin-bottom: 0 !important;
+  text-align: center !important;
+}
+
+/* modalCountryPicker */
+#modalCountryPicker button:not(:hover):not(.close) {
+  background-color: white;
+}
+
+#modalCountryPicker table thead th.code,
+#modalCountryPicker table tbody td.code {
+  font-size: smaller;
+  text-align: center;
+}
+
+#modalCountryPicker table thead th.population,
+#modalCountryPicker table tbody td.population {
+  font-family: monospace;
+  font-size: smaller;
+  text-align: right;
+}
+
+/* https://www.schemecolor.com/playstation-logo-colors.php 
+Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celtic Blue (#2E6DB4).
+*/
+#top #cumulat,
+#top #measure {
+  color: white;
+}
+
+#top [data-color="total"] {
+  color: white;
+  background-color: #df0024;
+}
+
+#top [data-color="daily"] {
+  color: white;
+  background-color: #f3c300;
+}
+
+#top [data-color="confirmed"] {
+  color: white;
+  background-color: #00ac9f;
+}
+#top [data-color="deaths"] {
+  color: white;
+  background-color: #2e6db4;
+}
+
+

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Countries with no covid data</title>
+</head>
+
+<body>
+    <div id="ok">everything's all right</div>
+    <div>details in console</div>
+    <div id="content"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@latest/lodash.min.js"></script>
+
+    <script type="module">
+        'use strict'
+        import { excludedNoCovidData, countryAliases } from '../js/model/population.js';
+
+        $.get("https://pomber.github.io/covid19/timeseries.json").then((data) => {
+            console.log("Aliases (pomber/timeseries => worldometers/population):");
+            for (const key in data) {
+                if (countryAliases[key]) {
+                    console.log("\t", key, "=>", countryAliases[key]);
+                }
+                const found = _.find(excludedNoCovidData, excluded => (excluded === key || excluded === countryAliases[key]));
+                if (found) {
+                    console.log("!!!!!!!!!!!!!!!", found);
+                    $('div#content').append($('<div>').text(found));
+                    $('div#ok').remove();
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
