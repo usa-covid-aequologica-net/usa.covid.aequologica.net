@@ -29,11 +29,11 @@ describe('measure', function () {
   it('measure type is persisted', function () {
     assert.equal(measure.getType(), "confirmed");
   });
-  it('valid array of measure types is [ "confirmed", "deaths", "recovered" ]', function () {
-    assert.deepEqual(measure.typesArray, ["confirmed", "deaths", "recovered"]);
+  it('valid array of measure types is [ "confirmed", "deaths"]', function () {
+    assert.deepEqual(measure.typesArray, ["confirmed", "deaths"]);
   });
-  it('valid measure types object is { confirmed: 0, deaths: 0, recovered: 0 }', function () {
-    assert.deepEqual(measure.typesObject, { confirmed: 0, deaths: 0, recovered: 0 });
+  it('valid measure types object is { confirmed: 0, deaths: 0  }', function () {
+    assert.deepEqual(measure.typesObject, { confirmed: 0, deaths: 0 });
   });
 
 });
