@@ -96,6 +96,15 @@ footer #bottom label {
   text-align: center !important;
 }
 
+footer img[type="svg"] {
+  width: 24px;
+  height: auto;
+}
+
+footer .custom-control {
+  padding-left: 0.5rem;
+}
+
 /* modalCountryPicker */
 #modalCountryPicker button:not(:hover):not(.close) {
   background-color: white;

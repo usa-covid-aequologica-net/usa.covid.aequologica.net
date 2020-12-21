@@ -21,6 +21,12 @@
   background-color: white;
 }
 
+#legend table.table tbody tr:first-child td {
+  padding-top: .5rem;
+}
+#legend table.table tbody tr:last-child td {
+  padding-bottom: .5rem;
+}
 #legend table.table tbody td,
 #legend table.table thead th {
   border: none;
