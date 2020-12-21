@@ -29,7 +29,7 @@ for f in files:
 
 for k,v in dic.items():
     print(k)
-    # os.remove('img/'+k)
+    os.remove('img/'+k)
 
 
 # # #!/usr/bin/env python3
