@@ -20,13 +20,13 @@ countries with numbers on a different order of magnitude is more readable.
 
 Try it here: [https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_](https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_)
 
-![DE,DK,EE,FI,LT,LV,NO,PL,RU,SE](./img/screenshot-sweden.png "DE,DK,EE,FI,LT,LV,NO,PL,RU,SE")
+![DE,DK,EE,FI,LT,LV,NO,PL,RU,SE](./img/png/screenshot-sweden.png "DE,DK,EE,FI,LT,LV,NO,PL,RU,SE")
 
 ## All this typing ?
 
 You may find cumbersome all this typing (read: you are not a geek). But wait, you can configure all these options with the - hopefully - intuitive user interface of the application, and boom! one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
 
-![UI explained](./img/screenshot6-UI-explained.png "UI explained")
+![UI explained](./img/png/screenshot6-UI-explained.png "UI explained")
 
 ## Sweden
 
@@ -84,7 +84,7 @@ Clicking country name in the legend toggles the selection.
 
 Selected country, if any, is locally stored.
 
-![FR,IT*,SE](./img/selectedCountryScreenshot.png "FR,IT*,SE")
+![FR,IT*,SE](./img/png/selectedCountryScreenshot.png "FR,IT*,SE")
 
 ### Reset
 
@@ -131,7 +131,7 @@ Try it : [store US vs. VA permalink!](https://covid.aequologica.net/?1,2020-02-2
 
 Adding or removing countries from the list with the country picker modal dialog is easier with keyboard [enter] key. Click on or select text of a country name, then press enter, the selection will be toggled Be aware that, depending on the sort criteria of the table, the country may be pushed at the top or bottom of the list, hence vanishing from sight.
 
-![screenshot of country picker](./img/screenshotCountryPicker.png)
+![screenshot of country picker](./img/png/screenshotCountryPicker.png)
 
 ### Swipe gesture for mobile device
 
@@ -142,5 +142,5 @@ On mobile devices, left and right swipe gestures will toggle _total/daily_ and _
 
 That's the map from [Google Analytics](https://analytics.google.com/analytics/web/#/) about the frequentation of the site, as of 16th of December 2020, since its creation, the 17th of April 2020.
 
-![Google Analytics geo map of frequentation](./img/screenshot-world-audience.png)
+![Google Analytics geo map of frequentation](./img/png/screenshot-world-audience.png)
 
