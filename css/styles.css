@@ -96,6 +96,11 @@ footer #bottom label {
   text-align: center !important;
 }
 
+footer #bottom label#startFeedback {
+  min-width: 116px;
+  text-align: right !important;
+}
+
 footer img[type="svg"] {
   height: 24px;
   width: 24px;
