@@ -82,12 +82,6 @@
 .btn-outline-secondary:not(:disabled):not(.disabled).active {
   background-color: white !important;
 }
-/* 
-#legend .active#legendToggle:not(:hover),
-#legend .active#populationToggle:not(:hover),
-#legend .active#filterToggle:not(:hover) {
-    background-color: #ccc !important;
-} */
 
 #rightVerticalBar button {
   padding: 0 0 2px 0;

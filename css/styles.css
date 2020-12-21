@@ -19,9 +19,6 @@ header #top {
 
 /* ---------- credits ---------- */
 header #credits {
-  /* background-color: #89b9b9; 
-  color: White;*/ 
-
   white-space: nowrap;
   overflow: hidden hidden;
   text-overflow: ellipsis;
@@ -36,12 +33,9 @@ header #credits #when_is_data_updated {
   font-size: 10px;
 }
 header #credits a {
-  /* color: white; */
   font-weight: bold;
 }
 header #credits a:link {
-  /* color: #1313ff; 
-  color: white; */
   font-weight: bold;
 }
 
@@ -54,7 +48,7 @@ header #top-bar #top-left {
 header #top-bar #title {
   line-height: 0;
   font-size: 28px;
-  color: #483C32;
+  color: #483c32;
 }
 
 header #top-bar #top-right {
@@ -135,17 +129,14 @@ Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celti
 #top #measure {
   color: white;
 }
-
 #top [data-color="total"] {
   color: white;
   background-color: #df0024;
 }
-
 #top [data-color="daily"] {
   color: white;
   background-color: #f3c300;
 }
-
 #top [data-color="confirmed"] {
   color: white;
   background-color: #00ac9f;
@@ -154,5 +145,3 @@ Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celti
   color: white;
   background-color: #2e6db4;
 }
-
-
