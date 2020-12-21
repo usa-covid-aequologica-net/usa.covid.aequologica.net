@@ -97,8 +97,13 @@ footer #bottom label {
 }
 
 footer img[type="svg"] {
+  height: 24px;
   width: 24px;
-  height: auto;
+}
+
+footer .navbar-collapse.collapse.show label#toggleCapita,
+footer .navbar-collapse.collapse.show label#toggleLinear {
+  width: 80px;
 }
 
 footer .custom-control {
