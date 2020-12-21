@@ -75,7 +75,7 @@
             <div class="dropdown-menu" id="type">
               <a class="dropdown-item" href="#" data-type="total" data-color="total">total</a>
               <a class="dropdown-item" href="#" data-type="daily" data-color="daily" active>daily</a>
-              <div class="text-center text-secondary font-italic only_touch_device">(hint: try swipe&hellip;)</div>
+              <div class="text-right text-secondary font-italic only_touch_device" style="font-size: smaller; color:gray;">(swipe horizontally to toggle)</div>
             </div>
           </div>
           <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths" data-color="">
@@ -88,7 +88,7 @@
               <a class="dropdown-item" href="#" data-type="confirmed" data-color="confirmed">confirmed</a>
               <a class="dropdown-item" href="#" data-type="deaths" data-color="deaths">deaths</a>
               <!-- a class="dropdown-item" href="#" data-type="recovered">recovered</!-->
-              <div class="text-center text-secondary font-italic only_touch_device">(hint: try swipe&hellip;)</div>
+              <div class="text-right text-secondary font-italic only_touch_device" style="font-size: smaller; color:gray;">(swipe horizontally to toggle)</div>
             </div>
           </div>
         </div>
@@ -421,10 +421,6 @@
           </button></div>
           </th>
       </th>
-      <!-- <th class="legend_population border-bottom pl-1" {{{pop-style}}}>
-        code
-        <a href="https://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements" target="_ISO_3166">&#9432;</a>
-      </th> -->
       <th class="legend_population border-bottom px-1" {{{pop-style}}}>
         population
         <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
@@ -440,7 +436,6 @@
         </button>
         {{name}}
       </td>
-      <!-- <td class="legend_population" {{{pop-style}}}>{{code}}&nbsp;</td> -->
       <td class="legend_population" {{{pop-style}}}>{{format count}}</td>
     </tr>
     {{/each}}
@@ -490,21 +485,6 @@
   <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></script>
 
-  <!-- facebook 
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: '104250825478',
-        cookie: true,
-        xfbml: true,
-        version: 'v7.0'
-      });
-    };
-  </script>
-  <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-  -->
-  <!-- /facebook -->
-
   <script>
     // compile the handlebars templates
     var printHeaderTemplate = Handlebars.compile(document.getElementById("print-header-template").innerHTML);
@@ -539,13 +519,6 @@
       text-align: center;
     }
   </style>
-  <!-- <div id="ajaxFeedback" class="centered">
-    <div class="">
-      <div class="spinner-border text-primary m-1" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
-  </div> -->
   <script>
     $(document).ajaxStart(function (event, xhr, options) {
       // ("ajax started", event, xhr, options);
@@ -651,7 +624,7 @@
 
   <!-- IF RELEASE -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-163898058-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163898058-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }

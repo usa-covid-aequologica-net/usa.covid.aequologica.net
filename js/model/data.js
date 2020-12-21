@@ -308,7 +308,7 @@ function setupCategories() {
 // Read in data
 function fetchData(callback) {
     const URL = (domain === "usa")
-        ? 'https://covidtracking.com/api/v1/states/daily.json'
+        ? 'https://api.covidtracking.com/v1/states/daily.json'
         : 'https://pomber.github.io/covid19/timeseries.json';
 
     $.ajax({
