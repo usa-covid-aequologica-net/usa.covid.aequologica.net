@@ -99,14 +99,14 @@ $(document).ready(() => {
         // start date
         {
             const startDate = model.getStartDate();
-            $('#startFeedback').text(startDate.format('LL'));
+            $('#startFeedback > span').text(startDate.format('LL'));
             $('#startRangeInput').prop('value', startDate.dayOfYear());
 
             $('#startRangeInput').on('change', (e) => {
                 model.setStartDate(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')));
                 redraw();
             }).on('input', (e) => {
-                $('#startFeedback').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
+                $('#startFeedback > span').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
             });
         }
 

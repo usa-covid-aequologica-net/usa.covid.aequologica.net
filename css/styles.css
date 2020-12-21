@@ -97,8 +97,14 @@ footer #bottom label {
 }
 
 footer #bottom label#startFeedback {
-  min-width: 116px;
+  min-width: 120px;
   text-align: right !important;
+  background-image: url(/img/svg/left-arrow-svgrepo-com.svg);
+  background-repeat: no-repeat;
+}
+footer #bottom label#startFeedback > span {
+  background-color: rgb(230, 250, 240);
+  padding-left: 2px;
 }
 
 footer img[type="svg"] {
