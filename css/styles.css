@@ -1,229 +1,158 @@
-html, body {
-    height: 100%;
-}
-
-body {
-    font-size: 14px;
-    color:rgb(0,45,114);
-    /* font-family: "monospaced"; */
-}
-
 @font-face {
-    font-family: 'inconsolata';
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    src: local('inconsolata'), url('../fonts/inconsolata.woff') format('woff');
+  font-family: "inconsolata";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  src: local("inconsolata"), url("../fonts/inconsolata.woff") format("woff");
 }
 
-/* global colors */
-
-button.btn.btn-outline-secondary[type="button"], .card.border-secondary {
-    border-color: rgba(0, 0, 0, .2) !important;
-    color: rgb(108, 117, 125) !important;
+/* ---------- general ---------- */
+body {
+  font-size: 14px;
 }
-
-button.btn.btn-outline-secondary[type="button"]:enabled:hover {
-    color: #fff !important;
-}
-
-/* general structure 
-
-+--------------------+
-| header             |
-+--------------------+
-| +-----+  chart     |
-| | leg |            |
-| | end |            |
-| +-----+            |
-|                    |
-+--------------------+
-| footer             |
-+--------------------+
-*/
 
 header #top {
-    height: 60px;
-    max-height: 60px;
-    color:rgb(0,45,114);
-    background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+  color: rgb(0, 45, 114);
+  /*  background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+  background-color: rgb(230, 250, 240);
 }
 
-header #top2 {
-    height: 40px;
-    max-height: 40px;
-}
-
+/* ---------- credits ---------- */
 header #credits {
-    white-space: nowrap;
-    overflow: hidden hidden;
-    text-overflow: ellipsis;
-    height: 32px;
-    top: 40px;
-    max-height: 32px;
-    padding: 0 .25rem;
-    font-size: 13px;
-    color: rgb(120, 120, 120);
-    background-color: white;
-    z-index: 1000;
-}
+  /* background-color: #89b9b9; 
+  color: White;*/ 
 
+  white-space: nowrap;
+  overflow: hidden hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.25rem;
+  font-size: 13px;
+  z-index: 1000;
+}
 header #credits #when_is_data_updated {
-    white-space: nowrap;
-    overflow: hidden hidden;
-    text-overflow: ellipsis;
-    font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
 }
-
-header .active#location:not(:hover) {
-    background-color: #ccc !important;
+header #credits a {
+  /* color: white; */
+  font-weight: bold;
 }
-
-main #chart {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    height: calc(100% - 88px);
-    width: 100%;
+header #credits a:link {
+  /* color: #1313ff; 
+  color: white; */
+  font-weight: bold;
 }
-
-main noscript {
-    position: fixed;
-    top: 100px;
-    left: 5px;
-    right: 5px;
-}
-
-footer #bottom {
-    /* height: 48px; NEVER UNCOMMENT height !!!! */
-    /* font-family: sans-serif; */
-    overflow: hidden hidden;
-    background-color: white;
-    /* z-index: 2000; */
-}
-
-/* /general structure */
 
 /* - - - - - header - - - - - */
 
-header #top2 #top-left {
-    display: inline-block;
-    white-space: nowrap;
+header #top-bar #top-left {
+  display: inline-block;
+  white-space: nowrap;
 }
-header #top2 #title {
-    line-height: 0;
-    font-size: 24px;
-    height: 32px; 
-    max-height:32px;
-}
-
-header #top2 #top-right {
-    font-size: 14px;
-    visibility: hidden;
+header #top-bar #title {
+  line-height: 0;
+  font-size: 28px;
+  color: #483C32;
 }
 
-header #top2 #top-right [type="button"] {
-    padding-left: 4px;
-    padding-right: 4px;
+header #top-bar #top-right {
+  font-size: 14px;
+  visibility: hidden;
 }
 
-header #top2 #b0x0 img {
-    display: inline-block;
-    width: 16px;
-    height: auto;
+header #top-bar #top-right [type="button"] {
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
-header #top2 ._boxrow1, #top2 ._boxrow2 {
-    height: 24px;
+header #top-bar #b0x0 img {
+  display: inline-block;
+  width: 16px;
+  height: auto;
 }
 
-header #top2 ._boxrow2 {
-    padding-top: 0 !important;
+header #top-bar ._boxrow1,
+#top-bar ._boxrow2 {
+  height: 24px;
 }
 
-header #top2 ._boxcol1 {
-    text-align: right;
+header #top-bar ._boxrow2 {
+  padding-top: 0 !important;
 }
 
-header #top2 button:not(:hover) {
-    background-color: white;
+header #top-bar .dropdown-menu.show {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-footer #bottom button:not(:hover) {
-    background-color: white;
+header #top-bar ._boxcol1 {
+  text-align: right;
+}
+
+header #top-bar button:not(:hover) {
+  background-color: white;
 }
 
 /* - - - - - footer - - - - - */
-
-footer #bottom .container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-}
-
-footer #bottom [data-toggle="toggle"] {
-    border: none;
-}
-
-footer #bottom #top2 ._boxcol2 {
-    text-align: center;
-}
-
-footer #bottom .form-check-inline {
-    margin-right: 0;
+footer #bottom {
+  padding: 0;
+  margin: 0;
+  overflow: hidden hidden;
+  background-color: rgb(230, 250, 240);
+  white-space: nowrap;
+  font-size: 12px;
 }
 
 footer #bottom label {
-    height: 1.4rem;
-    line-height: 1.4rem;
-    margin-bottom: 0 !important;
-    text-align: center !important;
+  margin-bottom: 0 !important;
+  text-align: center !important;
 }
 
-footer #bottom {
-    padding: 0;
-    margin: 0;
-}
-
-footer #bottom .card {
-    margin: 0
-}
-
-footer #bottom .navbar-brand {
-    margin-right: 0;
-}
-
-footer #bottom .card-body {
-    padding: 0.1rem 0.2rem;
-    padding-top: 0.1rem;
-    padding-right: 0.2rem;
-    padding-bottom: 0.1rem;
-    padding-left: 0.2rem;
-    font-size: 12px;
-    min-width: 100px;
-}
-
-footer #bottom .navbar-toggler-icon {
-    width: 1em;
-    height: 1em;
-}
-/*
-footer #bottom label#average {
-    font-family: monospace;
-}
-*/
+/* modalCountryPicker */
 #modalCountryPicker button:not(:hover):not(.close) {
-    background-color: white;
+  background-color: white;
 }
 
-#modalCountryPicker table thead th.code, #modalCountryPicker table tbody td.code {
-    font-size: smaller;
-    text-align: center;
+#modalCountryPicker table thead th.code,
+#modalCountryPicker table tbody td.code {
+  font-size: smaller;
+  text-align: center;
 }
 
-#modalCountryPicker table thead th.population, #modalCountryPicker table tbody td.population {
-    /* font-family: monospace; */
-    font-size: smaller;
-    text-align: right;
+#modalCountryPicker table thead th.population,
+#modalCountryPicker table tbody td.population {
+  font-family: monospace;
+  font-size: smaller;
+  text-align: right;
 }
+
+/* https://www.schemecolor.com/playstation-logo-colors.php 
+Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celtic Blue (#2E6DB4).
+*/
+#top #cumulat,
+#top #measure {
+  color: white;
+}
+
+#top [data-color="total"] {
+  color: white;
+  background-color: #df0024;
+}
+
+#top [data-color="daily"] {
+  color: white;
+  background-color: #f3c300;
+}
+
+#top [data-color="confirmed"] {
+  color: white;
+  background-color: #00ac9f;
+}
+#top [data-color="deaths"] {
+  color: white;
+  background-color: #2e6db4;
+}
+
+

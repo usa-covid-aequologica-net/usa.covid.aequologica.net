@@ -7,6 +7,7 @@ import { init as initModel } from './model/data.js';
 import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
 import { store } from './model/yetAnotherLocalStorageWrapper.js';
+import { Carousel } from './model/carousel.js';
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -118,7 +119,7 @@ $(document).ready(() => {
             });
         });
 
-        $('#bottom [type="radio"], #bottom [type="checkbox"]').change(event => {
+        $('footer [type="radio"], footer [type="checkbox"]').change(event => {
             // which toggle 
             const key = event.currentTarget.id;
             const isChecked = event.currentTarget.checked;
@@ -132,20 +133,22 @@ $(document).ready(() => {
         });
 
         // cumula
+        function cumula2averageFeedback(disable) {
+            $('[type="range"]#sizeOfAverage').prop("disabled", disable);
+            $('label#bubble, label#average').css({ opacity: !disable ? 1 : .333 });
+        }
         {
             const cumulat = model.getToggle("toggleCumula");
+            $("#cumulat").parent().parent().attr("data-color", cumulat);
             $("#cumulat").html(cumulat);
             $('#cumulaGroup .dropdown-toggle').dropdown();
-            function cumula2averageFeedback(disable) {
-                $('[type="range"]#sizeOfAverage').prop("disabled", disable);
-                $('label#bubble, label#average').css({ opacity: !disable ? 1 : .333 });
-            }
             cumula2averageFeedback(cumulat === "total");
             $("#cumulaGroup .dropdown-item").on("click", (e) => {
                 const odlCumula = model.getToggle("toggleCumula");
                 const newCumula = $(e.currentTarget).data("type");
                 if (odlCumula !== newCumula) {
                     model.setToggle("toggleCumula", newCumula);
+                    $("#cumulat").parent().parent().attr("data-color", newCumula);
                     $("#cumulat").html(newCumula);
                     cumula2averageFeedback(newCumula === "total");
                     redraw();
@@ -154,24 +157,67 @@ $(document).ready(() => {
         }
 
         // measure
+        function measure2deathsFeedback(enable) {
+            $('[data-toggle="toggle"]#toggleDeaths').bootstrapToggle(enable ? 'enable' : 'disable');
+            $('label#toggleDeaths, img#toggleDeaths').css({ opacity: enable ? 1 : .333 });
+        }
         {
             const measure = model.getMeasure();
+            $("#measure").parent().parent().attr("data-color", measure.getType());
             $("#measure").html(measure.getType());
             $('#mesureGroup .dropdown-toggle').dropdown();
-            function measure2deathsFeedback(enable) {
-                $('[data-toggle="toggle"]#toggleDeaths').bootstrapToggle(enable ? 'enable' : 'disable');
-                $('label#toggleDeaths, img#toggleDeaths').css({ opacity: enable ? 1 : .333 });
-            }
             measure2deathsFeedback(measure.getType() !== "deaths");
             $("#mesureGroup .dropdown-item").on("click", (e) => {
-                const odlMeasure = measure.getType();
+                const oldMeasure = measure.getType();
                 const newMeasure = $(e.currentTarget).data("type");
-                if (odlMeasure != newMeasure) {
+                if (oldMeasure != newMeasure) {
                     measure.setType(newMeasure);
+                    $("#measure").parent().parent().attr("data-color", newMeasure);
                     $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
                     redraw();
                 }
+            });
+        }
+
+        // swipe carousel
+        {  
+            function rightOrLeft (carousel) {            
+                const measure = model.getMeasure();
+                const oldMeasure = measure.getType();
+                const oldCumula = model.getToggle("toggleCumula")
+
+                const news = carousel(oldCumula, oldMeasure);
+
+                const newMeasure = news.measure;
+                const newCumula = news.cumula;
+
+                let doRedraw = false;
+                if (oldMeasure !== newMeasure) {
+                    doRedraw = true;
+                    measure.setType(newMeasure);
+                    $("#measure").parent().parent().attr("data-color", newMeasure);
+                    $("#measure").html(newMeasure);
+                    measure2deathsFeedback(measure.getType() !== "deaths");
+                }
+                if (oldCumula !== newCumula) {
+                    doRedraw = true;
+                    model.setToggle("toggleCumula", newCumula);
+                    $("#cumulat").parent().parent().attr("data-color", newCumula);
+                    $("#cumulat").html(newCumula);
+                    cumula2averageFeedback(newCumula === "total");
+                }
+                if (doRedraw) {
+                    redraw();
+                }
+            }
+
+            document.addEventListener('swiped-right', function(e) {
+                return rightOrLeft(Carousel().right);
+            });
+
+            document.addEventListener('swiped-left', function(e) {
+                return rightOrLeft(Carousel().left);
             });
         }
 
@@ -214,8 +260,17 @@ $(document).ready(() => {
 
         // size of average
         {
+            const values = [1,2,3,4,5,6,7,14,21,28];
             const sizeOfAverage = model.getSizeOfAverage();
-            $("#sizeOfAverage").val(sizeOfAverage);
+            if (sizeOfAverage <= 7) { 
+                $("#sizeOfAverage").val(sizeOfAverage-1);
+            } else if (sizeOfAverage <= 14) { 
+                $("#sizeOfAverage").val(7);
+            }else if (sizeOfAverage <= 21) { 
+                $("#sizeOfAverage").val(8);
+            }else if (sizeOfAverage <= 28) { 
+                $("#sizeOfAverage").val(9);
+            }
             $("#bubble").html(sizeOfAverage);
             function averageFeedback(a) {
                 $("label#average").html(a < 2
@@ -224,18 +279,20 @@ $(document).ready(() => {
                 );
             }
             averageFeedback(sizeOfAverage);
-            const ranges = document.querySelectorAll('#sizeOfAverage[type="range"]');
-            if (ranges) {
-                ranges.forEach((r) => {
+            const sizeOfAverageRange = document.querySelectorAll('#sizeOfAverage[type="range"]');
+            if (sizeOfAverageRange) {
+                sizeOfAverageRange.forEach((r) => {
                     r.addEventListener("input", () => {
-                        bubble.innerHTML = r.value;
-                        averageFeedback(r.value);
+                        const translated = values[r.value];
+                        bubble.innerHTML = translated;
+                        averageFeedback(translated);
                     });
                     r.addEventListener("change", () => {
-                        bubble.innerHTML = r.value;
-                        if (model.getSizeOfAverage() != r.value) {
-                            model.setSizeOfAverage(r.value);
-                            averageFeedback(r.value);
+                        const translated = values[r.value];
+                        bubble.innerHTML = translated;
+                        if (model.getSizeOfAverage() != translated) {
+                            model.setSizeOfAverage(translated);
+                            averageFeedback(translated);
                             redraw();
                         }
                     });

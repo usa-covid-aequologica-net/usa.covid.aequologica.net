@@ -17,12 +17,12 @@
     position: sticky;
     top: 0;
     color:rgb(0,45,114);
-    background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+    /* background-color: rgb(250,240,230); /* aka #faf0e6 aka Linen cf. https://www.colorhexa.com/faf0e6*/
+    background-color: white;
 }
 
 #legend table.table tbody td, #legend table.table thead th {
-    padding: .25rem .1rem;
-    border-top: none;
+    border: none;
 }
 
 #legend table.table tbody tr.selected {
@@ -33,7 +33,9 @@
 #legend table.table thead th.country {
     z-index: 4000;
 }
-
+#legend table.table thead th.country button {
+    min-height: 24px;
+}
 #legend table.table tbody td.country {
     cursor: pointer;
 }
@@ -42,23 +44,29 @@
     text-decoration: underline;
 }
 
-#legend table.table tbody td.country, #legend table.table tbody td.legend_population {
+#legend table.table tbody td.country, 
+#legend table.table tbody td.legend_population {
     padding-right: .3rem;
 }
 
-#legend table.table thead th.legend_population, #legend table.table tbody td.legend_population {
-    /* font-family: monospace; */
-    font-size: smaller;
+#legend table.table thead th.legend_population, 
+#legend table.table tbody td.legend_population {
+    font-family: monospace;
+    font-size: 12px;
     text-align: right;
     padding-left: .5rem;
 }
-
+#legend table.table thead th.legend_population {
+    padding: 0;
+    font-size: 12px;
+}
 #legend button {
     padding: 0 .25rem;
 }
 
-#legend .remove button {
-    padding: 0;
+#legend button.remove  {
+    vertical-align: top;
+    padding: 1px;
     border: none;
 }
 
@@ -66,25 +74,34 @@
     background-color: white !important;
 }
 
+#legend button#filterToggle.active {
+    color:black !important;
+}   
+
+.btn-outline-secondary:not(:disabled):not(.disabled).active {
+    background-color: white !important;
+}
+/* 
+#legend .active#legendToggle:not(:hover),
 #legend .active#populationToggle:not(:hover),
 #legend .active#filterToggle:not(:hover) {
     background-color: #ccc !important;
-}
+} */
 
-#legendButtonsWrapper button {
+#rightVerticalBar button {
     padding: 0.2rem;
     margin-left: auto;
 }
 
-#legendButtonsWrapper button:not(#legendToggle) {
+#rightVerticalBar button:not(#legendToggle) {
     width: 18px;
 }
 
-#legendButtonsWrapper button:not(:hover) {
+#rightVerticalBar button:not(:hover) {
     background-color: white;
 }
 
-#legendButtonsWrapper button#legendToggle.folded:not(:hover) {
+#rightVerticalBar button#legendToggle.folded:not(:hover) {
     background-color: #ccc !important;
 }
 
@@ -97,6 +114,14 @@
 }
 
 #legendToggle.folded img#legendToggleOpen, #legendToggle:not(.folded) img#legendToggleClosed {
+    display: inline;
+}
+
+#populationToggle:not(.active) img#populationToggleOpen, #populationToggle.active img#populationToggleClosed {
+    display: none;
+}
+
+#populationToggle.active img#populationToggleOpen, #populationToggle:not(.active) img#populationToggleClosed {
     display: inline;
 }
 

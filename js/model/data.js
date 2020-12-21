@@ -3,6 +3,7 @@
 import { domain } from './domain.js';
 import { store } from './yetAnotherLocalStorageWrapper.js';
 import { countryAliases, code2name } from './population.js';
+import { factory } from './factory.js'
 import { Countries } from './countries.js';
 import { Measure } from './measure.js';
 import { readToggles, getToggle, setToggle, forEachToggle } from './toggles.js';
@@ -67,8 +68,8 @@ function calcMovingAverage(data, country) {
         });
     });
 }
-const maxSizeOfAverage = 21;
-const defaultSizeOfAverage = 21;
+const maxSizeOfAverage = 28;
+const defaultSizeOfAverage = 7;
 let sizeOfAverage = undefined;
 let setSizeOfAverage = (s, nosave) => {
     if (s <= 0 || maxSizeOfAverage < s) {
@@ -83,7 +84,7 @@ let setSizeOfAverage = (s, nosave) => {
             }
         });
         if (!nosave) {
-            if (sizeOfAverage == 21) {
+            if (sizeOfAverage == defaultSizeOfAverage) {
                 store.remove("sizeOfAverage");
             } else {
                 store.set("sizeOfAverage", sizeOfAverage);
@@ -137,7 +138,6 @@ function massageData() {
                             'date',
                             'positive',
                             'death',
-                            'recovered'
                         ),
                         {
                             date: moment("" + row.date).format("YYYY-MM-DD"),
@@ -172,7 +172,7 @@ function massageData() {
                 d.date = parseDate(d.date);
                 d.confirmed = +d.confirmed;
                 d.deaths = +d.deaths;
-                d.recovered = +d.recovered;
+                /* d.recovered = +d.recovered; */
             });
         }
     });

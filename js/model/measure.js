@@ -8,8 +8,8 @@ export function Measure() {
 
     let type = store.get("measureType", defaultMeasureType);
 
-    const typesArray = ["confirmed", "deaths", "recovered"];
-    const typesObject = { confirmed: 0, deaths: 0, recovered: 0 };
+    const typesArray = ["confirmed", "deaths"/* , "recovered" */];
+    const typesObject = { confirmed: 0, deaths: 0 /*, recovered: 0 */};
 
     function getType() {
         return type;
@@ -21,7 +21,7 @@ export function Measure() {
             switch (newType) {
                 case "confirmed":
                 case "deaths":
-                case "recovered":
+                /* case "recovered": */
                     type = newType;
                     break;
                 default:

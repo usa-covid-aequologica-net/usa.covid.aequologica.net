@@ -111,8 +111,8 @@ export function share(...args) {
         Handlebars.registerHelper('isDaily', function (value) {
             return value === 'day' || value === 'daily';
         });
-        $('header #top2').html(printHeaderTemplate(properties.printHeaderTemplateObjects));
-        $('footer #bottom').html(printFooterTemplate({}));
+        $('header #top-bar').html(printHeaderTemplate(properties.printHeaderTemplateObjects));
+        $('footer nav:first-child').html(printFooterTemplate({}));
 
         // wait for end of loading 
         Pace.on('hide', () => {

@@ -45,10 +45,10 @@ export function parseParams(...args) {
                 found();
                 queryStringParams.measure = "deaths";
                 break;
-            case "RECOVERED":
+            /* case "RECOVERED":
                 found();
                 queryStringParams.measure = "recovered";
-                break;
+                break; */
             case "LIN":
             case "LINEAR":
                 found();
@@ -110,16 +110,16 @@ export function parseParams(...args) {
                 } else {
                     warn(item, 'not a country code');
                 }
-                // integer between 1 and 21 ?
+                // integer between 1 and 28 ?
                 if (ITEM.match("^\\d+$")) {
                     const itemAsInteger = +ITEM;
                     if (Number.isInteger(itemAsInteger)) {
-                        if (0 < itemAsInteger && itemAsInteger < 22) {
+                        if (0 < itemAsInteger && itemAsInteger <= 28) {
                             found();
                             queryStringParams.sizeOfAverage = itemAsInteger;
                             break;
                         } else {
-                            warn(item, 'integer is not between 1 and 21 (incl.)');
+                            warn(item, 'integer is not between 1 and 28 (incl.)');
                         }
                     } else {
                         warn(item, 'not an integer');

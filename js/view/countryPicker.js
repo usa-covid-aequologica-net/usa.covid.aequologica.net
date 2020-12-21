@@ -85,7 +85,7 @@ export function init(...args) {
         }
     }
 
-    emptyThenAppend = (countries) => {
+    const emptyThenAppend = (countries) => {
         const $tbody = $(selector + " tbody");
         $tbody.empty();
 

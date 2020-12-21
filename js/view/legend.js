@@ -131,9 +131,11 @@ export function Legend() {
             { 
                 const countries = model.getCountriesHolder().get();
                 if (countries.length <= 10 && model.getToggle("toggleFilter") === 'off') {
-                    $filterToggle.attr('disabled', 'disabled');
+                    // $filterToggle.attr('disabled', 'disabled');
+                    $filterToggle.hide();
                 } else {
-                    $filterToggle.removeAttr('disabled');
+                    // $filterToggle.removeAttr('disabled');
+                    $filterToggle.show();
                 }
             }
             function feedbackFilter() {
@@ -181,11 +183,11 @@ export function Legend() {
                     // hide all rows not selected
                     $("#legend table.table tbody tr:not(.selected)").hide();
                     $("#legend table.table tbody tr.selected").show();
-                    $("#legendToggle").addClass("folded");
+                    $("#legendToggle").addClass("folded").addClass('active');
                 } else {
                     // show all rows
                     $("#legend table.table tbody tr").css("display", "table-row");
-                    $("#legendToggle").removeClass("folded");
+                    $("#legendToggle").removeClass("folded").removeClass('active');
                 }
             }
 
