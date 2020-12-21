@@ -186,8 +186,12 @@
       </div>
       <!-- right vertical bar -->
       <div id="rightVerticalBar" class="mr-1 d-flex flex-column justify-content-around">
-        <button type="button" id="legendSelectionUp" class="btn btn-sm btn-outline-secondary" title="select next country"></button>
-        <button type="button" id="legendSelectionDown" class="btn btn-sm btn-outline-secondary" title="select previous country"></button>
+        <button type="button" id="legendSelectionUp" class="btn btn-sm btn-outline-secondary" title="select next country">
+          <img id="selectionUp" src="./img/up-arrow-svgrepo-com.svg">
+        </button>
+        <button type="button" id="legendSelectionDown" class="btn btn-sm btn-outline-secondary" title="select previous country">
+          <img id="selectionDown" src="./img/down-arrow-svgrepo-com.svg">
+        </button>
       </div>
     </div>
   </main>
@@ -409,7 +413,9 @@
           </button>
           <button type="button" id="filterToggle" class="topTen btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="top ten"
           data-taggle-on="on" data-taggle-off="off" >
-            ↑<sup>10</sup>
+            <img id="filter" style="width: 16px; height:auto;" src="./img/filter-svgrepo-com.svg">
+            <img id="eye" style="width: 20px; height:auto;" src="./img/eye-svgrepo-com.svg" style="display:none;">
+            <sup>10</sup>
           </button>
           <button type="button" id="legendToggle" class="btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="fold / unfold legend">
             <img id="legendToggleOpen" style="width: 14px; height:auto" src="./img/chevron-down-svgrepo-com.svg">

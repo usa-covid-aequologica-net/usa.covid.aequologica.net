@@ -244,7 +244,9 @@ $(document).ready(() => {
                             }
                             model.setToggle("toggleFilter", "off");
                             const $filterToggle = $('[type="button"]#filterToggle');
-                            $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                            $filterToggle.addClass('active').children("img#filter").show();
+                            $filterToggle.addClass('active').children("img#eye").hide();
+                            $filterToggle.removeClass('active').children("sup").html("10");
                             $filterToggle.attr('title', "top ten filter");
                         }
                         countryPicker.beforeOpen();

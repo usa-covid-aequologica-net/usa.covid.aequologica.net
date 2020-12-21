@@ -141,10 +141,14 @@ export function Legend() {
             function feedbackFilter() {
                 const toggleFilter = model.getToggle("toggleFilter");
                 if (toggleFilter === "on") {
-                    $filterToggle.addClass('active').html("↓<sup>all</sup>");
-                    $filterToggle.attr('title', "remove top ten filter");
+                    $filterToggle.addClass('active').children("img#filter").hide();
+                    $filterToggle.addClass('active').children("img#eye").show();
+                    $filterToggle.addClass('active').children("sup").html("ALL");
+                    $filterToggle.attr('title', "show all");
                 } else {
-                    $filterToggle.removeClass('active').html("↑<sup>10</sup>");
+                    $filterToggle.addClass('active').children("img#filter").show();
+                    $filterToggle.addClass('active').children("img#eye").hide();
+                    $filterToggle.removeClass('active').children("sup").html("10");
                     $filterToggle.attr('title', "top ten filter");
                 }
             }
