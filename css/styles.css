@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "inconsolata";
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  src: local("inconsolata"), url("../fonts/inconsolata.woff") format("woff");
-}
-
 /* ---------- general ---------- */
 body {
   font-size: 14px;
