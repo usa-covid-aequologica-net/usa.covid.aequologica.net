@@ -547,50 +547,6 @@
     }
   </script>
 
-  <!-- speech recognition : WORK IN PROGRESS -->
-  <script>
-    if ('webkitSpeechRecognition' in window) {
-      $("#speechRecognition").removeAttr('disabled');
-    } else {
-      $('#speechRecognition').attr('disabled', 'disabled');
-    }
-
-    const stopListen = () => {
-      console.log("stopListen");
-    };
-
-    const startListen = () => {
-      if ('webkitSpeechRecognition' in window) {
-        console.log("startListen");
-        console.log('speech OK');
-
-        var recognition = new webkitSpeechRecognition();
-        console.log(recognition);
-
-        recognition.start();
-        recognition.lang = 'en-US';
-        recognition.continuous = true;
-        recognition.InterimResults = true;
-
-        // var grammar = '#JSGF V1.0; grammar refs; public <ref> = ;'
-        // var speechRecognitionList = new webkitSpeechGrammarList();
-        // speechRecognitionList.addFromString(grammar, 1);
-        // recognition.grammars = speechRecognitionList;
-
-        recognition.onresult = function (event) {
-          console.log(event);
-
-          for (var i = event.resultIndex; i < event.results.length; i++) {
-            var trans = event.results[i][0].transcript;
-            console.log(trans);
-          }
-          recognition.stop();
-        }
-      } else {
-        console.log('speech NOK')
-      }
-    };
-  </script>
 
   <!-- main script -->
   <script type="module" src="./js/index.js"></script>

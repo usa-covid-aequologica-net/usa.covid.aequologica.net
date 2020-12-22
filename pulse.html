@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="./pulse.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="box">
+        <div class="object">
+            <div class="outline">
+            </div>
+            <div class="outline" id="delayed">
+            </div>
+            <div class="button">
+            </div>
+            <div class="button" id="circlein">
+                <svg class="mic-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000"
+                    enable-background="new 0 0 1000 1000" xml:space="preserve" style="fill:#1E2D70">
+                    <g>
+                        <path
+                            d="M500,683.8c84.6,0,153.1-68.6,153.1-153.1V163.1C653.1,78.6,584.6,10,500,10c-84.6,0-153.1,68.6-153.1,153.1v367.5C346.9,615.2,415.4,683.8,500,683.8z M714.4,438.8v91.9C714.4,649,618.4,745,500,745c-118.4,0-214.4-96-214.4-214.4v-91.9h-61.3v91.9c0,141.9,107.2,258.7,245,273.9v124.2H346.9V990h306.3v-61.3H530.6V804.5c137.8-15.2,245-132.1,245-273.9v-91.9H714.4z" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('div.button#circlein').on('click', () => {
+            const not_pulsing = ($('.outline').css('animation-name').startsWith('none'));
+            if (not_pulsing) {
+                $('.outline').css({
+                    color: 'blue',
+                    'animation': 'pulse 2s',
+                    'animation-iteration-count': 'infinite'
+                });
+                $('svg').css('fill', 'darkred');
+            } else {
+                $('.outline').css({
+                    color: 'red',
+                    'animation': 'none'
+                });
+                $('svg').css('fill', '#1E2D70');
+            }
+        });
+    });
+</script>
+
+  <!-- speech recognition : WORK IN PROGRESS -->
+  <script>
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
+    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
+    var grammar = '#JSGF V1.0; grammar colors; public <country> = ' + 'France | Italy' + ' ;'
+
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    $('#speechRecognition').on( "click", function() {
+      recognition.start();
+      console.log('Ready to receive a country command.');
+    });
+
+    recognition.onresult = function(event) {
+      // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
+      // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
+      // It has a getter so it can be accessed like an array
+      // The first [0] returns the SpeechRecognitionResult at the last position.
+      // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
+      // These also have getters so they can be accessed like arrays.
+      // The second [0] returns the SpeechRecognitionAlternative at position 0.
+      // We then return the transcript property of the SpeechRecognitionAlternative object
+      var country = event.results[0][0].transcript;
+      console.log(country, 'Confidence: ' + event.results[0][0].confidence);
+    }
+
+    recognition.onspeechend = function() {
+      recognition.stop();
+    }
+
+    recognition.onnomatch = function(event) {
+      console.log("I didn't recognise that country.");
+    }
+
+    recognition.onerror = function(event) {
+      console.log('Error occurred in recognition: ' + event.error);
+    }
+
+    // let speechState = false;
+
+    // {
+      
+    //   if (recognition) { // 'webkitSpeechRecognition' in window 
+    //     $("#speechRecognition").removeAttr('disabled');
+    //   } else {
+    //     $('#speechRecognition').attr('disabled', 'disabled');
+    //   }
+    // }
+    // const stopListen = () => {
+    //   console.log("stopListen");
+    // };
+
+    // const startListen = () => {
+    //   if ('webkitSpeechRecognition' in window) {
+    //     console.log('speech OK');
+
+    //     var recognition = new SpeechRecognition();
+    //     console.log(recognition);
+
+    //     recognition.start();
+    //     console.log('speech STARTED');
+    //     speechState = true;
+    //     recognition.lang = 'en-US';
+    //     recognition.continuous = true;
+    //     recognition.InterimResults = true;
+
+    //     // var grammar = '#JSGF V1.0; grammar refs; public <ref> = ;'
+    //     // var speechRecognitionList = new webkitSpeechGrammarList();
+    //     // speechRecognitionList.addFromString(grammar, 1);
+    //     // recognition.grammars = speechRecognitionList;
+
+    //     recognition.onresult = function (event) {
+    //       console.log(event);
+
+    //       for (var i = event.resultIndex; i < event.results.length; i++) {
+    //         var trans = event.results[i][0].transcript;
+    //         console.log(trans);
+    //       }
+    //       recognition.stop();
+    //       console.log('speech STOPPED')
+    //       speechState = false;
+    //     }
+    //   } else {
+    //     console.log('speech NOK')
+    //   }
+    // };
+  </script>
+
+
+</html>
