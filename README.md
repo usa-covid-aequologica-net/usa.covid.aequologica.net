@@ -40,7 +40,7 @@ There are 6 categories. For each category, valid values are (defaults are in **b
 2. **day** or **daily** / tot or total,
 3. log or logarithmic / **lin** or **linear**,
 4. per or percapita / **abs** or **absolute**,
-5. any number between 1 and **21** incl. will set the size of the average,
+5. any number between 1 and 28 incl. will set the size of the average - default is **7**, 
 6. start date in YYYY-MM-DD format; default is March 1st, 2020, i.e. **2020-03-01** (nb. there is no data before January 21, 2020).
 
 Categories must be separated by comma. Otherwise, parsing is rather lenient :
@@ -88,17 +88,17 @@ Selected country, if any, is locally stored.
 
 ### Reset
 
-The &hellip;
+All categories &hellip;
 
-1. _measure_ (confirmed/deaths),
-2. _daily or not_
-3. _linear or logaritmic_
-4. _per capita or absolute_
-5. _size of the average_,
+1. _confirmed_ or _deaths_,
+2. _total_ or _daily_
+3. _linear_ or _logaritmic_
+4. _per capita_ or _absolute_
+5. _size of average_,
 6. _start date_, and 
 7. _selected country_
 
-&hellip; categories are stored locally (using [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)).
+&hellip; are stored locally (using [localStorage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)).
 
 If there is no local storage in the browser (e.g. when cookies are blocked), nothing is stored; refresh the page will restore all default values.
 
