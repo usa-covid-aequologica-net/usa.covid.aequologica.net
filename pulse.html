@@ -4,35 +4,73 @@
 
 <head>
     <link href="./pulse.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            margin-bottom: 60px;
+            /* Margin bottom by footer height */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            /* Set the fixed height of the footer here */
+            line-height: 60px;
+            /* Vertically center the text there */
+            background-color: #f5f5f5;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
 
 </head>
 
 <body>
-    <h1>&hellip;</h1>
-    <div class="box">
-        <div class="object">
-            <div class="outline">
-            </div>
-            <div class="outline" id="delayed">
-            </div>
-            <div class="button">
-            </div>
-            <div class="button" id="circlein">
-                <svg class="mic-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000"
-                    enable-background="new 0 0 1000 1000" xml:space="preserve" style="fill:#1E2D70">
-                    <g>
-                        <path
-                            d="M500,683.8c84.6,0,153.1-68.6,153.1-153.1V163.1C653.1,78.6,584.6,10,500,10c-84.6,0-153.1,68.6-153.1,153.1v367.5C346.9,615.2,415.4,683.8,500,683.8z M714.4,438.8v91.9C714.4,649,618.4,745,500,745c-118.4,0-214.4-96-214.4-214.4v-91.9h-61.3v91.9c0,141.9,107.2,258.7,245,273.9v124.2H346.9V990h306.3v-61.3H530.6V804.5c137.8-15.2,245-132.1,245-273.9v-91.9H714.4z" />
-                    </g>
-                </svg>
+    <main role="main" class="container">
+        <h1>&hellip;</h1>
+        <div class="box">
+            <div class="object">
+                <div class="outline">
+                </div>
+                <div class="outline" id="delayed">
+                </div>
+                <div class="button">
+                </div>
+                <div class="button" id="circlein">
+                    <svg class="mic-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000"
+                        enable-background="new 0 0 1000 1000" xml:space="preserve" style="fill:#1E2D70">
+                        <g>
+                            <path
+                                d="M500,683.8c84.6,0,153.1-68.6,153.1-153.1V163.1C653.1,78.6,584.6,10,500,10c-84.6,0-153.1,68.6-153.1,153.1v367.5C346.9,615.2,415.4,683.8,500,683.8z M714.4,438.8v91.9C714.4,649,618.4,745,500,745c-118.4,0-214.4-96-214.4-214.4v-91.9h-61.3v91.9c0,141.9,107.2,258.7,245,273.9v124.2H346.9V990h306.3v-61.3H530.6V804.5c137.8-15.2,245-132.1,245-273.9v-91.9H714.4z" />
+                        </g>
+                    </svg>
+                </div>
             </div>
         </div>
-    </div>
-
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted"></span>
+        </div>
+    </footer>
 </body>
 
 <script type="text/javascript">
+    function isString(x) {
+        return Object.prototype.toString.call(x) === "[object String]"
+    }
+    function console_log(text) {
+        console.log(text);
+        if (isString(text)) $('footer div span').text(text);
+    }
     $(document).ready(function () {
         function showStart() {
             $('.outline').css({
@@ -57,13 +95,14 @@
         function start() {
             recognition.start();
             showStart();
-            console.log('Ready to receive a country command.');
+            console_log('Start ! Ready to receive a country command.');
 
         }
         function stop(error) {
-            if (error) console.error();
+            if (error) console.error(error);
             recognition.stop();
             showStop(error);
+            console_log('Stop ');
         }
 
 
@@ -91,7 +130,7 @@
             try {
                 start();
             } catch (error) {
-                console.log(error);
+                console_log(error);
                 stop();
             }
         });
@@ -109,7 +148,7 @@
             for (var i = 0, l = event.results.length; i < l; i++) {
                 var result = event.results[i][0].transcript;
                 $('h1').append($('<p>').text(result));
-                console.log(event.results[i]); // , 'Confidence: ' + event.results[i][0].confidence
+                console_log(event.results[i]); // , 'Confidence: ' + event.results[i][0].confidence
                 if (result.trim().startsWith('stop')) {
                     stop();
                 }
@@ -121,11 +160,11 @@
         }
 
         recognition.onnomatch = function (event) {
-            console.log("I didn't recognise that country.");
+            console_log("I didn't recognise that country.");
         }
 
         recognition.onerror = function (event) {
-            console.log('Error occurred in recognition: ' + event.error);
+            console_log('Error occurred in recognition: ' + event.error);
         }
     });
 
