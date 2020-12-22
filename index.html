@@ -137,8 +137,8 @@
         </div>
       </div>
       <div id="credits" class="fixed-top d-flex">
-        <div class="flex-grow-1">
-          data:&nbsp;
+        <div class="flex-grow-1 text-nowrap">
+          data:
           <span id="world" style="display: none;">
             <a href="https://github.com/pomber/covid19" target="_json-data_source" title="github.com/pomber/covid19">
               Johns Hopkins University
@@ -215,24 +215,20 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item d-flex justify-content-end">
             <div title="per capita vs. absolute numbers">
-              <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline text-nowrap">
                 <input id="toggleCapita" data-taggle-on="percapita" data-taggle-off="absolute" type="checkbox" data-toggle="toggle" data-size="xs" data-onstyle="outline-primary"
                   data-offstyle="outline-secondary">
-                <label id="toggleCapita" for="toggleCapita" class="form-check-label">
-                  &nbsp;per&nbsp;million&nbsp;
-                </label>
+                <label id="toggleCapita" for="toggleCapita" class="form-check-label px-1">per million</label>
                 <img id="toggleCapita" class="rounded float-right" type="svg" src="./img/svg/group-people-svgrepo-com.svg">
               </div>
             </div>
           </li>
           <li class="nav-item d-flex justify-content-end">
             <div title="logarithmic vs. linear Y axis">
-              <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline text-nowrap">
                 <input id="toggleLinear" data-taggle-on="logarithmic" data-taggle-off="linear" type="checkbox" data-toggle="toggle" data-size="xs" data-onstyle="outline-primary"
                   data-offstyle="outline-secondary">
-                <label id="toggleLinear" for="toggleLinear" class="form-check-label">
-                  &nbsp;log&nbsp;Y&nbsp;axis&nbsp;
-                </label>
+                <label id="toggleLinear" for="toggleLinear" class="form-check-label px-1">log Y axis</label>
                 <img id="toggleLinear" class="rounded float-right" type="svg" src="./img/svg/log.svg">
               </div>
             </div>
@@ -256,7 +252,7 @@
                 </input>
                 <label class="my-custom-control-label text-right" id="bubble" for="sizeOfAverage" style="width: 40px;"></label>
                 <!--  font-family: monospace; -->
-                <label id="average" class="my-custom-control-label mr-1"></label>
+                <label id="average" class="my-custom-control-label mr-1 text-nowrap"></label>
               </div>
             </div>
           </li>
@@ -334,7 +330,7 @@
         <span class="badge badge-secondary badge-pill badge-info">{{measure}}</span>
         {{#if (isDaily toggleCumula)}}
         {{#if (islargerThanOne sizeOfAverage)}}
-        <span class="badge badge-secondary badge-pill badge-info">{{sizeOfAverage}}&nbsp;days&nbsp;average</span>
+        <span class="badge badge-secondary badge-pill badge-info text-nowrap">{{sizeOfAverage}} days average</span>
         {{/if}}
         {{/if}}
         <span class="badge badge-secondary badge-pill badge-info">{{toggleCapita}}</span>
@@ -379,8 +375,8 @@
     <tr class="d-print-none">
       <th class="country" style="padding: 0;">
         <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="min-width: 200px; margin: -2px;">
-          <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-            &#x002B&nbsp;Add&nbsp;&hellip;
+          <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left text-nowrap" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
+            &#x002B add &hellip;
           </button>
           <button type="button" id="filterToggle" class="topTen btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="top ten"
           data-taggle-on="on" data-taggle-off="off" >

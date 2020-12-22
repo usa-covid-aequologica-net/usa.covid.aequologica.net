@@ -276,8 +276,8 @@ $(document).ready(() => {
             $("#bubble").html(sizeOfAverage);
             function averageFeedback(a) {
                 $("label#average").html(a < 2
-                    ? "day<span style='text-decoration: line-through; color: #9a9a9a;'>s&nbsp;average</span>"
-                    : "day<span>s&nbsp;average</span>"
+                    ? "day<span style='text-decoration: line-through; color: #9a9a9a;'>s average</span>"
+                    : "day<span>s average</span>"
                 );
             }
             averageFeedback(sizeOfAverage);
