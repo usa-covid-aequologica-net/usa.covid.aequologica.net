@@ -5,40 +5,48 @@ body#lui {
   
 }
 
-h1 {
+body#lui h1 {
     text-align: center;
     width:100%;
 }
 
 .box {
-  position: absolute;
+  display: inline-block;
+  /* background: #222032; 
+  color: white;*/
+  width: 30px;
+  height: 30px;
+  /* position: absolute; 
   top: 50%;
-  left: 50%;
+  left: 50%;*/
 }
 
 .object {
+  /* display: inline;*/
   display: flex;
-  flex: 0 1 100%;
+  flex: 0 1 100%; 
   justify-content: center;
   align-items: center;
   align-content: stretch;
+  position: relative;
 }
 
 .outline {
-  width: 60px;
-  height: 60px;
+  display: inline;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  border: 8px solid #b5a4a4;
+  /* border: 8px solid #b5a4a4; */
   position: absolute;
 }
 
-.button {
-  width: 120px;
-  height: 120px;
+.button#speechRecognition {
+  /* width: 120px;
+  height: 120px; */
   border-radius: 50%;
-  background: #50cddd;
+  background: white; 
   box-shadow: 0px 0px 80px #0084f9;
-  position: absolute;
+  /* position: absolute; */
 }
 
 @keyframes pulse {
@@ -53,7 +61,7 @@ h1 {
   }
 
   90% {
-    transform: scale(3.2);
+    transform: scale(3.3);
     opacity: 0.2;
     border: 3px solid #2e3cff;
   }
@@ -68,17 +76,12 @@ h1 {
   animation-delay: 1.5s;
 }
 
-#circlein {
-  width: 100px;
-  height: 100px;
+#speechRecognition {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: #6bd6e1;
+  background: white;
   box-shadow: 0px -2px 15px #e0ff94;
   position: absolute;
 }
 
-.mic-icon {
-  height: 60px;
-  position: absolute;
-  margin: 21px;
-}

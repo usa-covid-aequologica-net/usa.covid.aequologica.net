@@ -98,6 +98,7 @@
           <div class="flex-column">
             <div id="b0x0" class="">
               <span class="mr-auto mt-2 mt-lg-0" style="white-space: nowrap;">
+
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- help -->
                   <button id="info" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="reference guide"
@@ -133,6 +134,7 @@
                     </button>
                   </div>
                 </div>
+
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- twitter -->
                   <button id="twitter" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="follow on twitter">
@@ -149,6 +151,7 @@
                     </a>
                   </button>
                 </div>
+
               </span>
             </div>
           </div>
@@ -462,40 +465,40 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
   <!-- need these specific versions of popper & tippy for compatibility with bootstrap 4 -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1/dist/umd/popper.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tippy.js@5/dist/tippy-bundle.iife.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+  <!script src="https://cdn.jsdelivr.net/npm/tippy.js@5/dist/tippy-bundle.iife.min.js"></script>
+  <!script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></!script>
   <!-- / -->
-  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/js/bootstrap4-toggle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@latest/lodash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/d3@latest/dist/d3.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/moment@latest/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+  <!script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/js/bootstrap4-toggle.min.js"></!script>
+  <!script src="https://cdn.jsdelivr.net/npm/lodash@latest/lodash.min.js"></!script>
+  <!script src="https://cdn.jsdelivr.net/npm/d3@latest/dist/d3.js"></!script>
+  <!script src="https://cdn.jsdelivr.net/npm/moment@latest/moment.min.js"></!script>
+  <!script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></!script>
 
-  <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
-  <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
-  <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
-  <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></script>
+  <!script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></!script>
+  <!script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></!script>
+  <!script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></!script>
+  <!script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></!script>
 
-  <script>
+  <!script>
     // compile the handlebars templates
     var printHeaderTemplate = Handlebars.compile(document.getElementById("print-header-template").innerHTML);
     var printFooterTemplate = Handlebars.compile(document.getElementById("print-footer-template").innerHTML);
     var rowTemplate = Handlebars.compile(document.getElementById("row-template").innerHTML);
     var legendTemplate = Handlebars.compile(document.getElementById("legend-template").innerHTML);
     var tooltipTemplate = Handlebars.compile(document.getElementById("tooltip-template").innerHTML);
-  </script>
+  </!script>
 
-  <script nomodule>
-    $('#top').prepend($('<div class="alert alert-danger" role="alert">').text('This browser DOES NOT support <script type="module">'));
-  </script>
+  <!script nomodule>
+    $('#top').prepend($('<div class="alert alert-danger" role="alert">').text('This browser DOES NOT support <!script type="module">'));
+  </!script>
 
   <!-- https://github.com/doowb/sma -->
-  <!-- script src="https://cdn.jsdelivr.net/npm/sma@latest/index.js"></script -->
-  <script src="./lib/sma.js"></script>
+  <!-- script src="https://cdn.jsdelivr.net/npm/sma@latest/index.js"></!script -->
+  <!script src="./lib/sma.js"></!script>
 
   <!-- location -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
-  <script type="module" src="./js/location.js"></script>
+  <!script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></!script>
+  <!script type="module" src="./js/location.js"></!script>
   <!-- /location -->
 
   <!-- ajax feedback -->
@@ -510,7 +513,7 @@
       text-align: center;
     }
   </style>
-  <script>
+  <!script>
     $(document).ajaxStart(function (event, xhr, options) {
       // ("ajax started", event, xhr, options);
     });
@@ -523,8 +526,8 @@
       // console.log("ajax completed", event, xhr, options);
       $('#ajaxFeedback').hide();
     });
-  </script>
-  <script>
+  </!script>
+  <!script>
     // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
@@ -537,17 +540,17 @@
         document.documentElement.style.setProperty('--vh', `${vh}px`);
       }, 750)
     );
-  </script>
+  </!script>
   <!-- /ajax feedback -->
 
   <!-- swipe events -->
-  <script src="./lib/swiped-events.js"></script>
+  <!script src="./lib/swiped-events.js"></!script>
 
   <!-- 
     What's the best way to detect a 'touch screen' device using JavaScript?
     https://stackoverflow.com/a/64554195/1070215
    -->
-  <script>
+  <!script>
     function is_touch_device() {
       if ("ontouchstart" in window)
         return true;
@@ -563,18 +566,17 @@
     if (!is_touch_device()) {
       $(".only_touch_device").hide();
     }
-  </script>
+  </!script>
 
   <!-- speech -->
   <!-- script type="module" src="./pulse.js"></!-->
-  <script type="module">
+  <script>
     import m from './pulse.js';
     function onStopSpeech(qwe) {
       alert(qwe);
     }
     var x = m(onStopSpeech);
   </script>
-
   <!-- main script -->
   <script type="module" src="./js/index.js"></script>
 
@@ -599,4 +601,4 @@
 
 </body>
 
-</html>
+</html>f
