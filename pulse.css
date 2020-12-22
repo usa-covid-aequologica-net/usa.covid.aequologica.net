@@ -1,5 +1,13 @@
 body {
   background: #222032;
+  color: white;
+  font-family: monospace;
+  
+}
+
+h1 {
+    text-align: center;
+    width:100%;
 }
 
 .box {
@@ -21,9 +29,6 @@ body {
   height: 60px;
   border-radius: 50%;
   border: 8px solid #b5a4a4;
-  /* animation: pulse 3s; 
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;*/
   position: absolute;
 }
 
