@@ -195,7 +195,7 @@
       <svg id="chart"></svg>
       <!-- legend -->
       <div id="legend" class="p-1">
-        <div class="card border-secondary">
+        <div class="card border-secondary" style="overflow-x: hidden;">
           <div class="card-body text-secondary" style="padding: 0;">
             <table class="table table-sm table-hover" style="overflow-y: scroll;">
               <!-- legend-template goes here -->
@@ -268,7 +268,6 @@
                   <option value="21"></option>
                   <option value="28"></option>
                 </datalist>
-                </input>
                 <label class="my-custom-control-label text-right" id="bubble" for="sizeOfAverage" style="width: 40px;"></label>
                 <!--  font-family: monospace; -->
                 <label id="average" class="my-custom-control-label mr-1 text-nowrap"></label>
@@ -291,7 +290,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="text" style="width:100%;"></input>
+          <input type="text" style="width:100%;">
           <label></label>
         </div>
       </div>
@@ -390,36 +389,42 @@
   </script>
   <!-- legend -->
   <script id="legend-template" type="text/x-handlebars-template">
-  <thead>
-    <tr class="d-print-none">
-      <th class="country" style="padding: 0;">
-        <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="min-width: 200px; margin: -2px;">
-          <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left text-nowrap" title="add country" data-toggle="modal" data-target="#modalCountryPicker">
-            &#x002B add &hellip;
-          </button>
-          <button type="button" id="filterToggle" class="topTen btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="top ten"
-          data-taggle-on="on" data-taggle-off="off" >
-            <img id="filter" style="width: 16px; height:auto;" src="./img/svg/filter-svgrepo-com.svg">
-            <img id="eye" style="width: 20px; height:auto;" src="./img/svg/eye-svgrepo-com.svg" style="display:none;">
-            <sup>10</sup>
-          </button>
-          <button type="button" id="legendToggle" class="btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="fold / unfold legend">
-            <img id="legendToggleOpen" style="width: 14px; height:auto" src="./img/svg/chevron-down-svgrepo-com.svg">
-            <img id="legendToggleClosed" style="width: 14px; height:auto;" src="./img/svg/chevron-up-svgrepo-com.svg">
-          </button>
-          <button type="button" id="populationToggle" class="btn btn-sm border-top-0 _border-bottom-0 _border-right-0 btn-outline-secondary" title="toggle population column visibility">
-            <img id="populationToggleOpen" style="width: 12px; height:auto" src="./img/svg/chevron-left-svgrepo-com.svg">
-            <img id="populationToggleClosed" style="width: 12px; height:auto;" src="./img/svg/chevron-right-svgrepo-com.svg">
-          </button></div>
+    <thead>
+      <tr class="d-print-none">
+          <th class="country" style="padding: 0;">
+              <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="min-width: 200px; margin: -2px;">
+                  <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left text-nowrap" title="add country" data-toggle="modal"
+                      data-target="#modalCountryPicker">
+                      <span style="font-size: 18p; font-weight: bolder;">+</span>
+                  </button>
+                  <!-- <button type="button" id="qwe" class="qwe btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="qwe">
+                    <img id="qwe" style="width: 16px; height:auto;" src="./img/svg/microphone-2.svg">
+                  </button> -->
+                  <button type="button" id="filterToggle" class="topTen btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="top ten" data-taggle-on="on"
+                      data-taggle-off="off">
+                      <img id="filter" style="width: 16px; height:auto;" src="./img/svg/filter-svgrepo-com.svg">
+                      <img id="eye" style="width: 20px; height:auto;" src="./img/svg/eye-svgrepo-com.svg" style="display:none;">
+                      <!-- <sup>10</sup> -->
+                  </button>
+                  <button type="button" id="legendToggle" class="btn border-top-0 _border-bottom-0 btn-sm btn-outline-secondary" title="fold / unfold legend">
+                      <img id="legendToggleOpen" style="width: 14px; height:auto" src="./img/svg/chevron-down-svgrepo-com.svg">
+                      <img id="legendToggleClosed" style="width: 14px; height:auto;" src="./img/svg/chevron-up-svgrepo-com.svg">
+                  </button>
+                  <button type="button" id="populationToggle" class="btn btn-sm border-top-0 _border-bottom-0 _border-right-0 btn-outline-secondary"
+                      title="toggle population column visibility">
+                      <img id="populationToggleOpen" style="width: 12px; height:auto" src="./img/svg/chevron-left-svgrepo-com.svg">
+                      <img id="populationToggleClosed" style="width: 12px; height:auto;" src="./img/svg/chevron-right-svgrepo-com.svg">
+                  </button>
+              </div>
           </th>
-      </th>
-      <th class="legend_population border-bottom px-1" {{{pop-style}}}>
-        population
-        <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
-      </th>
-    </tr>
-  </thead>
-  <tbody data-folded=false>
+          </th>
+          <th class="legend_population border-bottom px-1" {{{pop-style}}}>
+              population
+              <a target="_population-by-country" href="https://www.worldometers.info/world-population/population-by-country/">&#x24D8;</a>
+          </th>
+      </tr>
+    </thead>
+    <tbody data-folded=false>
     {{#each @root}}
     <tr>
       <td class="country" id="{{name}}" name="{{name}}" {{{color name}}}>
@@ -570,7 +575,7 @@
   <script type="module">
     import pulse from './pulse.js';
     function onSpeechConsole(...args) {
-        console.log(...args);
+      console.log(...args);
     }
     function onSpeechStart() {
     }
