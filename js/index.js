@@ -96,6 +96,22 @@ $(document).ready(() => {
 
         }
 
+        // speech
+        window.ps.subscribe('COUNTRY', (e) => {
+            console.log(e);
+            if (!e) return;
+            e = e.trim();
+            if (e == 'reset') {
+            } else {
+                const qwe = model.getCountriesHolder().getAsObject(e);
+                if (qwe.code != 'XX') {
+                    console.log("FOUND!!!!", qwe);
+                    model.getCountriesHolder().write([qwe.name]);
+                    redraw(model.getCountriesHolder().get());
+                }
+            }
+        });
+    
         // start date
         {
             const startDate = model.getStartDate();

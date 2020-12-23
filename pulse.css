@@ -10,7 +10,7 @@ body#lui h1 {
     width:100%;
 }
 
-.box {
+.pulseBox {
   display: inline-block;
   /* background: #222032; 
   color: white;*/
@@ -21,7 +21,7 @@ body#lui h1 {
   left: 50%;*/
 }
 
-.object {
+.pulseObject {
   /* display: inline;*/
   display: flex;
   flex: 0 1 100%; 
@@ -31,7 +31,7 @@ body#lui h1 {
   position: relative;
 }
 
-.outline {
+.pulseOutline {
   display: inline;
   width: 30px;
   height: 30px;

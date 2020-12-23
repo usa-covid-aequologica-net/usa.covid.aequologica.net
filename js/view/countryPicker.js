@@ -9,8 +9,6 @@ let selector;
 let $table_sorter;
 let dirty;
 
-let emptyThenAppend;
-
 export function init(...args) {
     const [countriesHolderParam, tableSelector] = args;
 

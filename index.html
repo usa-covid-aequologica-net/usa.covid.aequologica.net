@@ -115,11 +115,11 @@
 
                 <!-- speech -->
                 <!-- <span aria-hidden="true"><img src="./img/svg/microphone-svgrepo-com.svg"></span> -->
-                <div class="box btn-group" role="group">
-                  <div class="object" style="top: 14px; z-index:1234;">
-                    <div class="outline">
+                <div class="pulseBox btn-group" role="group">
+                  <div class="pulseObject" style="top: 14px; z-index:1234;">
+                    <div class="pulseOutline">
                     </div>
-                    <div class="outline" id="delayed">
+                    <div class="pulseOutline" id="delayed">
                     </div>
                     <button id="speechRecognition" type="button" role="button" class="btn btn-sm btn-outline-secondary">
                       <!--  onclick="javascript:alert('work in progress!');" -->
@@ -133,6 +133,7 @@
                     </button>
                   </div>
                 </div>
+
                 <div class="btn-group" role="group" aria-label="Basic example">
                   <!-- twitter -->
                   <button id="twitter" type="button" role="button" class="btn btn-sm btn-outline-secondary" title="follow on twitter">
@@ -567,12 +568,16 @@
 
   <!-- speech -->
   <!-- script type="module" src="./pulse.js"></!-->
+  <script src="./wavetable.js"></script>
   <script type="module">
     import m from './pulse.js';
-    function onStopSpeech(qwe) {
-      alert(qwe);
+    function onSpeechStop(list) {
+      alert(list);
     }
-    var x = m(onStopSpeech);
+    function onSpeechResult(result) {
+      window.ps.publish('COUNTRY', result);
+    }
+    var x = m(onSpeechStop, onSpeechResult);
   </script>
 
   <!-- main script -->

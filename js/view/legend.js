@@ -230,10 +230,16 @@ export function Legend() {
                 feedbackSelectedCountry(newSelectedCountry);
             });
 
-            /* window.ps.subscribe(pubSubKey, (e) => {
-                console.log("received " + e);
-            }); */
-
+            window.ps.subscribe(pubSubKey, (e) => {
+                console.log("received " + e.event);
+                if (e.event == 'UP') {
+                    const newSelectedCountry = model.selectionUp();
+                    feedbackSelectedCountry(newSelectedCountry);
+                } else if (e.event == 'DOWN'){
+                    const newSelectedCountry = model.selectionDown();
+                    feedbackSelectedCountry(newSelectedCountry);
+                }
+            });
         }
     }
 }
