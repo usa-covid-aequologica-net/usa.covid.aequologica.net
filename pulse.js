@@ -112,7 +112,7 @@ export default function (onStop, onResult) {
       SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
     var grammar =
-      "#JSGF V1.0; grammar colors; public <country> = St. Vincent & Grenadines | France | Italy ;";
+      "#JSGF V1.0; grammar countries;";
 
     var recognition = new SpeechRecognition();
     var speechRecognitionList = new SpeechGrammarList();

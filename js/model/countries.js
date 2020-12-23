@@ -131,6 +131,7 @@ export function Countries() {
             return selectedCountry;
         },
         get: () => countries,
+        getAsObject: getCountryObject,
         getAsMap: getCountryObjectMap,
         getAsArray: getCountryObjectArray,
         set: countrays => {

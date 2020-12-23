@@ -570,14 +570,14 @@
   <!-- script type="module" src="./pulse.js"></!-->
   <script src="./wavetable.js"></script>
   <script type="module">
-    import m from './pulse.js';
+    import pulse from './pulse.js';
     function onSpeechStop(list) {
       alert(list);
     }
     function onSpeechResult(result) {
       window.ps.publish('COUNTRY', result);
     }
-    var x = m(onSpeechStop, onSpeechResult);
+    pulse(undefined, onSpeechResult);
   </script>
 
   <!-- main script -->
