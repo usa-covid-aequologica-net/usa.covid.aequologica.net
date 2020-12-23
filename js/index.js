@@ -97,17 +97,18 @@ $(document).ready(() => {
         }
 
         // speech
-        window.ps.subscribe('COUNTRY', (e) => {
-            console.log(e);
+        window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
             e = e.trim();
             if (e == 'reset') {
             } else {
                 const qwe = model.getCountriesHolder().getAsObject(e);
                 if (qwe.code != 'XX') {
-                    console.log("FOUND!!!!", qwe);
+                    console.log("FOUND !!!!", qwe);
                     model.getCountriesHolder().write([qwe.name]);
                     redraw(model.getCountriesHolder().get());
+                } else {
+                    console.log("NOT FOUND #### ", e);
                 }
             }
         });

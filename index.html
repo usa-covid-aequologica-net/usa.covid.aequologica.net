@@ -116,7 +116,7 @@
                 <!-- speech -->
                 <!-- <span aria-hidden="true"><img src="./img/svg/microphone-svgrepo-com.svg"></span> -->
                 <div class="pulseBox btn-group" role="group">
-                  <div class="pulseObject" style="top: 14px; z-index:1234;">
+                  <div class="pulseObject" style="z-index:1234;">
                     <div class="pulseOutline">
                     </div>
                     <div class="pulseOutline" id="delayed">
@@ -567,17 +567,20 @@
   </script>
 
   <!-- speech -->
-  <!-- script type="module" src="./pulse.js"></!-->
-  <script src="./wavetable.js"></script>
   <script type="module">
     import pulse from './pulse.js';
-    function onSpeechStop(list) {
-      alert(list);
+    function onSpeechConsole(...args) {
+        console.log(...args);
+    }
+    function onSpeechStart() {
     }
     function onSpeechResult(result) {
-      window.ps.publish('COUNTRY', result);
+      window.ps.publish('COMMAND', result);
     }
-    pulse(undefined, onSpeechResult);
+    function onSpeechStop(error) {
+      if (error) console.log(error);
+    }
+    pulse(onSpeechConsole, onSpeechStart, onSpeechResult, onSpeechStop);
   </script>
 
   <!-- main script -->

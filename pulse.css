@@ -11,12 +11,12 @@ body#lui h1 {
 }
 
 .pulseBox {
-  display: inline-block;
-  /* background: #222032; 
+  /* display: inline-block;
+  background: #222032; 
   color: white;*/
-  width: 30px;
-  height: 30px;
-  /* position: absolute; 
+  width: 40px;
+  /* height: 22px;
+  position: absolute; 
   top: 50%;
   left: 50%;*/
 }
@@ -33,8 +33,8 @@ body#lui h1 {
 
 .pulseOutline {
   display: inline;
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   /* border: 8px solid #b5a4a4; */
   position: absolute;
@@ -45,6 +45,7 @@ body#lui h1 {
   height: 120px; */
   border-radius: 50%;
   background: white; 
+  box-sizing: unset;
   box-shadow: 0px 0px 80px #0084f9;
   /* position: absolute; */
 }
@@ -77,9 +78,10 @@ body#lui h1 {
 }
 
 #speechRecognition {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
+  box-sizing: unset;
   background: white;
   box-shadow: 0px -2px 15px #e0ff94;
   position: absolute;

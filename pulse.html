@@ -61,6 +61,25 @@
     </footer>
 </body>
 
-<script type="module" src="./pulse.js"></script>
+<script type="module">
+    import pulse from './pulse.js';
+    function isString(x) {
+        return Object.prototype.toString.call(x) === "[object String]";
+    }
+    function onSpeechConsole(...args) {
+        console.log(...args);
+        if (isString(args[0])) $("footer span#console").text(args[0]);
+    }
+    function onSpeechStart() {
+        $("body#lui h1").html('&hellip;');
+    }
+    function onSpeechResult(result) {
+        $("body#lui h1").append($('<div>').text(result));
+    }
+    function onSpeechStop(error) {
+        if (error) console.log(error);
+    }
+    pulse(onSpeechConsole, onSpeechStart, onSpeechResult, onSpeechStop);
+</script>
 
 </html>
