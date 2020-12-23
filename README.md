@@ -137,6 +137,10 @@ Adding or removing countries from the list with the country picker modal dialog 
 
 On mobile devices, left and right swipe gestures will toggle _total/daily_ and _confirmed/deaths_ categories.
 
+### Speech Recognition
+
+Yes we can ! ![Google Analytics geo map of frequentation](./img/svg/microphone-svgrepo-com.svg)
+
 
 ## Some analytics
 
