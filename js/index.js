@@ -156,7 +156,7 @@ $(document).ready(() => {
         }
         {
             const cumulat = model.getToggle("toggleCumula");
-            $("#cumulat").parent().parent().attr("data-color", cumulat);
+            $("#cumulat").parent().attr("data-color", cumulat);
             $("#cumulat").html(cumulat);
             $('#cumulaGroup .dropdown-toggle').dropdown();
             cumula2averageFeedback(cumulat === "total");
@@ -165,7 +165,7 @@ $(document).ready(() => {
                 const newCumula = $(e.currentTarget).data("type");
                 if (odlCumula !== newCumula) {
                     model.setToggle("toggleCumula", newCumula);
-                    $("#cumulat").parent().parent().attr("data-color", newCumula);
+                    $("#cumulat").parent().attr("data-color", newCumula);
                     $("#cumulat").html(newCumula);
                     cumula2averageFeedback(newCumula === "total");
                     redraw();
@@ -180,7 +180,7 @@ $(document).ready(() => {
         }
         {
             const measure = model.getMeasure();
-            $("#measure").parent().parent().attr("data-color", measure.getType());
+            $("#measure").parent().attr("data-color", measure.getType());
             $("#measure").html(measure.getType());
             $('#mesureGroup .dropdown-toggle').dropdown();
             measure2deathsFeedback(measure.getType() !== "deaths");
@@ -189,7 +189,7 @@ $(document).ready(() => {
                 const newMeasure = $(e.currentTarget).data("type");
                 if (oldMeasure != newMeasure) {
                     measure.setType(newMeasure);
-                    $("#measure").parent().parent().attr("data-color", newMeasure);
+                    $("#measure").parent().attr("data-color", newMeasure);
                     $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
                     redraw();

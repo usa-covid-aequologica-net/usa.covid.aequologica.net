@@ -68,8 +68,8 @@
           <!-- TITLE -->
           <div id="top3"></div>
           <div id="title" class="btn-group m-1 p-2 d-none d-md-inline">COVID-19</div>
-          <div id="cumulaGroup" class="btn-group" title="total numbers vs. daily new" data-color="">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="background-color: transparent;"><span id="cumulat"></span></button>
+          <div id="cumulaGroup" class="btn-group" title="total numbers vs. daily new" >
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-color=""><span id="cumulat"></span></button>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="sr-only">Toggle Dropdown</span>
             </button>
@@ -79,9 +79,9 @@
               <div class="text-right text-secondary font-italic only_touch_device" style="font-size: smaller; color:gray;">(swipe horizontally to toggle)</div>
             </div>
           </div>
-          <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths" data-color="">
+          <div id="mesureGroup" class="btn-group" title="confirmed vs. deaths" >
             <!--  vs. recovered -->
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="background-color: transparent;"><span id="measure"></span></button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-color=""><span id="measure"></span></button>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="sr-only">Toggle Dropdown</span>
             </button>
@@ -217,7 +217,7 @@
   <!-- footer -->
   <footer class="footer">
     <nav id="bottom" class="navbar fixed-bottom navbar-expand-sm d-flex">
-      <form class="navbar-itemform-inline flex-grow-1">
+      <form class="navbar-item form-inline flex-grow-1">
         <div class="custom-control custom-control-inline d-flex">
           <label id="startFeedback" class="my-custom-control-label flex-shrink-1 mr-3"><span></span></label>
           <input type="range" id="startRangeInput" step="1" min="1" max="366" value="1" class="w-100 custom-range" />

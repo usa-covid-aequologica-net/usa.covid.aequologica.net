@@ -148,18 +148,27 @@ Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celti
   color: white;
 }
 #top [data-color="total"] {
-  color: white;
-  background-color: #df0024;
+  color: white !important;
+  background-color: #df0024 !important;
 }
 #top [data-color="daily"] {
-  color: white;
-  background-color: #f3c300;
+  color: white !important;
+  background-color: #f3c300 !important;
 }
 #top [data-color="confirmed"] {
-  color: white;
-  background-color: #00ac9f;
+  color: white !important;
+  background-color: #00ac9f !important;
 }
 #top [data-color="deaths"] {
-  color: white;
-  background-color: #2e6db4;
+  color: white !important;
+  background-color: #2e6db4 !important;
+}
+
+#top button:hover > a {
+  color: rgb(230, 250, 240);
+}
+
+#top button,
+#bottom button {
+  border-color: silver;
 }
