@@ -56,9 +56,6 @@ export default function (onConsole, onStart, onResult, onStop) {
     recognition.lang = "en-US";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
-    //     recognition.lang = 'fr-FR';
-    //     recognition.continuous = true;
-    //     recognition.InterimResults = true;
 
     $("[role='button']#speechRecognition").on("click", function () {
       try {
@@ -74,27 +71,18 @@ export default function (onConsole, onStart, onResult, onStop) {
     });
 
     recognition.onresult = function (event) {
-      // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
-      // The SpeechRecognitionResultList object contains SpeechRecognitionResult objects.
-      // It has a getter so it can be accessed like an array
-      // The first [0] returns the SpeechRecognitionResult at the last position.
-      // Each SpeechRecognitionResult object contains SpeechRecognitionAlternative objects that contain individual results.
-      // These also have getters so they can be accessed like arrays.
-      // The second [0] returns the SpeechRecognitionAlternative at position 0.
-      // We then return the transcript property of the SpeechRecognitionAlternative object
-      for (var i = 0, l = event.results.length; i < l; i++) {}
       if (0 < event.results.length) {
-        var i = event.results.length - 1;
-        var result = event.results[i][0].transcript.trim();
-        if (result.startsWith("stop")) {
+        const lastResult = event.results[event.results.length - 1];
+        var transcript = lastResult[0].transcript.trim();
+        if (transcript.startsWith("stop")) {
           doStop();
         } else {
-          onConsole(
-            result,
-            "Confidence: " + event.results[i][0].confidence,
-            event.results[i]
+          if (onConsole) onConsole(
+            transcript,
+            "Confidence: " + lastResult[0].confidence,
+            lastResult
           );
-          if (onResult) onResult(result);
+          if (onResult) onResult(transcript);
         }
       }
     };
