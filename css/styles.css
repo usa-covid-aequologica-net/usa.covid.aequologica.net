@@ -98,6 +98,7 @@ footer #bottom label {
 
 footer #bottom label#startFeedback {
   min-width: 120px;
+  line-height: 22px;
   text-align: right !important;
   background-image: url(/img/svg/left-arrow-svgrepo-com.svg);
   background-repeat: no-repeat;
