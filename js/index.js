@@ -334,19 +334,6 @@ $(document).ready(() => {
         }).on('hidden.bs.modal', () => {
         });
 
-        // facebook
-        $("#facebook").on("click", function () {
-            buildPermalink(model).then(permalink => {
-                FB.ui({
-                    method: 'share',
-                    href: permalink,
-                    display: 'popup',
-                    quote: permalink,
-                    hashtag: "#COVID19"
-                }, function (response) { });
-            });
-        });
-
         // location
         {
             const $location = $("header #location");
@@ -372,6 +359,7 @@ $(document).ready(() => {
                 }
             });
         }
+
         // get the data
         {
             model.fetchData(result => {
@@ -383,21 +371,6 @@ $(document).ready(() => {
                 redraw();
 
                 const $printModal = $('.modal#printModal');
-
-                /*
-                setupShare(
-                    params.PRINT,
-                    model,
-                    {
-                        $printModal: $printModal,
-                        $iframeWrapper: $printModal.find('#iframeWrapper'),
-                        $counter: $printModal.find('#counter'),
-                        $sendButton: $printModal.find('#send'),
-                    },
-                    buildPermalink,
-                    params.printMarker,
-                );
-                */
 
             });
         }

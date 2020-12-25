@@ -3,53 +3,61 @@
 
 "use strict";
 
-const gram = ohm.grammar(`Test {
-  Line = Command | Action 
-
-  Command = Reset
-  Action = (Add | Remove) Countries | Select Country
+export default function Grammar(countries) {
+  const formatCountries = '"' + countries.join('" | "') + '"';
+  const grammarAsString = `Test {
+    Line = Command | Action 
   
-  Countries = ALL | Country+ 
-  
-  ALL = "all"
-  Add = "add"
-  Remove = "remove"
-  Reset = "reset"
-  Select = "select"
-  
-  Country = "Germany" | "South Korea" | "France" | "United States" 
-}`);
+    Command = Reset
+    Action = (Add | Remove) Countries | Select Country
+    
+    Countries = ALL | Country+ 
+    
+    ALL = "all"
+    Add = "add"
+    Remove = "remove"
+    Reset = "reset"
+    Select = "select"
+    
+    Country = ${formatCountries}
+  }`;
+  console.log(grammarAsString);
+  const g = ohm.grammar(grammarAsString);
 
-const process = {
-  Line(one) {  
-    return one.process();
-  },
-  Command(one) {
-    return {action: one.sourceString.toUpperCase(), argument: null};
-  },
-  Action(one, two) {  
-    return {action: one.sourceString.toUpperCase(), argument: two.process()};
-  },
-  Country(_) {
-    return this.sourceString;
-  },
-};
+  const process = {
+    Line(one) {
+      return one.process();
+    },
+    Command(one) {
+      return { action: one.sourceString.toUpperCase(), argument: null };
+    },
+    Action(one, two) {
+      return {
+        action: one.sourceString.toUpperCase(),
+        argument: two.process(),
+      };
+    },
+    Country(_) {
+      return this.sourceString;
+    },
+  };
 
-const s = gram.createSemantics();
+  const s = g.createSemantics();
 
-s.addOperation('process', process);
+  s.addOperation("process", process);
 
-const matchResult0 = gram.match('reset');
-const matchResult1 = gram.match('add France Germany');
-const matchResult2 = gram.match('remove United States South Korea');
-const matchResult3 = gram.match('select France');
-
-console.log(s(matchResult0).process());
-console.log(s(matchResult1).process());
-console.log(s(matchResult2).process());
-console.log(s(matchResult3).process());
-
-export default function Grammar() {
   return {
+    process: (line) => {
+      const r = g.match(line);
+      if (r.failed()) {
+        throw "cannot parse |"+line+"|"
+      } 
+      if (r.succeeded()){
+        const result = s(r).process();
+        window.ps.publish('COMMAND', result);
+        return result;
+      }
+      return "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";
+    },
   };
 }

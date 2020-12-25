@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -27,15 +28,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@latest/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/ohm-js@latest/dist/ohm.js"></script>
 </head>
 
-<body id="balast">
+<body id="gram">
 </body>
 
 <script type="module">
     import Grammar from './gram.js';
+    import { populationByCountry } from './js/model/population.js';
+
+    const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
+
+    const gram = new Grammar(countries);
+
+    window.ps.subscribe('COMMAND', (e) => {
+        if (!e) return;
+        console.log(e);
+    });
+
+    try {
+        // OKs
+        gram.process("reset");
+        gram.process("add France Germany");
+        gram.process("remove United States South Korea");
+        gram.process("select Montenegro");
+        // NOKs
+        gram.process("blah")
+    } catch (error) {
+        console.log(error);
+    }
+
 </script>
 
 </html>
