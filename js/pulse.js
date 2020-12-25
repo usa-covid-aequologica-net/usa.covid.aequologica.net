@@ -99,8 +99,8 @@ export default function (onConsole, onStart, onResult, onStop) {
               );
             if (onResult) onResult(transcript);
           } else {
-            toastr.info(transcript);
           }
+          toastr.info(transcript);
         }
       }
     };
