@@ -56,7 +56,7 @@ export default function Grammar(countries) {
     processLine: line => {
       const r = g.match(line);
       if (r.failed()) {
-        throw "cannot parse '" + line + "'";
+        throw "'" + line + "' is not a valid command line";
       }
       if (r.succeeded()) {
         return new Promise(resolve => {
@@ -65,7 +65,7 @@ export default function Grammar(countries) {
           resolve(result);
         });
       }
-      return "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";
+      throw "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";
     },
   };
 }

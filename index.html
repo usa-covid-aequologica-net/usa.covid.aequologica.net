@@ -600,11 +600,10 @@
     }
     function onSpeechResult(result) {
       try {
-        gram.processLine(result);
-        return true;
+        return gram.processLine(result);
       } catch (error) {
         fart.play();
-        return false;
+        return null;
       }
     }
     function onSpeechStop(error) {
