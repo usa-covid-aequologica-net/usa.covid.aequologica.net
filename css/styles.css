@@ -172,3 +172,7 @@ Cadmium Red (#DF0024), Golden Poppy (#F3C300), Persian Green (#00AC9F) and Celti
 #bottom button {
   border-color: silver;
 }
+
+.toast-bottom-right {
+  bottom: 30px;
+}

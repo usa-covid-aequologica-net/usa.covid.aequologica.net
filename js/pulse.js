@@ -86,22 +86,24 @@ export default function (onConsole, onStart, onResult, onStop) {
     recognition.onresult = function (event) {
       if (0 < event.results.length) {
         const lastResult = event.results[event.results.length - 1];
-        var transcript = lastResult[0].transcript.trim();
+        const transcript = lastResult[0].transcript.trim();
+        const confidence = lastResult[0].confidence;
         if (transcript.startsWith("stop")) {
           doStop();
         } else {
           if (lastResult.isFinal) {
-            if (onResult) onResult(transcript);
+            if (onResult) {
+              if (onResult(transcript)) {
+                toastr.success(transcript);
+              } else {
+                toastr.error(transcript);
+              }
+            }
           } else {
-            ;
+            if (onConsole)
+              onConsole(transcript, "Confidence: " + confidence, lastResult);
+            toastr.info(transcript);
           }
-          if (onConsole)
-            onConsole(
-              transcript,
-              "Confidence: " + lastResult[0].confidence,
-              lastResult
-            );
-          toastr.info(transcript);
         }
       }
     };

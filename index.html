@@ -278,8 +278,6 @@
         </ul>
       </div>  
     </nav>
-    <div id="console" class="text-muted fixed-bottom" style="width: 100%;">console</div>
-    <!-- navbar fixed-bottom navbar-expand-sm d-flex -->
   </footer>
   <!-- modals  -->
   <!-- modal for permalink  -->
@@ -597,15 +595,16 @@
 
     function onSpeechConsole(...args) {
       console.log(...args);
-      $("footer #console").text(args[0]);
     }
     function onSpeechStart() {
     }
     function onSpeechResult(result) {
       try {
         gram.process(result);
+        return true;
       } catch (error) {
         fart.play();
+        return false;
       }
     }
     function onSpeechStop(error) {
