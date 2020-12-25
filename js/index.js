@@ -8,6 +8,8 @@ import { parseParams } from './model/queryStringParser.js';
 import { buildPermalink } from './model/permalink.js';
 import { store } from './model/yetAnotherLocalStorageWrapper.js';
 import { Carousel } from './model/carousel.js';
+import { populationByCountry } from './model/population.js';
+import { domain } from './model/domain.js';
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -96,37 +98,48 @@ $(document).ready(() => {
 
         }
 
+        // speech
         window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
             if (e.action == 'RESET') {
                 return;
             } 
             if (e.action == "SELECT") {
+                model.getCountriesHolder().setSelectedCountry(e.argument);
                 return;
             } 
             // https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848
             if (e.action == "ADD" || e.action == "PLUS") {
-                // 
-                const union = [...e.argument, ...model.getCountriesHolder().get()];
-                if (union.length > 0) {
-                    model.getCountriesHolder().write(union);
-                    redraw(model.getCountriesHolder().get());
-                }
+                let union = [];
+                if (Array.isArray(e.argument)) { // array of countries
+                    union = [...e.argument, ...model.getCountriesHolder().get()];
+                } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
+                    union = _.map(populationByCountry[domain], "name");
+                } 
+                model.getCountriesHolder().write(union);
+                redraw(model.getCountriesHolder().get());
+                return;
             } 
             if (e.action == "REMOVE") {
-                const difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
-                if (difference.length > 0) {
-                    model.getCountriesHolder().write(difference);
-                    redraw(model.getCountriesHolder().get());
-                }
+                let difference = [];
+                if (Array.isArray(e.argument)) { // array of countries
+                    difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
+                } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
+                    ;
+                } 
+                model.getCountriesHolder().write(difference);
+                redraw(model.getCountriesHolder().get());
                 return;
             } 
             if (e.action == "SET") {
-                const set = e.argument;
-                if (set.length > 0) {
-                    model.getCountriesHolder().write(set);
-                    redraw(model.getCountriesHolder().get());
-                }
+                let set = [];
+                if (Array.isArray(e.argument)) { // array of countries
+                    set = e.argument;
+                } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
+                    set = _.map(populationByCountry[domain], "name");
+                } 
+                model.getCountriesHolder().write(set);
+                redraw(model.getCountriesHolder().get());
                 return;
             }
         

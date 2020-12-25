@@ -53,9 +53,12 @@
     // OKs
     gram.process("reset");
     gram.process("France Germany");
+    gram.process("add France");
     gram.process("add France Germany");
     gram.process("remove United States South Korea");
     gram.process("select Montenegro");
+    gram.process("remove all");
+    gram.process("all");
     // NOKs
     try {
         gram.process("blah");

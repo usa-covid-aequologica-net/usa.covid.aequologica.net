@@ -13,7 +13,7 @@ export default function Grammar(countries) {
     
     Countries = ALL | Country+ 
     
-    ALL = "all"
+    ALL = "all" | "All"
     Add = "Add" | "add" | "Plus" | "plus" 
     Remove = "Remove" | "remove" | "Minus" | "minus"
     Reset = "reset"
@@ -37,6 +37,9 @@ export default function Grammar(countries) {
         argument: two.process(),
       };
     },
+    ALL(_) {
+      return "ALL";
+    },
     Country(_) {
       return this.sourceString;
     },
@@ -54,9 +57,11 @@ export default function Grammar(countries) {
       }
       if (r.succeeded()) {
         const result = s(r).process();
-        if (Array.isArray(result)) {
+        if (Array.isArray(result)) { // array of countries
           window.ps.publish("COMMAND", { action: "SET", argument: result });
-        } else {
+        } else if (typeof result === "string" && result === "ALL") { // ALL
+          window.ps.publish("COMMAND", { action: "SET", argument: result });
+        } else if (typeof result === 'object') { // object
           window.ps.publish("COMMAND", result);
         }
         return result;
