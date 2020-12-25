@@ -580,6 +580,8 @@
     import Grammar from './js/gram.js';
     import { populationByCountry } from './js/model/population.js';
 
+    toastr.info('toastr looks OK');
+
     const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
 
     const gram = new Grammar(countries);
