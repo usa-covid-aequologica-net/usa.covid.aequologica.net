@@ -276,8 +276,10 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div>  
     </nav>
+    <div id="console" class="text-muted fixed-bottom" style="width: 100%;">console</div>
+    <!-- navbar fixed-bottom navbar-expand-sm d-flex -->
   </footer>
   <!-- modals  -->
   <!-- modal for permalink  -->
@@ -595,6 +597,7 @@
 
     function onSpeechConsole(...args) {
       console.log(...args);
+      $("footer #console").text(args[0]);
     }
     function onSpeechStart() {
     }

@@ -68,7 +68,7 @@
     }
     function onSpeechConsole(...args) {
         console.log(...args);
-        if (isString(args[0])) $("footer span#console").text(args[0]);
+        if (isString(args[0])) $("footer #console").text(args[0]);
     }
     function onSpeechStart() {
         $("body#lui h1").html('&hellip;');

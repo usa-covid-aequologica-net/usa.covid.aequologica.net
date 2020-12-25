@@ -69,17 +69,17 @@ export default function (onConsole, onStart, onResult, onStop) {
     });
 
     toastr.options = {
-      "closeButton": false,
-      "debug": false,
-      "newestOnTop": true,
-      "progressBar": false,
-      "positionClass": "toast-bottom-right",
-      "preventDuplicates": true,
-      "onclick": null,
-      "showDuration": "0",
-      "hideDuration": "0",
-      "timeOut": "2000",
-      "extendedTimeOut": "5000",
+      closeButton: false,
+      debug: false,
+      newestOnTop: true,
+      progressBar: false,
+      positionClass: "toast-bottom-right",
+      preventDuplicates: true,
+      onclick: null,
+      showDuration: "0",
+      hideDuration: "0",
+      timeOut: "2000",
+      extendedTimeOut: "5000",
       "background-image": "none !important",
     };
 
@@ -91,15 +91,16 @@ export default function (onConsole, onStart, onResult, onStop) {
           doStop();
         } else {
           if (lastResult.isFinal) {
-            if (onConsole)
-              onConsole(
-                transcript,
-                "Confidence: " + lastResult[0].confidence,
-                lastResult
-              );
             if (onResult) onResult(transcript);
           } else {
+            ;
           }
+          if (onConsole)
+            onConsole(
+              transcript,
+              "Confidence: " + lastResult[0].confidence,
+              lastResult
+            );
           toastr.info(transcript);
         }
       }
