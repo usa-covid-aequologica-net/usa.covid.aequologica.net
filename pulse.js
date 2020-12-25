@@ -1,7 +1,5 @@
 export default function (onConsole, onStart, onResult, onStop) {
-
   $(document).ready(function () {
- 
     function showStart() {
       $(".pulseOutline").css({
         color: "blue",
@@ -54,7 +52,7 @@ export default function (onConsole, onStart, onResult, onStop) {
     recognition.grammars = speechRecognitionList;
     recognition.continuous = true;
     recognition.lang = "en-US";
-    recognition.interimResults = false;
+    recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
     $("[role='button']#speechRecognition").on("click", function () {
@@ -70,6 +68,21 @@ export default function (onConsole, onStart, onResult, onStop) {
       }
     });
 
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": false,
+      "positionClass": "toast-bottom-right",
+      "preventDuplicates": true,
+      "onclick": null,
+      "showDuration": "0",
+      "hideDuration": "0",
+      "timeOut": "2000",
+      "extendedTimeOut": "5000",
+      "background-image": "none !important",
+    };
+
     recognition.onresult = function (event) {
       if (0 < event.results.length) {
         const lastResult = event.results[event.results.length - 1];
@@ -77,12 +90,17 @@ export default function (onConsole, onStart, onResult, onStop) {
         if (transcript.startsWith("stop")) {
           doStop();
         } else {
-          if (onConsole) onConsole(
-            transcript,
-            "Confidence: " + lastResult[0].confidence,
-            lastResult
-          );
-          if (onResult) onResult(transcript);
+          if (lastResult.isFinal) {
+            if (onConsole)
+              onConsole(
+                transcript,
+                "Confidence: " + lastResult[0].confidence,
+                lastResult
+              );
+            if (onResult) onResult(transcript);
+          } else {
+            toastr.info(transcript);
+          }
         }
       }
     };
@@ -101,7 +119,12 @@ export default function (onConsole, onStart, onResult, onStop) {
     recognition.onerror = function (event) {
       recognizing = false;
       showStop();
-      if (onConsole) onConsole("Stopped - Error occurred in recognition: ", event.error, event);
+      if (onConsole)
+        onConsole(
+          "Stopped - Error occurred in recognition: ",
+          event.error,
+          event
+        );
       if (onStop) onStop(event.error);
     };
   });

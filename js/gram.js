@@ -17,8 +17,8 @@ export default function Grammar(countries) {
     
     ALL = "All" | "all"
     Set = "Set" | "set"
-    Add = "Add" | "add" | "Plus" | "plus" 
-    Remove = "Remove" | "remove" | "Minus" | "minus"
+    Add = "Add" | "add" | "Plus" | "plus" | "+"
+    Remove = "Remove" | "remove" | "Minus" | "minus" | "-"
     Reset = "Reset" | "reset"
     Select = "Select" | "select" | "Show" | "show" | "To" | "to"
     

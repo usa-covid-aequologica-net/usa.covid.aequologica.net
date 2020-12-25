@@ -110,7 +110,7 @@ $(document).ready(() => {
                 return;
             } 
             // https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848
-            if (e.action == "ADD" || e.action == "PLUS") {
+            if (e.action == "ADD" || e.action == "PLUS" || e.action == "+") {
                 let union = [];
                 if (Array.isArray(e.argument)) { // array of countries
                     union = [...e.argument, ...model.getCountriesHolder().get()];
@@ -121,7 +121,7 @@ $(document).ready(() => {
                 redraw(model.getCountriesHolder().get());
                 return;
             } 
-            if (e.action == "REMOVE" || e.action == "MINUS") {
+            if (e.action == "REMOVE" || e.action == "MINUS" || e.action == "-") {
                 let difference = [];
                 if (Array.isArray(e.argument)) { // array of countries
                     difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
