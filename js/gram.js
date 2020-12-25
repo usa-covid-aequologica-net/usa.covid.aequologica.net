@@ -7,15 +7,15 @@ export default function Grammar(countries) {
   
   const formatCountries = '"' + countries.join('" | "') + '"';
   
-  const grammarAsString = `Test {
+  const grammarAsAString = `Test {
     Line = Command | Action 
   
     Command = Reset
     Action = (Set | Add | Remove) Countries | Select Country
     
-    Countries = ALL | Country+ 
+    Countries = All | Country+ 
     
-    ALL = "All" | "all"
+    All = "All" | "all"
     Set = "Set" | "set"
     Add = "Add" | "add" | "Plus" | "plus" | "+"
     Remove = "Remove" | "remove" | "Minus" | "minus" | "-"
@@ -24,10 +24,9 @@ export default function Grammar(countries) {
     
     Country = ${formatCountries}
   }`;
-
-  console.log(grammarAsString);
+  console.log(grammarAsAString);
   
-  const g = ohm.grammar(grammarAsString);
+  const g = ohm.grammar(grammarAsAString);
 
   const process = {
     Line(one) {
@@ -42,7 +41,7 @@ export default function Grammar(countries) {
         argument: two.process(),
       };
     },
-    ALL(_) {
+    All(_) {
       return "ALL";
     },
     Country(_) {
@@ -51,19 +50,20 @@ export default function Grammar(countries) {
   };
 
   const s = g.createSemantics();
-
   s.addOperation("process", process);
 
   return {
-    process: (line) => {
+    processLine: line => {
       const r = g.match(line);
       if (r.failed()) {
-        throw "cannot parse |" + line + "|";
+        throw "cannot parse '" + line + "'";
       }
       if (r.succeeded()) {
-        const result = s(r).process();
-        window.ps.publish("COMMAND", result);
-        return result;
+        return new Promise(resolve => {
+          const result = s(r).process();
+          window.ps.publish("COMMAND", result);
+          resolve(result);
+        });
       }
       return "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";
     },

@@ -590,7 +590,7 @@
     // });
 
     // speech
-    var fart = document.createElement('audio')/*.setAttribute("id", "fart").css("display", "none")*/;
+    var fart = document.createElement('audio');
     fart.setAttribute('src', '/fart.wav');
 
     function onSpeechConsole(...args) {
@@ -600,7 +600,7 @@
     }
     function onSpeechResult(result) {
       try {
-        gram.process(result);
+        gram.processLine(result);
         return true;
       } catch (error) {
         fart.play();
