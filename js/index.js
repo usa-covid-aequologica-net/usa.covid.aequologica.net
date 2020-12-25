@@ -196,7 +196,7 @@ $(document).ready(() => {
                 const newMeasure = $(e.currentTarget).data("type");
                 if (oldMeasure != newMeasure) {
                     measure.setType(newMeasure);
-                    $("#measure").parent().attr("data-color", newMeasure);
+                    $("#measure").parent().attr("data-color", measure.getType());
                     $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
                     redraw();
@@ -220,14 +220,14 @@ $(document).ready(() => {
                 if (oldMeasure !== newMeasure) {
                     doRedraw = true;
                     measure.setType(newMeasure);
-                    $("#measure").parent().parent().attr("data-color", newMeasure);
+                    $("#measure").parent().attr("data-color", newMeasure);
                     $("#measure").html(newMeasure);
                     measure2deathsFeedback(measure.getType() !== "deaths");
                 }
                 if (oldCumula !== newCumula) {
                     doRedraw = true;
                     model.setToggle("toggleCumula", newCumula);
-                    $("#cumulat").parent().parent().attr("data-color", newCumula);
+                    $("#cumulat").parent().attr("data-color", newCumula);
                     $("#cumulat").html(newCumula);
                     cumula2averageFeedback(newCumula === "total");
                 }
