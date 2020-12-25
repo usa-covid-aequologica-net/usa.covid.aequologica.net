@@ -106,6 +106,7 @@ $(document).ready(() => {
             } 
             if (e.action == "SELECT") {
                 model.getCountriesHolder().setSelectedCountry(e.argument);
+                window.ps.publish('KEYBOARD', { event: 'SPACE' });
                 return;
             } 
             // https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848

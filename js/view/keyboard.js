@@ -25,6 +25,11 @@ $(document).ready(() => {
             e.stopPropagation();
 
             window.ps.publish(pubSubKey, { event: 'DOWN' });
+        } else if (e.which == 32) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.ps.publish(pubSubKey, { event: 'SPACE' });
         }
     }
 
