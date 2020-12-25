@@ -4,24 +4,29 @@
 "use strict";
 
 export default function Grammar(countries) {
+  
   const formatCountries = '"' + countries.join('" | "') + '"';
+  
   const grammarAsString = `Test {
-    Line = Countries | Command | Action 
+    Line = Command | Action 
   
     Command = Reset
-    Action = (Add | Remove) Countries | Select Country
+    Action = (Set | Add | Remove) Countries | Select Country
     
     Countries = ALL | Country+ 
     
-    ALL = "all" | "All"
+    ALL = "All" | "all"
+    Set = "Set" | "set"
     Add = "Add" | "add" | "Plus" | "plus" 
     Remove = "Remove" | "remove" | "Minus" | "minus"
-    Reset = "reset"
-    Select = "select"
+    Reset = "Reset" | "reset"
+    Select = "Select" | "select" | "Show" | "show" | "To" | "to"
     
     Country = ${formatCountries}
   }`;
+
   console.log(grammarAsString);
+  
   const g = ohm.grammar(grammarAsString);
 
   const process = {
@@ -57,13 +62,7 @@ export default function Grammar(countries) {
       }
       if (r.succeeded()) {
         const result = s(r).process();
-        if (Array.isArray(result)) { // array of countries
-          window.ps.publish("COMMAND", { action: "SET", argument: result });
-        } else if (typeof result === "string" && result === "ALL") { // ALL
-          window.ps.publish("COMMAND", { action: "SET", argument: result });
-        } else if (typeof result === 'object') { // object
-          window.ps.publish("COMMAND", result);
-        }
+        window.ps.publish("COMMAND", result);
         return result;
       }
       return "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";

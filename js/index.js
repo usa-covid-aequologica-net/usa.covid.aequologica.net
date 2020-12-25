@@ -104,7 +104,7 @@ $(document).ready(() => {
             if (e.action == 'RESET') {
                 return;
             } 
-            if (e.action == "SELECT") {
+            if (e.action == "SELECT" || e.action == "SHOW" || e.action == "TO" ) {
                 model.getCountriesHolder().setSelectedCountry(e.argument);
                 window.ps.publish('KEYBOARD', { event: 'SPACE' });
                 return;
@@ -121,7 +121,7 @@ $(document).ready(() => {
                 redraw(model.getCountriesHolder().get());
                 return;
             } 
-            if (e.action == "REMOVE") {
+            if (e.action == "REMOVE" || e.action == "MINUS") {
                 let difference = [];
                 if (Array.isArray(e.argument)) { // array of countries
                     difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
