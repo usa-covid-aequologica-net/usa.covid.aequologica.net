@@ -593,23 +593,20 @@
     var fart = document.createElement('audio');
     fart.setAttribute('src', '/fart.wav');
 
-    function onSpeechConsole(...args) {
-      console.log(...args);
+    const speechHooks = {
+      onConsole: (...args) => console.log(...args),
+      onStop: error => { if (error) console.log(error); },
+      onResult : result => {
+        try {
+          return gram.processLine(result);
+        } catch (error) {
+          console.error(error);
+          fart.play();
+          return null;
+        }
+      },
     }
-    function onSpeechStart() {
-    }
-    function onSpeechResult(result) {
-      try {
-        return gram.processLine(result);
-      } catch (error) {
-        fart.play();
-        return null;
-      }
-    }
-    function onSpeechStop(error) {
-      if (error) console.log(error);
-    }
-    pulse(onSpeechConsole, onSpeechStart, onSpeechResult, onSpeechStop);
+    pulse(countries, speechHooks);
   </script>
 
   <!-- main script -->

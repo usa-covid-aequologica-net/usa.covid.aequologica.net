@@ -65,20 +65,22 @@
 <script type="module">
     import pulse from './js/pulse.js';
 
-    function onSpeechConsole(...args) {
-        console.log(...args);
-        if (args.length > 0 && typeof args[0] === "string") $("footer #console").text(args[0]);
+    const speechHooks = {
+        onConsole: (...args) => {
+            console.log(...args);
+            if (args.length > 0 && typeof args[0] === "string") $("footer #console").text(args[0]);
+        },
+        onStart: () => {
+            $("body#lui h1").html('&hellip;');
+        },
+        onResult: result => {
+            $("body#lui h1").append($('<div>').text(result));
+        },
+        onStop: error => {
+            if (error) console.log(error);
+        },
     }
-    function onSpeechStart() {
-        $("body#lui h1").html('&hellip;');
-    }
-    function onSpeechResult(result) {
-        $("body#lui h1").append($('<div>').text(result));
-    }
-    function onSpeechStop(error) {
-        if (error) console.log(error);
-    }
-    pulse(onSpeechConsole, onSpeechStart, onSpeechResult, onSpeechStop);
+    pulse(undefined, speechHooks);
 </script>
 
 </html>

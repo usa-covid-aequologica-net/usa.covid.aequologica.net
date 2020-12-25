@@ -1,4 +1,4 @@
-export default function (onConsole, onStart, onResult, onStop) {
+export default function (countries, hooks) {
   $(document).ready(function () {
     function showStart() {
       $(".pulseOutline").css({
@@ -25,8 +25,9 @@ export default function (onConsole, onStart, onResult, onStop) {
         recognition.start();
         recognizing = true;
         showStart();
-        if (onStart) onStart();
-        if (onConsole) onConsole("Start ! Ready to receive a country command.");
+        if (hooks && hooks.onStart) hooks.onStart();
+        if (hooks && hooks.onConsole)
+          hooks.onConsole("Start ! Ready to receive a country command.");
       }
       return recognizing;
     }
@@ -44,8 +45,14 @@ export default function (onConsole, onStart, onResult, onStop) {
     var SpeechRecognitionEvent =
       SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-    var grammar = "#JSGF V1.0; grammar countries;";
-
+    let grammar;
+    if (countries) {
+      const formatCountries = countries.join(' | ');
+      grammar = `#JSGF V1.0; grammar countries; public <countries> = ${formatCountries} ;`;
+    } else {
+      grammar = "#JSGF V1.0; grammar countries;";
+    }
+    console.log(grammar);
     var recognition = new SpeechRecognition();
     var speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar, 1);
@@ -63,7 +70,7 @@ export default function (onConsole, onStart, onResult, onStop) {
           start();
         }
       } catch (error) {
-        if (onConsole) onConsole(error);
+        if (hooks && hooks.onConsole) hooks.onConsole(error);
         doStop();
       }
     });
@@ -92,16 +99,20 @@ export default function (onConsole, onStart, onResult, onStop) {
           doStop();
         } else {
           if (lastResult.isFinal) {
-            if (onResult) {
-              if (onResult(transcript)) {
+            if (hooks && hooks.onResult) {
+              if (hooks.onResult(transcript)) {
                 toastr.success(transcript);
               } else {
                 toastr.error(transcript);
               }
             }
           } else {
-            if (onConsole)
-              onConsole(transcript, "Confidence: " + confidence, lastResult);
+            if (hooks && hooks.onConsole)
+              hooks.onConsole(
+                transcript,
+                "Confidence: " + confidence,
+                lastResult
+              );
             toastr.info(transcript);
           }
         }
@@ -111,24 +122,25 @@ export default function (onConsole, onStart, onResult, onStop) {
     recognition.onspeechend = function (event) {
       recognizing = false;
       showStop();
-      if (onConsole) onConsole("Stopped", event);
-      if (onStop) onStop();
+      if (hooks && hooks.onConsole) hooks.onConsole("Stopped", event);
+      if (hooks && hooks.onStop) hooks.onStop();
     };
 
     recognition.onnomatch = function (event) {
-      if (onConsole) onConsole("I didn't recognise that country.", event);
+      if (hooks && hooks.onConsole)
+        hooks.onConsole("I didn't recognise that country.", event);
     };
 
     recognition.onerror = function (event) {
       recognizing = false;
       showStop();
-      if (onConsole)
-        onConsole(
+      if (hooks && hooks.onConsole)
+        hooks.onConsole(
           "Stopped - Error occurred in recognition: ",
           event.error,
           event
         );
-      if (onStop) onStop(event.error);
+      if (hooks && hooks.onStop) hooks.onStop(event.error);
     };
   });
   return {};
