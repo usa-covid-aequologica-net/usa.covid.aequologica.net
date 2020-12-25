@@ -6,7 +6,7 @@
 export default function Grammar(countries) {
   const formatCountries = '"' + countries.join('" | "') + '"';
   const grammarAsString = `Test {
-    Line = Command | Action 
+    Line = Countries | Command | Action 
   
     Command = Reset
     Action = (Add | Remove) Countries | Select Country
@@ -15,7 +15,7 @@ export default function Grammar(countries) {
     
     ALL = "all"
     Add = "Add" | "add" | "Plus" | "plus" 
-    Remove = "remove"
+    Remove = "Remove" | "remove" | "Minus" | "minus"
     Reset = "reset"
     Select = "select"
     
@@ -50,11 +50,15 @@ export default function Grammar(countries) {
     process: (line) => {
       const r = g.match(line);
       if (r.failed()) {
-        throw "cannot parse |"+line+"|"
-      } 
-      if (r.succeeded()){
+        throw "cannot parse |" + line + "|";
+      }
+      if (r.succeeded()) {
         const result = s(r).process();
-        window.ps.publish('COMMAND', result);
+        if (Array.isArray(result)) {
+          window.ps.publish("COMMAND", { action: "SET", argument: result });
+        } else {
+          window.ps.publish("COMMAND", result);
+        }
         return result;
       }
       return "Il faut qu'une porte soit ouverte ou fermée. (Alfred de Musset)";

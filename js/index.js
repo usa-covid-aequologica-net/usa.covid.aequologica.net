@@ -96,28 +96,62 @@ $(document).ready(() => {
 
         }
 
+        // function toValidArray(countries, initial, remove) {
+        //     const array = [];
+        //     countries.forEach((country) => {
+        //         const objectCountry = model.getCountriesHolder().getAsObject(country);
+        //         if (objectCountry.code != 'XX') {
+        //             if (remove) {
+        //                 for( var i = 0; i < initial.length; i++){ 
+        //                     if ( initial[i] !== objectCountry.name) { 
+        //                         arr.splice(i, 1); 
+        //                     }
+        //                 }
+        //             } else {
+        //                 array.push(objectCountry.name);
+        //             }
+        //         } else {
+        //             console.log("NOT FOUND #### ", objectCountry);
+        //         }
+        //     });
+        //     return array;
+        // }
+
         // speech
         window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
             if (e.action == 'RESET') {
-            } else {
-                if (e.action == "ADD" || e.action == "PLUS" ) {
-                    const array = [];
-                    e.argument.forEach((country) => {
-                        const objectCountry = model.getCountriesHolder().getAsObject(country);
-                        if (objectCountry.code != 'XX') {
-                            console.log("FOUND !!!!", objectCountry);
-                            array.push(objectCountry.name);
-                        } else {
-                            console.log("NOT FOUND #### ", objectCountry);
-                        }
-                    });
-                    if (array.length > 0) {
-                        model.getCountriesHolder().write(array);
-                        redraw(model.getCountriesHolder().get());
-                    }
+                return;
+            } 
+            if (e.action == "SELECT") {
+                return;
+            } 
+            // https://medium.com/@alvaro.saburido/set-theory-for-arrays-in-es6-eb2f20a61848
+            if (e.action == "ADD" || e.action == "PLUS") {
+                // 
+                const union = [...e.argument, ...model.getCountriesHolder().get()];
+                if (union.length > 0) {
+                    model.getCountriesHolder().write(union);
+                    redraw(model.getCountriesHolder().get());
                 }
+            } 
+            if (e.action == "REMOVE") {
+                const difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
+                if (difference.length > 0) {
+                    model.getCountriesHolder().write(difference);
+                    redraw(model.getCountriesHolder().get());
+                }
+                return;
+            } 
+            if (e.action == "SET") {
+                const set = e.argument;
+                if (set.length > 0) {
+                    model.getCountriesHolder().write(set);
+                    redraw(model.getCountriesHolder().get());
+                }
+                return;
             }
+        
         });
     
         // start date
