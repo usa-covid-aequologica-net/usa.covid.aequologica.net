@@ -14,7 +14,7 @@ export default function Grammar(countries) {
     Countries = ALL | Country+ 
     
     ALL = "all"
-    Add = "add"
+    Add = "Add" | "add" | "Plus" | "plus" 
     Remove = "remove"
     Reset = "reset"
     Select = "select"

@@ -99,16 +99,23 @@ $(document).ready(() => {
         // speech
         window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
-            e = e.trim();
-            if (e == 'reset') {
+            if (e.action == 'RESET') {
             } else {
-                const qwe = model.getCountriesHolder().getAsObject(e);
-                if (qwe.code != 'XX') {
-                    console.log("FOUND !!!!", qwe);
-                    model.getCountriesHolder().write([qwe.name]);
-                    redraw(model.getCountriesHolder().get());
-                } else {
-                    console.log("NOT FOUND #### ", e);
+                if (e.action == "ADD" || e.action == "PLUS" ) {
+                    const array = [];
+                    e.argument.forEach((country) => {
+                        const objectCountry = model.getCountriesHolder().getAsObject(country);
+                        if (objectCountry.code != 'XX') {
+                            console.log("FOUND !!!!", objectCountry);
+                            array.push(objectCountry.name);
+                        } else {
+                            console.log("NOT FOUND #### ", objectCountry);
+                        }
+                    });
+                    if (array.length > 0) {
+                        model.getCountriesHolder().write(array);
+                        redraw(model.getCountriesHolder().get());
+                    }
                 }
             }
         });

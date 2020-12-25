@@ -476,7 +476,7 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@latest/dist/d3.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment@latest/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ohm-js@latest/src/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ohm-js@latest/dist/ohm.js"></script>
 
   <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
@@ -575,13 +575,25 @@
   <!-- speech -->
   <script type="module">
     import pulse from './pulse.js';
+    import Grammar from './js/gram.js';
+    import { populationByCountry } from './js/model/population.js';
+
+    const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
+
+    const gram = new Grammar(countries);
+
+    // window.ps.subscribe('COMMAND', (e) => {
+    //     if (!e) return;
+    //     console.log(e);
+    // });
+
     function onSpeechConsole(...args) {
       console.log(...args);
     }
     function onSpeechStart() {
     }
     function onSpeechResult(result) {
-      window.ps.publish('COMMAND', result);
+      gram.process(result);
     }
     function onSpeechStop(error) {
       if (error) console.log(error);

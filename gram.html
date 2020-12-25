@@ -38,7 +38,7 @@
 </body>
 
 <script type="module">
-    import Grammar from './gram.js';
+    import Grammar from './js/gram.js';
     import { populationByCountry } from './js/model/population.js';
 
     const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
@@ -50,14 +50,19 @@
         console.log(e);
     });
 
+    // OKs
+    gram.process("reset");
+    gram.process("add France Germany");
+    gram.process("remove United States South Korea");
+    gram.process("select Montenegro");
+    // NOKs
     try {
-        // OKs
-        gram.process("reset");
-        gram.process("add France Germany");
-        gram.process("remove United States South Korea");
-        gram.process("select Montenegro");
-        // NOKs
-        gram.process("blah")
+        gram.process("blah");
+    } catch (error) {
+        console.log(error);
+    }
+    try {
+        gram.process("select France Italy");
     } catch (error) {
         console.log(error);
     }
