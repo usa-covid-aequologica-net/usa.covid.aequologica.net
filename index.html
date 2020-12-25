@@ -587,13 +587,21 @@
     //     console.log(e);
     // });
 
+    // speech
+    var fart = document.createElement('audio')/*.setAttribute("id", "fart").css("display", "none")*/;
+    fart.setAttribute('src', '/fart.wav');
+
     function onSpeechConsole(...args) {
       console.log(...args);
     }
     function onSpeechStart() {
     }
     function onSpeechResult(result) {
-      gram.process(result);
+      try {
+        gram.process(result);
+      } catch (error) {
+        fart.play();
+      }
     }
     function onSpeechStop(error) {
       if (error) console.log(error);

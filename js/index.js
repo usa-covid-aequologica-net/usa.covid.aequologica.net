@@ -96,28 +96,6 @@ $(document).ready(() => {
 
         }
 
-        // function toValidArray(countries, initial, remove) {
-        //     const array = [];
-        //     countries.forEach((country) => {
-        //         const objectCountry = model.getCountriesHolder().getAsObject(country);
-        //         if (objectCountry.code != 'XX') {
-        //             if (remove) {
-        //                 for( var i = 0; i < initial.length; i++){ 
-        //                     if ( initial[i] !== objectCountry.name) { 
-        //                         arr.splice(i, 1); 
-        //                     }
-        //                 }
-        //             } else {
-        //                 array.push(objectCountry.name);
-        //             }
-        //         } else {
-        //             console.log("NOT FOUND #### ", objectCountry);
-        //         }
-        //     });
-        //     return array;
-        // }
-
-        // speech
         window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
             if (e.action == 'RESET') {
