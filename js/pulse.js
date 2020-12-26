@@ -4,7 +4,10 @@ export default function (countries, hooks) {
   const onStart = hooks ? hooks.onStart || nullFunc : nullFunc;
   const onResult = hooks ? hooks.onResult || nullFunc : nullFunc;
   const onStop = hooks ? hooks.onStop || nullFunc : nullFunc;
+
   $(document).ready(function () {
+    let recognizing = false;
+
     function showStart() {
       $(".pulseOutline").css({
         color: "blue",
@@ -23,24 +26,20 @@ export default function (countries, hooks) {
       $("svg.mic-icon").css("fill", "#1E2D70");
     }
 
-    var recognizing = false;
-
     function start() {
       if (!recognizing) {
         recognition.start();
         recognizing = true;
         showStart();
         onStart();
-        onConsole("Ready to listen. Speak out! Waiting for your directives.");
+        onConsole("Ready to listen. Speak out!");
       }
-      return recognizing;
     }
 
     function doStop() {
       if (recognizing) {
         recognition.stop();
       }
-      return recognizing;
     }
 
     // <!-- speech recognition : WORK IN PROGRESS -->
@@ -52,9 +51,9 @@ export default function (countries, hooks) {
     let grammar;
     if (countries) {
       const formatCountries = countries.join(" | ");
-      grammar = `#JSGF V1.0; grammar countries; public <countries> = add | all | minus | please | plus | remove | reset | select | set | show | to | ${formatCountries} ;`;
+      grammar = `#JSGF V1.0; grammar countries; public <countries> = add | all | minus | plus | remove | reset | select | set | ${formatCountries} ;`;
     } else {
-      grammar = "#JSGF V1.0; grammar countries;";
+      grammar = "#JSGF V1.0;";
     }
     console.log(grammar);
     var recognition = new SpeechRecognition();
@@ -82,15 +81,17 @@ export default function (countries, hooks) {
     recognition.onresult = function (event) {
       if (0 < event.results.length) {
         const lastResult = event.results[event.results.length - 1];
-        const transcript = lastResult[0].transcript.trim();
-        const confidence = lastResult[0].confidence;
-        if (transcript.startsWith("stop")) {
-          doStop();
-        } else {
-          if (lastResult.isFinal) {
-            onResult(transcript);
+        if (lastResult && lastResult.length > 0) {
+          const transcript = lastResult[0].transcript.trim();
+          const confidence = lastResult[0].confidence;
+          if (transcript.startsWith("stop")) {
+            doStop();
           } else {
-            onConsole(transcript, "Confidence: " + confidence, lastResult);
+            if (lastResult.isFinal) {
+              onResult(transcript);
+            } else {
+              onConsole(transcript, "Confidence: " + confidence, lastResult);
+            }
           }
         }
       }

@@ -4,7 +4,15 @@
 "use strict";
 
 export default function Grammar(countries, onParsed) {
-  const formatCountries = '"' + countries.join('" | "') + '"';
+  const addendum = [
+    "Democratic Republic of the Congo",
+    "Czech Republic",
+    "Saint Kitts and Nevis",
+    "São Tomé and Príncipe",
+    "Saint Vincent and the Grenadines",
+  ];
+  const union = _.sortBy([...countries, ...addendum]);
+  const formatCountries = '"' + union.join('" | "') + '"';
 
   const grammarAsAString = `CommandInterface {
     Line = Command | Action | Countries

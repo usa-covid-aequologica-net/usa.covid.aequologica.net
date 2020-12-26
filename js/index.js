@@ -102,6 +102,7 @@ $(document).ready(() => {
         // speech
         window.ps.subscribe('COMMAND', async (e) => {
             if (!e) return;
+            
             // {
             //     async function sleep(ms) {
             //         return new Promise(resolve => setTimeout(resolve, ms));
