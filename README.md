@@ -171,8 +171,7 @@ CommandInterface {
     Clear = caseInsensitive<"clear">
     Select = caseInsensitive<"select">
     
-    Country = "button"
-			 | "Afghanistan"
+    Country = "Afghanistan"
 			 | "Albania"
 			 | "Algeria"
 			 | "Andorra"
