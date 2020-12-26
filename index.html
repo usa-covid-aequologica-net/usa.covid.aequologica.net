@@ -602,6 +602,9 @@
     // fart sound on error
     var fart = document.createElement('audio');
     fart.setAttribute('src', '/fart.wav');
+    // fart sound on error
+    var banana = document.createElement('audio');
+    banana.setAttribute('src', '/banana.mp3');
 
     const speechHooks = {
       onConsole: (...args) => {
@@ -618,7 +621,7 @@
         try {
           gram.processLine(result);
         } catch (error) {
-          fart.play();
+          banana.play();
         }
       },
     }

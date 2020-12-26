@@ -8,8 +8,9 @@ export default function Grammar(countries, onParsed) {
     "Democratic Republic of the Congo",
     "Czech Republic",
     "Saint Kitts and Nevis",
-    "São Tomé and Príncipe",
+    "Sao Tome and Principe",
     "Saint Vincent and the Grenadines",
+    "st. Vincent and the Grenadines",
   ];
   const union = _.sortBy([...countries, ...addendum]);
   const formatCountries = '"' + union.join('" | "') + '"';
