@@ -580,8 +580,9 @@
     import pulse from './js/pulse.js';
     import Grammar from './js/gram.js';
     import { populationByCountry } from './js/model/population.js';
+    import { domain } from './js/model/domain.js';
 
-    const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
+    const countries = _.map(populationByCountry[domain], "name"); // ["Germany", "South Korea", "France", "United States"];
 
     toastr.options = {
       closeButton: false,
