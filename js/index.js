@@ -110,6 +110,20 @@ $(document).ready(() => {
             //     await sleep(5000);
             //     console.log(new Date());
             // }
+
+            const options = {
+                includeScore: true
+            }
+            const fuse = new Fuse(_.map(populationByCountry[domain], "name"), options)
+            function fromFuzzyToCountry(array) {
+                return _.map(array, countray => {
+                    const proposals = fuse.search(countray);
+                    if (proposals && proposals.length > 0) {
+                        return proposals[0].item;
+                    }
+                    return countray;
+                });
+            }
             if (e.action == 'RESET') {
                 model.getCountriesHolder().write(factory[domain]);
                 redraw(model.getCountriesHolder().get());
@@ -121,7 +135,7 @@ $(document).ready(() => {
                 return;
             } 
             if (e.action == "SELECT") {
-                model.getCountriesHolder().setSelectedCountry(e.argument);
+                model.getCountriesHolder().setSelectedCountry(fuse.search(e.argument));
                 window.ps.publish('KEYBOARD', { event: 'SPACE' });
                 return;
             } 
@@ -129,7 +143,7 @@ $(document).ready(() => {
             if (e.action == "ADD" || e.action == "PLUS" || e.action == "+") {
                 let union = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    union = [...e.argument, ...model.getCountriesHolder().get()];
+                    union = [fromFuzzyToCountry(...e.argument), ...model.getCountriesHolder().get()];
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     union = _.map(populationByCountry[domain], "name");
                 } 
@@ -140,7 +154,8 @@ $(document).ready(() => {
             if (e.action == "REMOVE" || e.action == "MINUS" || e.action == "-") {
                 let difference = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    difference = model.getCountriesHolder().get().filter(x => !e.argument.includes(x));
+                    const squared = fromFuzzyToCountry(e.argument);
+                    difference = model.getCountriesHolder().get().filter(x => !squared.includes(x));
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     ;
                 } 
@@ -151,7 +166,7 @@ $(document).ready(() => {
             if (e.action == "SET") {
                 let set = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    set = e.argument;
+                    set = fromFuzzyToCountry(e.argument);
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     set = _.map(populationByCountry[domain], "name");
                 } 

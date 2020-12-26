@@ -22,7 +22,7 @@ export default function Grammar(countries, onParsed) {
     Clear = caseInsensitive<"clear">
     Select = caseInsensitive<"select">
     
-    Country = ${formatCountries}
+    Country = "button" | ${formatCountries}
   }`;
   console.log(grammarAsAString);
 
@@ -64,7 +64,10 @@ export default function Grammar(countries, onParsed) {
           const resultBeforeMassage = s(r).process();
           let result = undefined;
           if (resultBeforeMassage) {
-            if (typeof resultBeforeMassage === "string" && resultBeforeMassage === "ALL") {
+            if (
+              typeof resultBeforeMassage === "string" &&
+              resultBeforeMassage === "ALL"
+            ) {
               result = { action: "SET", argument: "ALL" };
             } else if (Array.isArray(resultBeforeMassage)) {
               result = { action: "SET", argument: resultBeforeMassage };
