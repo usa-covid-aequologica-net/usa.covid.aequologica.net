@@ -139,7 +139,7 @@ On mobile devices, left and right swipe gestures will toggle _total/daily_ and _
 
 ### Speech Recognition
 
-Yes we can ! ![Google Analytics geo map of frequentation](./img/svg/microphone-svgrepo-com.svg)
+Yes we can ! ![Google Analytics geo map of frequentation](./img/svg/microphone-2.svg | width=100)
 
 
 ## Some analytics
