@@ -22,7 +22,7 @@ export default function Grammar(countries, onParsed) {
     Clear = caseInsensitive<"clear">
     Select = caseInsensitive<"select">
     
-    Country = "button" | ${formatCountries}
+    Country = ${formatCountries}
   }`;
   console.log(grammarAsAString);
 
