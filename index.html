@@ -609,7 +609,7 @@
       onStop: error => { 
         if (error) {
           console.log(error);
-          toastr.error(error);
+          // toastr.error(error);
         } 
       },
       onParsed: line => {
@@ -620,7 +620,7 @@
           gram.processLine(result);
         } catch (error) {
           fart.play();
-          toastr.error(result, error);
+          // toastr.error(result, error);
           return null;
         }
       },

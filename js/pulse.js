@@ -1,9 +1,9 @@
 export default function (countries, hooks) {
   const nullFunc = () => {};
-  const onConsole = hooks ? hooks.onConsole || nullFunc : nullFunc ;
-  const onStart = hooks ? hooks.onStart || nullFunc: nullFunc ;
-  const onResult = hooks ? hooks.onResult || nullFunc: nullFunc ;
-  const onStop = hooks ? hooks.onStop || nullFunc: nullFunc ;
+  const onConsole = hooks ? hooks.onConsole || nullFunc : nullFunc;
+  const onStart = hooks ? hooks.onStart || nullFunc : nullFunc;
+  const onResult = hooks ? hooks.onResult || nullFunc : nullFunc;
+  const onStop = hooks ? hooks.onStop || nullFunc : nullFunc;
   $(document).ready(function () {
     function showStart() {
       $(".pulseOutline").css({
@@ -51,7 +51,7 @@ export default function (countries, hooks) {
 
     let grammar;
     if (countries) {
-      const formatCountries = countries.join(' | ');
+      const formatCountries = countries.join(" | ");
       grammar = `#JSGF V1.0; grammar countries; public <countries> = add | all | minus | please | plus | remove | reset | select | set | show | to | ${formatCountries} ;`;
     } else {
       grammar = "#JSGF V1.0; grammar countries;";
@@ -90,11 +90,7 @@ export default function (countries, hooks) {
           if (lastResult.isFinal) {
             onResult(transcript);
           } else {
-            onConsole(
-                transcript,
-                "Confidence: " + confidence,
-                lastResult
-              );
+            onConsole(transcript, "Confidence: " + confidence, lastResult);
           }
         }
       }
@@ -103,22 +99,22 @@ export default function (countries, hooks) {
     recognition.onspeechend = function (event) {
       recognizing = false;
       showStop();
-      onConsole("I stopped listening to you.", event);
+      onConsole("Stopped.", event);
       onStop();
     };
 
     recognition.onnomatch = function (event) {
-      onConsole("I didn't recognise that country.", event);
+      onConsole("I didn't understand.", event);
     };
 
     recognition.onerror = function (event) {
       recognizing = false;
       showStop();
       onConsole(
-          "I stopped listening to you - Error occurred in recognition: "+event.error,
-          event.error,
-          event
-        );
+        "Stopped - error occurred in recognition: '" + event.error + "'",
+        event.error,
+        event
+      );
       onStop(event.error);
     };
   });
