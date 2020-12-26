@@ -582,30 +582,50 @@
 
     const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
 
-    const gram = new Grammar(countries);
-
-    // window.ps.subscribe('COMMAND', (e) => {
-    //     if (!e) return;
-    //     console.log(e);
-    // });
+    toastr.options = {
+      closeButton: false,
+      debug: false,
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: "toast-bottom-right",
+      preventDuplicates: true,
+      onclick: null,
+      showDuration: "0",
+      hideDuration: "0",
+      timeOut: "2000",
+      extendedTimeOut: "5000",
+      "background-image": "none !important",
+    };
 
     // speech
     var fart = document.createElement('audio');
     fart.setAttribute('src', '/fart.wav');
 
     const speechHooks = {
-      onConsole: (...args) => console.log(...args),
-      onStop: error => { if (error) console.log(error); },
-      onResult : result => {
+      onConsole: (...args) => {
+        console.log(...args)
+        toastr.info(args[0]);
+      },
+      onStop: error => { 
+        if (error) {
+          console.log(error);
+          toastr.error(error);
+        } 
+      },
+      onParsed: line => {
+        toastr.success(line);
+      },
+      onResult: result => {
         try {
-          return gram.processLine(result);
+          gram.processLine(result);
         } catch (error) {
-          console.error(error);
           fart.play();
+          toastr.error(result, error);
           return null;
         }
       },
     }
+    const gram = new Grammar(countries, speechHooks.onParsed);
     pulse(countries, speechHooks);
   </script>
 

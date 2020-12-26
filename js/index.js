@@ -10,6 +10,7 @@ import { store } from './model/yetAnotherLocalStorageWrapper.js';
 import { Carousel } from './model/carousel.js';
 import { populationByCountry } from './model/population.js';
 import { domain } from './model/domain.js';
+import { factory } from './model/factory.js'
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -99,12 +100,27 @@ $(document).ready(() => {
         }
 
         // speech
-        window.ps.subscribe('COMMAND', (e) => {
+        window.ps.subscribe('COMMAND', async (e) => {
             if (!e) return;
+            // {
+            //     async function sleep(ms) {
+            //         return new Promise(resolve => setTimeout(resolve, ms));
+            //     }
+            //     console.log(new Date());
+            //     await sleep(5000);
+            //     console.log(new Date());
+            // }
             if (e.action == 'RESET') {
+                model.getCountriesHolder().write(factory[domain]);
+                redraw(model.getCountriesHolder().get());
                 return;
             } 
-            if (e.action == "SELECT" || e.action == "SHOW" || e.action == "TO" ) {
+            if (e.action == 'CLEAR') {
+                model.getCountriesHolder().write([]);
+                redraw(model.getCountriesHolder().get());
+                return;
+            } 
+            if (e.action == "SELECT") {
                 model.getCountriesHolder().setSelectedCountry(e.argument);
                 window.ps.publish('KEYBOARD', { event: 'SPACE' });
                 return;

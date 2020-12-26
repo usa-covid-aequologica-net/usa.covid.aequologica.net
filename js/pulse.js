@@ -1,4 +1,9 @@
 export default function (countries, hooks) {
+  const nullFunc = () => {};
+  const onConsole = hooks ? hooks.onConsole || nullFunc : nullFunc ;
+  const onStart = hooks ? hooks.onStart || nullFunc: nullFunc ;
+  const onResult = hooks ? hooks.onResult || nullFunc: nullFunc ;
+  const onStop = hooks ? hooks.onStop || nullFunc: nullFunc ;
   $(document).ready(function () {
     function showStart() {
       $(".pulseOutline").css({
@@ -25,9 +30,8 @@ export default function (countries, hooks) {
         recognition.start();
         recognizing = true;
         showStart();
-        if (hooks && hooks.onStart) hooks.onStart();
-        if (hooks && hooks.onConsole)
-          hooks.onConsole("Start ! Ready to receive a country command.");
+        onStart();
+        onConsole("Ready to listen. Speak out! Waiting for your directives.");
       }
       return recognizing;
     }
@@ -48,7 +52,7 @@ export default function (countries, hooks) {
     let grammar;
     if (countries) {
       const formatCountries = countries.join(' | ');
-      grammar = `#JSGF V1.0; grammar countries; public <countries> = ${formatCountries} ;`;
+      grammar = `#JSGF V1.0; grammar countries; public <countries> = add | all | minus | please | plus | remove | reset | select | set | show | to | ${formatCountries} ;`;
     } else {
       grammar = "#JSGF V1.0; grammar countries;";
     }
@@ -58,7 +62,7 @@ export default function (countries, hooks) {
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.continuous = true;
-    recognition.lang = "en-US";
+    recognition.lang = "en-GB";
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
@@ -70,25 +74,10 @@ export default function (countries, hooks) {
           start();
         }
       } catch (error) {
-        if (hooks && hooks.onConsole) hooks.onConsole(error);
+        onConsole(error);
         doStop();
       }
     });
-
-    toastr.options = {
-      closeButton: false,
-      debug: false,
-      newestOnTop: true,
-      progressBar: false,
-      positionClass: "toast-bottom-right",
-      preventDuplicates: true,
-      onclick: null,
-      showDuration: "0",
-      hideDuration: "0",
-      timeOut: "2000",
-      extendedTimeOut: "5000",
-      "background-image": "none !important",
-    };
 
     recognition.onresult = function (event) {
       if (0 < event.results.length) {
@@ -99,21 +88,13 @@ export default function (countries, hooks) {
           doStop();
         } else {
           if (lastResult.isFinal) {
-            if (hooks && hooks.onResult) {
-              if (hooks.onResult(transcript)) {
-                toastr.success(transcript);
-              } else {
-                toastr.error(transcript);
-              }
-            }
+            onResult(transcript);
           } else {
-            if (hooks && hooks.onConsole)
-              hooks.onConsole(
+            onConsole(
                 transcript,
                 "Confidence: " + confidence,
                 lastResult
               );
-            toastr.info(transcript);
           }
         }
       }
@@ -122,25 +103,23 @@ export default function (countries, hooks) {
     recognition.onspeechend = function (event) {
       recognizing = false;
       showStop();
-      if (hooks && hooks.onConsole) hooks.onConsole("Stopped", event);
-      if (hooks && hooks.onStop) hooks.onStop();
+      onConsole("I stopped listening to you.", event);
+      onStop();
     };
 
     recognition.onnomatch = function (event) {
-      if (hooks && hooks.onConsole)
-        hooks.onConsole("I didn't recognise that country.", event);
+      onConsole("I didn't recognise that country.", event);
     };
 
     recognition.onerror = function (event) {
       recognizing = false;
       showStop();
-      if (hooks && hooks.onConsole)
-        hooks.onConsole(
-          "Stopped - Error occurred in recognition: ",
+      onConsole(
+          "I stopped listening to you - Error occurred in recognition: "+event.error,
           event.error,
           event
         );
-      if (hooks && hooks.onStop) hooks.onStop(event.error);
+      onStop(event.error);
     };
   });
   return {};

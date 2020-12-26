@@ -41,9 +41,9 @@
     import Grammar from './js/gram.js';
     import { populationByCountry } from './js/model/population.js';
 
-    const countries = _.map(populationByCountry['world'], "name"); // ["Germany", "South Korea", "France", "United States"];
+    const countries = _.map(populationByCountry['world'], "name"); // e.g. ["Germany", "South Korea", "France", "United States"];
 
-    const gram = new Grammar(countries);
+    const gram = new Grammar(countries, line => console.log("PARSED", line));
 
     window.ps.subscribe('COMMAND', (e) => {
         if (!e) return;
@@ -51,12 +51,17 @@
     });
 
     const OKs = [
+        "clear",
         "reset",
-        "Please set France",
-        "set all",
+        "all",
+        "set ALL",
+        "South Africa",
+        "India Pakistan Bhutan United States South Korea",
         "add Italy Germany",
-        "remove United States South Korea",
-        "select Montenegro",
+        "PLUS Bangladesh",
+        "Remove United States South Korea",
+        "minus Bhutan",
+        "select Italy",
         "remove all",
     ];
     OKs.forEach(line => {
@@ -66,16 +71,28 @@
     });
 
     const NOKs = [
-        "all",
-        "France Germany",
-        "select France Italy",
+        "select France Italy", 
         "set Africa",
+        "france",
+        "dugenou",
+        "remove",
+        "reset France",
     ];
+    const explanations = [
+        "(select has one and only one argument)", 
+        "(Africa is not a country)",
+        "(country name must start with an uppercase letter)",
+        "(dugenou is full of sound and fury, signifying nothing)",
+        "(remove must have one or more arguments)",
+        "(reset has no argument)",
+    ];
+    let i = 0;
     NOKs.forEach(line => {
         try {
             gram.processLine(line);
+            console.error("Should have thown exception !!!", '"'+line+'"');
         } catch (error) {
-            console.log(error);
+            console.log(error, explanations[i++]);
         }
     });
 
