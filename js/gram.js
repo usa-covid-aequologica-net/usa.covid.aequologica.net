@@ -8,8 +8,9 @@ export default function Grammar(countries) {
   const formatCountries = '"' + countries.join('" | "') + '"';
   
   const grammarAsAString = `Test {
-    Line = Command | Action 
+    Line = Civility? (Command | Action) 
   
+    Civility = "Please" | "please"
     Command = Reset
     Action = (Set | Add | Remove) Countries | Select Country
     
@@ -29,8 +30,8 @@ export default function Grammar(countries) {
   const g = ohm.grammar(grammarAsAString);
 
   const process = {
-    Line(one) {
-      return one.process();
+    Line(one, two) {
+      return two.process();
     },
     Command(one) {
       return { action: one.sourceString.toUpperCase(), argument: null };
