@@ -30,7 +30,7 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ![UI explained](./img/png/screenshot6-UI-explained.png "UI explained")
 
-## All this clicking ?
+## All this clicking ? Speech Recognition!
 
 
 You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~, set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
