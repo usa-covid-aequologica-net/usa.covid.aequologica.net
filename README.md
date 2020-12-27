@@ -32,9 +32,14 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ## All this clicking ?
 
-![works only in chrome](./works_only_in_chrome.png "works only in chrome")
 
 You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~, set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
+
+Alas! Speech Recognition…
+
+![works only in chrome](./works_only_in_chrome.png "works only in chrome")
+
+cf. [Speech Recognition API @ caniuse.com](https://caniuse.com/speech-recognition)
 
 e.g.
 
