@@ -32,7 +32,7 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ## All this clicking ?
 
-You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~ set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
+You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~, set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
 
 e.g.
 

@@ -1,6 +1,6 @@
 "use strict";
 
-import { Fuzzy2Country } from './model/fuzzy.js';
+import { Fuzzy2Country } from "./model/fuzzy.js";
 
 export default function (countries, hooks) {
   const nullFunc = () => {};
@@ -9,7 +9,21 @@ export default function (countries, hooks) {
   const onResult = hooks ? hooks.onResult || nullFunc : nullFunc;
   const onStop = hooks ? hooks.onStop || nullFunc : nullFunc;
 
+  let SpeechRecognition;
+  let SpeechGrammarList;
+
+  try {
+    SpeechRecognition = SpeechRecognition || webkitSpeechRecognition ? webkitSpeechRecognition : undefined;
+    SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList ? webkitSpeechGrammarList : undefined;
+  } catch (error) {
+  }
+
   $(document).ready(function () {
+    if (!SpeechRecognition || !SpeechGrammarList) {
+      $("[role='button']#speechRecognition").attr('disabled', 'disabled');
+      return;
+    }
+
     let recognizing = false;
 
     function showStart() {
@@ -42,19 +56,15 @@ export default function (countries, hooks) {
 
     function doStop() {
       if (recognizing) {
-        recognition =  false;
+        recognizing = false;
         recognition.stop();
         showStop();
         onConsole("Stopped.", event);
         onStop();
-        }
+      }
     }
 
     // <!-- speech recognition : WORK IN PROGRESS -->
-    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-    var SpeechRecognitionEvent =
-      SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
     let grammar;
     const countriesExt = Fuzzy2Country().countries;
