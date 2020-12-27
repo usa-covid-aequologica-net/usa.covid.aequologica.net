@@ -36,11 +36,11 @@ You may find cumbersome all this clicking (read: …). But wait, you can ~~confi
 
 e.g.
 
-| command  | listen |
-| ------------- | ------------- |
-| "reset"  | <audio controls><source src="/reset.mp3" type="audio/wav"><a href="/reset.mp3">reset.mp3</a></audio> |
-| "clear" | _ | 
-| "set" + a list of countries | _ | 
+| command  | e.g. | listen |
+| ------------- | -- | ------------- |
+| "reset"  | | <audio controls><source src="/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/reset.mp3">reset.mp3</a></audio> |
+| "clear" | | <audio controls><source src="/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">reset.mp3</a></audio> |  
+| "set" + a list of countries | set India Pakistan Bhutan United States South Korea | <audio controls><source src="/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">reset.mp3</a></audio> | 
 | "add" + a list of countries | _ | 
 | "remove" + a list of countries | _ | 
 | "select" + one country | _ | 
