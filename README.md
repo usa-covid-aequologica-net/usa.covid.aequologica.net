@@ -37,7 +37,7 @@ You may find cumbersome all this clicking (read: …). But wait, you can ~~confi
 
 Alas! Speech Recognition…
 
-![works only in chrome](./works_only_in_chrome.png "works only in chrome")
+![works only in chrome](./works_only_in_chrome_2.png "works only in chrome")
 
 cf. [Browser support for Speech Recognition](https://caniuse.com/speech-recognition)
 
