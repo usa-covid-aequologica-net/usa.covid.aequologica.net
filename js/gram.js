@@ -3,17 +3,13 @@
 
 "use strict";
 
+import { Fuzzy2Country } from './model/fuzzy.js';
+
 export default function Grammar(countries, onParsed) {
-  const addendum = [
-    "Democratic Republic of the Congo",
-    "Czech Republic",
-    "Saint Kitts and Nevis",
-    "Sao Tome and Principe",
-    "Saint Vincent and the Grenadines",
-    "st. Vincent and the Grenadines",
-  ];
-  const union = _.sortBy([...countries, ...addendum]);
-  const formatCountries = '"' + union.join('" | "') + '"';
+
+  const countriesExt = Fuzzy2Country().countries;
+
+  const formatCountries = '"' + countriesExt.join('" | "') + '"';
 
   const grammarAsAString = `CommandInterface {
     Line = Command | Action | Countries

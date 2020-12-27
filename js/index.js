@@ -11,7 +11,7 @@ import { Carousel } from './model/carousel.js';
 import { populationByCountry } from './model/population.js';
 import { domain } from './model/domain.js';
 import { factory } from './model/factory.js'
-import { Fuzzy2Country } from './js/model/fuzzy.js';
+import { Fuzzy2Country } from './model/fuzzy.js';
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);

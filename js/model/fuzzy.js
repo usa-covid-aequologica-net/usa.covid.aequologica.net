@@ -1,35 +1,40 @@
 "use strict";
 
-import { domain } from './domain.js';
-import { populationByCountry } from './population.js';
+import { domain } from "./domain.js";
+import { populationByCountry } from "./population.js";
 
 export function Fuzzy2Country() {
-
   const exceptions = {
-    "East Timor": true,
-    "Turkmenistan": false,
-    "Swaziland": "Eswatini",
-    "St. Lucia": true,
-    "Ivory Coast": "Côte d'Ivoire",
-    "United States of America": true,
-    "St. Vincent and the Grenadines": true,
+    "North Korea": false,
+    Turkmenistan: false,
+    Yugoslavia: false,
     "Antigua & Barbuda": true,
     "Czech Republic": true,
+    "East Timor": true,
+    Macedonia: true,
     "St. Kitts and Nevis": true,
+    "St. Lucia": true,
+    "St. Vincent and the Grenadines": true,
+    "United States of America": true,
     "Democratic Republic of the Congo": "DR Congo",
-    "Macedonia": true,
-    "North Korea": false,
-    "Myanmar": "Burma",
-    "Yugoslavia": false,
+    "Ivory Coast": "Côte d'Ivoire",
+    Myanmar: "Burma",
     "Russian Federation": "Russia",
+    Swaziland: "Eswatini",
   };
+  const valid = () => _.keys(_.pickBy(exceptions, (v) => v));
+  const invalid = () => _.keys(_.pickBy(exceptions, (v) => !v));
 
   const options = {
     includeScore: true,
   };
 
+  const countries = _.map(populationByCountry[domain], "name");
+  const addendum = valid();
+  const countriesExt = _.sortBy([...countries, ...addendum]);
+
   const fuse = new Fuse(_.map(populationByCountry[domain], "name"), options);
-  
+
   function convert(param) {
     if (Array.isArray(param)) {
       return _.map(array, (countray) => {
@@ -67,5 +72,6 @@ export function Fuzzy2Country() {
 
   return {
     convert: convert,
+    countries: countriesExt,
   };
 }

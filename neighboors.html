@@ -41,9 +41,12 @@
     import Neighbours from './js/model/neighbours.js';
     import { Fuzzy2Country } from './js/model/fuzzy.js';
 
+    const f2c = Fuzzy2Country();
+    console.log(f2c.valid());
+
     const neighbours = new Neighbours(r => {
         _.each(r, (val, key) => {
-            let converted = Fuzzy2Country().convert(key);
+            let converted = f2c.convert(key);
             if (key != converted) console.log(key, "->", converted);
         });
     });
