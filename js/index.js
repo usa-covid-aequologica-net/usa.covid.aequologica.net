@@ -103,17 +103,9 @@ $(document).ready(() => {
         // speech
         const fuzzy2country =  new Fuzzy2Country();
 
-        window.ps.subscribe('COMMAND', async (e) => {
+        window.ps.subscribe('COMMAND', (e) => {
             if (!e) return;
             
-            // {
-            //     async function sleep(ms) {
-            //         return new Promise(resolve => setTimeout(resolve, ms));
-            //     }
-            //     console.log(new Date());
-            //     await sleep(5000);
-            //     console.log(new Date());
-            // }
             if (e.action == 'RESET') {
                 model.getCountriesHolder().write(factory[domain]);
                 redraw(model.getCountriesHolder().get());
