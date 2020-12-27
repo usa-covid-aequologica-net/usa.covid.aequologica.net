@@ -125,7 +125,7 @@ $(document).ready(() => {
                 return;
             } 
             if (e.action == "SELECT") {
-                model.getCountriesHolder().setSelectedCountry(fuse.search(e.argument));
+                model.getCountriesHolder().setSelectedCountry(fuzzy2country.convert(e.argument));
                 window.ps.publish('KEYBOARD', { event: 'SPACE' });
                 return;
             } 
