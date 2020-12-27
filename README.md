@@ -29,13 +29,13 @@ Try it here: [https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,P
 
 ## All this typing ?
 
-You may find cumbersome all this typing (read: you are not a geek). But wait, you can configure all these options with the - hopefully - intuitive user interface of the application, and boom! one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
+You may find cumbersome all this typing (read: you are not a geek). But wait, you can configure all these options with the (hopefully intuitive) user interface of the application, and boom! one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
 
 ## All this clicking ?
 
-You may find cumbersome all this clicking (read: …). But wait, you can ~~~~configure all these options~~~~ set / add /remove countries with the - hopefully - intuitive speech recognition interface of the application.
+You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~ set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
 
-Valid speech recognition commands are (full specification at the end of this document):
+Valid commands may be:
 
 * "reset"
 * "clear"
@@ -44,6 +44,8 @@ Valid speech recognition commands are (full specification at the end of this doc
 * "remove" + a list of countries
 * "select" + one country
 * "all" = all countries
+
+Full specification towards the end of this document.
 
 ![UI explained](./img/png/screenshot6-UI-explained.png "UI explained")
 
