@@ -2,6 +2,8 @@
 
 Live at [covid.aequologica.net](http://covid.aequologica.net/). Consuming [Johns Hopkins University](https://coronavirus.jhu.edu/data/new-cases) data through [pomber/covid19](https://github.com/pomber/covid19).
 
+![prout](fart.wav?controlsList=nodownload-nofullscreen-noremoteplayback)
+
 ## What is it about ?
 
 You are involved in a heated discussion on your favorite Whatsapp group about the confinement measures. 
