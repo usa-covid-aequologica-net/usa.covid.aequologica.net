@@ -40,11 +40,11 @@ e.g.
 | ------------- | -- | ------------- |
 | "reset"  | _ | <audio controls><source src="/audio/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/reset.mp3">reset.mp3</a></audio> |
 | "clear" | _ | <audio controls><source src="/audio/clear.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">clear.mp3</a></audio> |  
-| "set" + a list of countries | set India Pakistan Bhutan United States South Korea | <audio controls><source src="/audio/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">set.mp3</a></audio> | 
-| "add" + a list of countries | add Italy Germany | <audio controls><source src="/audio/add.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/add.mp3">add.mp3</a></audio> | 
-| "remove" + a list of countries | remove Bhutan Italy | <audio controls><source src="/audio/remove.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/remove.mp3">remove.mp3</a></audio> | 
-| "select" + one country | select United States | <audio controls><source src="/audio/select.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/select.mp3">select.mp3</a></audio>  | 
-| "all" = all countries | _ | <audio controls><source src="/audio/all.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/all.mp3">all.mp3</a></audio>  | 
+| "set" + one or more countries | set India Pakistan Bhutan United States South Korea | <audio controls><source src="/audio/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">set.mp3</a></audio> | 
+| "add" + one or more countries | add Italy Germany | <audio controls><source src="/audio/add.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/add.mp3">add.mp3</a></audio> | 
+| "remove" + one or more countries | remove Bhutan Italy | <audio controls><source src="/audio/remove.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/remove.mp3">remove.mp3</a></audio> | 
+| "select" + one and only one country | select United States | <audio controls><source src="/audio/select.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/select.mp3">select.mp3</a></audio>  | 
+| use "all" to specify all countries | set all | <audio controls><source src="/audio/all.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/all.mp3">all.mp3</a></audio>  | 
 
 Full specification towards the end of this document.
 
