@@ -41,7 +41,7 @@ Alas! Speech Recognition…
 
 cf. [Browser support for Speech Recognition](https://caniuse.com/speech-recognition)
 
-e.g.
+### Commands for Speech Recognition
 
 | command  | e.g. | listen |
 | ------------- | -- | ------------- |
