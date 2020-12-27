@@ -2,10 +2,7 @@
 
 Live at [covid.aequologica.net](http://covid.aequologica.net/). Consuming [Johns Hopkins University](https://coronavirus.jhu.edu/data/new-cases) data through [pomber/covid19](https://github.com/pomber/covid19).
 
-<audio controls>
-  <source src="reset.mp3" type="audio/wav">
-  [listen](/reset.mp3)
-</audio>
+
 
 ## What is it about ?
 
@@ -37,15 +34,17 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 You may find cumbersome all this clicking (read: …). But wait, you can ~~configure all these options~~ set, add or remove countries with the (hopefully intuitive) speech recognition interface of the application.
 
-Valid commands may be:
+e.g.
 
-* "reset"
-* "clear"
-* "set" + a list of countries
-* "add" + a list of countries
-* "remove" + a list of countries
-* "select" + one country
-* "all" = all countries
+| command  | listen |
+| ------------- | ------------- |
+| "reset"  | <audio controls><source src="/reset.mp3" type="audio/wav"><a href="/reset.mp3">reset.mp3</a></audio> |
+| "clear" | _ | 
+| "set" + a list of countries | _ | 
+| "add" + a list of countries | _ | 
+| "remove" + a list of countries | _ | 
+| "select" + one country | _ | 
+| "all" = all countries | _ | 
 
 Full specification towards the end of this document.
 
