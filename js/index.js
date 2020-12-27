@@ -101,6 +101,8 @@ $(document).ready(() => {
         }
 
         // speech
+        const fuzzy2country =  Fuzzy2Country();
+
         window.ps.subscribe('COMMAND', async (e) => {
             if (!e) return;
             
@@ -112,7 +114,6 @@ $(document).ready(() => {
             //     await sleep(5000);
             //     console.log(new Date());
             // }
-            const fuzzy2country =  Fuzzy2Country().convert(key);
             if (e.action == 'RESET') {
                 model.getCountriesHolder().write(factory[domain]);
                 redraw(model.getCountriesHolder().get());
