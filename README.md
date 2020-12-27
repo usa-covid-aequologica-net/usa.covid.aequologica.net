@@ -38,13 +38,13 @@ e.g.
 
 | command  | e.g. | listen |
 | ------------- | -- | ------------- |
-| "reset"  | _ | <audio controls><source src="/audio/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/reset.mp3">reset.mp3</a></audio> |
-| "clear" | _ | <audio controls><source src="/audio/clear.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">clear.mp3</a></audio> |  
+| **reset**  | reset | <audio controls><source src="/audio/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/reset.mp3">reset.mp3</a></audio> |
+| **clear** | clear | <audio controls><source src="/audio/clear.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">clear.mp3</a></audio> |  
 | one or more countries | India Pakistan Bhutan United States South Korea | <audio controls><source src="/audio/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">set.mp3</a></audio> | 
-| "plus" + one or more countries | plus Italy Germany France | <audio controls><source src="/audio/plus.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/plus.mp3">plus.mp3</a></audio> | 
-| "remove" + one or more countries | remove Bhutan Italy | <audio controls><source src="/audio/remove.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/remove.mp3">remove.mp3</a></audio> | 
-| "select" + one and only one country | select United States | <audio controls><source src="/audio/select.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/select.mp3">select.mp3</a></audio>  | 
-| use "all" to specify all countries | set all | <audio controls><source src="/audio/all.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/all.mp3">all.mp3</a></audio>  | 
+| **plus** -> one or more countries | plus Italy Germany France | <audio controls><source src="/audio/plus.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/plus.mp3">plus.mp3</a></audio> | 
+| **remove** -> one or more countries | remove Bhutan Italy | <audio controls><source src="/audio/remove.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/remove.mp3">remove.mp3</a></audio> | 
+| **select** -> one and only one country | select United States | <audio controls><source src="/audio/select.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/select.mp3">select.mp3</a></audio>  | 
+| use **all** to specify all countries | set all | <audio controls><source src="/audio/all.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/all.mp3">all.mp3</a></audio>  | 
 
 Full specification towards the end of this document.
 
