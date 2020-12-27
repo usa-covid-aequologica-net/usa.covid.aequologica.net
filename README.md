@@ -39,8 +39,8 @@ e.g.
 | command  | e.g. | listen |
 | ------------- | -- | ------------- |
 | "reset"  | | <audio controls><source src="/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/reset.mp3">reset.mp3</a></audio> |
-| "clear" | | <audio controls><source src="/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">reset.mp3</a></audio> |  
-| "set" + a list of countries | set India Pakistan Bhutan United States South Korea | <audio controls><source src="/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">reset.mp3</a></audio> | 
+| "clear" | | <audio controls><source src="/reset.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/clear.mp3">clear.mp3</a></audio> |  
+| "set" + a list of countries | set India Pakistan Bhutan United States South Korea | <audio controls><source src="/set.mp3" type="audio/mpeg"><a href="https://covid.aequologica.net/audio/set.mp3">set.mp3</a></audio> | 
 | "add" + a list of countries | _ | _ | 
 | "remove" + a list of countries | _ | _ | 
 | "select" + one country | _ | _ | 
