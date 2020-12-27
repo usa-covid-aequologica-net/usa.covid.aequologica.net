@@ -7,7 +7,7 @@ import { Fuzzy2Country } from './model/fuzzy.js';
 
 export default function Grammar(countries, onParsed) {
 
-  const countriesExt = Fuzzy2Country().countries;
+  const countriesExt = new Fuzzy2Country().countries;
 
   const formatCountries = '"' + countriesExt.join('" | "') + '"';
 

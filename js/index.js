@@ -101,7 +101,7 @@ $(document).ready(() => {
         }
 
         // speech
-        const fuzzy2country =  Fuzzy2Country();
+        const fuzzy2country =  new Fuzzy2Country();
 
         window.ps.subscribe('COMMAND', async (e) => {
             if (!e) return;
@@ -133,7 +133,8 @@ $(document).ready(() => {
             if (e.action == "ADD" || e.action == "PLUS" || e.action == "+") {
                 let union = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    union = [fuzzy2country.convert(...e.argument), ...model.getCountriesHolder().get()];
+                    const squared = fuzzy2country.convert(e.argument);
+                    union = [...squared, ...model.getCountriesHolder().get()];
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     union = _.map(populationByCountry[domain], "name");
                 } 
@@ -156,7 +157,7 @@ $(document).ready(() => {
             if (e.action == "SET") {
                 let set = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    set = fromFuzzyToCountry(e.argument);
+                    set = fuzzy2country.convert(e.argument);
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     set = _.map(populationByCountry[domain], "name");
                 } 
