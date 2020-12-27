@@ -11,6 +11,7 @@ import { Carousel } from './model/carousel.js';
 import { populationByCountry } from './model/population.js';
 import { domain } from './model/domain.js';
 import { factory } from './model/factory.js'
+import { Fuzzy2Country } from './js/model/fuzzy.js';
 
 if (location.protocol !== 'https:' && window.location.hostname !== "localhost") {
     location.replace(`https:${location.href.substring(location.protocol.length)}`);
@@ -111,20 +112,7 @@ $(document).ready(() => {
             //     await sleep(5000);
             //     console.log(new Date());
             // }
-
-            const options = {
-                includeScore: true
-            }
-            const fuse = new Fuse(_.map(populationByCountry[domain], "name"), options)
-            function fromFuzzyToCountry(array) {
-                return _.map(array, countray => {
-                    const proposals = fuse.search(countray);
-                    if (proposals && proposals.length > 0) {
-                        return proposals[0].item;
-                    }
-                    return countray;
-                });
-            }
+            const fuzzy2country =  Fuzzy2Country().convert(key);
             if (e.action == 'RESET') {
                 model.getCountriesHolder().write(factory[domain]);
                 redraw(model.getCountriesHolder().get());
@@ -144,7 +132,7 @@ $(document).ready(() => {
             if (e.action == "ADD" || e.action == "PLUS" || e.action == "+") {
                 let union = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    union = [fromFuzzyToCountry(...e.argument), ...model.getCountriesHolder().get()];
+                    union = [fuzzy2country.convert(...e.argument), ...model.getCountriesHolder().get()];
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     union = _.map(populationByCountry[domain], "name");
                 } 
@@ -155,7 +143,7 @@ $(document).ready(() => {
             if (e.action == "REMOVE" || e.action == "MINUS" || e.action == "-") {
                 let difference = [];
                 if (Array.isArray(e.argument)) { // array of countries
-                    const squared = fromFuzzyToCountry(e.argument);
+                    const squared = fuzzy2country.convert(e.argument);
                     difference = model.getCountriesHolder().get().filter(x => !squared.includes(x));
                 } else if (typeof e.argument === "string" && e.argument === "ALL") { // ALL
                     ;
