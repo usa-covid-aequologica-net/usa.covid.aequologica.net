@@ -1,6 +1,6 @@
 "use strict";
 
-import { Fuzzy2Country } from './model/fuzzy.js';
+import { Fuzzy2Country } from "./model/fuzzy.js";
 
 export default function (countries, hooks) {
   const nullFunc = () => {};
@@ -43,6 +43,9 @@ export default function (countries, hooks) {
     function doStop() {
       if (recognizing) {
         recognition.stop();
+        showStop();
+        onConsole("Stopped.", event);
+        onStop();
       }
     }
 
