@@ -34,7 +34,8 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@latest/dist/fuse.min.js"></script>
 </head>
 
-<body id="neigh">
+<body id="neighboors">
+    <div class="container">Open console to see something. (Option-Command-i)</div>
 </body>
 
 <script type="module">
@@ -42,7 +43,6 @@
     import { Fuzzy2Country } from './js/model/fuzzy.js';
 
     const f2c = new Fuzzy2Country();
-    console.log(f2c.valid());
 
     const neighbours = new Neighbours(r => {
         _.each(r, (val, key) => {
