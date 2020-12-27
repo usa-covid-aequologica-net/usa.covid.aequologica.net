@@ -39,7 +39,7 @@ Alas! Speech Recognition…
 
 ![works only in chrome](./works_only_in_chrome.png "works only in chrome")
 
-cf. [Speech Recognition API @ caniuse.com](https://caniuse.com/speech-recognition)
+cf. [Browser support for Speech Recognition](https://caniuse.com/speech-recognition)
 
 e.g.
 
