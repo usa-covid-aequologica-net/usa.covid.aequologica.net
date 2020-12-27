@@ -609,7 +609,15 @@
     const speechHooks = {
       onConsole: (...args) => {
         console.log(...args)
-        if (args.length  > 0) toastr.info(args[0]);
+        if (args.length == 1) {
+          toastr.info(args[0])
+        };
+      },
+      onError: (...args) => { 
+        console.log(...args)
+        if (0 < args.length) {
+          toastr.error(args[0])
+        };
       },
       onStop: error => { 
         if (error) console.log(error);

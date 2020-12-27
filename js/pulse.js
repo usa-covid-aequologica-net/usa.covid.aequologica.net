@@ -5,6 +5,7 @@ import { Fuzzy2Country } from "./model/fuzzy.js";
 export default function (countries, hooks) {
   const nullFunc = () => {};
   const onConsole = hooks ? hooks.onConsole || nullFunc : nullFunc;
+  const onError = hooks ? hooks.onError || nullFunc : nullFunc;
   const onStart = hooks ? hooks.onStart || nullFunc : nullFunc;
   const onResult = hooks ? hooks.onResult || nullFunc : nullFunc;
   const onStop = hooks ? hooks.onStop || nullFunc : nullFunc;
@@ -13,14 +14,16 @@ export default function (countries, hooks) {
   let SpeechGrammarList;
 
   try {
-    SpeechRecognition = SpeechRecognition || webkitSpeechRecognition ? webkitSpeechRecognition : undefined;
-    SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList ? webkitSpeechGrammarList : undefined;
+    SpeechRecognition = SpeechRecognition || (webkitSpeechRecognition ? webkitSpeechRecognition : undefined);
+    SpeechGrammarList = SpeechGrammarList || (webkitSpeechGrammarList ? webkitSpeechGrammarList : undefined);
   } catch (error) {
+    console.error(error);
   }
 
   $(document).ready(function () {
     if (!SpeechRecognition || !SpeechGrammarList) {
-      $("[role='button']#speechRecognition").attr('disabled', 'disabled');
+      // $("[role='button']#speechRecognition").attr('disabled', 'disabled');
+      $(".pulseBox").hide();
       return;
     }
 
@@ -59,7 +62,7 @@ export default function (countries, hooks) {
         recognizing = false;
         recognition.stop();
         showStop();
-        onConsole("Stopped.", event);
+        onConsole("Stopped.");
         onStop();
       }
     }
@@ -80,7 +83,7 @@ export default function (countries, hooks) {
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.continuous = true;
-    recognition.lang = "en-GB";
+    recognition.lang = "en";
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
@@ -130,7 +133,7 @@ export default function (countries, hooks) {
     recognition.onerror = function (event) {
       recognizing = false;
       showStop();
-      onConsole(
+      onError(
         "Stopped - error occurred in recognition: '" + event.error + "'",
         event.error,
         event
