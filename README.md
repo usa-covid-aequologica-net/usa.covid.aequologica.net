@@ -3,8 +3,8 @@
 Live at [covid.aequologica.net](http://covid.aequologica.net/). Consuming [Johns Hopkins University](https://coronavirus.jhu.edu/data/new-cases) data through [pomber/covid19](https://github.com/pomber/covid19).
 
 <audio controls>
-  <source src="fart.wav" type="audio/wav">
-  Your browser does not support the audio element.
+  <source src="reset.mp3" type="audio/wav">
+  [listen](/reset.mp3)
 </audio>
 
 ## What is it about ?
