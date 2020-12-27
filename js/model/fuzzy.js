@@ -37,7 +37,7 @@ export function Fuzzy2Country() {
 
   function convert(param) {
     if (Array.isArray(param)) {
-      return _.map(array, (countray) => {
+      return _.map(param, (countray) => {
         return convert(countray);
       });
     } else {
