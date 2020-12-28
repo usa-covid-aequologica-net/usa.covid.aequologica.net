@@ -37,6 +37,7 @@
             position: absolute;
             background-repeat: no-repeat;
         }
+
         /*
 
         */
@@ -52,9 +53,27 @@
             background-blend-mode: saturation;
         }
 
+        .stripe-1 {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+            background: repeating-linear-gradient(-45deg,
+                    white,
+                    white 3px,
+                    silver 3px,
+                    silver 6px);
+        }
+
+
+        .blend>:last-child>div {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
         .blend>:last-child {
             border: 1px dotted gray;
-            border-radius: 2rem;
+            border-radius: 1.8rem;
             margin: -1px;
             background-image: url(/img/png/screenshot-2020-12-28.png);
             left: 0px;
@@ -73,7 +92,9 @@
         <div class="blend">
             <div>
             </div>
+
             <div id="item">
+                <div class="stripe-1"></div>
             </div>
         </div>
     </div>
@@ -84,15 +105,19 @@
 
 <script>
     var dragItem = document.querySelector("#item");
+    var dragItem2 = document.querySelector("#item>div");
     var container = document.querySelector("#tutorial");
 
     var active = false;
+    var target;
     var currentX;
     var currentY;
     var initialX;
     var initialY;
     var xOffset = 0;
     var yOffset = 0;
+    var cx = 200;
+    var cy = 200;
 
     container.addEventListener("touchstart", dragStart, false);
     container.addEventListener("touchend", dragEnd, false);
@@ -103,57 +128,80 @@
     container.addEventListener("mousemove", drag, false);
 
     function dragStart(e) {
-      if (e.type === "touchstart") {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-      } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-      }
+        if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+        } else {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+        }
 
-      if (e.target === dragItem) {
-        active = true;
-      }
+        if (e.target === dragItem || e.target === dragItem2) {
+            target = e.target;
+
+            active = true;
+        }
     }
 
     function dragEnd(e) {
-      initialX = currentX;
-      initialY = currentY;
+        initialX = currentX;
+        initialY = currentY;
 
-      active = false;
+        cx = $(dragItem).width();
+        cy = $(dragItem).height();
+
+        console.log(cx, cy);
+
+        active = false;
     }
 
     function drag(e) {
-      if (active) {
-      
-        e.preventDefault();
-      
-        if (e.type === "touchmove") {
-          currentX = e.touches[0].clientX - initialX;
-          currentY = e.touches[0].clientY - initialY;
-        } else {
-          currentX = e.clientX - initialX;
-          currentY = e.clientY - initialY;
+        if (active) {
+
+            e.preventDefault();
+
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            } else {
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+            }
+            if (target === dragItem) {
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, dragItem);
+            }
+
+            if (target === dragItem2) {
+                setDimension(currentX, currentY, dragItem);
+            }
         }
-
-        xOffset = currentX;
-        yOffset = currentY;
-
-        setTranslate(currentX, currentY, dragItem);
-      }
     }
 
     function setTranslate(xPos, yPos, el) {
-      // el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-      const X = Math.min(1200-200, Math.max(0, (0+xPos)));
-      const Y = Math.min(633-200, Math.max(0, (0+yPos)));
-      $(el).css({
-        "left": X+"px",
-        "top": Y+"px",
-        "background-position-x": "-"+X+"px",
-        "background-position-y": "-"+Y+"px",
-      });
+        // el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+        const X = Math.min(1200 - 200, Math.max(0, (0 + xPos)));
+        const Y = Math.min(633 - 200, Math.max(0, (0 + yPos)));
+        $(el).css({
+            "left": X + "px",
+            "top": Y + "px",
+            "background-position-x": "-" + X + "px",
+            "background-position-y": "-" + Y + "px",
+        });
     }
-  </script>
-  
-  </html>
+
+    function setDimension(xPos, yPos, el) {
+        const pos = $(dragItem).position();
+        let cx_ = cx + xPos - pos.left;
+        let cy_ = cy + yPos - pos.top;
+        console.log(cx_, xPos, cy_, yPos);
+        $(el).css({
+            "width": cx_ + "px",
+            "height": cy_ + "px",
+        });
+    }
+</script>
+
+</html>
