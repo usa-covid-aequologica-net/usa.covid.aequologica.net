@@ -53,7 +53,6 @@ export default function (countries, hooks) {
         recognizing = true;
         showStart();
         onStart();
-        onConsole("Ready to listen. Speak out!");
       }
     }
 
@@ -62,7 +61,6 @@ export default function (countries, hooks) {
         recognizing = false;
         recognition.stop();
         showStop();
-        onConsole("Stopped.");
         onStop();
       }
     }

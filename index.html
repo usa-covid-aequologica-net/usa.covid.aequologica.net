@@ -28,8 +28,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/css/theme.bootstrap_4.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@latest/css/bootstrap4-toggle.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/toastr@latest/build/toastr.min.css" rel="stylesheet">
-
+  
   <link href="./css/styles.css" rel="stylesheet">
   <link href="./css/layout.css" rel="stylesheet">
   <link href="./css/legend.css" rel="stylesheet">
@@ -478,7 +477,6 @@
   <script src="https://cdn.jsdelivr.net/npm/moment@latest/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/ohm-js@latest/dist/ohm.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/toastr@latest/toastr.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@latest/dist/fuse.min.js"></script>
 
   <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
@@ -576,63 +574,94 @@
   </script>
 
   <!-- speech -->
+  <link href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise" rel="stylesheet" type="text/css"/>
+
+  <style>
+    .centered {
+      position: fixed;
+      background-color: lightgray;
+      top: 50%;
+      left: 50%;
+      margin: 0 .5rem 0 0;
+      width: calc(100% - 2rem);
+      text-align: right;
+      z-index: 123456;
+      transform: translate(-50%, -50%);
+      font-family: 'Waiting for the Sunrise', cursive; 
+      color: darkgray;
+      padding: .5rem; 
+      letter-spacing: 6px; 
+      /* font-weight: bold; */
+    }
+  </style>
+
+  <div id="typedtext" class="centered" style="display: none;"></div>
+  
   <script type="module">
     import pulse from './js/pulse.js';
     import Grammar from './js/gram.js';
-    import { populationByCountry } from './js/model/population.js';
     import { domain } from './js/model/domain.js';
+    import { populationByCountry } from './js/model/population.js';
 
     const countries = _.map(populationByCountry[domain], "name"); // ["Germany", "South Korea", "France", "United States"];
 
-    toastr.options = {
-      closeButton: false,
-      debug: false,
-      newestOnTop: false,
-      progressBar: false,
-      positionClass: "toast-bottom-right",
-      preventDuplicates: true,
-      onclick: null,
-      showDuration: "0",
-      hideDuration: "0",
-      timeOut: "2000",
-      extendedTimeOut: "5000",
-      "background-image": "none !important",
-    };
-
-    // // fart sound on error
-    // var fart = document.createElement('audio');
-    // fart.setAttribute('src', '/audio/fart.wav');
-    // // fart sound on error
+    // fart sound 
+    var fart = document.createElement('audio');
+    fart.setAttribute('src', '/audio/fart.wav');
+    // // slip sound
     // var banana = document.createElement('audio');
     // banana.setAttribute('src', '/audio/banana.mp3');
+
+    const $typewriter = $('#typedtext');
+
+    function showSpeech(text, color, spoken) {
+      $typewriter.text(text).css('color', color);
+      if (spoken) {
+        $typewriter.css({
+          'font-family' : "'Waiting for the Sunrise', cursive",
+          "font-size" : "24px" 
+        });
+      } else {
+        $typewriter.css({
+          'font-family' : "monospace",
+          "font-size" : "18px" 
+        });
+      }
+    }
 
     const speechHooks = {
       onConsole: (...args) => {
         console.log(...args)
-        if (args.length == 1) {
-          toastr.info(args[0])
+        if (0 < args.length) {
+          showSpeech(args[0], 'black', true);
         };
       },
       onError: (...args) => { 
         console.log(...args)
         if (0 < args.length) {
-          toastr.error(args[0])
+          showSpeech(args[0], 'red', false);
         };
       },
-      onStop: error => { 
-        if (error) console.log(error);
+      onStart: () => { 
+        $typewriter.show();
+        showSpeech("Ready to listen. Speak out!", 'gray', false);
       },
       onParsed: line => {
-        toastr.success(line);
+        showSpeech(line, 'green', false);
       },
       onResult: result => {
         try {
           gram.processLine(result);
         } catch (error) {
           console.log(error);
-          // banana.play();
-
+          fart.play();
+          showSpeech(error, 'red', false);
         }
+      },
+      onStop: error => { 
+        showSpeech("Bye!", 'blue', false);
+        setTimeout(() => $typewriter.hide(), 1700);
+        if (error) console.log(error);
       },
     }
 
