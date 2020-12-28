@@ -116,6 +116,11 @@ $(document).ready(() => {
                 redraw(model.getCountriesHolder().get());
                 return;
             } 
+            if (e.action == "UNSELECT") {
+                model.getCountriesHolder().setSelectedCountry(undefined);
+                window.ps.publish('KEYBOARD', { event: 'SPACE' });
+                return;
+            } 
             if (e.action == "SELECT") {
                 model.getCountriesHolder().setSelectedCountry(fuzzy2country.convert(e.argument));
                 window.ps.publish('KEYBOARD', { event: 'SPACE' });

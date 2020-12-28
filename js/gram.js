@@ -14,7 +14,7 @@ export default function Grammar(countries, onParsed) {
   const grammarAsAString = `CommandInterface {
     Line = Command | Action | Countries
   
-    Command = Reset | Clear
+    Command = Reset | Clear | Unselect
     Action = (Set | Add | Remove) Countries | Select Country
     
     Countries = All | Country+ 
@@ -26,6 +26,7 @@ export default function Grammar(countries, onParsed) {
     Reset = caseInsensitive<"reset">
     Clear = caseInsensitive<"clear">
     Select = caseInsensitive<"select">
+    Unselect = caseInsensitive<"unselect">
     
     Country = ${formatCountries}
   }`;
