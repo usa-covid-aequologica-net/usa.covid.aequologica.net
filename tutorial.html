@@ -38,44 +38,18 @@
             background-repeat: no-repeat;
         }
 
-        /*
-
-        */
-
-        .blend>:first-child {
-            background-image: linear-gradient(white, white), url(/img/png/screenshot-2020-12-28.png);
+        .blend>#fond {
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            filter: blur(3px);
             background-size: 1200px 633px;
+            background-image: linear-gradient(white, silver), url(/img/png/screenshot-2020-12-28.png);
             background-blend-mode: saturation;
+            filter: blur(2px);
         }
 
-        .stripe-1 {
-            width: 1.5rem;
-            height: 1.5rem;
-            color: white;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom right, transparent 0%, transparent 50%, #dadada 50%, #dadada 100%);
-            /* background: repeating-linear-gradient(-45deg,
-                    white,
-                    white 3px,
-                    silver 3px,
-                    silver 6px); */
-        }
-
-
-        .blend>:last-child>div {
-            position: absolute;
-            border-bottom-right-radius: 1rem;
-            bottom: 0px;
-            right: 0px;
-        }
-
-        .blend>:last-child {
+        .blend>#loupe{
             border: 1px dotted gray;
             border-radius: 1rem;
             margin: -1px;
@@ -88,17 +62,41 @@
             width: 200px;
             height: 200px;
         }
+
+        .blend>#loupe>#coin {
+            position: absolute;
+            border-bottom-right-radius: 1rem;
+            bottom: 0px;
+            right: 0px;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 0;
+            padding: 0;
+            background: repeating-linear-gradient(to bottom right,
+                    transparent 0%,
+                    transparent 50%,
+                    lightgray 55%,
+                    transparent 60%,
+                    lightgray 65%,
+                    transparent 70%,
+                    lightgray 75%,
+                    transparent 80%,
+                    lightgray 85%,
+                    transparent 90%,
+                    lightgray 96%,
+                    transparent 100%);
+        }
+
     </style>
 </head>
 
 <body id="tutorial">
     <div class="design">
         <div class="blend">
-            <div>
+            <div id="fond">
             </div>
-
-            <div id="item">
-                <div class="stripe-1"></div>
+            <div id="loupe">
+                <div id="coin"></div>
             </div>
         </div>
     </div>
@@ -108,8 +106,8 @@
 </script>
 
 <script>
-    var dragItem = document.querySelector("#item");
-    var dragItem2 = document.querySelector("#item>div");
+    var $loupe = document.querySelector("#loupe");
+    var $coin = document.querySelector("#loupe>#coin");
     var container = document.querySelector("#tutorial");
 
     var active = false;
@@ -140,7 +138,7 @@
             initialY = e.clientY - yOffset;
         }
 
-        if (e.target === dragItem || e.target === dragItem2) {
+        if (e.target === $loupe || e.target === $coin) {
             target = e.target;
 
             active = true;
@@ -151,10 +149,8 @@
         initialX = currentX;
         initialY = currentY;
 
-        cx = $(dragItem).width();
-        cy = $(dragItem).height();
-
-        console.log(cx, cy);
+        cx = $($loupe).width();
+        cy = $($loupe).height();
 
         active = false;
     }
@@ -171,23 +167,23 @@
                 currentX = e.clientX - initialX;
                 currentY = e.clientY - initialY;
             }
-            if (target === dragItem) {
+            if (target === $loupe) {
                 xOffset = currentX;
                 yOffset = currentY;
 
-                setTranslate(currentX, currentY, dragItem);
+                setTranslate(currentX, currentY, $loupe);
             }
 
-            if (target === dragItem2) {
-                setDimension(currentX, currentY, dragItem);
+            if (target === $coin) {
+                setDimension(currentX, currentY, $loupe);
             }
         }
     }
 
     function setTranslate(xPos, yPos, el) {
-        // el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
         const X = Math.min(1200 - cx, Math.max(0, (0 + xPos)));
         const Y = Math.min(633 - cy, Math.max(0, (0 + yPos)));
+
         $(el).css({
             "left": X + "px",
             "top": Y + "px",
@@ -197,13 +193,13 @@
     }
 
     function setDimension(xPos, yPos, el) {
-        const pos = $(dragItem).position();
-        let cx_ = cx + xPos - pos.left;
-        let cy_ = cy + yPos - pos.top;
-        console.log(cx_, xPos, cy_, yPos);
+        const pos = $($loupe).position();
+        const _cx = cx + xPos - pos.left;
+        const _cy = cy + yPos - pos.top;
+
         $(el).css({
-            "width": cx_ + "px",
-            "height": cy_ + "px",
+            "width": _cx + "px",
+            "height": _cy + "px",
         });
     }
 </script>
