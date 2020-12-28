@@ -73,7 +73,7 @@
 
         .blend>:last-child {
             border: 1px dotted gray;
-            border-radius: 1.8rem;
+            border-radius: 1rem;
             margin: -1px;
             background-image: url(/img/png/screenshot-2020-12-28.png);
             left: 0px;
@@ -182,8 +182,8 @@
 
     function setTranslate(xPos, yPos, el) {
         // el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-        const X = Math.min(1200 - 200, Math.max(0, (0 + xPos)));
-        const Y = Math.min(633 - 200, Math.max(0, (0 + yPos)));
+        const X = Math.min(1200 - cx, Math.max(0, (0 + xPos)));
+        const Y = Math.min(633 - cy, Math.max(0, (0 + yPos)));
         $(el).css({
             "left": X + "px",
             "top": Y + "px",
