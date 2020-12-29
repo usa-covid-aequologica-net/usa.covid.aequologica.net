@@ -22,7 +22,7 @@ countries with numbers on a different order of magnitude is more readable.
 
 Try it here: [https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_](https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_)
 
-![DE,DK,EE,FI,LT,LV,NO,PL,RU,SE](./img/png/screenshot-2020-12-28.png "DE,DK,EE,FI,LT,LV,NO,PL,RU,SE")
+![DE,DK,EE,FI,LT,LV,NO,PL,RU,SE](./img/png/screenshot-2020-12-29.png "DE,DK,EE,FI,LT,LV,NO,PL,RU,SE")
 
 ## All this typing ?
 
