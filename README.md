@@ -65,9 +65,9 @@ Read this article: [Coronavirus: Should We Aim for Herd Immunity Like Sweden?](h
 There are 6 categories. For each category, valid values are (defaults are in **bold**):
 
 1. **confirmed** / deaths ,
-2. **day** or **daily** / tot or total,
-3. **lin** or **linear** / log or logarithmic,
-4. **per** or **percapita** / abs or absolute,
+2. **day** (or **daily**) / tot or total,
+3. **lin** (or **linear**) / log or logarithmic,
+4. **per** (or **percapita**), i.e. per million inhabitants / abs or absolute,
 5. any number between 1 and 28 incl. will set the size of the average - default is **7** days, 
 6. start date in YYYY-MM-DD format; default is March 1st, 2020, i.e. **2020-03-01** (nb. there is no data before January 21, 2020).
 
