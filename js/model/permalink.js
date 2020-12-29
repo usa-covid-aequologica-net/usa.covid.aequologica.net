@@ -8,8 +8,9 @@ export function buildPermalink(...args) {
             window.location.protocol +
             "//" +
             window.location.hostname +
-            (window.location.port ? (":" + window.location.port) : "");
-        let options = [];
+            (window.location.port ? (":" + window.location.port) : "") +
+            "/?";
+            let options = [];
         {
             options.push(properties.getMeasure().getType());
             if (properties.getToggle("toggleLinear") === "linear") {
