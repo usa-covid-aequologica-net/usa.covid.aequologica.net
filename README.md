@@ -169,6 +169,12 @@ On mobile devices, left and right swipe gestures will toggle _total/daily_ and _
 
 Yes we can ! 
 
+<style>
+img[alt="Microphone"] {
+	  width: 100px;
+}
+</style>
+
 ![Microphone](./img/svg/microphone-2.svg)
 
 
