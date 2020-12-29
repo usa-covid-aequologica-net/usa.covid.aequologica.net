@@ -12,6 +12,7 @@
         body {
             min-width: 100%;
             min-height: 100%;
+            margin: 32px;
         }
     </style>
 
@@ -44,7 +45,7 @@
             width: 100%;
             height: 100%;
             background-size: 1200px 630px;
-            background-image: linear-gradient(white, white), url(/img/png/screenshot-2020-12-29.png);
+            background-image: linear-gradient(white, white), url(/img/png/screenshot-tutorial.png);
             background-blend-mode: saturation;
             filter: blur(2px);
         }
@@ -53,7 +54,7 @@
             border: 1px dotted gray;
             border-radius: 1rem;
             margin: -1px;
-            background-image: url(/img/png/screenshot-2020-12-29.png);
+            background-image: url(/img/png/screenshot-tutorial.png);
             left: 0px;
             top: 0px;
             background-size: 1200px 630px;
@@ -181,14 +182,16 @@
     }
 
     function setTranslate(xPos, yPos, el) {
-        const X = Math.min(1200 - cx, Math.max(0, (0 + xPos)));
-        const Y = Math.min(630 - cy, Math.max(0, (0 + yPos)));
+        const X = Math.min(1200 + 64 - cx, Math.max(-32, (0 + xPos)));
+        const Y = Math.min(630 + 64 - cy, Math.max(-32, (0 + yPos)));
 
+        console.log(X,Y);
+        
         $(el).css({
             "left": X + "px",
             "top": Y + "px",
-            "background-position-x": "-" + X + "px",
-            "background-position-y": "-" + Y + "px",
+            "background-position-x": (-1*X) + "px",
+            "background-position-y": (-1*Y) + "px",
         });
     }
 

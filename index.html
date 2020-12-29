@@ -478,38 +478,22 @@
   <script src="./lib/sma.js"></script>
 
   <!-- location -->
-  <!-- 
-  <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@latest/src/js.cookie.min.js"></script>
-  <script type="module" src="./js/location.js"></script> 
-  -->
-  <!-- /location -->
-
-  <!-- ajax feedback -->
-  <style>
-    .centered {
-      position: fixed;
-      background-color: transparent;
-      top: 50%;
-      left: 50%;
-      z-index: 123456;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-  </style>
   <script>
-    $(document).ajaxStart(function (event, xhr, options) {
-      // ("ajax started", event, xhr, options);
-    });
-    $(document).ajaxSend(function (event, xhr, options) {
-      // console.log("ajax send", event, xhr, options);
-      // $('#ajaxFeedback #source').html(options.url);
-      $('#ajaxFeedback').show();
-    });
-    $(document).ajaxComplete(function (event, xhr, options) {
-      // console.log("ajax completed", event, xhr, options);
-      $('#ajaxFeedback').hide();
+    $(document).ready(function () {
+      if (domain === 'world') {
+        $('span#'+domain).show();
+        $('span#usa').hide();
+      } else {
+        $('span#'+domain).show();
+        $('span#world').hide();
+      }    
+
+      $('button#location').hide();
+      $('.flag').hide();
     });
   </script>
+  <!-- /location -->
+
   <script>
     // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
     let vh = window.innerHeight * 0.01;
