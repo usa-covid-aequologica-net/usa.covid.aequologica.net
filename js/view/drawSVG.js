@@ -8,7 +8,7 @@ let flyingXScale;
 let flyingYScale;
 
 export function draw(...args) {
-    const [rootG, properties, categories, PRINT, doNotAnimate] = args;
+    const [rootG, properties, categories, doNotAnimate] = args;
 
     flyingCategories = categories;
 
@@ -176,24 +176,22 @@ export function draw(...args) {
 
     // animate cf. http://bl.ocks.org/fryford/2925ecf70ac9d9b51031
     function animate() {
-        if (!PRINT) {
-            const cssEncode = cat => cat.replace(/'/g, "\\'"); // pour "Côte d'Ivoire" (beware the ' !)
+        const cssEncode = cat => cat.replace(/'/g, "\\'"); // pour "Côte d'Ivoire" (beware the ' !)
 
-            // select All of the lines and process them one by one
-            d3.selectAll(".line").each((d, i) => {
-                // get the length of each line in turn
-                const ID = ".category[name='" + cssEncode(d.category) + "'] .line#line_" + i;
-                const sel = d3.select(ID);
-                if (0 < sel.size() && sel.node()) {
-                    const totalLength = sel.node().getTotalLength();
-                    const line = d3.selectAll(ID)
-                        .attr("stroke-dashoffset", totalLength)
-                        .attr("stroke-dasharray", totalLength + " " + totalLength)
-                        .transition().duration(2500)
-                        .attr("stroke-dashoffset", 0);
-                }
-            });
-        }
+        // select All of the lines and process them one by one
+        d3.selectAll(".line").each((d, i) => {
+            // get the length of each line in turn
+            const ID = ".category[name='" + cssEncode(d.category) + "'] .line#line_" + i;
+            const sel = d3.select(ID);
+            if (0 < sel.size() && sel.node()) {
+                const totalLength = sel.node().getTotalLength();
+                const line = d3.selectAll(ID)
+                    .attr("stroke-dashoffset", totalLength)
+                    .attr("stroke-dasharray", totalLength + " " + totalLength)
+                    .transition().duration(2500)
+                    .attr("stroke-dashoffset", 0);
+            }
+        });
     }
 
     // define responsive behavior

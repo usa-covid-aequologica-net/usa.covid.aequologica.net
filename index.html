@@ -50,6 +50,9 @@
   <meta property="og:url" content="https://covid.aequologica.net" />
   <meta property="og:description" content="Yet Another Covid-19 App, by Christophe Thiebaud" />
   <meta property="og:site_name" content="covid.aequologica.net" />
+  <!-- 
+  https://screenshotapi.net/api/v1/screenshot?url=https%3A%2F%2Fcovid.aequologica.net%2F%3F2020-03-01%2C7%2CDE%2CDK%2CEE%2CFI%2CLT%2CLV%2CNO%2CPL%2CRU%2CSE%2Cdeaths%2Clin%2Cper%2Ctot%2C_&width=1200&height=630&output=image&delay=5000
+  -->
   <meta property="og:image" content="https://covid.aequologica.net/img/png/screenshot-2020-12-29.png" />
   <meta property="og:image:url" content="https://covid.aequologica.net/img/png/screenshot-2020-12-29.png" />
   <meta property="og:image:type" content="image/png" />
@@ -62,7 +65,7 @@
 
   <header>
     <div id="top">
-      <div id="top-bar" class="fixed-top d-flex justify-content-between d-print-none">
+      <div id="top-bar" class="fixed-top d-flex justify-content-between">
 
         <div id="top-left" class="flex-grow-1">
           <!-- TITLE -->
@@ -94,7 +97,7 @@
           </div>
         </div>
 
-        <div id="top-right" class="d-flex justify-content-between d-print-none">
+        <div id="top-right" class="d-flex justify-content-between">
           <div class="flex-column">
             <div id="b0x0" class="">
               <span class="mr-auto mt-2 mt-lg-0" style="white-space: nowrap;">
@@ -186,7 +189,7 @@
   <main role="main">
     <div class="container">
       <noscript>
-        <div class="alert alert-danger d-print-none" role="alert">
+        <div class="alert alert-danger" role="alert">
           covid.aequologica.net requires javascript
         </div>
       </noscript>
@@ -340,30 +343,6 @@
   <!-- /modals  -->
 
   <!-- handlebars templates -->
-  <!-- PRINT header -->
-  <script id="print-header-template" type="text/x-handlebars-template">
-    <div class=row>
-      <div class="col">
-        <span class="badge badge-secondary badge-pill badge-info">{{toggleCumula}}</span>
-        <span class="badge badge-secondary badge-pill badge-info">{{measure}}</span>
-        {{#if (isDaily toggleCumula)}}
-        {{#if (islargerThanOne sizeOfAverage)}}
-        <span class="badge badge-secondary badge-pill badge-info text-nowrap">{{sizeOfAverage}} days average</span>
-        {{/if}}
-        {{/if}}
-        <span class="badge badge-secondary badge-pill badge-info">{{toggleCapita}}</span>
-        <span class="badge badge-secondary badge-pill badge-info">{{toggleLinear}}</span>
-      </div>
-    </div>
-  </script>
-  <!-- PRINT footer -->
-  <script id="print-footer-template" type="text/x-handlebars-template">
-    <div style="font-size: 8pt; text-align:right; width: 100%">
-      <div>COVID-19 data from Johns Hopkins University</div>
-      <div>json aggregation by Rodrigo Pombo</div>
-      <div>https:/covid.aequologica.net by Christophe Thiebaud</div>
-    </div>
-  </script>
   <!-- country picker row -->
   <script id="row-template" type="text/x-handlebars-template">
     <tr id="r{{index}}">
@@ -390,7 +369,7 @@
   <!-- legend -->
   <script id="legend-template" type="text/x-handlebars-template">
     <thead>
-      <tr class="d-print-none">
+      <tr>
           <th class="country" style="padding: 0;">
               <div class="btn-group d-flex justify-content-between" role="group" aria-label="Basic example" style="min-width: 200px; margin: -2px;">
                   <button type="button" class="add border-top-0 _border-bottom-0 _border-left-0 btn btn-sm btn-primary float-left text-nowrap" title="add country" data-toggle="modal"
@@ -428,7 +407,7 @@
     {{#each @root}}
     <tr>
       <td class="country" id="{{name}}" name="{{name}}" {{{color name}}}>
-        <button type="button" class="remove btn btn-sm btn-outline-secondary d-print-none" title="remove {{name}}" name="{{name}}">
+        <button type="button" class="remove btn btn-sm btn-outline-secondary" title="remove {{name}}" name="{{name}}">
           <span class="remove">×</span>
         </button>
         {{name}}
@@ -480,14 +459,11 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@latest/dist/fuse.min.js"></script>
 
   <script async defer src="https://cdn.jsdelivr.net/npm/tablesorter@latest/dist/js/jquery.tablesorter.combined.min.js"></script>
-  <script async defer src="https://cdn.jsdelivr.net/npm/html2canvas@latest/dist/html2canvas.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/file-saver@latest/dist/FileSaver.min.js"></script>
   <script async defer src="https://cdn.jsdelivr.net/npm/pubsubJS@latest/pubsub.min.js"></script>
 
   <script>
     // compile the handlebars templates
-    var printHeaderTemplate = Handlebars.compile(document.getElementById("print-header-template").innerHTML);
-    var printFooterTemplate = Handlebars.compile(document.getElementById("print-footer-template").innerHTML);
     var rowTemplate = Handlebars.compile(document.getElementById("row-template").innerHTML);
     var legendTemplate = Handlebars.compile(document.getElementById("legend-template").innerHTML);
     var tooltipTemplate = Handlebars.compile(document.getElementById("tooltip-template").innerHTML);

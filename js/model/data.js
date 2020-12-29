@@ -453,13 +453,5 @@ export function init(queryStringParams) {
             return undefined;
         },
         getFetchResults: () => massagedData,
-
-        printHeaderTemplateObjects: {
-            measure: measure.getType(),
-            sizeOfAverage: sizeOfAverage,
-            toggleCapita: getToggle("toggleCapita"),
-            toggleCumula: getToggle("toggleCumula"),
-            toggleLinear: getToggle("toggleLinear"),
-        }
     }
 }

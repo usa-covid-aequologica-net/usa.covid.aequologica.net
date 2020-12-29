@@ -33,18 +33,8 @@ jQuery.Deferred.exceptionHook = function (error, stack) {
 
 // first thing to do is to decrypt parameters from url
 const params = (function () {
-    const printMarker = "action=PRINT&";
-    let PRINT = false;
     let queryString = window.location.search.substring(1);
-    {
-        if (queryString && queryString.startsWith(printMarker)) {
-            PRINT = true;
-            queryString = queryString.substring(printMarker.length);
-        }
-    }
     return {
-        printMarker: printMarker,
-        PRINT: PRINT,
         queryString: parseParams(queryString)
     };
 })();
@@ -86,7 +76,6 @@ $(document).ready(() => {
                     selectedCountry: model.getCountriesHolder().getSelectedCountry(),
                 },
                 categories,
-                params.PRINT,
                 doNotAnimate);
 
             // legend
@@ -421,9 +410,7 @@ $(document).ready(() => {
                 $('#startRangeInput').prop("min", result.earliest.dayOfYear() - 1);
 
                 redraw();
-
-                const $printModal = $('.modal#printModal');
-
+                
             });
         }
     })();

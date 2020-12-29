@@ -1,16 +1,14 @@
 'use strict';
 
 export function buildPermalink(...args) {
-    const [properties, printMarker] = args;
+    const [properties] = args;
 
     return new Promise(function (resolve, reject) {
         let permalink =
             window.location.protocol +
             "//" +
             window.location.hostname +
-            (window.location.port ? (":" + window.location.port) : "") +
-            "/?" +
-            (printMarker ? printMarker : "");
+            (window.location.port ? (":" + window.location.port) : "");
         let options = [];
         {
             options.push(properties.getMeasure().getType());
