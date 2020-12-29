@@ -20,6 +20,42 @@ body {
   height: calc(var(--vh, 1vh) * 100);
 }
 
+/* larger */
+@media (min-width: 576px) {
+  header #top { /* == #top-bar + #credits */
+    height: 64px;
+    max-height: 64px;
+  }
+  header #top-bar {
+    height: 40px;
+    max-height: 40px;
+    margin: 4px 4px 0 4px;
+  }
+  header #credits {
+    top: 44px;
+    height: 20px;
+    max-height: 20px;
+  }
+  main #chart,
+  main #legend,
+  main #rightVerticalBar {
+    top: 64px;
+  }
+  main #chart,
+  main #rightVerticalBar {
+    height: calc(100vh - 101px); /* fallback */
+    height: calc((var(--vh, 1vh) * 100) - 101px);
+  }
+  main #legend,
+  main #legend .card{
+    max-height: calc(100vh - 110px); /* fallback */
+    max-height: calc((var(--vh, 1vh) * 100) - 110px);
+  }
+  footer #bottom {
+    min-height: 37px;
+  }
+}
+
 /* smaller */
 @media (max-width: 576px) {
   header #top {
@@ -43,46 +79,16 @@ body {
   }
   main #chart,
   main #rightVerticalBar {
-    height: calc(100vh - 100); /* fallback */
-    height: calc((var(--vh, 1vh) * 100) - 90px);
+    height: calc(100vh - 87px); /* fallback */
+    height: calc((var(--vh, 1vh) * 100) - 87px);
   }
   main #legend,
   main #legend .card{
-    max-height: calc(100vh - 100px); /* fallback */
-    max-height: calc((var(--vh, 1vh) * 100) - 90px);
+    max-height: calc(100vh - 95px); /* fallback */
+    max-height: calc((var(--vh, 1vh) * 100) - 95px);
   }
-}
-
-/* larger */
-@media (min-width: 576px) {
-  header #top {
-    height: 60px;
-    max-height: 60px;
-  }
-  header #top-bar {
-    height: 40px;
-    max-height: 40px;
-    margin: 0.25rem;
-  }
-  header #credits {
-    top: 40px;
-    height: 20px;
-    max-height: 20px;
-  }
-  main #chart,
-  main #legend,
-  main #rightVerticalBar {
-    top: 60px;
-  }
-  main #chart,
-  main #rightVerticalBar {
-    height: calc(100vh - 100); /* fallback */
-    height: calc((var(--vh, 1vh) * 100) - 100px);
-  }
-  main #legend,
-  main #legend .card{
-    max-height: calc(100vh - 100px); /* fallback */
-    max-height: calc((var(--vh, 1vh) * 100) - 100px);
+  footer #bottom {
+    min-height: 37px;
   }
 }
 
@@ -122,5 +128,6 @@ main noscript {
   height: calc(90vh - 60px); /* fallback */
   max-height: calc((var(--vh, 1vh) * 90) - 60px);
 }
+
 
 
