@@ -77,6 +77,7 @@ Categories must be separated by comma. Otherwise, parsing is rather lenient :
 - categories may appear in the query string in any order,
 - white spaces will be trimmed,
 - case does not matter; FR, fr, Fr and fR will all go to France,
+- the marker for country selection '**\***', may appear before or after the country code, e.g. \*FR or FR\*,
 - if several options appear for the same category in the URL, the **first** one wins: e.g. 
 ```
 https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_

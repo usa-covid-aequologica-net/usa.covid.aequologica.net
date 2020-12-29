@@ -91,7 +91,7 @@ export function parseParams(...args) {
                             countryCode = ITEM.substring(1, 3);
                             addCountries = true;
                         }
-                        if (ITEM.charAt(ITEM.length - 1) === "*") {
+                        if (ITEM.charAt(ITEM.length - 1) === "*" || ITEM.charAt(0) === "*") {
                             countryCode = ITEM.substring(ITEM.length - 3, ITEM.length - 1);
                             isSelected = true;
                         }
