@@ -478,7 +478,9 @@
   <script src="./lib/sma.js"></script>
 
   <!-- location -->
-  <script>
+  <script type="module">
+    import { domain } from './js/model/domain.js';
+
     $(document).ready(function () {
       if (domain === 'world') {
         $('span#'+domain).show();
