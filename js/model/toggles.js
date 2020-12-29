@@ -3,7 +3,7 @@
 import { store } from './yetAnotherLocalStorageWrapper.js';
 
 const validToggles = { // first is default
-    toggleCapita: ["absolute", "percapita"],
+    toggleCapita: ["percapita", "absolute"],
     toggleCumula: ["daily", "total"],
     toggleDeaths: ["hidden", "visible"],
     toggleLinear: ["linear", "logarithmic"],
