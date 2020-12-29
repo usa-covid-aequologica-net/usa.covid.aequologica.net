@@ -21,7 +21,8 @@ body {
 }
 
 /* larger */
-@media (min-width: 576px) {
+/* https://css-tricks.com/logic-in-media-queries/ */
+@media (min-width: 576px) and (min-height: 576px) {
   header #top { /* == #top-bar + #credits */
     height: 64px;
     max-height: 64px;
@@ -57,7 +58,7 @@ body {
 }
 
 /* smaller */
-@media (max-width: 576px) {
+@media (max-width: 576px), (max-height: 576px) {
   header #top {
     height: 50px;
     max-height: 50px;
