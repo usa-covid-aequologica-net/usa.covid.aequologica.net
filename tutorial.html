@@ -12,7 +12,6 @@
         body {
             min-width: 100%;
             min-height: 100%;
-            margin: 32px;
         }
     </style>
 
@@ -181,9 +180,11 @@
         }
     }
 
+    const margin = 0;
+    $('body').css("margin", margin+"px");
     function setTranslate(xPos, yPos, el) {
-        const X = Math.min(1200 + 64 - cx, Math.max(-32, (0 + xPos)));
-        const Y = Math.min(630 + 64 - cy, Math.max(-32, (0 + yPos)));
+        const X = Math.min(1200 + (2*margin) - cx, Math.max(-(margin), (0 + xPos)));
+        const Y = Math.min(630 + (2*margin) - cy, Math.max(-(margin), (0 + yPos)));
 
         console.log(X,Y);
         
