@@ -34,7 +34,7 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
     title="help"
     width="100%"
     height="auto"
-    src="7tutorial.html">
+    src="/tutorial.html">
 </iframe>
 
 ## All this clicking ? Speech Recognition!
