@@ -33,7 +33,7 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 <iframe id="iFrame"
     title="help"
     width="100%"
-    height="100%"
+    height="700px"
     src="/tutorial.html">
 </iframe>
 
