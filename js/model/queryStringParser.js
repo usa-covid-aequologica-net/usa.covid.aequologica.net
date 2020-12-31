@@ -9,7 +9,6 @@ export function parseParams(...args) {
     const queryStringParams = {};
 
     let countries = [];
-    let addCountries = false;
     let warnings = {};
     function warn(key, warning) {
         let w = warnings[key] || [];
@@ -85,14 +84,13 @@ export function parseParams(...args) {
                 if (ITEM.match("^\\+?\\*?[A-Z]{2}\\*?$")) {
                     let countryCode = ITEM;
                     let isSelected = false;
-                    addCountries = false; // last one wins
                     if (ITEM.length >= 3) {
-                        if (ITEM.charAt(0) === "+") {
-                            countryCode = ITEM.substring(1, 3);
-                            addCountries = true;
+                        if (ITEM.charAt(ITEM.length - 1) === "*") {
+                            countryCode = ITEM.substring(0, ITEM.length - 1);
+                            isSelected = true;
                         }
-                        if (ITEM.charAt(ITEM.length - 1) === "*" || ITEM.charAt(0) === "*") {
-                            countryCode = ITEM.substring(ITEM.length - 3, ITEM.length - 1);
+                        if (ITEM.charAt(0) === "*") {
+                            countryCode = ITEM.substring(1);
                             isSelected = true;
                         }
                     }
@@ -154,10 +152,6 @@ export function parseParams(...args) {
 
     if (countries.length > 0) {
         queryStringParams.countries = _.sortedUniq(_.sortBy(_.map(countries, 'name')));
-    }
-
-    if (addCountries) {
-        queryStringParams.addCountries = addCountries;
     }
 
     if (!_.isEmpty(warnings)) {

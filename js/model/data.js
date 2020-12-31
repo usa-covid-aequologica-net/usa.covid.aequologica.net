@@ -362,9 +362,6 @@ export function init(queryStringParams) {
         }
         if (queryStringParams.countries && queryStringParams.countries.length > 0) {
             let countries = queryStringParams.countries;
-            if (queryStringParams.addCountries) {
-                countries = countries.concat(countriesHolder.get());
-            }
             if (queryStringParams.store) {
                 countriesHolder.write(countries);
             } else {
