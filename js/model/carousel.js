@@ -1,6 +1,7 @@
 "use strict";
 
 export function Carousel() {
+  /*
   const order = [
     { cumula: "total", measure: "confirmed" },
     { cumula: "total", measure: "deaths" },
@@ -24,8 +25,16 @@ export function Carousel() {
     }
   }
 
+  function left(c,m) {
+    return order[(find(c, m) + order.length - 1) % order.length];
+  }
+  function right(c,m) {
+    return order[(find(c, m) + 1) % order.length];
+  }
+  */
+
   return {
-    left: (c, m) => order[(find(c, m) + order.length - 1) % order.length],
-    right: (c, m) => order[(find(c, m) + 1) % order.length],
+    left: (c, m) => c == "total" ? { cumula: "daily", measure: m } : { cumula: "total", measure: m },
+    right: (c, m) => m == "confirmed" ? { cumula: c, measure: "deaths" } : { cumula: c, measure: "confirmed" },
   };
 }
