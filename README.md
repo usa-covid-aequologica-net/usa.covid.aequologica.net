@@ -110,7 +110,7 @@ _Tip : ending the query string with an underscore (\_) prevents Facebook to horr
 Notice the * in the permalink:
 
 ```
-https://covid.aequologica.net/?14,2020-03-01,FR,IT*,SE,confirmed,day,log,per,_
+https://covid.aequologica.net/?14,2020-03-01,FR,IT,SE*,confirmed,day,log,per,_,!
 ```
 
 Observe the results in the screenshot below.
