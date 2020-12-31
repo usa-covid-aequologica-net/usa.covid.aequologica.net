@@ -15,7 +15,7 @@ https://covid.aequologica.net/?tot,deaths,SE,DE,DK,EE,FI,LT,LV,NO,PL,RU,2020-03-
 ```
 
 This will lead to a web page that shows a comparison graph of all (**tot**) **deaths** for Sweden (**SE**) vs. all its neighbours : Germany (**DE**), Denmark (**DK**), Estonia (**EE**), Finland (**FI**), Lithuania (**LT**), Latvia (**LV**), Norway (**NO**), Poland (**PL**) and Russia (**RU**), starting from the 1st of March of this year (**2020-03-01**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); 
-the population of these countries differs widly (from Estonia ~1.3M to Russia ~146M), so the figures are per capita (**per**), to adjust for that; 
+the population of these countries differs widly (from Estonia ~1.3M to Russia ~146M), so the figures are per million inhabitants, a.k.a. per capita (**per**), to adjust for that; 
 the Y-axis scale is linear (**lin**); be it logaritmic (log), comparison between countries with numbers on a different order of magnitude is more readable.
 
 
