@@ -82,7 +82,7 @@ export function parseParams(...args) {
             default:
                 warn(item, 'not a reserved word');
                 // country code ?
-                if (ITEM.match("^\\+?[A-Z]{2}\\*?$")) {
+                if (ITEM.match("^\\+?\\*?[A-Z]{2}\\*?$")) {
                     let countryCode = ITEM;
                     let isSelected = false;
                     addCountries = false; // last one wins
