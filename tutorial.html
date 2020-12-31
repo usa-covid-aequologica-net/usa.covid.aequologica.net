@@ -22,8 +22,8 @@
     <style>
         .design {
             position: relative;
-            width: 1200px;
-            height: 630px;
+            width: 1966px;
+            height: 874px;
             margin: auto;
         }
 
@@ -43,35 +43,38 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-size: 1200px 630px;
-            background-image: linear-gradient(white, white), url(/img/png/screenshot-permalink.png);
+            background-size: 1966px 874px;
+            background-image: linear-gradient(white, white), url(/img/png/screenshot-tutorial_clean.png);
             background-blend-mode: saturation;
-            filter: blur(2px);
+            filter: blur(5px);
         }
 
-        .blend>#loupe{
-            border: 1px dotted gray;
-            border-radius: 1rem;
+        .blend>.loupe {
+            border: 2px solid gray;
+            /* border-radius: 1rem; */
             margin: -1px;
-            background-image: url(/img/png/screenshot-permalink.png);
+            background-image: url(/img/png/screenshot-tutorial_clean.png);
             left: 0px;
             top: 0px;
-            background-size: 1200px 630px;
+            background-size: 1966px 874px;
             background-position-x: -0px;
             background-position-y: -0px;
             width: 200px;
             height: 200px;
         }
 
-        .blend>#loupe>#coin {
+        .blend>.loupe>.coin {
             position: absolute;
-            border-bottom-right-radius: 1rem;
+            /* border-bottom-right-radius: 1rem; */
             bottom: 0px;
             right: 0px;
             width: 1.5rem;
             height: 1.5rem;
             margin: 0;
             padding: 0;
+        }
+
+        .blend>.loupe>.coin:hover {
             background: repeating-linear-gradient(to bottom right,
                     transparent 0%,
                     transparent 50%,
@@ -87,6 +90,59 @@
                     transparent 100%);
         }
 
+        #loupe1 {
+            border-color: red;
+            left: 408px;
+            top: 215px;
+            background-position: -408px -215px;
+            width: 383px;
+            height: 84px;
+        }
+
+        #loupe2 {
+            border-color: green;
+            left: 116px;
+            top: 328px;
+            background-position: -116px -328px;
+            width: 145px;
+            height: 58px;
+        }
+
+        #loupe3 {
+            border-color: blue;
+            left: 101px;
+            top: 647px;
+            background-position: -101px -649px;
+            width: 579px;
+            height: 90px;
+        }
+
+        #loupe4 {
+            border-color: blueviolet;
+            left: 724px;
+            top: 647px;
+            background-position: -724px -648px;
+            width: 294px;
+            height: 90px;
+        }
+
+        #loupe5 {
+            border-color: orange;
+            left: 1023px;
+            top: 647px;
+            background-position: -1023px -647px;
+            width: 276px;
+            height: 90px;
+        }
+
+        #loupe6 {
+            border-color: black;
+            left: 1305px;
+            top: 647px;
+            background-position: -1305px -647px;
+            width: 564px;
+            height: 90px;
+        }
     </style>
 </head>
 
@@ -95,8 +151,23 @@
         <div class="blend">
             <div id="fond">
             </div>
-            <div id="loupe">
-                <div id="coin"></div>
+            <div id="loupe1" class="loupe">
+                <div class="coin"></div>
+            </div>
+            <div id="loupe2" class="loupe">
+                <div class="coin"></div>
+            </div>
+            <div id="loupe3" class="loupe">
+                <div class="coin"></div>
+            </div>
+            <div id="loupe4" class="loupe">
+                <div class="coin"></div>
+            </div>
+            <div id="loupe5" class="loupe">
+                <div class="coin"></div>
+            </div>
+            <div id="loupe6" class="loupe">
+                <div class="coin"></div>
             </div>
         </div>
     </div>
@@ -106,20 +177,14 @@
 </script>
 
 <script>
-    var $loupe = document.querySelector("#loupe");
-    var $coin = document.querySelector("#loupe>#coin");
-    var container = document.querySelector("#tutorial");
+    let container = document.querySelector("#tutorial");
 
-    var active = false;
-    var target;
-    var currentX;
-    var currentY;
-    var initialX;
-    var initialY;
-    var xOffset = 0;
-    var yOffset = 0;
-    var cx = 200;
-    var cy = 200;
+    let loupes_properties = {};
+    let $loupe = undefined;
+    let $coin;
+    let $target;
+    let currentX;
+    let currentY;
 
     container.addEventListener("touchstart", dragStart, false);
     container.addEventListener("touchend", dragEnd, false);
@@ -130,76 +195,94 @@
     container.addEventListener("mousemove", drag, false);
 
     function dragStart(e) {
-        if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
-        } else {
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
+
+        $target = $(e.target);
+        $loupe = undefined;
+        if ($target.hasClass("loupe")) {
+            $loupe = $target;
+            $coin = $loupe.children('.coin');
+        } else if ($target.hasClass("coin")) {
+            $coin = $target;
+            $loupe = $coin.parent();
         }
-
-        if (e.target === $loupe || e.target === $coin) {
-            target = e.target;
-
-            active = true;
+        if ($loupe) {
+            loupes_properties[$loupe.attr('id')] = _.assign({
+                initialX: undefined,
+                initialY: undefined,
+                xOffset: 0,
+                yOffset: 0,
+                cx: 200,
+                cy: 200,
+            }, loupes_properties[$loupe.attr('id')]);
+            const p = loupes_properties[$loupe.attr('id')];
+            if (e.type === "touchstart") {
+                p.initialX = e.touches[0].clientX - p.xOffset;
+                p.initialY = e.touches[0].clientY - p.yOffset;
+            } else {
+                p.initialX = e.clientX - p.xOffset;
+                p.initialY = e.clientY - p.yOffset;
+            }
         }
     }
 
     function dragEnd(e) {
-        initialX = currentX;
-        initialY = currentY;
-
-        cx = $($loupe).width();
-        cy = $($loupe).height();
-
-        active = false;
+        if ($loupe) {
+            loupes_properties[$loupe.attr('id')] = _.assign(loupes_properties[$loupe.attr('id')], {
+                initialX: currentX,
+                initialY: currentY,
+                cx: $loupe.width(),
+                cy: $loupe.height(),
+            });
+        }
+        $loupe = undefined;
     }
 
     function drag(e) {
-        if (active) {
+        if ($loupe) {
 
             e.preventDefault();
 
+            const p = loupes_properties[$loupe.attr('id')];
             if (e.type === "touchmove") {
-                currentX = e.touches[0].clientX - initialX;
-                currentY = e.touches[0].clientY - initialY;
+                currentX = e.touches[0].clientX - p.initialX;
+                currentY = e.touches[0].clientY - p.initialY;
             } else {
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
+                currentX = e.clientX - p.initialX;
+                currentY = e.clientY - p.initialY;
             }
-            if (target === $loupe) {
-                xOffset = currentX;
-                yOffset = currentY;
+            if ($target === $loupe) {
+                p.xOffset = currentX;
+                p.yOffset = currentY;
 
-                setTranslate(currentX, currentY, $loupe);
+                setTranslate(currentX, currentY, $loupe, p);
             }
 
-            if (target === $coin) {
-                setDimension(currentX, currentY, $loupe);
+            if ($target === $coin) {
+                setDimension(currentX, currentY, $loupe, p);
             }
         }
     }
 
     const margin = 0;
-    $('body').css("margin", margin+"px");
-    function setTranslate(xPos, yPos, el) {
-        const X = Math.min(1200 + (2*margin) - cx, Math.max(-(margin), (0 + xPos)));
-        const Y = Math.min(630 + (2*margin) - cy, Math.max(-(margin), (0 + yPos)));
+    $('body').css("margin", margin + "px");
+    function setTranslate(xPos, yPos, el, p) {
+        const X = Math.min(1966 + (2 * margin) - p.cx, Math.max(-(margin), (0 + xPos)));
+        const Y = Math.min(874 + (2 * margin) - p.cy, Math.max(-(margin), (0 + yPos)));
 
-        console.log(X,Y);
-        
+        // console.log(X,Y);
+
         $(el).css({
             "left": X + "px",
             "top": Y + "px",
-            "background-position-x": (-1*X) + "px",
-            "background-position-y": (-1*Y) + "px",
+            "background-position-x": (-1 * X) + "px",
+            "background-position-y": (-1 * Y) + "px",
         });
     }
 
-    function setDimension(xPos, yPos, el) {
-        const pos = $($loupe).position();
-        const _cx = cx + xPos - pos.left;
-        const _cy = cy + yPos - pos.top;
+    function setDimension(xPos, yPos, el, p) {
+        const pos = $loupe.position();
+        const _cx = p.cx + xPos - pos.left;
+        const _cy = p.cy + yPos - pos.top;
 
         $(el).css({
             "width": _cx + "px",

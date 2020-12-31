@@ -28,15 +28,15 @@ Try it here: [https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,P
 
 You may find cumbersome all this typing (read: you are not a geek). But wait, you can configure all these options with the (hopefully intuitive) user interface of the application, and boom! one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
 
-<!-- ![Permalink](./img/png/screenshot-permalink-2.png "permalink") -->
+![Tutorial](./img/png/screenshot-tutorial.png "tutorial") -->
 
-<iframe id="iFrame"
+<!-- <iframe id="iFrame"
     title="help"
     width="100%"
     height="700px"
     src="/tutorial.html"
 	frameBorder="0">
-</iframe>
+</iframe> -->
 
 ## All this clicking ? Speech Recognition!
 
