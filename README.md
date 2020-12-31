@@ -11,16 +11,15 @@ One guy - who happens to be your best friend - maintains that Sweden is doing pr
 You do not want to terminate a 20 years long friendship, so, instead of calling him names, you cut & paste the following permalink in the Whatsapp chat :
 
 ```
-https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_
+https://covid.aequologica.net/?tot,deaths,SE,DE,DK,EE,FI,LT,LV,NO,PL,RU,2020-03-01,per,lin,_
 ```
 
 This will lead to a web page that shows a comparison graph of all (**tot**) **deaths** for Sweden (**SE**) vs. all its neighbours : Denmark (**DK**), Estonia (**EE**), Finland (**FI**), Germany (**DE**), Latvia (**LV**), Lithuania (**LT**), Norway (**NO**), Poland (**PL**) and Russia (**RU**), starting from the 1st of March of this year (**2020-03-01**), until the latest available data from the [Johns Hopkins University](https://github.com/pomber/covid19); 
 the population of these countries differs widly (from Estonia ~1.3M to Russia ~146M), so the figures are per capita (**per**), to adjust for that; 
-the Y-axis scale is linear (**lin**); be it logaritmic (log), comparison between 
-countries with numbers on a different order of magnitude is more readable.
+the Y-axis scale is linear (**lin**); be it logaritmic (log), comparison between countries with numbers on a different order of magnitude is more readable.
 
 
-Try it here: [https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_](https://covid.aequologica.net/?2020-03-01,7,DE,DK,EE,FI,LT,LV,NO,PL,RU,SE,deaths,lin,per,tot,_)
+Try it here: [https://covid.aequologica.net/?tot,deaths,SE,DE,DK,EE,FI,LT,LV,NO,PL,RU,2020-03-01,per,lin,_](https://covid.aequologica.net/?tot,deaths,SE,DE,DK,EE,FI,LT,LV,NO,PL,RU,2020-03-01,per,lin,_)
 
 ![DE,DK,EE,FI,LT,LV,NO,PL,RU,SE](./img/png/screenshot-2020-12-29.png "DE,DK,EE,FI,LT,LV,NO,PL,RU,SE")
 
