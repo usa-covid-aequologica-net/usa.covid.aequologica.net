@@ -29,12 +29,12 @@ You may find cumbersome all this typing (read: you are not a geek). But wait, yo
 
 ![Tutorial](./img/png/screenshot-tutorial.png "tutorial")
 
-1. select **daily** or total figures, and **confirmed** or deaths measures
-2. add and remove countries from list
+1. select **daily** or total figures, and **confirmed** or deaths data
+2. add or remove countries from list
 3. set start date
 4. select **per million inhabitants** or absolute figures
-5. set **linear** or logarithmic Y axis
-6. set the size of the average (only for daily figures)
+5. select **linear** or logarithmic Y axis
+6. set the number of days over which the daily average is calculated (effective only for daily figures)
 
 Then, one click on the "permalink" button at the top right of the screen will generate the well-formed link with all information and have it copied to the clipboard. Now, you may go back to Whatsapp, paste the link, and resume the conversation.
 
@@ -81,8 +81,8 @@ Categories must be separated by comma. Otherwise, parsing is rather lenient :
 - each and every category is optional; when omitted, default value will apply (in **bold** above),
 - categories may appear in the query string in any order,
 - white spaces will be trimmed,
-- case does not matter; FR, fr, Fr and fR will all go to France,
-- the marker for country selection '**\***', may appear before or after the country code, e.g. \*FR or FR\*,
+- case does not matter; FR, fr, Fr or fR will all go to France,
+- the marker for country selection '**\***', may appear before or after the country code; \*FR or FR\*  will both select France,
 - if several options appear for the same category in the URL, the **first** one wins: e.g. 
 ```
 https://covid.aequologica.net/?daily,confirmed,deaths,2,3,4,5,6,7,8,9,_
