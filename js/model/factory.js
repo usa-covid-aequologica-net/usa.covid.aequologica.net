@@ -19,14 +19,14 @@ export const factory = {
     _.sortBy([
       "Alabama",
       "Arizona",
-      "Florida",
-      "Georgia",
-      "Louisiana",
-      "Mississippi",
-      "Nevada",
-      "South Carolina",
+      "Arkansas",
+      "California",
+      "Delaware",
+      "Oklahoma",
+      "Rhode Island",
       "Tennessee",
-      "Texas",
+      "Utah",
+      "West Virginia",
     ])
   ),
   eu: _.sortedUniq(
