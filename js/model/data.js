@@ -27,12 +27,13 @@ let setStartDate;
     const defaultStart = moment("2020-03-01");
     // start date
     let readStartDate = () => {
-        // // const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
-        // // const startDate = moment().dayOfYear(startAsDayOfYear);
-        // const storeStartDate = store.get("startDate");
-        // if (storeStartDate) {
-        //     return moment(storeStartDate);
-        // }
+        const storeStartDate = store.get("startDate");
+        if (storeStartDate) {
+            if (/^\d+$/.test(storeStartDate)) { // only numbers ? backward compat with when only # of days where stored
+                return moment(defaultStart).add(storeStartDate, 'days');    
+            } 
+            return moment(storeStartDate);
+        }
         return defaultStart;
     };
     setStartDate = (s, nosave) => {
@@ -367,9 +368,9 @@ export function init(queryStringParams) {
         if (queryStringParams.toggleDeaths) {
             setToggle("toggleDeaths", queryStringParams.toggleDeaths, !queryStringParams.store);
         }
-        // if (queryStringParams.startDate) {
-        //     setStartDate(queryStringParams.startDate, !queryStringParams.store);
-        // }
+        if (queryStringParams.startDate) {
+            setStartDate(queryStringParams.startDate, !queryStringParams.store);
+        }
         if (queryStringParams.sizeOfAverage) {
             setSizeOfAverage(queryStringParams.sizeOfAverage, !queryStringParams.store);
         }
