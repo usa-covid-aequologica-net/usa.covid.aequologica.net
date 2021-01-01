@@ -19,39 +19,39 @@ const countriesHolder = Countries();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
-const startDate =  moment("2020-03-01");
+let startDate =  moment("2020-03-01");
 let endDate;
 
-// let setStartDate;
-// {
-//     const defaultStart = moment("2020-03-01");
-//     // start date
-//     let readStartDate = () => {
-//         // const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
-//         // const startDate = moment().dayOfYear(startAsDayOfYear);
-//         const storeStartDate = store.get("startDate");
-//         if (storeStartDate) {
-//             return moment(storeStartDate);
-//         }
-//         return defaultStart;
-//     };
-//     setStartDate = (s, nosave) => {
-//         startDate = s;
-//         if (!nosave) {
-//             if (s.isSame(defaultStart, 'day')) {
-//                 store.remove("startDate");
-//             } else {
-//                 store.set("startDate", startDate);
-//             }
-//         }
-//         return startDate;
-//     }
-//     function readEndDate() {
-//         return moment();
-//     };
-//     startDate = readStartDate();
-//     endDate = readEndDate();
-// }
+let setStartDate;
+{
+    const defaultStart = moment("2020-03-01");
+    // start date
+    let readStartDate = () => {
+        // // const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
+        // // const startDate = moment().dayOfYear(startAsDayOfYear);
+        // const storeStartDate = store.get("startDate");
+        // if (storeStartDate) {
+        //     return moment(storeStartDate);
+        // }
+        return defaultStart;
+    };
+    setStartDate = (s, nosave) => {
+        startDate = s;
+        if (!nosave) {
+            if (s.isSame(defaultStart, 'day')) {
+                store.remove("startDate");
+            } else {
+                store.set("startDate", startDate);
+            }
+        }
+        return startDate;
+    }
+    function readEndDate() {
+        return moment();
+    };
+    startDate = readStartDate();
+    endDate = readEndDate();
+}
 
 // size of average
 function calcMovingAverage(data, country) {
@@ -394,7 +394,7 @@ export function init(queryStringParams) {
         getMeasure: () => measure,
 
         getStartDate: () => startDate,
-        setStartDate: (d) => {}, // setStartDate,
+        setStartDate: setStartDate,
 
         getSizeOfAverage: () => sizeOfAverage,
         setSizeOfAverage: setSizeOfAverage,

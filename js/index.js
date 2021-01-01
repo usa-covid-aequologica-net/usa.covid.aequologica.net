@@ -155,17 +155,31 @@ $(document).ready(() => {
         });
     
         // start date
-        {
-            const startDate = model.getStartDate();
-            $('#startFeedback > span').text(startDate.format('LL'));
-        //     $('#startRangeInput').prop('value', startDate.dayOfYear());
+        function configureStartRangeInput(begin, end)  {
+            const BEGIN = begin || moment("2020-01-21");
+            const start = model.getStartDate();
+            const END = end || moment();
 
-        //     $('#startRangeInput').on('change', (e) => {
-        //         model.setStartDate(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')));
-        //         redraw();
-        //     }).on('input', (e) => {
-        //         $('#startFeedback > span').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
-        //     });
+            $('#startFeedback > span').text(start.format('LL'));
+
+            const max = Math.round(moment.duration(END.diff(BEGIN)).asDays());
+            const now = Math.round(moment.duration(END.diff(start)).asDays());
+
+            $('#startRangeInput').prop('min', 1);
+            $('#startRangeInput').prop('max', max);
+            $('#startRangeInput').prop('value', max-now);
+
+            $('#startRangeInput').on('change', (e) => {
+                const qwe = $.prop(e.currentTarget, 'valueAsNumber');
+                console.log(qwe);
+                const newDate = moment(BEGIN).add(qwe, 'days');
+                model.setStartDate(newDate);
+                redraw();
+            }).on('input', (e) => {
+                const qwe = $.prop(e.currentTarget, 'valueAsNumber');
+                const newDate = moment(BEGIN).add(qwe, 'days');
+                $('#startFeedback > span').text(newDate.format('LL'));
+            });
         }
 
         // various toggles
@@ -406,8 +420,9 @@ $(document).ready(() => {
             model.fetchData(result => {
 
                 $("#end").html(result.latest.format('LL'));
-                $('#startRangeInput').prop("max", result.latest.dayOfYear() - 2);
-                $('#startRangeInput').prop("min", result.earliest.dayOfYear() - 1);
+                configureStartRangeInput(result.earliest.subtract(2, 'days'), result.latest.subtract(1, 'days'));
+                // $('#startRangeInput').prop("max", result.latest.dayOfYear() - 2);
+                // $('#startRangeInput').prop("min", result.earliest.dayOfYear() - 1);
 
                 redraw();
                 
