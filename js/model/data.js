@@ -297,9 +297,15 @@ function setupCategories() {
     categories = countries.map((country) => {
         let points = []
         if (massagedData.data[country]) {
-            points = _.map(_.filter(massagedData.data[country], (d) => {
-                return true; // moment(d.date).isSameOrAfter(startDate);
-            }, (d) => which(country, d)));
+            points = _.map(
+                        _.filter(
+                            massagedData.data[country], 
+                            (d) => {
+                                return moment(d.date).isSameOrAfter(startDate);
+                            }), 
+                        (d) => {
+                            return which(country, d);
+                        });
         }
         return {
             category: country,

@@ -45,11 +45,15 @@ export function draw(...args) {
     const yGrid = d3.axisLeft().scale(yScale);
 
     // define lines
-    const line = d3
+    const LINE = d3
         .line()
         .curve(d3.curveCatmullRom)
-        .x((d) => { return xScale(d.date); })
-        .y((d) => { return yScale(d.nummer); });
+        .x((d) => { 
+            return xScale(d.date); 
+        })
+        .y((d) => { 
+            return yScale(d.nummer); 
+        });
 
     // @TODO: add trendline with https://observablehq.com/@harrystevens/d3-regression-with-datetimes?collection=@harrystevens/d3-regression
     if (properties.countries.length > 0 && categories.length > 0) {
@@ -125,7 +129,7 @@ export function draw(...args) {
                 return "line_" + i;
             })
             .attr("d", d => {
-                const li = line(d.datapoints);
+                const li = LINE(d.datapoints);
                 return li;
             })
             .style("stroke", d => {
@@ -228,7 +232,7 @@ export function draw(...args) {
                 .tickSize(-width)
             );
         rootG.selectAll(".line").attr("d", (d) => {
-            const li = line(d.datapoints);
+            const li = LINE(d.datapoints);
             return li;
         });
 

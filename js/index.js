@@ -155,9 +155,9 @@ $(document).ready(() => {
         });
     
         // start date
-        // {
-        //     const startDate = model.getStartDate();
-        //     $('#startFeedback > span').text(startDate.format('LL'));
+        {
+            const startDate = model.getStartDate();
+            $('#startFeedback > span').text(startDate.format('LL'));
         //     $('#startRangeInput').prop('value', startDate.dayOfYear());
 
         //     $('#startRangeInput').on('change', (e) => {
@@ -166,7 +166,7 @@ $(document).ready(() => {
         //     }).on('input', (e) => {
         //         $('#startFeedback > span').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
         //     });
-        // }
+        }
 
         // various toggles
         model.forEachToggle((key, val) => {
