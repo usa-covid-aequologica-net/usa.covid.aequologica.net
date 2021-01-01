@@ -155,18 +155,18 @@ $(document).ready(() => {
         });
     
         // start date
-        {
-            const startDate = model.getStartDate();
-            $('#startFeedback > span').text(startDate.format('LL'));
-            $('#startRangeInput').prop('value', startDate.dayOfYear());
+        // {
+        //     const startDate = model.getStartDate();
+        //     $('#startFeedback > span').text(startDate.format('LL'));
+        //     $('#startRangeInput').prop('value', startDate.dayOfYear());
 
-            $('#startRangeInput').on('change', (e) => {
-                model.setStartDate(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')));
-                redraw();
-            }).on('input', (e) => {
-                $('#startFeedback > span').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
-            });
-        }
+        //     $('#startRangeInput').on('change', (e) => {
+        //         model.setStartDate(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')));
+        //         redraw();
+        //     }).on('input', (e) => {
+        //         $('#startFeedback > span').text(moment().dayOfYear($.prop(e.currentTarget, 'valueAsNumber')).format('LL'));
+        //     });
+        // }
 
         // various toggles
         model.forEachToggle((key, val) => {

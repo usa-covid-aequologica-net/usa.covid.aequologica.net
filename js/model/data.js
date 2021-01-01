@@ -19,34 +19,39 @@ const countriesHolder = Countries();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
-let startDate;
+const startDate =  moment("2020-03-01");
 let endDate;
-let setStartDate;
-{
-    const defaultStart = moment("2020-03-01");
-    // start date
-    let readStartDate = () => {
-        const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
-        const startDate = moment().dayOfYear(startAsDayOfYear);
-        return startDate;
-    };
-    setStartDate = (s, nosave) => {
-        startDate = s;
-        if (!nosave) {
-            if (s.isSame(defaultStart, 'day')) {
-                store.remove("startAsDayOfYear");
-            } else {
-                store.set("startAsDayOfYear", startDate.dayOfYear());
-            }
-        }
-        return startDate;
-    }
-    function readEndDate() {
-        return moment();
-    };
-    startDate = readStartDate();
-    endDate = readEndDate();
-}
+
+// let setStartDate;
+// {
+//     const defaultStart = moment("2020-03-01");
+//     // start date
+//     let readStartDate = () => {
+//         // const startAsDayOfYear = store.get("startAsDayOfYear", defaultStart.dayOfYear());
+//         // const startDate = moment().dayOfYear(startAsDayOfYear);
+//         const storeStartDate = store.get("startDate");
+//         if (storeStartDate) {
+//             return moment(storeStartDate);
+//         }
+//         return defaultStart;
+//     };
+//     setStartDate = (s, nosave) => {
+//         startDate = s;
+//         if (!nosave) {
+//             if (s.isSame(defaultStart, 'day')) {
+//                 store.remove("startDate");
+//             } else {
+//                 store.set("startDate", startDate);
+//             }
+//         }
+//         return startDate;
+//     }
+//     function readEndDate() {
+//         return moment();
+//     };
+//     startDate = readStartDate();
+//     endDate = readEndDate();
+// }
 
 // size of average
 function calcMovingAverage(data, country) {
@@ -287,12 +292,14 @@ function setupCategories() {
         }
         return { nummer: nummer, tot: tot, date: d.date };
     }
-
+ 
     // reformat data to make it more copasetic for d3
     categories = countries.map((country) => {
         let points = []
         if (massagedData.data[country]) {
-            points = _.map(_.filter(massagedData.data[country], (d) => moment(d.date).isSameOrAfter(startDate)), (d) => which(country, d));
+            points = _.map(_.filter(massagedData.data[country], (d) => {
+                return true; // moment(d.date).isSameOrAfter(startDate);
+            }, (d) => which(country, d)));
         }
         return {
             category: country,
@@ -354,9 +361,9 @@ export function init(queryStringParams) {
         if (queryStringParams.toggleDeaths) {
             setToggle("toggleDeaths", queryStringParams.toggleDeaths, !queryStringParams.store);
         }
-        if (queryStringParams.startDate) {
-            setStartDate(queryStringParams.startDate, !queryStringParams.store);
-        }
+        // if (queryStringParams.startDate) {
+        //     setStartDate(queryStringParams.startDate, !queryStringParams.store);
+        // }
         if (queryStringParams.sizeOfAverage) {
             setSizeOfAverage(queryStringParams.sizeOfAverage, !queryStringParams.store);
         }
@@ -381,7 +388,7 @@ export function init(queryStringParams) {
         getMeasure: () => measure,
 
         getStartDate: () => startDate,
-        setStartDate: setStartDate,
+        setStartDate: (d) => {}, // setStartDate,
 
         getSizeOfAverage: () => sizeOfAverage,
         setSizeOfAverage: setSizeOfAverage,

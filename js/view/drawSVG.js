@@ -125,7 +125,8 @@ export function draw(...args) {
                 return "line_" + i;
             })
             .attr("d", d => {
-                return line(d.datapoints);
+                const li = line(d.datapoints);
+                return li;
             })
             .style("stroke", d => {
                 return color(d.category);
@@ -227,7 +228,8 @@ export function draw(...args) {
                 .tickSize(-width)
             );
         rootG.selectAll(".line").attr("d", (d) => {
-            return line(d.datapoints);
+            const li = line(d.datapoints);
+            return li;
         });
 
         rootG.selectAll("circle.point")
