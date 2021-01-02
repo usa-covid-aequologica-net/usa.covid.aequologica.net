@@ -9,25 +9,30 @@ export function Fuzzy2Country() {
   true: country name not in list verbatim, fuse.js does find it
   "alternate name": country name not in list, fuse.js unable to find it, force name
   */
-  const exceptions = {
-    "North Korea": false,
-    Turkmenistan: false,
-    Yugoslavia: false,
-    "Antigua & Barbuda": true,
-    "Czech Republic": true,
-    "East Timor": true,
-    Macedonia: true,
-    "St. Kitts and Nevis": true,
-    "St. Lucia": true,
-    "St. Vincent and the Grenadines": true,
-    "United States of America": true,
-    "Democratic Republic of the Congo": "DR Congo",
-    "Ivory Coast": "Côte d'Ivoire",
-    Myanmar: "Burma",
-    "Russian Federation": "Russia",
-    Swaziland: "Eswatini",
+
+  const exceptionsByCountry = {
+    world: {
+      "North Korea": false,
+      Turkmenistan: false,
+      Yugoslavia: false,
+      "Antigua & Barbuda": true,
+      "Czech Republic": true,
+      "East Timor": true,
+      Macedonia: true,
+      "St. Kitts and Nevis": true,
+      "St. Lucia": true,
+      "St. Vincent and the Grenadines": true,
+      "United States of America": true,
+      "Democratic Republic of the Congo": "DR Congo",
+      "Ivory Coast": "Côte d'Ivoire",
+      Myanmar: "Burma",
+      "Russian Federation": "Russia",
+      Swaziland: "Eswatini",
+    },
+    usa: {},
   };
-  const valid = () => _.keys(_.pickBy(exceptions, (v) => v));
+
+  const valid = () => _.keys(_.pickBy(exceptionsByCountry[domain], (v) => v));
 
   const options = {
     includeScore: true,
