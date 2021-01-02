@@ -571,9 +571,6 @@
     import pulse from './js/pulse.js';
     import Grammar from './js/gram.js';
     import { domain } from './js/model/domain.js';
-    import { populationByCountry } from './js/model/population.js';
-
-    const countries = _.map(populationByCountry[domain], "name"); // ["Germany", "South Korea", "France", "United States"];
 
     // fart sound 
     var fart = document.createElement('audio');
@@ -635,9 +632,9 @@
       },
     }
 
-    const gram = new Grammar(countries, speechHooks.onParsed);
+    const gram = new Grammar(speechHooks.onParsed);
 
-    pulse(countries, speechHooks);
+    pulse(gram.countries, speechHooks);
 
 </script>
 

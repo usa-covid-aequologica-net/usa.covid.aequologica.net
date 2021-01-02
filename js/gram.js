@@ -5,7 +5,7 @@
 
 import { Fuzzy2Country } from './model/fuzzy.js';
 
-export default function Grammar(countries, onParsed) {
+export default function Grammar(onParsed) {
 
   const countriesExt = new Fuzzy2Country().countries;
 
@@ -59,6 +59,7 @@ export default function Grammar(countries, onParsed) {
   s.addOperation("process", process);
 
   return {
+    countries: countriesExt,
     processLine: (line) => {
       const r = g.match(line);
       if (r.failed()) {

@@ -1,7 +1,5 @@
 "use strict";
 
-import { Fuzzy2Country } from "./model/fuzzy.js";
-
 export default function (countries, hooks) {
   const nullFunc = () => {};
   const onConsole = hooks ? hooks.onConsole || nullFunc : nullFunc;
@@ -68,9 +66,8 @@ export default function (countries, hooks) {
     // <!-- speech recognition : WORK IN PROGRESS -->
 
     let grammar;
-    const countriesExt = Fuzzy2Country().countries;
-    if (countriesExt) {
-      const formatCountries = countriesExt.join(" | ");
+    if (countries) {
+      const formatCountries = countries.join(" | ");
       grammar = `#JSGF V1.0; grammar countries; public <countries> = add | all | minus | plus | remove | reset | select | set | ${formatCountries} ;`;
     } else {
       grammar = "#JSGF V1.0;";
