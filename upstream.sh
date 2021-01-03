@@ -21,3 +21,4 @@
 
 git checkout -b usa usa/master
 git branch --set-upstream-to usa/master usa
+git push usa HEAD/master

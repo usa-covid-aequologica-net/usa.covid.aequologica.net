@@ -1,0 +1,19 @@
+{
+    "name": "YACA",
+    "short_name": "YACA",
+    "icons": [
+        {
+            "src": "/favicon/android-chrome-192x192.png?v=KmwKe775rr",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon/android-chrome-512x512.png?v=KmwKe775rr",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#e6faf0",
+    "background_color": "#e6faf0",
+    "display": "standalone"
+}
