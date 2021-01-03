@@ -19,6 +19,15 @@ const countriesHolder = Countries();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
+function parseDateHack(d, soonest) {
+    // hack to fix another hack, cf. https://github.com/pomber/covid19/issues/234
+    const parsed = moment(parseDate(d));
+    if (parsed.isBefore(soonest)) {
+        parsed.add(1, 'year');
+    }
+    const ret  = parsed.toDate();
+    return ret;
+}
 let startDate =  moment("2020-03-01");
 let endDate;
 
@@ -191,20 +200,20 @@ function massageData() {
     const countries = countriesHolder.get();
 
     // parse dates & integerify other attributes
+    let latest = new moment("2020-01-21"); // actual data starts just after
+    let earliest = moment();
+
     countries.forEach((country) => {
         if (!data[country] && rawData[country]) {
             data[country] = _.cloneDeep(rawData[country]);
             data[country].forEach(d => {
-                d.date = parseDate(d.date);
+                d.date = parseDateHack(d.date, latest);
                 d.confirmed = +d.confirmed;
                 d.deaths = +d.deaths;
                 /* d.recovered = +d.recovered; */
             });
         }
     });
-
-    let latest = new moment("2020-01-01");
-    let earliest = moment();
 
     // compute delta
     if (countries.length > 0) {

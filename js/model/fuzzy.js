@@ -53,7 +53,7 @@ export function Fuzzy2Country() {
       let searchString = param;
 
       // handle exceptions
-      let e = exceptions[param];
+      let e = exceptionsByCountry[param];
       if (typeof e !== "undefined") {
         if (typeof e === "boolean") {
           if (!e) {
