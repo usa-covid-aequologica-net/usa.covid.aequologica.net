@@ -4,26 +4,35 @@ import { domain } from "./domain.js";
 import { populationByCountry } from "./population.js";
 
 export function Fuzzy2Country() {
-  const exceptions = {
-    "North Korea": false,
-    Turkmenistan: false,
-    Yugoslavia: false,
-    "Antigua & Barbuda": true,
-    "Czech Republic": true,
-    "East Timor": true,
-    Macedonia: true,
-    "St. Kitts and Nevis": true,
-    "St. Lucia": true,
-    "St. Vincent and the Grenadines": true,
-    "United States of America": true,
-    "Democratic Republic of the Congo": "DR Congo",
-    "Ivory Coast": "Côte d'Ivoire",
-    Myanmar: "Burma",
-    "Russian Federation": "Russia",
-    Swaziland: "Eswatini",
+  /*
+  false : no data for country
+  true: country name not in list verbatim, fuse.js does find it
+  "alternate name": country name not in list, fuse.js unable to find it, force name
+  */
+
+  const exceptionsByCountry = {
+    world: {
+      "North Korea": false,
+      Turkmenistan: false,
+      Yugoslavia: false,
+      "Antigua & Barbuda": true,
+      "Czech Republic": true,
+      "East Timor": true,
+      Macedonia: true,
+      "St. Kitts and Nevis": true,
+      "St. Lucia": true,
+      "St. Vincent and the Grenadines": true,
+      "United States of America": true,
+      "Democratic Republic of the Congo": "DR Congo",
+      "Ivory Coast": "Côte d'Ivoire",
+      Myanmar: "Burma",
+      "Russian Federation": "Russia",
+      Swaziland: "Eswatini",
+    },
+    usa: {},
   };
-  const valid = () => _.keys(_.pickBy(exceptions, (v) => v));
-  const invalid = () => _.keys(_.pickBy(exceptions, (v) => !v));
+
+  const valid = () => _.keys(_.pickBy(exceptionsByCountry[domain], (v) => v));
 
   const options = {
     includeScore: true,
@@ -33,7 +42,7 @@ export function Fuzzy2Country() {
   const addendum = valid();
   const countriesExt = _.sortBy([...countries, ...addendum]);
 
-  const fuse = new Fuse(_.map(populationByCountry[domain], "name"), options);
+  const fuse = new Fuse(countries, options);
 
   function convert(param) {
     if (Array.isArray(param)) {
@@ -41,32 +50,25 @@ export function Fuzzy2Country() {
         return convert(countray);
       });
     } else {
-      let e = exceptions[param];
-      if (typeof e === "undefined") {
-        const proposals = fuse.search(param);
-        if (proposals && proposals.length > 0) {
-          return proposals[0].item;
+      let searchString = param;
+
+      // handle exceptions
+      let e = exceptionsByCountry[param];
+      if (typeof e !== "undefined") {
+        if (typeof e === "boolean") {
+          if (!e) {
+            return undefined;
+          }
+        } else if (typeof e === "string") {
+          searchString = e;
         }
-        return null;
       }
-      if (typeof e === "boolean") {
-        if (!e) {
-          return undefined;
-        }
-        const proposals = fuse.search(param);
-        if (proposals && proposals.length > 0) {
-          return proposals[0].item;
-        }
-        return null;
+
+      const proposals = fuse.search(searchString);
+      if (proposals && proposals.length > 0) {
+        return proposals[0].item;
       }
-      if (typeof e === "string") {
-        const proposals = fuse.search(e);
-        if (proposals && proposals.length > 0) {
-          return proposals[0].item;
-        }
-        return null;
-      }
-      throw "qwe";
+      return null;
     }
   }
 

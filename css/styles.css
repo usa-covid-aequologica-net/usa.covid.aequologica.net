@@ -86,7 +86,7 @@ footer #bottom {
   padding: 0;
   margin: 0;
   overflow: hidden hidden;
-  background-color: rgb(230, 250, 240);
+  background-color: rgb(230, 250, 240, .8);
   white-space: nowrap;
   font-size: 12px;
 }
@@ -98,7 +98,7 @@ footer #bottom label {
 
 footer #bottom label#startFeedback {
   min-width: 120px;
-  line-height: 22px;
+  /* line-height: 22px; */
   text-align: right !important;
   background-image: url(/img/svg/left-arrow-svgrepo-com.svg);
   background-repeat: no-repeat;

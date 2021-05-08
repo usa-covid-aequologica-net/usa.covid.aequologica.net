@@ -3,15 +3,15 @@
 export const factory = {
   world: _.sortedUniq(
     _.sortBy([
-      "Finland",
+      "Argentina",
+      "Brazil",
+      "Colombia",
+      "European Union",
       "France",
       "Germany",
       "India",
-      "Italy",
-      "Netherlands",
-      "Spain",
-      "Sweden",
-      "United Kingdom",
+      "Iran",
+      "Turkey",
       "United States",
     ])
   ),
@@ -19,14 +19,14 @@ export const factory = {
     _.sortBy([
       "Alabama",
       "Arizona",
-      "Florida",
-      "Georgia",
-      "Louisiana",
-      "Mississippi",
-      "Nevada",
-      "South Carolina",
+      "Arkansas",
+      "California",
+      "Delaware",
+      "Oklahoma",
+      "Rhode Island",
       "Tennessee",
-      "Texas",
+      "Utah",
+      "West Virginia",
     ])
   ),
   eu: _.sortedUniq(

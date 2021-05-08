@@ -1,11 +1,13 @@
 'use strict';
 
-import { setupTooltip } from './tooltip.js';
+/* import { setupTooltip } from './tooltip.js'; */
 
 let pubSubToken;
 let flyingCategories;
 let flyingXScale;
 let flyingYScale;
+
+export const pubSubKeyDRAWPOINTS = 'DRAWPOINTS';
 
 export function draw(...args) {
     const [rootG, properties, categories, doNotAnimate] = args;
@@ -136,7 +138,7 @@ export function draw(...args) {
                 return color(d.category);
             });
 
-        pubSubToken = window.ps.subscribe("SELECTED_COUNTRY", (msg, data) => {
+        pubSubToken = window.ps.subscribe(pubSubKeyDRAWPOINTS, (msg, data) => {
             drawPoints(msg);
         });
 
@@ -151,6 +153,7 @@ export function draw(...args) {
             }
 
             // between try/catch: points and tooltip is not worth crashing the app
+            /*
             try {
                 d3.selectAll("circle.point").remove();
                 if (country) {
@@ -173,6 +176,7 @@ export function draw(...args) {
             } catch (err) {
                 console.log(err);
             }
+            */
 
         }
 
@@ -244,9 +248,11 @@ export function draw(...args) {
                 return yScale(d.nummer)
             });
 
+        /*
         if (0 < $(".tippy-popper").length && $(".tippy-popper")[0]._tippy) {
             $(".tippy-popper")[0]._tippy.hide();
-        }
+        } 
+        */
 
         if (!doNotAnimate) {
             animate();

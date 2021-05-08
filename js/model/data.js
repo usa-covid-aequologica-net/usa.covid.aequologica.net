@@ -19,6 +19,7 @@ const countriesHolder = Countries();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
+
 let startDate =  moment("2020-03-01");
 let endDate;
 
@@ -191,6 +192,9 @@ function massageData() {
     const countries = countriesHolder.get();
 
     // parse dates & integerify other attributes
+    let latest = new moment("2020-01-01");
+    let earliest = moment();
+
     countries.forEach((country) => {
         if (!data[country] && rawData[country]) {
             data[country] = _.cloneDeep(rawData[country]);
@@ -202,9 +206,6 @@ function massageData() {
             });
         }
     });
-
-    let latest = new moment("2020-01-01");
-    let earliest = moment();
 
     // compute delta
     if (countries.length > 0) {

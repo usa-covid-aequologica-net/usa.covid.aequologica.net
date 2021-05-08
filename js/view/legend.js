@@ -1,6 +1,7 @@
 "use strict";
 
-import { pubSubKey } from "./keyboard.js";
+import { pubSubKeyKEYBOARD } from "./keyboard.js";
+import { pubSubKeyDRAWPOINTS } from "./drawSVG.js";
 import { store } from "../model/yetAnotherLocalStorageWrapper.js";
 
 export function Legend() {
@@ -82,7 +83,7 @@ export function Legend() {
 
         displayFoldedLegend($("#legend table.table tbody").data("folded"));
 
-        window.ps.publish("SELECTED_COUNTRY", selectedCountry);
+        window.ps.publish(pubSubKeyDRAWPOINTS, selectedCountry);
 
         return ret;
       }
@@ -260,17 +261,17 @@ export function Legend() {
           feedbackSelectedCountry(newSelectedCountry);
         });
 
-      window.ps.subscribe(pubSubKey, (e) => {
+      window.ps.subscribe(pubSubKeyKEYBOARD, (e) => {
         const event = e && e.event ? e.event : null;
         if (event) {
           console.log("received " + event);
-          if (event == "UP") {
+          if (event == 'UP') {
             const newSelectedCountry = model.selectionUp();
             feedbackSelectedCountry(newSelectedCountry);
-          } else if (event == "DOWN") {
+          } else if (event == 'DOWN') {
             const newSelectedCountry = model.selectionDown();
             feedbackSelectedCountry(newSelectedCountry);
-          } else if (event == "SPACE") {
+          } else if (event == 'SPACE') {
             feedbackSelectedCountry(model.getCountriesHolder().getSelectedCountry());
           }
         }

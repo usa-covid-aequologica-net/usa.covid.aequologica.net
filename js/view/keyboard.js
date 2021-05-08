@@ -1,6 +1,6 @@
 'use strict';
 
-export const pubSubKey = 'KEYBOARD';
+export const pubSubKeyKEYBOARD = 'KEYBOARD';
 
 // let's go
 $(document).ready(() => {
@@ -18,18 +18,18 @@ $(document).ready(() => {
             e.preventDefault();
             e.stopPropagation();
 
-            window.ps.publish(pubSubKey, { event: 'UP' });
+            window.ps.publish(pubSubKeyKEYBOARD, { event: 'UP' });
 
         } else if (e.which == 40) {
             e.preventDefault();
             e.stopPropagation();
 
-            window.ps.publish(pubSubKey, { event: 'DOWN' });
+            window.ps.publish(pubSubKeyKEYBOARD, { event: 'DOWN' });
         } else if (e.which == 32) {
             e.preventDefault();
             e.stopPropagation();
 
-            window.ps.publish(pubSubKey, { event: 'SPACE' });
+            window.ps.publish(pubSubKeyKEYBOARD, { event: 'SPACE' });
         }
     }
 

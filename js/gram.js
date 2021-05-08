@@ -3,10 +3,11 @@
 
 "use strict";
 
-import { Fuzzy2Country } from './model/fuzzy.js';
+import { Fuzzy2Country } from "./model/fuzzy.js";
 
-export default function Grammar(countries, onParsed) {
+export const pubSubKeyGRAMMAR = 'GRAMMAR';
 
+export function Grammar(onParsed) {
   const countriesExt = new Fuzzy2Country().countries;
 
   const formatCountries = '"' + countriesExt.join('" | "') + '"';
@@ -14,20 +15,21 @@ export default function Grammar(countries, onParsed) {
   const grammarAsAString = `CommandInterface {
     Line = Command | Action | Countries
   
-    Command = Reset | Clear | Unselect
-    Action = (Set | Add | Remove) Countries | Select Country
-    
+    Command = Bye | Clear | Reset | Unselect
+    Action = (Add | Remove | Set) Countries | Select Country
     Countries = All | Country+ 
     
-    All = caseInsensitive<"all">
-    Set = caseInsensitive<"set">
-    Add = caseInsensitive<"add"> | caseInsensitive<"plus"> | "+"
-    Remove = caseInsensitive<"remove"> | caseInsensitive<"minus"> | "-"
-    Reset = caseInsensitive<"reset">
+    Bye = caseInsensitive<"bye"> | caseInsensitive<"quit"> | caseInsensitive<"stop">
     Clear = caseInsensitive<"clear">
-    Select = caseInsensitive<"select">
+    Reset = caseInsensitive<"reset">
     Unselect = caseInsensitive<"unselect">
     
+    Add = caseInsensitive<"add"> | caseInsensitive<"plus"> | "+"
+    Remove = caseInsensitive<"remove"> | caseInsensitive<"minus"> | "-"
+    Set = caseInsensitive<"set">
+    Select = caseInsensitive<"select">
+    
+    All = caseInsensitive<"all">
     Country = ${formatCountries}
   }`;
   console.log(grammarAsAString);
@@ -59,6 +61,7 @@ export default function Grammar(countries, onParsed) {
   s.addOperation("process", process);
 
   return {
+    countries: countriesExt,
     processLine: (line) => {
       const r = g.match(line);
       if (r.failed()) {
@@ -76,12 +79,14 @@ export default function Grammar(countries, onParsed) {
             ) {
               result = { action: "SET", argument: "ALL" };
             } else if (Array.isArray(resultBeforeMassage)) {
-              result = { action: "SET", argument: resultBeforeMassage };
+              result = { action: "ADD", argument: resultBeforeMassage };
             } else {
               result = resultBeforeMassage;
             }
           }
-          if (result) window.ps.publish("COMMAND", result);
+          if (result) {
+            window.ps.publish(pubSubKeyGRAMMAR, result);
+          }
           resolve(result);
         });
       }
