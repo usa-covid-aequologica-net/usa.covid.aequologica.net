@@ -19,7 +19,6 @@ const countriesHolder = Countries();
 
 // dates
 const parseDate = d3.timeParse("%Y-%m-%d");
-
 let startDate =  moment("2020-03-01");
 let endDate;
 
@@ -199,7 +198,7 @@ function massageData() {
         if (!data[country] && rawData[country]) {
             data[country] = _.cloneDeep(rawData[country]);
             data[country].forEach(d => {
-                d.date = parseDate(d.date);
+                d.date = parseDateHack(d.date, latest);
                 d.confirmed = +d.confirmed;
                 d.deaths = +d.deaths;
                 /* d.recovered = +d.recovered; */
