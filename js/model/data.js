@@ -119,11 +119,17 @@ function massageData() {
     if (!massagedData.data) {
 
         if (domain === "usa") {
+            rawData.forEach(e => {
+                e.date_as_moment = moment("" + e.submission_date);                
+                e.date = e.date_as_moment.format("YYYY-MM-DD");
+            });
+
             rawData.sort((a, b) => {
                 if (a.state < b.state) { return -1; }
                 if (a.state > b.state) { return 1; }
 
-                return a.date - b.date;
+                const diff = a.date_as_moment.unix() - b.date_as_moment.unix();
+                return diff;
             });
 
             const rawData1 = _.uniqWith(rawData, (a, b) => {
@@ -142,17 +148,18 @@ function massageData() {
                             row,
                             'state',
                             'date',
-                            'positive',
-                            'death',
+                            'date_as_moment',
+                            'tot_cases',
+                            'tot_death',
                         ),
                         {
-                            date: moment("" + row.date).format("YYYY-MM-DD"),
-                            confirmed: row.positive,
-                            deaths: row.death
+                            confirmed: row.tot_cases,
+                            deaths: row.tot_death
                         }
                     ),
-                    'death',
-                    'positive'
+                    'date_as_moment',
+                    'tot_death',
+                    'tot_cases'
                 )
             );
             rawData = _.groupBy(rawData2, d => code2name[d.state]);
@@ -198,7 +205,7 @@ function massageData() {
         if (!data[country] && rawData[country]) {
             data[country] = _.cloneDeep(rawData[country]);
             data[country].forEach(d => {
-                d.date = parseDateHack(d.date, latest);
+                d.date = parseDate(d.date);
                 d.confirmed = +d.confirmed;
                 d.deaths = +d.deaths;
                 /* d.recovered = +d.recovered; */
@@ -322,7 +329,7 @@ function setupCategories() {
 // Read in data
 function fetchData(callback) {
     const URL = (domain === "usa")
-        ? 'https://api.covidtracking.com/v1/states/daily.json'
+        ? 'https://data.cdc.gov/resource/9mfq-cb36.json?$$app_token=g6U42bfLJwycegLniCxcgwkCZ&$limit=50000'
         : 'https://pomber.github.io/covid19/timeseries.json';
 
     $.ajax({
